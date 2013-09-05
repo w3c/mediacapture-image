@@ -33,7 +33,7 @@
     </section>
     
     <section id='abstract'>
-      This document specific the takePhoto() and getFrame methods, and corresponding camera settings for use with MediaStreams as defined in Media Capture and Streams [[!GETUSERMEDIA]].
+      This document specific the takePhoto() and grabFrame() methods, and corresponding camera settings for use with MediaStreams as defined in Media Capture and Streams [[!GETUSERMEDIA]].
     </section>
     
     Introduction
@@ -46,29 +46,28 @@
     --------------
     <dl title='[Constructor(VideoStreamTrack track)] interface ImageCapture : EventTarget' class='idl'>
     <dd>interface ImageCapture: EventTarget</dd>
-    <dt>readonly attribute PhotoSettingsOptions photoSettingsOptions</dt>
+    <dt>readonly attribute PhotoOptions photoOptions</dt>
     <dd>Describes current photo settings</dd>
     <dt>readonly attribute VideoStreamTrack videoStreamTrack</dt>
     <dd>The MediaStream passed into the constructor</dd>
     <dt>attribute EventHandler onphoto</dt>
     <dd>Register/unregister for photo events of type <code>BlobEvent</code>. The handler should expect to get a <code>BlobEvent</code> object as its first parameter.</dd>
     <dt>attribute EventHandler onerror</dt>
-    <dd>Register/unregister for Image Capture error events of type <code>ImageCaptureErrorEvent</code>. The handler should expect to get a <code>ImageCaptureError</code> object as its first parameter.</dd>
-    <dt>attribute EventHandler onphotosettingschange</dt>
+    <dd>Register/unregister for Image Capture error events of type <code>ImageCaptureErrorEvent</code>. The handler should expect to get an <code>ImageCaptureError</code> object as its first parameter.</dd>
+    <dt>attribute EventHandler onoptions</dt>
     <dd>Register/unregister for photo settings change events of type <code>SettingsChangeEvent</code>.</dd>
-    <dt>attribute EventHandler onframegrab</dt>
+    <dt>attribute EventHandler onframe</dt>
     <dd>Register/unregister for frame capture events of type <code>FrameGrabEvent</code>. The handler should expect to get a <code>FrameGrabEvent</code> object as its first parameter.</dd>
     <dt>void setOptions(PhotoSettings? photoSettings)</dt>
-    <dd>When the <code>setOptions()</code> method of an <code>ImageCapture</code> object is invoked, then
-    then a valid <code>PhotoSettings</code> object <em title="must" class="rfc2119">must</em> be passed in the method to the
+    <dd>When the <code>setOptions()</code> method of an <code>ImageCapture</code> object is invoked, then a valid <code>PhotoSettings</code> object <em title="must" class="rfc2119">must</em> be passed in the method to the
     <code>ImageCapture</code> object.  If the UA can successfully apply the settings, then the UA <em title="must" class="rfc2119">must</em> fire a <code>SettingsChangeEvent</code> event at the 
-    <code>onphotosettingschange</code> event handler (if specified).  If the UA cannot successfully apply the settings, then the UA
-    <em title="must" class="rfc2119">must</em> fire a <code>ImageCaptureErrorEvent</code> at the <code>ImageCapture</code> object whose <code>code</code> is set to SETTINGS_ERROR. </dd>
+    <code>onoptions</code> event handler (if specified).  If the UA cannot successfully apply the settings, then the UA
+    <em title="must" class="rfc2119">must</em> fire an <code>ImageCaptureErrorEvent</code> at the <code>ImageCapture</code> object whose <code>code</code> is set to OPTIONS_ERROR. </dd>
     <dt>void takePhoto ()</dt>
     <dd>When the <code>takePhoto()</code> method of an <code>ImageCapture</code> object is invoked,
-	then if the <code>readyState</code> of the <code>VideoStreamTrack</code> provided in the constructor is not "live", the UA <em title="must" class="rfc2119">must</em> fire a <code>ImageCaptureErrorEvent</code> event at the <code>ImageCapture</code> object with a 
+	then if the <code>readyState</code> of the <code>VideoStreamTrack</code> provided in the constructor is not "live", the UA <em title="must" class="rfc2119">must</em> fire an <code>ImageCaptureErrorEvent</code> event at the <code>ImageCapture</code> object with a 
           new <code>ImageCaptureError</code> object whose <code>code</code> is set to INVALID_TRACK.  If the UA is unable to execute the <code>takePhoto()</code> method for any
-          other reason (for example, upon invocation of multiple takePhoto() method calls in rapid succession), then the UA <em title="must" class="rfc2119">must</em> fire a <code>ImageCaptureErrorEvent</code> event at the <code>ImageCapture</code> object with a 
+          other reason (for example, upon invocation of multiple takePhoto() method calls in rapid succession), then the UA <em title="must" class="rfc2119">must</em> fire an <code>ImageCaptureErrorEvent</code> event at the <code>ImageCapture</code> object with a 
           new <code>ImageCaptureError</code> object whose <code>code</code> is set to PHOTO_ERROR.
    Otherwise it <em title="must" class="rfc2119">must</em>
           queue a task, using the DOM manipulation task source, that runs the following steps:
@@ -79,16 +78,16 @@
 				and then resume streaming.  In this case, the stopping and restarting of streaming <em title="should" class="rfc2119">should</em>
 				cause <code>mute</code> and <code>unmute</code> events to fire on the Track in question.  </li>
 	 <li>Raise a <code>BlobEvent</code> event containing the <code>Blob</code> to the <code>onphoto</code> event handler (if specified).</li></dd>
-	 <dt>void getFrame()</dt>
-	 <dd>When the <code>getFrame()</code> method of an <code>ImageCapture</code> object is invoked, then if the <code>readyState</code> of the <code>VideoStreamTrack</code> provided in the contructor is not "live", the UA <em title="must" class="rfc2119">must</em> fire a <code>ImageCaptureErrorEvent</code> event at the <code>ImageCapture</code> object with a 
-          new <code>ImageCaptureError</code> object whose <code>code</code> is set to INVALID_TRACK. If the UA is unable to execute the <code>getFrame()</code> method for any
-          other reason, then the UA <em title="must" class="rfc2119">must</em> fire a <code>ImageCaptureErrorEvent</code> event at the <code>ImageCapture</code> object with a 
-          new <code>ImageCaptureError</code> object whose <code>code</code> is set to FRAME_GRAB_ERROR.    Otherwise it <em title="must" class="rfc2119">must</em>
+	 <dt>void grabFrame()</dt>
+	 <dd>When the <code>grabFrame()</code> method of an <code>ImageCapture</code> object is invoked, then if the <code>readyState</code> of the <code>VideoStreamTrack</code> provided in the contructor is not "live", the UA <em title="must" class="rfc2119">must</em> fire an <code>ImageCaptureErrorEvent</code> event at the <code>ImageCapture</code> object with a 
+          new <code>ImageCaptureError</code> object whose <code>code</code> is set to INVALID_TRACK. If the UA is unable to execute the <code>grabFrame()</code> method for any
+          other reason, then the UA <em title="must" class="rfc2119">must</em> fire an <code>ImageCaptureErrorEvent</code> event at the <code>ImageCapture</code> object with a 
+          new <code>ImageCaptureError</code> object whose <code>code</code> is set to FRAME_ERROR.    Otherwise it <em title="must" class="rfc2119">must</em>
           queue a task, using the DOM manipulation task source, that runs the following steps:
 		<ol>
-			<li>Gather data from the <code>VideoStreamTrack</code> into a <code>ImageData</code> object (as defined in [[!CANVAS-2D]]) containing a single still frame in RGBA format. The <code>width</code> and <code>height</code> of the
+			<li>Gather data from the <code>VideoStreamTrack</code> into an <code>ImageData</code> object (as defined in [[!CANVAS-2D]]) containing a single still frame in RGBA format. The <code>width</code> and <code>height</code> of the
 			<code>ImageData</code> object are derived from the constraints of the <code>VideoStreamTrack</code>.  </li>
-	 <li>Raise a <code>FrameGrabEvent</code> event containing the <code>ImageData</code> to the <code>onframegrab</code> event handler (if specified). {Note: <code>getFrame()</code> returns data only once upon being invoked.}</li>
+	 <li>Raise a <code>FrameGrabEvent</code> event containing the <code>ImageData</code> to the <code>onframe</code> event handler (if specified). {Note: <code>grabFrame()</code> returns data only once upon being invoked.}</li>
 	 </dd>
 	 </dl>
       
@@ -96,7 +95,7 @@
     --------------
     <dl title='[Constructor(DOMString type, optional FrameGrabEventInit frameGrabInitDict)] interface FrameGrabEvent : Event' class='idl'>
     <dt>readonly attribute ImageData imageData</dt>
-    <dd>Returns an <code>ImageData</code> object whose <code>length</code> and <code>height</code> attributes indicates the dimensions of the captured frame. </dd>
+    <dd>Returns an <code>ImageData</code> object whose <code>width</code> and <code>height</code> attributes indicates the dimensions of the captured frame. </dd>
     </dl>
 
     ##### <code>FrameGrabEventInit</code> Dictionary
@@ -110,14 +109,14 @@
     --------------
     <dl title='[Constructor(DOMString type, optional ImageCaptureErrorEventInit imageCaptureErrorInitDict)] interface ImageCaptureErrorEvent : Event' class='idl'>
     <dt>readonly attribute ImageCaptureError imageCaptureError</dt>
-    <dd>Returns a <code>ImageCaptureError</code> object whose <code>code</code> attribute indicates the type of error occurrence. </dd>
+    <dd>Returns an <code>ImageCaptureError</code> object whose <code>code</code> attribute indicates the type of error occurrence. </dd>
     </dl>
 
     ##### <code>ImageCaptureErrorEventInit</code> Dictionary
     
     <dl title='dictionary ImageCaptureErrorEventInit : EventInit' class='idl'>
     <dt>ImageCaptureError imageCaptureError</dt>
-    <dd>A <code>ImageCaptureError</code> object containing the data to deliver via this event.</dd>
+    <dd>an <code>ImageCaptureError</code> object containing the data to deliver via this event.</dd>
     </dl>  
         
     <code>BlobEvent</code>
@@ -153,9 +152,9 @@
     <p>The <code>ImageCaptureError</code> object is passed to an <code>onerror</code> event handler of an
     <code>ImageCapture</code> object if an error occurred when the object was created or any of its methods were invoked.</p>         
     <dl title='[NoInterfaceObject] interface ImageCaptureError' class='idl'>
-    <dt>const unsigned short FRAME_GRAB_ERROR=1</dt>
-    <dd>An <code>ImageCaptureError</code> object must set its <code>code</code> value to this constant if an error occurred upon invocation of the <code>getFrame()</code> method of the <code>ImageCapture</code> interface.</dd>
-    <dt>const unsigned short SETTINGS_ERROR=2</dt>
+    <dt>const unsigned short FRAME_ERROR=1</dt>
+    <dd>An <code>ImageCaptureError</code> object must set its <code>code</code> value to this constant if an error occurred upon invocation of the <code>grabFrame()</code> method of the <code>ImageCapture</code> interface.</dd>
+    <dt>const unsigned short OPTIONS_ERROR=2</dt>
     <dd>An <code>ImageCaptureError</code> object must set its <code>code</code> value to this constant if an error occurred upon invocation of the <code>setOptions()</code> method of the <code>ImageCapture</code> interface.</dd>
     <dt>const unsigned short PHOTO_ERROR=3</dt>
     <dd>An <code>ImageCaptureError</code> object must set its <code>code</code> value to this constant if an error occurred upon invocation of the <code>takePhoto()</code> method of the <code>ImageCapture</code> interface.</dd>
@@ -190,8 +189,8 @@
     </section>
     
     <section>
-    <h2><code>PhotoSettingsOptions</code></h2>
-    <p>The PhotoSettingsOptions attribute of the <code>ImageCapture</code> object provides
+    <h2><code>PhotoOptions</code></h2>
+    <p>The PhotoOptions attribute of the <code>ImageCapture</code> object provides
     the photo-specific settings options and current settings values.  The following definitions are assumed
     for individual settings and are provided for information purposes:</p>
     <ol>
@@ -247,7 +246,7 @@
     <li><i>Saturation</i> is a numeric camera setting that controls the intensity of color in a scene (i.e. the amount of gray in the scene).  Very low saturation levels will result in photo's closer to black-and-white.</li>
     <li><i>Sharpness</i> is a numeric camera setting that controls the intensity of edges in a scene.  Higher sharpness settings result in higher edge intensity, while lower settings result in less contrast and blurrier edges (i.e. soft focus).</li>
     </ol>
-    <dl title='interface PhotoSettingsOptions' class='idl'>
+    <dl title='interface PhotoOptions' class='idl'>
     <dt>attribute MediaSettingsItem autoWhiteBalanceMode</dt>
     <dd>This reflects whether automated White Balance Mode selection is on or off, and is boolean - on is true</dd>
     <dt>attribute MediaSettingsRange whiteBalanceMode</dt>
@@ -333,17 +332,17 @@
           //Extract video track.  'kind' attribute not checked because stream was created with video option only.
           var videoDevice = mediastream.getTrackByID()[0];
           // Check if this device supports a picture mode...
-          var pictureDevice = new ImageCapture(videoDevice);
-          if (pictureDevice) {
-                pictureDevice.onphoto = showPicture;
-                if (pictureDevice.photoSettingsOptions.redEyeReduction) {
-                   pictureDevice.setOptions({redEyeReductionSetting:true});
+          var captureDevice = new ImageCapture(videoDevice);
+          if (captureDevice) {
+                captureDevice.onphoto = showPicture;
+                if (captureDevice.photoOptions.redEyeReduction) {
+                   captureDevice.setOptions({redEyeReductionSetting:true});
                    }
                 else
                    console.log('No red eye reduction');
-                pictureDevice.onphotosettingschange = function(){
-                   if (pictureDevice.photoSettingsOptions.redEyeReduction.value)
-                       pictureDevice.takePhoto();
+                captureDevice.onoptions = function(){
+                   if (captureDevice.photoOptions.redEyeReduction.value)
+                       captureDevice.takePhoto();
                    }
                 }
             }
@@ -366,10 +365,10 @@
           //Extract video track.  'kind' attribute not checked because stream was created with video option only.
           var videoDevice = mediastream.getTrackByID()[0];
           // Check if this device supports a picture mode...
-          var pictureDevice = new ImageCapture(videoDevice);
-          if (pictureDevice) {
-                pictureDevice.onframegrab = processFrame;
-                pictureDevice.getFrame();
+          var captureDevice = new ImageCapture(videoDevice);
+          if (captureDevice) {
+                captureDevice.onframe = processFrame;
+                captureDevice.grabFrame();
                 }
             }
 
@@ -377,7 +376,7 @@
            imgData = e.imageData;
            width = imgData.width;
            height = imgData.height;
-           for (j=3; j < imgData.length; j+=4)
+           for (j=3; j < imgData.width; j+=4)
                 {
                 // Set all alpha values to medium opacity
                 imgData.data[j] = 128;
@@ -386,7 +385,7 @@
            var canvas = document.createElement('canvas');
            ctx = canvas.getContext("2d");
            newImg = ctx.createImageData(width,height);
-           for (j=0; j < imgData.length; j++)
+           for (j=0; j < imgData.width; j++)
                 {
                 newImg.data[j] = imgData.data[j];
                 }
@@ -396,6 +395,44 @@
     function failedToGetMedia{
            console.log('Stream failure');
            }
-    </pre>    
+    </pre> 
+    
+    ##### Repeated grabbing of a frame
+    <pre class='example'>
+    &lthtml&gt
+   &ltbody&gt
+   &ltp&gt&ltcanvas id="frame"&gt&lt/canvas&gt&lt/p&gt 
+   &ltbutton onclick="stopFunction()"&gtStop frame grab&lt/button&gt
+   &ltscript&gt
+   var canvas = document.getElementById('frame');
+   navigator.getUserMedia({video: true}, gotMedia, failedToGetMedia);
+
+   function gotMedia(mediastream) {
+          //Extract video track.  
+          var videoDevice = mediastream.getTrackByID()[0];
+          // Check if this device supports a picture mode...
+          var captureDevice = new ImageCapture(videoDevice);
+          var frameVar;
+          if (captureDevice) {
+                captureDevice.onframe = processFrame;
+                frameVar = setInterval(captureDevice.grabFrame(), 1000);
+                }
+            }
+
+    function processFrame(e) {
+            imgData = e.imageData;
+            canvas.width = imgData.width;
+            canvas.height = imgData.height;
+            canvas.getContext('2d').drawImage(imgData, 0, 0,imgData.width,imgData.height);
+            }
+            
+    function stopFunction(e) {
+            clearInterval(myVar);
+            }
+   &lt/script&gt
+   &lt/body&gt
+   &lt/html&gt   
+    </pre>
+
   </body>
 </html>
