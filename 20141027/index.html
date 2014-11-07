@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html xmlns='http://www.w3.org/1999/xhtml' lang='en'>
+  <head>
+    <meta charset='utf-8'/>
+    <title>Mediastream Image Capture</title>
+    <script class='remove'>
+      var respecConfig = {
+          specStatus: "ED"
+      ,   shortName:  "image-capture"
+      ,   editors: [
+         {   name:       "Giridhar Mandyam"
+                ,   company:    "Qualcomm Innovation Center, Inc"
+                ,   companyURL: "http://www.qualcomm.com/about/businesses/quicinc" }
+          ]
+      ,   edDraftURI:   "http://gmandyam.github.com/image-capture"
+      ,   previousURI:   "http://gmandyam.github.com/image-capture"
+      ,   copyrightStart: 2012
+      ,   noIDLIn:      true
+      ,   wg:           ["Web Real-Time Communication Working Group", "Device APIs Working Group"]
+      ,   wgURI:        ["http://www.w3.org/2011/04/webrtc/","http://www.w3.org/2009/dap"]
+      ,   wgPublicList: "public-media-capture"
+      ,   wgPatentURI:  "XXX"
+      ,   isRecTrack:   false
+      ,   isNoTrack:    true
+      ,   format:       'markdown'
+      };
+    </script>
+    <script src='https://www.w3.org/Tools/respec/respec-w3c-common.js' class='remove' async></script>
+  </head>
+  <body>
+    <section id='sotd'>
+      Comments on this document are welcomed.
+    </section>
+    
+    <section id='abstract'>
+      This document specific the takePhoto() and grabFrame() methods, and corresponding camera settings for use with MediaStreams as defined in Media Capture and Streams [[!GETUSERMEDIA]].
+    </section>
+    
+    Introduction
+    ------------
+    <p>The API defined in this document taks a valid MediaStream and returns an encoded image in the form of a <code>Blob</code> (as defined in [[!FILE-API]]).  The image is
+    provided by the capture device that provides the MediaStream.  Moreover, 
+    picture-specific settings can be optionally provided as arguments that can be applied to the image being captured.</p>
+    
+    Image Capture API
+    --------------
+    <p>The User Agent must support <i>Promises</i> in order to implement the Image Capture API.  Any <i>Promise</i> object is assumed to have <i>resolver</i> object, with <i>resolve()</i> and <i>reject()</i> methods associated with it.
+    The <code>MediaStreamTrack</code> passed to the constructor <em title="must" class="rfc2119">must</em> have its <code>kind</code> attribute set to "<code>video</code>" otherwise an exception will be thrown.</p>
+    <dl title='[Constructor(MediaStreamTrack track)] interface ImageCapture' class='idl'>
+    <dd>interface ImageCapture</dd>
+    <dt>readonly attribute PhotoCapabilities photoCapabilities</dt>
+    <dd>Describes current photo settings</dd>
+    <dt>readonly attribute MediaStreamTrack videoStreamTrack</dt>
+    <dd>The MediaStreamTrack passed into the constructor</dd>
+    <dt>readonly attribute MediaStream previewStream</dt>
+    <dd>The MediaStream that provides a camera preview</dd>
+    <dt>Promise setOptions(PhotoSettings? photoSettings)</dt>
+    <dd>When the <code>setOptions()</code> method of an <code>ImageCapture</code> object is invoked, then a valid <code>PhotoSettings</code> object <em title="must" class="rfc2119">must</em> be passed in the method to the
+    <code>ImageCapture</code> object.  In addition, a new <i>Promise</i> object is returned.  If the UA can successfully apply the settings, then the UA <em title="must" class="rfc2119">must</em> return a <code>SettingsChangeEvent</code> event to the 
+    <i>resolver</i> object's <i>resolve()</i> method.  If the UA cannot successfully apply the settings, then the UA
+    <em title="must" class="rfc2119">must</em> return an <code>ImageCaptureErrorEvent</code> to the <i>resolver</i> object's <i>reject()</i> method whose <code>errorDescription</code> is set to OPTIONS_ERROR. </dd>
+    <dt>Promise takePhoto ()</dt>
+    <dd>When the <code>takePhoto()</code> method of an <code>ImageCapture</code> object is invoked, a new <i>Promise</i> object is returned.
+	If the <code>readyState</code> of the <code>VideoStreamTrack</code> provided in the constructor is not "live", the UA <em title="must" class="rfc2119">must</em> return an <code>ImageCaptureErrorEvent</code> event to the <i>resolver</i> object's <i>reject()</i> method with a 
+          new <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to INVALID_TRACK.  If the UA is unable to execute the <code>takePhoto()</code> method for any
+          other reason (for example, upon invocation of multiple takePhoto() method calls in rapid succession), then the UA <em title="must" class="rfc2119">must</em> return an <code>ImageCaptureErrorEvent</code> event to the <i>resolver</i> object's <i>reject()</i> method with a 
+          new <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to PHOTO_ERROR.
+   Otherwise it <em title="must" class="rfc2119">must</em>
+          queue a task, using the DOM manipulation task source, that runs the following steps:
+		<ol>
+			<li>Gather data from the <code>MediaStreamTrack</code> into a <code>Blob</code> containing a single still image. The method of doing
+				this will depend on the underlying device.  Devices 
+				may temporarily stop streaming data, reconfigure themselves with the appropriate photo settings, take the photo,
+				and then resume streaming.  In this case, the stopping and restarting of streaming <em title="should" class="rfc2119">should</em>
+				cause <code>mute</code> and <code>unmute</code> events to fire on the Track in question.  </li>
+	 <li>Return a <code>BlobEvent</code> event containing the <code>Blob</code> to the <i>resolver</i> object's <i>resolve()</i> method.</li></dd>
+	 <dt>Promise grabFrame()</dt>
+	 <dd>When the <code>grabFrame()</code> method of an <code>ImageCapture</code> object is invoked, a new <i>Promise</i> object is returned. If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the contructor is not "live", the UA <em title="must" class="rfc2119">must</em> return an <code>ImageCaptureErrorEvent</code> event to the <i>resolver</i> object's <i>reject()</i> method with a 
+          new <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to INVALID_TRACK. If the UA is unable to execute the <code>grabFrame()</code> method for any
+          other reason, then the UA <em title="must" class="rfc2119">must</em> return an <code>ImageCaptureErrorEvent</code> event to the <i>resolver</i> object's <i>reject()</i> method with a 
+          new <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to FRAME_ERROR.    Otherwise it <em title="must" class="rfc2119">must</em>
+          queue a task, using the DOM manipulation task source, that runs the following steps:
+		<ol>
+			<li>Gather data from the <code>MediaStreamTrack</code> into an <code>ImageData</code> object (as defined in [[!CANVAS-2D]]) containing a single still frame in RGBA format. The <code>width</code> and <code>height</code> of the
+			<code>ImageData</code> object are derived from the constraints of the <code>MediaStreamTrack</code>. The method of doing
+				this will depend on the underlying device.  Devices 
+				may temporarily stop streaming data, reconfigure themselves with the appropriate photo settings (which may be a subset of the settings provided in <code>photoCapabilities</code>), take the photo (and convert to an ImageData object),
+				and then resume streaming.  In this case, the stopping and restarting of streaming <em title="should" class="rfc2119">should</em>
+				cause <code>mute</code> and <code>unmute</code> events to fire on the Track in question.   </li>
+	 <li>Return a <code>FrameGrabEvent</code> event containing the <code>ImageData</code> to the <i>resolver</i> object's <i>resolve()</i> method. {Note: <code>grabFrame()</code> returns data only once upon being invoked.}</li>
+	 </dd>
+	 </dl>
+      
+    <code>FrameGrabEvent</code>
+    --------------
+    <dl title='[Constructor(DOMString type, optional FrameGrabEventInit frameGrabInitDict)] interface FrameGrabEvent : Event' class='idl'>
+    <dt>readonly attribute ImageData imageData</dt>
+    <dd>Returns an <code>ImageData</code> object whose <code>width</code> and <code>height</code> attributes indicates the dimensions of the captured frame. </dd>
+    </dl>
+
+    ##### <code>FrameGrabEventInit</code> Dictionary
+    
+    <dl title='dictionary FrameGrabEventInit : EventInit' class='idl'>
+    <dt>ImageData imageData</dt>
+    <dd>An <code>ImageData</code> object containing the data to deliver via this event.</dd>
+    </dl>
+
+    <code>ImageCaptureErrorEvent</code>
+    --------------
+    <dl title='[Constructor(DOMString type, optional ImageCaptureErrorEventInit imageCaptureErrorInitDict)] interface ImageCaptureErrorEvent : Event' class='idl'>
+    <dt>readonly attribute ImageCaptureError imageCaptureError</dt>
+    <dd>Returns an <code>ImageCaptureError</code> object whose <code>errorDescription</code> attribute indicates the type of error occurrence. </dd>
+    </dl>
+
+    ##### <code>ImageCaptureErrorEventInit</code> Dictionary
+    
+    <dl title='dictionary ImageCaptureErrorEventInit : EventInit' class='idl'>
+    <dt>ImageCaptureError imageCaptureError</dt>
+    <dd>an <code>ImageCaptureError</code> object containing the data to deliver via this event.</dd>
+    </dl>  
+        
+    <code>BlobEvent</code>
+    --------------
+    <dl title='[Constructor(DOMString type, optional BlobEventInit blobInitDict)] interface BlobEvent : Event' class='idl'>
+    <dt>readonly attribute Blob data</dt>
+    <dd>Returns a <code>Blob</code> object whose type attribute indicates the encoding of the blob data. An implementation must return a Blob in a format that is capable of being viewed in an HTML <code>&lt;img&gt;</code> tag. </dd>
+    </dl>
+    
+    ##### <code>BlobEventInit</code> Dictionary
+    
+    <dl title='dictionary BlobEventInit : EventInit' class='idl'>
+    <dt>Blob data</dt>
+    <dd>A <code>Blob</code> object containing the data to deliver via this event.</dd>
+    </dl>
+    
+    <code>SettingsChangeEvent</code>
+    --------------
+    <dl title='[Constructor(DOMString type, optional SettingsChangeEventInit photoSettingsInitDict)] interface PhotoSettingsEvent : Event' class='idl'>
+    <dt>readonly attribute PhotoSettings photoSettings</dt>
+    <dd>Returns a <code>PhotoSettings</code> object whose type attribute indicates the current photo settings. </dd>
+    </dl>
+    
+    ##### <code>SettingsChangeEventInit</code> Dictionary
+    
+    <dl title='dictionary SettingsChangeEventInit : EventInit' class='idl'>
+    <dt>PhotoSettings photoSettings</dt>
+    <dd>A <code>PhotoSettings</code> object containing the data to deliver via this event.</dd>
+    </dl>  
+    
+    <code>ImageCaptureError</code>
+    -----------------
+    <p>The <code>ImageCaptureError</code> object is passed to an <code>onerror</code> event handler of an
+    <code>ImageCapture</code> object if an error occurred when the object was created or any of its methods were invoked.</p>         
+    <dl title='[NoInterfaceObject] interface ImageCaptureError' class='idl'>
+    <dt>readonly attribute DOMString? errorDescription</dt>
+    <dd>The <code>errorDescription</code> attribute returns the appropriate DOMString for the error event.  Acceptable values are FRAME_ERROR, OPTIONS_ERROR, PHOTO_ERROR, and ERROR_UNKNOWN.</dd>
+    </dl>
+    
+    <section>
+    <h2><code>MediaSettingsRange</code></h2>
+    <dl title='interface MediaSettingsRange' class='idl'>
+    <dt>readonly attribute unsigned long max</dt>
+    <dd>The maximum value of this setting</dd>
+    <dt>readonly attribute unsigned long min</dt>
+    <dd>The minimum value of this setting</dd>
+    <dt>readonly attribute unsigned long initial</dt>
+    <dd>The current value of this setting</dd>
+    </dl>
+    </section>
+    
+    <section>
+    <h2><code>MediaSettingsItem</code></h2>
+    <p>The <code>MediaSettingsItem</code> interface is now defined, which allows for a single setting to be managed.</p>
+    <dl title='interface MediaSettingsItem' class='idl'>
+    <dt>readonly attribute any value</dt>
+    <dd>Value of current setting.</dd>
+    </dl>
+    <p></p>
+    </section>
+    
+    <section>
+    <h2><code>PhotoCapabilities</code></h2>
+    <p>The photoCapabilities attribute of the <code>ImageCapture</code> object provides
+    the photo-specific settings options and current settings values.  The following definitions are assumed
+    for individual settings and are provided for information purposes:</p>
+    <ol>
+    <li><i>White balance mode</i> is a setting that cameras use to adjust for different color temperatures.  Color temperature is
+    the temperature of background light (measured in Kelvin normally).  This setting can also be automatically
+    determined by the implementation.  If 'automatic' mode is selected, then the Kelvin setting for White Balance Mode
+    may be overridden.  Typical temprature ranges for different modes are provided below:
+    <table border="1">
+    <tr>
+        <th>Mode</th>
+        <th>Kelvin range</th>
+    </tr>
+    <tr>
+        <td>incandescent</td>
+        <td>2500-3500</td>
+    </tr>
+    <tr>
+        <td>fluorescent</td>
+        <td>4000-5000</td>
+    </tr>
+    <tr>
+        <td>warm-fluorescent</td>
+        <td>5000-5500</td>
+    </tr>
+    <tr>
+        <td>daylight</td>
+        <td>5500-6500</td>
+    </tr>
+    <tr>
+        <td>cloudy-daylight</td>
+        <td>6500-8000</td>
+    </tr>
+    <tr>
+        <td>twilight</td>
+        <td>8000-9000</td>
+    </tr>
+    <tr>
+        <td>shade</td>
+        <td>9000-10000</td>
+    </tr>
+    </table>
+    </li>
+    <li><i>Exposure</i> is the amount of light allowed to fall on the photographic medium.  Auto-exposure mode is a camera setting
+    where the exposure levels are automatically adjusted by the implementation based on the subject of the photo.</li>
+    <li><i>Exposure Compensation</i> is a numeric camera setting that adjusts the exposure level from the current value used by the implementation.  This value can
+    be used to bias the exposure level enabled by auto-exposure.</li>
+    <li>The <i>ISO</i> setting of a camera describes the sensistivity of the camera to light.  It is a numeric value, where the lower the value
+    the greater the sensitivity.  This setting in most implementations relates to shutter speed, and is sometimes known as the ASA setting.</li>
+    <li><i>Red Eye Reduction</i> is a feature in cameras that is designed to limit or prevent the appearance of 
+    red pupils ("Red Eye") in photography subjects due prolonged exposure to a camera's flash.</li>
+    <li><i>Brightness</i> refers to the numeric camera setting that adjusts the perceived amount of light emitting from the photo object.  A higher brightness setting increases the intensity of darker areas in a scene while compressing the intensity of brighter parts of the scene.</li>
+    <li><i>Contrast</i> is the numeric camera setting that controls the difference in brightness between light and dark areas in a scene.  A higher contrast setting reflects an expansion in the difference in brightness.</li>
+    <li><i>Saturation</i> is a numeric camera setting that controls the intensity of color in a scene (i.e. the amount of gray in the scene).  Very low saturation levels will result in photo's closer to black-and-white.</li>
+    <li><i>Sharpness</i> is a numeric camera setting that controls the intensity of edges in a scene.  Higher sharpness settings result in higher edge intensity, while lower settings result in less contrast and blurrier edges (i.e. soft focus).</li>
+    <li><i>Zoom</i> is a numeric camera setting that controls the focal length of the lens.  The setting usually represents a ratio, e.g. 4 is a zoom ratio of 4:1.  The minimum value is usually 1, to represent a 1:1 ratio (i.e. no zoom).</li>
+    <li><i>Fill light mode</i> describes the flash setting of the capture device. </li>
+    <li><i>Focus mode</i> describes the focus setting of the capture device. </li>
+    </ol>
+    <dl title='interface PhotoCapabilities' class='idl'>
+    <dt>attribute MediaSettingsItem autoWhiteBalanceMode</dt>
+    <dd>This reflects whether automated White Balance Mode selection is on or off, and is boolean - on is true</dd>
+    <dt>attribute MediaSettingsRange whiteBalanceMode</dt>
+    <dd>This reflects the current white balance mode setting. Values are of type <code>WhiteBalanceModeEnum</code>.</dd>
+    <dt>attribute ExposureMode autoExposureMode</dt>
+    <dd>This reflects the current auto exposure mode setting.  Values are of type <code>ExposureMode</code>.</dd>
+    <dt>attribute MediaSettingsRange exposureCompensation</dt>
+    <dd>This reflects the current exposure compensation setting and permitted range.  Values are numeric.</dd>
+    <dt>attribute MediaSettingsRange iso</dt>
+    <dd>This reflects the current camera ISO setting and permitted range.  Values are numeric.</dd>
+    <dd>This feature reflects the current exposure level for recorded images. Values are numeric.</dd>
+    <dt>attribute MediaSettingsItem redEyeReduction</dt>
+    <dd>This reflects whether camera red eye reduction is on or off, and is boolean - on is true</dd>
+    <dt>attribute MediaSettingsRange brightness</dt>
+    <dd>This reflects the current brightness setting of the camera and permitted range. Values are numeric.</dd>
+    <dt>attribute MediaSettingsRange contrast</dt>
+    <dd>This reflects the current contrast setting of the camera and permitted range. Values are numeric.</dd>
+    <dt>attribute MediaSettingsRange saturation</dt>
+    <dd>This reflects the current saturation setting of the camera and permitted range. Values are numeric.</dd>
+    <dt>attribute MediaSettingsRange sharpness</dt>
+    <dd>This reflects the current sharpness setting of the camera and permitted range. Values are numeric.</dd>
+    <dt>attribute MediaSettingsRange imageHeight</dt>
+    <dd>This reflects the image height range supported by the UA and the current height setting.</dd>
+    <dt>attribute MediaSettingsRange imageWidth</dt>
+    <dd>This reflects the image width range supported by the UA and the current width setting.</dd>
+    <dt>attribute MediaSettingsRange zoom</dt>
+    <dd>This reflects the zoom value range supported by the UA and the current zoom setting.</dd>
+    <dt>attribute FillLightMode fillLightMode</dt>
+    <dd>This reflects the current fill light (flash) mode setting.  Values are of type <code>FillLightMode</code>.</dd>
+    <dt>attribute FocusMode focusMode</dt>
+    <dd>This reflects the current focus mode setting.  Values are of type <code>FocusMode</code>.</dd>
+    </dl>
+    <p></p>
+    </section>
+    
+    <section>
+    <h2><code>ExposureMode</code></h2>
+    <dl title='enum ExposureMode' class='idl'>
+    <dt>frame-average</dt>
+    <dd>Average of light information from entire scene</dd>
+    <dt>center-weighted</dt>
+    <dd>Sensitivity concentrated towards center of viewfinder</dd>
+    <dt>spot-metering</dt>
+    <dd>Spot-centered weighting</dd>
+    </dl>
+    </section>
+    
+    <section>
+    <h2><code>FillLightMode</code></h2>
+    <dl title='enum FillLightMode' class='idl'>
+    <dt>unavailable</dt>
+    <dd>This source does not have an option to change fill light modes (e.g., the camera does not have a flash)</dd>
+    <dt>auto</dt>
+    <dd>The video device's fill light will be enabled when required (typically low light conditions). Otherwise it will be off. Note that auto does not guarantee that a flash will fire when takePhoto is called. Use <code>flash</code> to guarantee firing of the flash for the <code>takePhoto()</code> or <code>getFrame()</code> methods.</dd>
+    <dt>off</dt>
+    <dd>The source's fill light and/or flash will not be used.</dd>
+    <dt>flash</dt>
+    <dd>This value will always cause the flash to fire for the <code>takePhoto()</code> or <code>getFrame()</code> methods. </dd>
+    <dt>on</dt>
+    <dd>The source's fill light will be turned on (and remain on) while the source <code>MediaStreamTrack</code> is active</dd>
+    </dl>
+    </section>
+
+    <section>
+    <h2><code>FocusMode</code></h2>
+    <dl title='enum FocusMode' class='idl'>
+    <dt>unavailable</dt>
+    <dd>This source does not have an option to change focus modes.</dd>
+    <dt>auto</dt>
+    <dd>Auto-focus mode is enabled.</dd>
+    <dt>manual</dt>
+    <dd>TManual focus mode is enabled.</dd>
+    </dl>
+    </section>
+    
+    <section>
+    <h2><code>PhotoSettings</code></h2>
+    <p>The <code>PhotoSettings</code> object is optionally passed into the <code>ImageCapture.setOptions()</code> method
+    in order to modify capture device settings specific to still imagery.  Each of the attributes in this object
+    are optional.</p>
+    <dl title='dictionary PhotoSettings' class='idl'>
+    <dt>attribute boolean autoWhiteBalanceMode</dt>
+    <dd>This reflects whether automatic White Balance Mode selection is desired.</dd>
+    <dt>attribute unsigned long whiteBalanceMode</dt>
+    <dd>This reflects the desired white balance mode setting.</dd>
+    <dt>attribute ExposureMode autoExposureMode</dt>
+    <dd>This reflects the desired auto exposure mode setting.  Acceptable values are of type <code>ExposureMode</code>.</dd>
+    <dt>attribute unsigned long exposureCompensation</dt>
+    <dd>This reflects the desired exposure compensation setting.</dd>
+    <dt>attribute unsigned long iso</dt>
+    <dd>This reflects the desired camera ISO setting.</dd>
+    <dd>This feature reflects the current exposure level for recorded images. Values are numeric.</dd>
+    <dt>attribute boolean redEyeReduction</dt>
+    <dd>This reflects whether camera red eye reduction is desired</dd>
+    <dt>attribute unsigned long brightness</dt>
+    <dd>This reflects the desired brightness setting of the camera.</dd>
+    <dt>attribute unsigned long contrast</dt>
+    <dd>This reflects the desired contrast setting of the camera.</dd>
+    <dt>attribute unsigned long saturation</dt>
+    <dd>This reflects the desired saturation setting of the camera.</dd>
+    <dt>attribute unsigned long sharpness</dt>
+    <dd>This reflects the desired sharpness setting of the camera.</dd>
+    <dt>attribute unsigned long zoom</dt>
+    <dd>This reflects the desired zoom setting of the camera.</dd>
+    <dt>attribute unsigned long imageHeight</dt>
+    <dd>This reflects the desired image height.  The UA <em title="must" class="rfc2119">must</em> select the closest height value this setting if it supports a discrete set of height options. </dd>
+    <dt>attribute unsigned long imageWidth</dt>
+    <dd>This reflects the desired image width. The UA <em title="must" class="rfc2119">must</em> select the closest width value this setting if it supports a discrete set of width options.</dd>
+    <dt>attribute FillLightMode fillLightMode</dt>
+    <dd>This reflects the desired fill light (flash) mode setting.  Acceptable values are of type <code>FillLightMode</code>.</dd>
+    <dt>attribute FocustMode focustMode</dt>
+    <dd>This reflects the desired focus mode setting.  Acceptable values are of type <code>FocusMode</code>.</dd>
+    </dl>
+    </section>
+        
+    Examples
+    -------
+    
+    ##### Grabbing a Frame for Post-Processing
+    <pre class='example'>
+    navigator.getUserMedia({video: true}, gotMedia, failedToGetMedia);
+    
+   function gotMedia(mediastream) {
+          //Extract video track.
+          var videoDevice = mediastream.getVideoTracks()[0];
+          // Check if this device supports a picture mode...
+          var captureDevice = new ImageCapture(videoDevice);
+          if (captureDevice) {
+                captureDevice.grabFrame().then(processFrame(imgData));
+                }
+            }
+
+    function processFrame(e) {
+           imgData = e.imageData;
+           width = imgData.width;
+           height = imgData.height;
+           for (j=3; j < imgData.width; j+=4)
+                {
+                // Set all alpha values to medium opacity
+                imgData.data[j] = 128;
+                }
+           // Create new ImageObject with the modified pixel values
+           var canvas = document.createElement('canvas');
+           ctx = canvas.getContext("2d");
+           newImg = ctx.createImageData(width,height);
+           for (j=0; j < imgData.width; j++)
+                {
+                newImg.data[j] = imgData.data[j];
+                }
+           // ... and do something with the modified image ...
+           }
+           
+    function failedToGetMedia{
+           console.log('Stream failure');
+           }
+    </pre> 
+
+    ##### Taking a picture if Red Eye Reduction is activated
+    <pre class='example'>
+    navigator.getUserMedia({video: true}, gotMedia, failedToGetMedia);
+    
+   function gotMedia(mediastream) {
+          //Extract video track.
+          var videoDevice = mediastream.getVideoTracks()[0];
+          // Check if this device supports a picture mode...
+          var captureDevice = new ImageCapture(videoDevice);
+          if (captureDevice) {
+                if (captureDevice.photoCapabilities.redEyeReduction) {
+                   captureDevice.setOptions({redEyeReductionSetting:true}).then(captureDevice.takePhoto().then(showPicture(blob),function(error){alert("Failed to take photo");}));
+                   }
+                else
+                   console.log('No red eye reduction');
+                }
+            }
+
+    function showPicture(e) {
+           var img = document.querySelector("img");
+           img.src = URL.createObjectURL(e.data);
+           }
+           
+    function failedToGetMedia{
+           console.log('Stream failure');
+           }
+    </pre>
+
+    ##### Repeated grabbing of a frame
+    <pre class='example'>
+    &lthtml&gt
+   &ltbody&gt
+   &ltp&gt&ltcanvas id="frame"&gt&lt/canvas&gt&lt/p&gt 
+   &ltbutton onclick="stopFunction()"&gtStop frame grab&lt/button&gt
+   &ltscript&gt
+   var canvas = document.getElementById('frame');
+   navigator.getUserMedia({video: true}, gotMedia, failedToGetMedia);
+
+   function gotMedia(mediastream) {
+          //Extract video track.  
+          var videoDevice = mediastream.getVideoTracks()[0];
+          // Check if this device supports a picture mode...
+          var captureDevice = new ImageCapture(videoDevice);
+          var frameVar;
+          if (captureDevice) {
+                frameVar = setInterval(captureDevice.grabFrame().then(processFrame()), 1000);
+                }
+            }
+
+    function processFrame(e) {
+            imgData = e.imageData;
+            canvas.width = imgData.width;
+            canvas.height = imgData.height;
+            canvas.getContext('2d').drawImage(imgData, 0, 0,imgData.width,imgData.height);
+            }
+            
+    function stopFunction(e) {
+            clearInterval(myVar);
+            }
+   &lt/script&gt
+   &lt/body&gt
+   &lt/html&gt   
+    </pre>
+  </body>
+</html>
