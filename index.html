@@ -359,7 +359,7 @@
     
     ##### Grabbing a Frame for Post-Processing
     <pre class='example'>
-    navigator.getUserMedia({video: true}, gotMedia, failedToGetMedia);
+    navigator.mediaDevices.getUserMedia({video: true}).then(gotMedia, failedToGetMedia);
     
    function gotMedia(mediastream) {
           //Extract video track.
@@ -368,8 +368,8 @@
           var captureDevice = new ImageCapture(videoDevice);
           if (captureDevice) {
                 captureDevice.grabFrame().then(processFrame(imgData));
-                }
-            }
+          }
+    }
 
     function processFrame(e) {
            imgData = e.imageData;
@@ -390,10 +390,11 @@
                 }
            // ... and do something with the modified image ...
            }
-           
+    }
+
     function failedToGetMedia{
            console.log('Stream failure');
-           }
+    }
     </pre> 
 
     ##### Taking a picture if Red Eye Reduction is activated
