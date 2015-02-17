@@ -381,144 +381,155 @@
     -------
     ##### Taking a picture if Red Eye Reduction is activated
     <pre class='example'>
-    navigator.getUserMedia({video: true}, gotMedia, failedToGetMedia);
-    
-   function gotMedia(mediastream) {
-          //Extract video track.
-          var videoDevice = mediastream.getVideoTracks()[0];
-          // Check if this device supports a picture mode...
-          var captureDevice = new ImageCapture(videoDevice);
-          if (captureDevice) {
-                captureDevice.onphoto = showPicture;
-                if (captureDevice.photoOptions.redEyeReduction) {
-                   captureDevice.setOptions({redEyeReductionSetting:true});
-                   }
-                else
-                   console.log('No red eye reduction');
-                captureDevice.onoptions = function(){
-                   if (captureDevice.photoOptions.redEyeReduction.value)
-                       captureDevice.takePhoto();
-                   }
-                }
-            }
+ navigator.getUserMedia({
+   video: true
+ }, gotMedia, failedToGetMedia);
 
-    function showPicture(e) {
-           var img = document.querySelector("img");
-           img.src = URL.createObjectURL(e.data);
-           }
-           
-    function failedToGetMedia{
-           console.log('Stream failure');
-           }
-    </pre>
+ function gotMedia(mediastream) {
+   //Extract video track.
+   const videoDevice = mediastream.getVideoTracks()[0];
+   // Check if this device supports a picture mode...
+   const captureDevice = new ImageCapture(videoDevice);
+   if (captureDevice) {
+     captureDevice.onphoto = showPicture;
+     if (captureDevice.photoOptions.redEyeReduction) {
+       captureDevice.setOptions({
+         redEyeReductionSetting: true
+       });
+     } else {
+       console.log('No red eye reduction');
+     }
+     captureDevice.onoptions = function(){
+       if (this.photoOptions.redEyeReduction.value) { 
+         captureDevice.takePhoto() 
+       }
+     }
+   }
+ }
+
+ function showPicture(e) {
+   var img = document.querySelector("img");
+   img.src = URL.createObjectURL(e.data);
+ }
+
+ function failedToGetMedia {
+   console.log('Stream failure');
+ }
+ </pre>
     
     ##### Grabbing a Frame for Post-Processing
     <pre class='example'>
-    navigator.getUserMedia({video: true}, gotMedia, failedToGetMedia);
-    
-   function gotMedia(mediastream) {
-          //Extract video track.
-          var videoDevice = mediastream.getVideoTracks()[0];
-          // Check if this device supports a picture mode...
-          var captureDevice = new ImageCapture(videoDevice);
-          if (captureDevice) {
-                captureDevice.onframe = processFrame;
-                captureDevice.grabFrame();
-                }
-            }
+navigator.getUserMedia({
+  video: true
+}, gotMedia, failedToGetMedia);
 
-    function processFrame(e) {
-           imgData = e.imageData;
-           width = imgData.width;
-           height = imgData.height;
-           for (j=3; j < imgData.width; j+=4)
-                {
-                // Set all alpha values to medium opacity
-                imgData.data[j] = 128;
-                }
-           // Create new ImageObject with the modified pixel values
-           var canvas = document.createElement('canvas');
-           ctx = canvas.getContext("2d");
-           newImg = ctx.createImageData(width,height);
-           for (j=0; j < imgData.width; j++)
-                {
-                newImg.data[j] = imgData.data[j];
-                }
-           // ... and do something with the modified image ...
-           }
-           
-    function failedToGetMedia{
-           console.log('Stream failure');
-           }
+function gotMedia(mediastream) {
+  //Extract video track.
+  const videoDevice = mediastream.getVideoTracks()[0];
+  // Check if this device supports a picture mode...
+  const captureDevice = new ImageCapture(videoDevice);
+  if (captureDevice) {
+    captureDevice.onframe = processFrame;
+    captureDevice.grabFrame();
+  }
+}
+
+function processFrame(e) {
+  const imgData = e.imageData;
+  const width = imgData.width;
+  const height = imgData.height;
+  for (let j = 3; j < imgData.width; j += 4) {
+    // Set all alpha values to medium opacity
+    imgData.data[j] = 128;
+  }
+  // Create new ImageObject with the modified pixel values
+  var canvas = document.createElement('canvas');
+  ctx = canvas.getContext("2d");
+  newImg = ctx.createImageData(width, height);
+  for (let j = 0; j < imgData.width; j++) {
+    newImg.data[j] = imgData.data[j];
+  }
+  // ... and do something with the modified image ...
+}
+
+function failedToGetMedia {
+  console.log('Stream failure');
+}
     </pre> 
     
     ##### Repeated grabbing of a frame
     <pre class='example'>
-    &lthtml&gt
+   &lthtml&gt
    &ltbody&gt
    &ltp&gt&ltcanvas id="frame"&gt&lt/canvas&gt&lt/p&gt 
    &ltbutton onclick="stopFunction()"&gtStop frame grab&lt/button&gt
    &ltscript&gt
-   var canvas = document.getElementById('frame');
-   navigator.getUserMedia({video: true}, gotMedia, failedToGetMedia);
 
-   function gotMedia(mediastream) {
-          //Extract video track.  
-          var videoDevice = mediastream.getVideoTracks()[0];
-          // Check if this device supports a picture mode...
-          var captureDevice = new ImageCapture(videoDevice);
-          var frameVar;
-          if (captureDevice) {
-                captureDevice.onframe = processFrame;
-                frameVar = setInterval(captureDevice.grabFrame(), 1000);
-                }
-            }
+navigator.getUserMedia({video: true}, gotMedia, failedToGetMedia);
 
-    function processFrame(e) {
-            imgData = e.imageData;
-            canvas.width = imgData.width;
-            canvas.height = imgData.height;
-            canvas.getContext('2d').drawImage(imgData, 0, 0,imgData.width,imgData.height);
-            }
-            
-    function stopFunction(e) {
-            clearInterval(myVar);
-            }
-   &lt/script&gt
-   &lt/body&gt
-   &lt/html&gt   
-    </pre>
+function gotMedia(mediastream) {
+  //Extract video track.  
+  const videoDevice = mediastream.getVideoTracks()[0];
+  // Check if this device supports a picture mode...
+  const captureDevice = new ImageCapture(videoDevice);
+  if (captureDevice) {
+    captureDevice.onframe = processFrame;
+    setInterval(captureDevice.grabFrame(), 1000);
+  }
+}
 
-    ##### Taking a picture if Red Eye Reduction is activated using promises
-    <pre class='example'>
-    navigator.getUserMedia({video: true}, gotMedia, failedToGetMedia);
-    
-   function gotMedia(mediastream) {
-          //Extract video track.
-          var videoDevice = mediastream.getVideoTracks()[0];
-          // Check if this device supports a picture mode...
-          var captureDevice = new ImageCapture(videoDevice);
-          if (captureDevice) {
-                if (captureDevice.photoOptions.redEyeReduction) {
-                   captureDevice.setOptions({redEyeReductionSetting:true});
-                   }
-                else
-                   console.log('No red eye reduction');
-                captureDevice.onoptions = function(){
-                   if (captureDevice.photoOptions.redEyeReduction.value)
-                       captureDevice.takePhoto().then(showPicture(blob),function(error){alert("Failed to take photo");});
-                   }
-                }
-            }
+function processFrame(e) {
+  const canvas = document.getElementById('frame');
+  const imgData = e.imageData;
+  canvas.width = imgData.width;
+  canvas.height = imgData.height;
+  canvas.getContext('2d')
+        .drawImage(imgData, 0, 0, imgData.width, imgData.height);
+}
 
-    function showPicture(e) {
-           var img = document.querySelector("img");
-           img.src = URL.createObjectURL(e.data);
-           }
-           
-    function failedToGetMedia{
-           console.log('Stream failure');
-           }
+function stopFunction(e) {
+  clearInterval(myVar);
+} 
+&lt/script&gt
+</pre>
+
+#####Taking a picture
+if Red Eye Reduction is activated using promises 
+<pre class='example'>
+navigator.getUserMedia({
+  video: true
+}, gotMedia, failedToGetMedia);
+
+function gotMedia(mediastream) {
+  //Extract video track.
+  const videoDevice = mediastream.getVideoTracks()[0];
+  // Check if this device supports a picture mode...
+  const captureDevice = new ImageCapture(videoDevice);
+  if (captureDevice) {
+    if (captureDevice.photoOptions.redEyeReduction) {
+      captureDevice.setOptions({
+        redEyeReductionSetting: true
+      });
+    } else {
+      console.log('No red eye reduction')
+    };
+    captureDevice.onoptions = function(e) {
+      if (this.photoOptions.redEyeReduction.value){ 
+        this.takePhoto()
+          .then( (pic) => showPicture(pic.data), 
+                 (err) => alert("Failed to take photo:" + err););
+      }
+    }
+  }
+}
+function showPicture(blob) {
+  var img = document.querySelector("img");
+  img.src = URL.createObjectURL(blob);
+}
+
+function failedToGetMedia {
+  console.log('Stream failure');
+}
     </pre>
   </body>
 </html>
