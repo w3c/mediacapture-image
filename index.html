@@ -53,17 +53,20 @@
     <dd>The MediaStreamTrack passed into the constructor</dd>
     <dt>readonly attribute MediaStream previewStream</dt>
     <dd>The MediaStream that provides a camera preview</dd>
-    <dt>Promise setOptions(PhotoSettings? photoSettings)</dt>
+    <dt>
+      [Throws]
+      Promise&lt;void&gt; setOptions(PhotoSettings? photoSettings)
+    </dt>
     <dd>When the <code>setOptions()</code> method of an <code>ImageCapture</code> object is invoked, then a valid <code>PhotoSettings</code> object <em title="must" class="rfc2119">must</em> be passed in the method to the
-    <code>ImageCapture</code> object.  In addition, a new <i>Promise</i> object is returned.  If the UA can successfully apply the settings, then the UA <em title="must" class="rfc2119">must</em> return a <code>SettingsChangeEvent</code> event to the 
-    <i>resolver</i> object's <i>resolve()</i> method.  If the UA cannot successfully apply the settings, then the UA
-    <em title="must" class="rfc2119">must</em> return an <code>ImageCaptureErrorEvent</code> to the <i>resolver</i> object's <i>reject()</i> method whose <code>errorDescription</code> is set to OPTIONS_ERROR. </dd>
-    <dt>Promise takePhoto ()</dt>
+    <code>ImageCapture</code> object.  In addition, a new <i>Promise</i> object is returned.  If the UA can successfully apply the settings, then the UA <em title="must" class="rfc2119">must</em> return a resolved promise. If the UA cannot successfully apply the settings, then the UA
+    <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <code>ImageCaptureError</code> whose <code>errorDescription</code> is set to OPTIONS_ERROR.</dd>
+    <dt>
+      [Throws]
+      Promise&lt;Blob&gt; takePhoto()
+    </dt>
     <dd>When the <code>takePhoto()</code> method of an <code>ImageCapture</code> object is invoked, a new <i>Promise</i> object is returned.
-	If the <code>readyState</code> of the <code>VideoStreamTrack</code> provided in the constructor is not "live", the UA <em title="must" class="rfc2119">must</em> return an <code>ImageCaptureErrorEvent</code> event to the <i>resolver</i> object's <i>reject()</i> method with a 
-          new <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to INVALID_TRACK.  If the UA is unable to execute the <code>takePhoto()</code> method for any
-          other reason (for example, upon invocation of multiple takePhoto() method calls in rapid succession), then the UA <em title="must" class="rfc2119">must</em> return an <code>ImageCaptureErrorEvent</code> event to the <i>resolver</i> object's <i>reject()</i> method with a 
-          new <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to PHOTO_ERROR.
+	If the <code>readyState</code> of the <code>VideoStreamTrack</code> provided in the constructor is not "live", the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to INVALID_TRACK.  If the UA is unable to execute the <code>takePhoto()</code> method for any
+          other reason (for example, upon invocation of multiple takePhoto() method calls in rapid succession), then the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to PHOTO_ERROR.
    Otherwise it <em title="must" class="rfc2119">must</em>
           queue a task, using the DOM manipulation task source, that runs the following steps:
 		<ol>
@@ -72,87 +75,31 @@
 				may temporarily stop streaming data, reconfigure themselves with the appropriate photo settings, take the photo,
 				and then resume streaming.  In this case, the stopping and restarting of streaming <em title="should" class="rfc2119">should</em>
 				cause <code>mute</code> and <code>unmute</code> events to fire on the Track in question.  </li>
-	 <li>Return a <code>BlobEvent</code> event containing the <code>Blob</code> to the <i>resolver</i> object's <i>resolve()</i> method.</li></dd>
-	 <dt>Promise grabFrame()</dt>
-	 <dd>When the <code>grabFrame()</code> method of an <code>ImageCapture</code> object is invoked, a new <i>Promise</i> object is returned. If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the contructor is not "live", the UA <em title="must" class="rfc2119">must</em> return an <code>ImageCaptureErrorEvent</code> event to the <i>resolver</i> object's <i>reject()</i> method with a 
-          new <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to INVALID_TRACK. If the UA is unable to execute the <code>grabFrame()</code> method for any
-          other reason, then the UA <em title="must" class="rfc2119">must</em> return an <code>ImageCaptureErrorEvent</code> event to the <i>resolver</i> object's <i>reject()</i> method with a 
-          new <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to FRAME_ERROR.    Otherwise it <em title="must" class="rfc2119">must</em>
+	 <li>Return a resolved promise with the Blob object.</li></dd>
+    <dt>
+      [Throws]
+      Promise&lt;ImageBitmap&gt; grabFrame()
+    </dt>
+	 <dd>When the <code>grabFrame()</code> method of an <code>ImageCapture</code> object is invoked, a new <i>Promise</i> object is returned. If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the contructor is not "live", the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to INVALID_TRACK. If the UA is unable to execute the <code>grabFrame()</code> method for any
+          other reason, then the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to FRAME_ERROR.    Otherwise it <em title="must" class="rfc2119">must</em>
           queue a task, using the DOM manipulation task source, that runs the following steps:
 		<ol>
-			<li>Gather data from the <code>MediaStreamTrack</code> into an <code>ImageData</code> object (as defined in [[!CANVAS-2D]]) containing a single still frame in RGBA format. The <code>width</code> and <code>height</code> of the
-			<code>ImageData</code> object are derived from the constraints of the <code>MediaStreamTrack</code>. The method of doing
+			<li>Gather data from the <code>MediaStreamTrack</code> into an <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> 
+                        object (as defined in [[!HTML51]]). The <code>width</code> and <code>height</code> of the
+			<code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object are derived from the constraints of the <code>MediaStreamTrack</code>. The method of doing
 				this will depend on the underlying device.  Devices 
-				may temporarily stop streaming data, reconfigure themselves with the appropriate photo settings (which may be a subset of the settings provided in <code>photoCapabilities</code>), take the photo (and convert to an ImageData object),
+				may temporarily stop streaming data, reconfigure themselves with the appropriate photo settings (which may be a subset of the settings provided in <code>photoCapabilities</code>), take the photo (and convert to an <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object),
 				and then resume streaming.  In this case, the stopping and restarting of streaming <em title="should" class="rfc2119">should</em>
 				cause <code>mute</code> and <code>unmute</code> events to fire on the Track in question.   </li>
-	 <li>Return a <code>FrameGrabEvent</code> event containing the <code>ImageData</code> to the <i>resolver</i> object's <i>resolve()</i> method. {Note: <code>grabFrame()</code> returns data only once upon being invoked.}</li>
+	 <li>return a resolved promise with an new created <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object. {Note: <code>grabFrame()</code> returns data only once upon being invoked.}</li>
 	 </dd>
 	 </dl>
       
-    <code>FrameGrabEvent</code>
-    --------------
-    <dl title='[Constructor(DOMString type, optional FrameGrabEventInit frameGrabInitDict)] interface FrameGrabEvent : Event' class='idl'>
-    <dt>readonly attribute ImageData imageData</dt>
-    <dd>Returns an <code>ImageData</code> object whose <code>width</code> and <code>height</code> attributes indicates the dimensions of the captured frame. </dd>
-    </dl>
-
-    ##### <code>FrameGrabEventInit</code> Dictionary
-    
-    <dl title='dictionary FrameGrabEventInit : EventInit' class='idl'>
-    <dt>ImageData imageData</dt>
-    <dd>An <code>ImageData</code> object containing the data to deliver via this event.</dd>
-    </dl>
-
-    <code>ImageCaptureErrorEvent</code>
-    --------------
-    <dl title='[Constructor(DOMString type, optional ImageCaptureErrorEventInit imageCaptureErrorInitDict)] interface ImageCaptureErrorEvent : Event' class='idl'>
-    <dt>readonly attribute ImageCaptureError imageCaptureError</dt>
-    <dd>Returns an <code>ImageCaptureError</code> object whose <code>errorDescription</code> attribute indicates the type of error occurrence. </dd>
-    </dl>
-
-    ##### <code>ImageCaptureErrorEventInit</code> Dictionary
-    
-    <dl title='dictionary ImageCaptureErrorEventInit : EventInit' class='idl'>
-    <dt>ImageCaptureError imageCaptureError</dt>
-    <dd>an <code>ImageCaptureError</code> object containing the data to deliver via this event.</dd>
-    </dl>  
-        
-    <code>BlobEvent</code>
-    --------------
-    <dl title='[Constructor(DOMString type, optional BlobEventInit blobInitDict)] interface BlobEvent : Event' class='idl'>
-    <dt>readonly attribute Blob data</dt>
-    <dd>Returns a <code>Blob</code> object whose type attribute indicates the encoding of the blob data. An implementation must return a Blob in a format that is capable of being viewed in an HTML <code>&lt;img&gt;</code> tag. </dd>
-    </dl>
-    
-    ##### <code>BlobEventInit</code> Dictionary
-    
-    <dl title='dictionary BlobEventInit : EventInit' class='idl'>
-    <dt>Blob data</dt>
-    <dd>A <code>Blob</code> object containing the data to deliver via this event.</dd>
-    </dl>
-    
-    <code>SettingsChangeEvent</code>
-    --------------
-    <dl title='[Constructor(DOMString type, optional SettingsChangeEventInit photoSettingsInitDict)] interface PhotoSettingsEvent : Event' class='idl'>
-    <dt>readonly attribute PhotoSettings photoSettings</dt>
-    <dd>Returns a <code>PhotoSettings</code> object whose type attribute indicates the current photo settings. </dd>
-    </dl>
-    
-    ##### <code>SettingsChangeEventInit</code> Dictionary
-    
-    <dl title='dictionary SettingsChangeEventInit : EventInit' class='idl'>
-    <dt>PhotoSettings photoSettings</dt>
-    <dd>A <code>PhotoSettings</code> object containing the data to deliver via this event.</dd>
-    </dl>  
-    
     <code>ImageCaptureError</code>
     -----------------
-    <p>The <code>ImageCaptureError</code> object is passed to an <code>onerror</code> event handler of an
-    <code>ImageCapture</code> object if an error occurred when the object was created or any of its methods were invoked.</p>         
     <dl title='[NoInterfaceObject] interface ImageCaptureError' class='idl'>
     <dt>readonly attribute DOMString? errorDescription</dt>
-    <dd>The <code>errorDescription</code> attribute returns the appropriate DOMString for the error event.  Acceptable values are FRAME_ERROR, OPTIONS_ERROR, PHOTO_ERROR, and ERROR_UNKNOWN.</dd>
+    <dd>The <code>errorDescription</code> attribute returns the appropriate DOMString for the error description.  Acceptable values are FRAME_ERROR, OPTIONS_ERROR, PHOTO_ERROR, INVALID_TRACK, and ERROR_UNKNOWN.</dd>
     </dl>
     
     <section>
