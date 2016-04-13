@@ -30,17 +30,17 @@
     <section id='sotd'>
       Comments on this document are welcomed.
     </section>
-    
+
     <section id='abstract'>
       This document specific the takePhoto() and grabFrame() methods, and corresponding camera settings for use with MediaStreams as defined in Media Capture and Streams [[!GETUSERMEDIA]].
     </section>
-    
+
     Introduction
     ------------
     <p>The API defined in this document taks a valid MediaStream and returns an encoded image in the form of a <code>Blob</code> (as defined in [[!FILE-API]]).  The image is
-    provided by the capture device that provides the MediaStream.  Moreover, 
+    provided by the capture device that provides the MediaStream.  Moreover,
     picture-specific settings can be optionally provided as arguments that can be applied to the image being captured.</p>
-    
+
     Image Capture API
     --------------
     <p>The User Agent must support <i>Promises</i> in order to implement the Image Capture API.  Any <i>Promise</i> object is assumed to have <i>resolver</i> object, with <i>resolve()</i> and <i>reject()</i> methods associated with it.
@@ -71,7 +71,7 @@
           queue a task, using the DOM manipulation task source, that runs the following steps:
 		<ol>
 			<li>Gather data from the <code>MediaStreamTrack</code> into a <code>Blob</code> containing a single still image. The method of doing
-				this will depend on the underlying device.  Devices 
+				this will depend on the underlying device.  Devices
 				may temporarily stop streaming data, reconfigure themselves with the appropriate photo settings, take the photo,
 				and then resume streaming.  In this case, the stopping and restarting of streaming <em title="should" class="rfc2119">should</em>
 				cause <code>mute</code> and <code>unmute</code> events to fire on the Track in question.  </li>
@@ -84,24 +84,20 @@
           other reason, then the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to FRAME_ERROR.    Otherwise it <em title="must" class="rfc2119">must</em>
           queue a task, using the DOM manipulation task source, that runs the following steps:
 		<ol>
-			<li>Gather data from the <code>MediaStreamTrack</code> into an <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> 
+			<li>Gather data from the <code>MediaStreamTrack</code> into an <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code>
                         object (as defined in [[!HTML51]]). The <code>width</code> and <code>height</code> of the
-			<code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object are derived from the constraints of the <code>MediaStreamTrack</code>. The method of doing
-				this will depend on the underlying device.  Devices 
-				may temporarily stop streaming data, reconfigure themselves with the appropriate photo settings (which may be a subset of the settings provided in <code>photoCapabilities</code>), take the photo (and convert to an <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object),
-				and then resume streaming.  In this case, the stopping and restarting of streaming <em title="should" class="rfc2119">should</em>
-				cause <code>mute</code> and <code>unmute</code> events to fire on the Track in question.   </li>
+			<code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object are derived from the constraints of the <code>MediaStreamTrack</code>. </li>
 	 <li>return a resolved promise with an new created <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object. {Note: <code>grabFrame()</code> returns data only once upon being invoked.}</li>
 	 </dd>
 	 </dl>
-      
+
     <code>ImageCaptureError</code>
     -----------------
     <dl title='[NoInterfaceObject] interface ImageCaptureError' class='idl'>
     <dt>readonly attribute DOMString? errorDescription</dt>
     <dd>The <code>errorDescription</code> attribute returns the appropriate DOMString for the error description.  Acceptable values are FRAME_ERROR, OPTIONS_ERROR, PHOTO_ERROR, INVALID_TRACK, and ERROR_UNKNOWN.</dd>
     </dl>
-    
+
     <section>
     <h2><code>MediaSettingsRange</code></h2>
     <dl title='interface MediaSettingsRange' class='idl'>
@@ -113,7 +109,7 @@
     <dd>The current value of this setting</dd>
     </dl>
     </section>
-    
+
     <section>
     <h2><code>MediaSettingsItem</code></h2>
     <p>The <code>MediaSettingsItem</code> interface is now defined, which allows for a single setting to be managed.</p>
@@ -123,7 +119,7 @@
     </dl>
     <p></p>
     </section>
-    
+
     <section>
     <h2><code>PhotoCapabilities</code></h2>
     <p>The photoCapabilities attribute of the <code>ImageCapture</code> object provides
@@ -175,7 +171,7 @@
     be used to bias the exposure level enabled by auto-exposure.</li>
     <li>The <i>ISO</i> setting of a camera describes the sensistivity of the camera to light.  It is a numeric value, where the lower the value
     the greater the sensitivity.  This setting in most implementations relates to shutter speed, and is sometimes known as the ASA setting.</li>
-    <li><i>Red Eye Reduction</i> is a feature in cameras that is designed to limit or prevent the appearance of 
+    <li><i>Red Eye Reduction</i> is a feature in cameras that is designed to limit or prevent the appearance of
     red pupils ("Red Eye") in photography subjects due prolonged exposure to a camera's flash.</li>
     <li><i>Brightness</i> refers to the numeric camera setting that adjusts the perceived amount of light emitting from the photo object.  A higher brightness setting increases the intensity of darker areas in a scene while compressing the intensity of brighter parts of the scene.</li>
     <li><i>Contrast</i> is the numeric camera setting that controls the difference in brightness between light and dark areas in a scene.  A higher contrast setting reflects an expansion in the difference in brightness.</li>
@@ -220,7 +216,7 @@
     </dl>
     <p></p>
     </section>
-    
+
     <section>
     <h2><code>ExposureMode</code></h2>
     <dl title='enum ExposureMode' class='idl'>
@@ -232,7 +228,7 @@
     <dd>Spot-centered weighting</dd>
     </dl>
     </section>
-    
+
     <section>
     <h2><code>FillLightMode</code></h2>
     <dl title='enum FillLightMode' class='idl'>
@@ -260,7 +256,7 @@
     <dd>TManual focus mode is enabled.</dd>
     </dl>
     </section>
-    
+
     <section>
     <h2><code>PhotoSettings</code></h2>
     <p>The <code>PhotoSettings</code> object is optionally passed into the <code>ImageCapture.setOptions()</code> method
@@ -300,14 +296,14 @@
     <dd>This reflects the desired focus mode setting.  Acceptable values are of type <code>FocusMode</code>.</dd>
     </dl>
     </section>
-        
+
     Examples
     -------
-    
+
     ##### Grabbing a Frame for Post-Processing
     <pre class='example'>
     navigator.mediaDevices.getUserMedia({video: true}).then(gotMedia, failedToGetMedia);
-    
+
    function gotMedia(mediastream) {
           //Extract video track.
           var videoDevice = mediastream.getVideoTracks()[0];
@@ -342,12 +338,12 @@
     function failedToGetMedia{
            console.log('Stream failure');
     }
-    </pre> 
+    </pre>
 
     ##### Taking a picture if Red Eye Reduction is activated
     <pre class='example'>
     navigator.getUserMedia({video: true}, gotMedia, failedToGetMedia);
-    
+
    function gotMedia(mediastream) {
           //Extract video track.
           var videoDevice = mediastream.getVideoTracks()[0];
@@ -366,7 +362,7 @@
            var img = document.querySelector("img");
            img.src = URL.createObjectURL(e.data);
            }
-           
+
     function failedToGetMedia{
            console.log('Stream failure');
            }
@@ -376,14 +372,14 @@
     <pre class='example'>
     &lthtml&gt
    &ltbody&gt
-   &ltp&gt&ltcanvas id="frame"&gt&lt/canvas&gt&lt/p&gt 
+   &ltp&gt&ltcanvas id="frame"&gt&lt/canvas&gt&lt/p&gt
    &ltbutton onclick="stopFunction()"&gtStop frame grab&lt/button&gt
    &ltscript&gt
    var canvas = document.getElementById('frame');
    navigator.getUserMedia({video: true}, gotMedia, failedToGetMedia);
 
    function gotMedia(mediastream) {
-          //Extract video track.  
+          //Extract video track.
           var videoDevice = mediastream.getVideoTracks()[0];
           // Check if this device supports a picture mode...
           var captureDevice = new ImageCapture(videoDevice);
@@ -399,13 +395,13 @@
             canvas.height = imgData.height;
             canvas.getContext('2d').drawImage(imgData, 0, 0,imgData.width,imgData.height);
             }
-            
+
     function stopFunction(e) {
             clearInterval(myVar);
             }
    &lt/script&gt
    &lt/body&gt
-   &lt/html&gt   
+   &lt/html&gt
     </pre>
   </body>
 </html>
