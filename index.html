@@ -2,7 +2,7 @@
 <html xmlns='http://www.w3.org/1999/xhtml' lang='en'>
   <head>
     <meta charset='utf-8'/>
-    <title>Mediastream Image Capture</title>
+    <title>MediaStream Image Capture</title>
     <script class='remove'>
       var respecConfig = {
           specStatus: "ED"
@@ -32,19 +32,17 @@
     </section>
 
     <section id='abstract'>
-      This document specific the takePhoto() and grabFrame() methods, and corresponding camera settings for use with MediaStreams as defined in Media Capture and Streams [[!GETUSERMEDIA]].
+      This document specifies the takePhoto() and grabFrame() methods, and corresponding camera settings for use with MediaStreamTracks as defined in Media Capture and Streams [[!GETUSERMEDIA]].
     </section>
 
     Introduction
     ------------
-    <p>The API defined in this document taks a valid MediaStream and returns an encoded image in the form of a <code>Blob</code> (as defined in [[!FILE-API]]).  The image is
-    provided by the capture device that provides the MediaStream.  Moreover,
-    picture-specific settings can be optionally provided as arguments that can be applied to the image being captured.</p>
+    <p>The API defined in this document captures images from a valid MediaStreamTrack. The produced image can be in the form of a <code>Blob</code> (as defined in [[!FILE-API]]) or as an <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> (as defined in [[!HTML51]])).  The source image is provided by the capture device that provides the MediaStreamTrack.  Moreover, picture-specific settings can be optionally provided as arguments that can be applied to the device for the capture.</p>
 
     Image Capture API
     --------------
     <p>The User Agent must support <i>Promises</i> in order to implement the Image Capture API.  Any <i>Promise</i> object is assumed to have <i>resolver</i> object, with <i>resolve()</i> and <i>reject()</i> methods associated with it.
-    The <code>MediaStreamTrack</code> passed to the constructor <em title="must" class="rfc2119">must</em> have its <code>kind</code> attribute set to "<code>video</code>" otherwise an exception will be thrown.</p>
+    The <code>MediaStreamTrack</code> passed to the constructor <em title="must" class="rfc2119">must</em> have its <code>kind</code> attribute set to "<code>video</code>" otherwise a <code>DOMException</code> of type <code>NotSupportedError</code> will be thrown.</p>
     <dl title='[Constructor(MediaStreamTrack track)] interface ImageCapture' class='idl'>
     <dd>interface ImageCapture</dd>
     <dt>readonly attribute PhotoCapabilities photoCapabilities</dt>
@@ -53,41 +51,22 @@
     <dd>The MediaStreamTrack passed into the constructor</dd>
     <dt>readonly attribute MediaStream previewStream</dt>
     <dd>The MediaStream that provides a camera preview</dd>
-    <dt>
-      [Throws]
-      Promise&lt;void&gt; setOptions(PhotoSettings? photoSettings)
-    </dt>
-    <dd>When the <code>setOptions()</code> method of an <code>ImageCapture</code> object is invoked, then a valid <code>PhotoSettings</code> object <em title="must" class="rfc2119">must</em> be passed in the method to the
-    <code>ImageCapture</code> object.  In addition, a new <i>Promise</i> object is returned.  If the UA can successfully apply the settings, then the UA <em title="must" class="rfc2119">must</em> return a resolved promise. If the UA cannot successfully apply the settings, then the UA
+    <dt> [Throws] Promise&lt;void&gt; setOptions(PhotoSettings? photoSettings) </dt>
+    <dd>When the <code>setOptions()</code> method of an <code>ImageCapture</code> object is invoked, then a valid <code>PhotoSettings</code> object <em title="must" class="rfc2119">must</em> be passed in the method to the <code>ImageCapture</code> object.  In addition, a new <i>Promise</i> object is returned.  If the UA can successfully apply the settings, then the UA <em title="must" class="rfc2119">must</em> return a resolved promise. If the UA cannot successfully apply the settings, then the UA
     <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <code>ImageCaptureError</code> whose <code>errorDescription</code> is set to OPTIONS_ERROR.</dd>
-    <dt>
-      [Throws]
-      Promise&lt;Blob&gt; takePhoto()
-    </dt>
+    <dt> [Throws] Promise&lt;Blob&gt; takePhoto() </dt>
     <dd>When the <code>takePhoto()</code> method of an <code>ImageCapture</code> object is invoked, a new <i>Promise</i> object is returned.
-	If the <code>readyState</code> of the <code>VideoStreamTrack</code> provided in the constructor is not "live", the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to INVALID_TRACK.  If the UA is unable to execute the <code>takePhoto()</code> method for any
-          other reason (for example, upon invocation of multiple takePhoto() method calls in rapid succession), then the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to PHOTO_ERROR.
-   Otherwise it <em title="must" class="rfc2119">must</em>
-          queue a task, using the DOM manipulation task source, that runs the following steps:
-		<ol>
-			<li>Gather data from the <code>MediaStreamTrack</code> into a <code>Blob</code> containing a single still image. The method of doing
-				this will depend on the underlying device.  Devices
-				may temporarily stop streaming data, reconfigure themselves with the appropriate photo settings, take the photo,
-				and then resume streaming.  In this case, the stopping and restarting of streaming <em title="should" class="rfc2119">should</em>
-				cause <code>mute</code> and <code>unmute</code> events to fire on the Track in question.  </li>
-	 <li>Return a resolved promise with the Blob object.</li></dd>
-    <dt>
-      [Throws]
-      Promise&lt;ImageBitmap&gt; grabFrame()
-    </dt>
-	 <dd>When the <code>grabFrame()</code> method of an <code>ImageCapture</code> object is invoked, a new <i>Promise</i> object is returned. If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the contructor is not "live", the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to INVALID_TRACK. If the UA is unable to execute the <code>grabFrame()</code> method for any
-          other reason, then the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to FRAME_ERROR.    Otherwise it <em title="must" class="rfc2119">must</em>
-          queue a task, using the DOM manipulation task source, that runs the following steps:
-		<ol>
-			<li>Gather data from the <code>MediaStreamTrack</code> into an <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code>
-                        object (as defined in [[!HTML51]]). The <code>width</code> and <code>height</code> of the
-			<code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object are derived from the constraints of the <code>MediaStreamTrack</code>. </li>
-	 <li>return a resolved promise with an new created <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object. {Note: <code>grabFrame()</code> returns data only once upon being invoked.}</li>
+	If the <code>readyState</code> of the <code>VideoStreamTrack</code> provided in the constructor is not "live", the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to INVALID_TRACK.  If the UA is unable to execute the <code>takePhoto()</code> method for any other reason (for example, upon invocation of multiple takePhoto() method calls in rapid succession), then the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to PHOTO_ERROR. Otherwise it <em title="must" class="rfc2119">must</em> queue a task, using the DOM manipulation task source, that runs the following steps:
+	<ol>
+		<li>Gather data from the <code>MediaStreamTrack</code> into a <code>Blob</code> containing a single still image. The method of doing this will depend on the underlying device.  Devices may temporarily stop streaming data, reconfigure themselves with the appropriate photo settings, take the photo, and then resume streaming.  In this case, the stopping and restarting of streaming <em title="should" class="rfc2119">should</em> cause <code>mute</code> and <code>unmute</code> events to fire on the Track in question.  </li>
+        <li>Return a resolved promise with the Blob object.</li>
+    </dd>
+
+    <dt> [Throws] Promise&lt;ImageBitmap&gt; grabFrame() </dt> 
+	<dd>When the <code>grabFrame()</code> method of an <code>ImageCapture</code> object is invoked, a new <i>Promise</i> object is returned. If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the contructor is not "live", the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to INVALID_TRACK. If the UA is unable to execute the <code>grabFrame()</code> method for any other reason, then the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to FRAME_ERROR.    Otherwise it <em title="must" class="rfc2119">must</em> queue a task, using the DOM manipulation task source, that runs the following steps:
+	<ol>
+		<li>Gathers data from the <code>MediaStreamTrack</code> into an <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object (as defined in [[!HTML51]]). The <code>width</code> and <code>height</code> of the <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object are derived from the constraints of the <code>MediaStreamTrack</code>. </li>
+	    <li>Returns a resolved promise with a newly created <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object. (Note: <code>grabFrame()</code> returns data only once upon being invoked).</li>
 	 </dd>
 	 </dl>
 
