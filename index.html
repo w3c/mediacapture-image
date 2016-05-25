@@ -45,25 +45,34 @@
     The <code>MediaStreamTrack</code> passed to the constructor <em title="must" class="rfc2119">must</em> have its <code>kind</code> attribute set to "<code>video</code>" otherwise a <code>DOMException</code> of type <code>NotSupportedError</code> will be thrown.</p>
     <dl title='[Constructor(MediaStreamTrack track)] interface ImageCapture' class='idl'>
     <dd>interface ImageCapture</dd>
-    <dt>readonly attribute PhotoCapabilities photoCapabilities</dt>
-    <dd>Describes current photo settings</dd>
+
     <dt>readonly attribute MediaStreamTrack videoStreamTrack</dt>
     <dd>The MediaStreamTrack passed into the constructor</dd>
+
     <dt>readonly attribute MediaStream previewStream</dt>
     <dd>The MediaStream that provides a camera preview</dd>
+
+    <dt> [Throws] Promise&lt;PhotoCapabilities&gt; getPhotoCapabilities() </dt>
+    <dd>When the <code>getPhotoCapabilities()</code> method of an <code>ImageCapture</code> object is invoked, a new <i>Promise</i> is returned. If the UA is unable to execute the <code>getPhotoCapabilities()</code> method for any reason (for example, the <code>MediaStreamTrack</code> being ended asynchronously), then the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <a href="#idl-def-ImageCaptureError" class="idlType"><code>ImageCaptureError</code></a> with the appropriate <code>errorDescription</code> set. Otherwise it <em title="must" class="rfc2119">must</em> queue a task, using the DOM manipulation task source, that runs the following steps:
+    <ol>
+        <li>Gather data from the <code>MediaStreamTrack</code> into a <a href="#idl-def-PhotoCapabilities" class="idlType"><code>PhotoCapabilities</code></a> object containing the available capabilities of the device, including ranges where appropriate. The resolved <a href="#idl-def-PhotoCapabilities" class="idlType"><code>PhotoCapabilities</code></a> will also include the current conditions in which the capabilities of the device are found. The method of doing this will depend on the underlying device. </li>
+        <li>Return a resolved promise with the <a href="#idl-def-PhotoCapabilities" class="idlType"><code>PhotoCapabilities</code></a> object.</li>
+    </dd>
+
     <dt> [Throws] Promise&lt;void&gt; setOptions(PhotoSettings? photoSettings) </dt>
     <dd>When the <code>setOptions()</code> method of an <code>ImageCapture</code> object is invoked, then a valid <code>PhotoSettings</code> object <em title="must" class="rfc2119">must</em> be passed in the method to the <code>ImageCapture</code> object.  In addition, a new <i>Promise</i> object is returned.  If the UA can successfully apply the settings, then the UA <em title="must" class="rfc2119">must</em> return a resolved promise. If the UA cannot successfully apply the settings, then the UA
-    <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <code>ImageCaptureError</code> whose <code>errorDescription</code> is set to OPTIONS_ERROR.</dd>
+    <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <a href="#idl-def-ImageCaptureError" class="idlType"><code>ImageCaptureError</code></a> whose <code>errorDescription</code> is set to OPTIONS_ERROR.</dd>
+
     <dt> [Throws] Promise&lt;Blob&gt; takePhoto() </dt>
     <dd>When the <code>takePhoto()</code> method of an <code>ImageCapture</code> object is invoked, a new <i>Promise</i> object is returned.
-	If the <code>readyState</code> of the <code>VideoStreamTrack</code> provided in the constructor is not "live", the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to INVALID_TRACK.  If the UA is unable to execute the <code>takePhoto()</code> method for any other reason (for example, upon invocation of multiple takePhoto() method calls in rapid succession), then the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to PHOTO_ERROR. Otherwise it <em title="must" class="rfc2119">must</em> queue a task, using the DOM manipulation task source, that runs the following steps:
+	If the <code>readyState</code> of the <code>VideoStreamTrack</code> provided in the constructor is not "live", the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <a href="#idl-def-ImageCaptureError" class="idlType"><code>ImageCaptureError</code></a>  object whose <code>errorDescription</code> is set to INVALID_TRACK.  If the UA is unable to execute the <code>takePhoto()</code> method for any other reason (for example, upon invocation of multiple takePhoto() method calls in rapid succession), then the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to PHOTO_ERROR. Otherwise it <em title="must" class="rfc2119">must</em> queue a task, using the DOM manipulation task source, that runs the following steps:
 	<ol>
 		<li>Gather data from the <code>MediaStreamTrack</code> into a <code>Blob</code> containing a single still image. The method of doing this will depend on the underlying device.  Devices may temporarily stop streaming data, reconfigure themselves with the appropriate photo settings, take the photo, and then resume streaming.  In this case, the stopping and restarting of streaming <em title="should" class="rfc2119">should</em> cause <code>mute</code> and <code>unmute</code> events to fire on the Track in question.  </li>
         <li>Return a resolved promise with the Blob object.</li>
     </dd>
 
     <dt> [Throws] Promise&lt;ImageBitmap&gt; grabFrame() </dt> 
-	<dd>When the <code>grabFrame()</code> method of an <code>ImageCapture</code> object is invoked, a new <i>Promise</i> object is returned. If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the contructor is not "live", the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to INVALID_TRACK. If the UA is unable to execute the <code>grabFrame()</code> method for any other reason, then the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to FRAME_ERROR.    Otherwise it <em title="must" class="rfc2119">must</em> queue a task, using the DOM manipulation task source, that runs the following steps:
+	<dd>When the <code>grabFrame()</code> method of an <code>ImageCapture</code> object is invoked, a new <i>Promise</i> object is returned. If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the contructor is not "live", the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to INVALID_TRACK. If the UA is unable to execute the <code>grabFrame()</code> method for any other reason, then the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <a href="#idl-def-ImageCaptureError" class="idlType"><code>ImageCaptureError</code></a>  object whose <code>errorDescription</code> is set to FRAME_ERROR.    Otherwise it <em title="must" class="rfc2119">must</em> queue a task, using the DOM manipulation task source, that runs the following steps:
 	<ol>
 		<li>Gathers data from the <code>MediaStreamTrack</code> into an <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object (as defined in [[!HTML51]]). The <code>width</code> and <code>height</code> of the <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object are derived from the constraints of the <code>MediaStreamTrack</code>. </li>
 	    <li>Returns a resolved promise with a newly created <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object. (Note: <code>grabFrame()</code> returns data only once upon being invoked).</li>
@@ -78,32 +87,8 @@
     </dl>
 
     <section>
-    <h2><code>MediaSettingsRange</code></h2>
-    <dl title='interface MediaSettingsRange' class='idl'>
-    <dt>readonly attribute unsigned long max</dt>
-    <dd>The maximum value of this setting</dd>
-    <dt>readonly attribute unsigned long min</dt>
-    <dd>The minimum value of this setting</dd>
-    <dt>readonly attribute unsigned long initial</dt>
-    <dd>The current value of this setting</dd>
-    </dl>
-    </section>
-
-    <section>
-    <h2><code>MediaSettingsItem</code></h2>
-    <p>The <code>MediaSettingsItem</code> interface is now defined, which allows for a single setting to be managed.</p>
-    <dl title='interface MediaSettingsItem' class='idl'>
-    <dt>readonly attribute any value</dt>
-    <dd>Value of current setting.</dd>
-    </dl>
-    <p></p>
-    </section>
-
-    <section>
     <h2><code>PhotoCapabilities</code></h2>
-    <p>The photoCapabilities attribute of the <code>ImageCapture</code> object provides
-    the photo-specific settings options and current settings values.  The following definitions are assumed
-    for individual settings and are provided for information purposes:</p>
+    <p>The <code>PhotoCapabilities</code> interface provides the photo-specific settings options and current settings values.  The following definitions are assumed for individual settings and are provided for information purposes:</p>
     <ol>
     <li><i>White balance mode</i> is a setting that cameras use to adjust for different color temperatures.  Color temperature is
     the temperature of background light (measured in Kelvin normally).  This setting can also be automatically
@@ -196,45 +181,6 @@
     <p></p>
     </section>
 
-    <section>
-    <h2><code>ExposureMode</code></h2>
-    <dl title='enum ExposureMode' class='idl'>
-    <dt>frame-average</dt>
-    <dd>Average of light information from entire scene</dd>
-    <dt>center-weighted</dt>
-    <dd>Sensitivity concentrated towards center of viewfinder</dd>
-    <dt>spot-metering</dt>
-    <dd>Spot-centered weighting</dd>
-    </dl>
-    </section>
-
-    <section>
-    <h2><code>FillLightMode</code></h2>
-    <dl title='enum FillLightMode' class='idl'>
-    <dt>unavailable</dt>
-    <dd>This source does not have an option to change fill light modes (e.g., the camera does not have a flash)</dd>
-    <dt>auto</dt>
-    <dd>The video device's fill light will be enabled when required (typically low light conditions). Otherwise it will be off. Note that auto does not guarantee that a flash will fire when takePhoto is called. Use <code>flash</code> to guarantee firing of the flash for the <code>takePhoto()</code> or <code>getFrame()</code> methods.</dd>
-    <dt>off</dt>
-    <dd>The source's fill light and/or flash will not be used.</dd>
-    <dt>flash</dt>
-    <dd>This value will always cause the flash to fire for the <code>takePhoto()</code> or <code>getFrame()</code> methods. </dd>
-    <dt>on</dt>
-    <dd>The source's fill light will be turned on (and remain on) while the source <code>MediaStreamTrack</code> is active</dd>
-    </dl>
-    </section>
-
-    <section>
-    <h2><code>FocusMode</code></h2>
-    <dl title='enum FocusMode' class='idl'>
-    <dt>unavailable</dt>
-    <dd>This source does not have an option to change focus modes.</dd>
-    <dt>auto</dt>
-    <dd>Auto-focus mode is enabled.</dd>
-    <dt>manual</dt>
-    <dd>TManual focus mode is enabled.</dd>
-    </dl>
-    </section>
 
     <section>
     <h2><code>PhotoSettings</code></h2>
@@ -276,6 +222,67 @@
     </dl>
     </section>
 
+    <section>
+    <h2><code>MediaSettingsRange</code></h2>
+    <dl title='interface MediaSettingsRange' class='idl'>
+    <dt>readonly attribute unsigned long max</dt>
+    <dd>The maximum value of this setting</dd>
+    <dt>readonly attribute unsigned long min</dt>
+    <dd>The minimum value of this setting</dd>
+    <dt>readonly attribute unsigned long current</dt>
+    <dd>The current value of this setting</dd>
+    </dl>
+    </section>
+
+    <section>
+    <h2><code>MediaSettingsItem</code></h2>
+    <p>The <code>MediaSettingsItem</code> interface is now defined, which allows for a single setting to be managed.</p>
+    <dl title='interface MediaSettingsItem' class='idl'>
+    <dt>readonly attribute any value</dt>
+    <dd>Value of current setting.</dd>
+    </dl>
+    </section>
+
+    <section>
+    <h2><code>ExposureMode</code></h2>
+    <dl title='enum ExposureMode' class='idl'>
+    <dt>frame-average</dt>
+    <dd>Average of light information from entire scene</dd>
+    <dt>center-weighted</dt>
+    <dd>Sensitivity concentrated towards center of viewfinder</dd>
+    <dt>spot-metering</dt>
+    <dd>Spot-centered weighting</dd>
+    </dl>
+    </section>
+
+    <section>
+    <h2><code>FillLightMode</code></h2>
+    <dl title='enum FillLightMode' class='idl'>
+    <dt>unavailable</dt>
+    <dd>This source does not have an option to change fill light modes (e.g., the camera does not have a flash)</dd>
+    <dt>auto</dt>
+    <dd>The video device's fill light will be enabled when required (typically low light conditions). Otherwise it will be off. Note that auto does not guarantee that a flash will fire when takePhoto is called. Use <code>flash</code> to guarantee firing of the flash for the <code>takePhoto()</code> or <code>getFrame()</code> methods.</dd>
+    <dt>off</dt>
+    <dd>The source's fill light and/or flash will not be used.</dd>
+    <dt>flash</dt>
+    <dd>This value will always cause the flash to fire for the <code>takePhoto()</code> or <code>getFrame()</code> methods. </dd>
+    <dt>on</dt>
+    <dd>The source's fill light will be turned on (and remain on) while the source <code>MediaStreamTrack</code> is active</dd>
+    </dl>
+    </section>
+
+    <section>
+    <h2><code>FocusMode</code></h2>
+    <dl title='enum FocusMode' class='idl'>
+    <dt>unavailable</dt>
+    <dd>This source does not have an option to change focus modes.</dd>
+    <dt>auto</dt>
+    <dd>Auto-focus mode is enabled.</dd>
+    <dt>manual</dt>
+    <dd>Manual focus mode is enabled.</dd>
+    </dl>
+    </section>
+
     Examples
     -------
 
@@ -283,7 +290,7 @@
     <pre class='example'>
     navigator.mediaDevices.getUserMedia({video: true}).then(gotMedia, failedToGetMedia);
 
-   function gotMedia(mediastream) {
+    function gotMedia(mediastream) {
           //Extract video track.
           var videoDevice = mediastream.getVideoTracks()[0];
           // Check if this device supports a picture mode...
@@ -330,7 +337,9 @@
           var captureDevice = new ImageCapture(videoDevice);
           if (captureDevice) {
                 if (captureDevice.photoCapabilities.redEyeReduction) {
-                   captureDevice.setOptions({redEyeReductionSetting:true}).then(captureDevice.takePhoto().then(showPicture(blob),function(error){alert("Failed to take photo");}));
+                   captureDevice.setOptions({redEyeReductionSetting:true})
+                       .then(captureDevice.takePhoto()
+                       .then(showPicture(blob),function(error){alert("Failed to take photo");}));
                    }
                 else
                    console.log('No red eye reduction');
