@@ -15,10 +15,10 @@
       ,   edDraftURI:   "http://w3c.github.io/mediacapture-image/index.html"
       ,   copyrightStart: 2012
       ,   noIDLIn:      true
-      ,   wg:           ["Web Real-Time Communication Working Group", "Device APIs Working Group"]
-      ,   wgURI:        ["http://www.w3.org/2011/04/webrtc/","http://www.w3.org/2009/dap"]
+      ,   wg:         ["Device and Sensors Working Group", "Web Real-Time Communications Working Group"]
+      ,   wgURI:    ["http://www.w3.org/2009/dap/", "http://www.w3.org/2011/04/webrtc/"]
       ,   wgPublicList: "public-media-capture"
-      ,   wgPatentURI:  "XXX"
+      ,   wgPatentURI:  ["https://www.w3.org/2004/01/pp-impl/43696/status", "https://www.w3.org/2004/01/pp-impl/47318/status"]
       ,   isRecTrack:   false
       ,   isNoTrack:    true
       ,   format:       'markdown'
@@ -39,10 +39,10 @@
     ------------
     <p>The API defined in this document captures images from a valid MediaStreamTrack. The produced image can be in the form of a <code>Blob</code> (as defined in [[!FILE-API]]) or as an <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> (as defined in [[!HTML51]])).  The source image is provided by the capture device that provides the MediaStreamTrack.  Moreover, picture-specific settings can be optionally provided as arguments that can be applied to the device for the capture.</p>
 
-    Image Capture API
-    --------------
-    <p>The User Agent must support <i>Promises</i> in order to implement the Image Capture API.  Any <i>Promise</i> object is assumed to have <i>resolver</i> object, with <i>resolve()</i> and <i>reject()</i> methods associated with it.
-    The <code>MediaStreamTrack</code> passed to the constructor MUST have its <code>kind</code> attribute set to "<code>video</code>" otherwise a <code>DOMException</code> of type <code>NotSupportedError</code> will be thrown.</p>
+    <section id="ImageCaptureAPI">
+    <h2>Image Capture API</h2>
+
+    <p>The User Agent must support <i>Promises</i> in order to implement the Image Capture API.  Any <i>Promise</i> object is assumed to have <i>resolver</i> object, with <i>resolve()</i> and <i>reject()</i> methods associated with it.</p>
 
     <div>
       <pre class="idl">
@@ -57,6 +57,7 @@
         };      
       </pre>
     </div>
+
     <section>
       <h2>Constructors</h2>
       <dl data-link-for="ImageCapture" data-dfn-for="ImageCapture" class="constructors">
@@ -76,7 +77,7 @@
                 <td class="prmType"><code>MediaStreamTrack</code></td>
                 <td class="prmNullFalse"><span role="img" aria-label="False">&#10008;</span></td>
                 <td class="prmOptFalse"><span role="img" aria-label="False">&#10008;</span></td>
-                <td class="prmDesc">The MediaStreamTrack to be used as source of data. This will be the value of the <code>videoStreamTrack</code> attribute.</td>
+                <td class="prmDesc">The MediaStreamTrack to be used as source of data. This will be the value of the <code>videoStreamTrack</code> attribute. The <code>MediaStreamTrack</code> passed to the constructor MUST have its <code>kind</code> attribute set to "<code>video</code>" otherwise a <code>DOMException</code> of type <code>NotSupportedError</code> will be thrown.                </td>
               </tr>
             </tbody>
           </table>
@@ -102,6 +103,7 @@
         <ol>
           <li>Gather data from the <code>MediaStreamTrack</code> into a <a href="#idl-def-PhotoCapabilities" class="idlType"><code>PhotoCapabilities</code></a> object containing the available capabilities of the device, including ranges where appropriate. The resolved <a href="#idl-def-PhotoCapabilities" class="idlType"><code>PhotoCapabilities</code></a> will also include the current conditions in which the capabilities of the device are found. The method of doing this will depend on the underlying device. </li>
           <li>Return a resolved promise with the <a href="#idl-def-PhotoCapabilities" class="idlType"><code>PhotoCapabilities</code></a> object.</li>
+        </ol>
         </dd>
 
         <dt><dfn><code>setOptions</code></dfn></dt>
@@ -114,6 +116,7 @@
         <ol>
           <li>Gather data from the <code>MediaStreamTrack</code> into a <code>Blob</code> containing a single still image. The method of doing this will depend on the underlying device.  Devices may temporarily stop streaming data, reconfigure themselves with the appropriate photo settings, take the photo, and then resume streaming.  In this case, the stopping and restarting of streaming SHOULD cause <code>mute</code> and <code>unmute</code> events to fire on the Track in question.  </li>
           <li>Return a resolved promise with the Blob object.</li>
+        </ol>
         </dd>
 
         <dt><dfn><code>grabFrame</code></dfn></dt>
@@ -121,321 +124,424 @@
         <ol>
           <li>Gathers data from the <code>MediaStreamTrack</code> into an <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object (as defined in [[!HTML51]]). The <code>width</code> and <code>height</code> of the <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object are derived from the constraints of the <code>MediaStreamTrack</code>. </li>
           <li>Returns a resolved promise with a newly created <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object. (Note: <code>grabFrame()</code> returns data only once upon being invoked).</li>
+        </ol>
         </dd>      
       </dl>
     </section>
 
-    <code>ImageCaptureError</code>
-    -----------------
-    <dl title='[NoInterfaceObject] interface ImageCaptureError' class='idl'>
-    <dt>readonly attribute DOMString? errorDescription</dt>
-    <dd>The <code>errorDescription</code> attribute returns the appropriate DOMString for the error description.  Acceptable values are FRAME_ERROR, OPTIONS_ERROR, PHOTO_ERROR, INVALID_TRACK, and ERROR_UNKNOWN.</dd>
-    </dl>
+    </section>
+
+    <section id="ImageCaptureError">
+    <h2><code>ImageCaptureError</code></h2>
+    <div>
+      <pre class="idl">
+        [NoInterfaceObject] interface ImageCaptureError {
+          readonly attribute DOMString? errorDescription;
+        };      
+      </pre>
+    </div>
 
     <section>
+      <h2>Attributes</h2>
+      <dl data-link-for="ImageCaptureError" data-dfn-for="ImageCaptureError" class="attributes">
+        <dt><dfn><code>errorDescription</code></dfn> of type <span class="idlAttrType"><a>DOMString?</a></span>, readonly</dt>
+        <dd>The <code>errorDescription</code> attribute returns the appropriate DOMString for the error description.  Acceptable values are FRAME_ERROR, OPTIONS_ERROR, PHOTO_ERROR, INVALID_TRACK, and ERROR_UNKNOWN.</dd>
+      </dl>
+    </section>
+    </section>
+
+    <section id="PhotoCapabilities">
     <h2><code>PhotoCapabilities</code></h2>
-    <p>The <code>PhotoCapabilities</code> interface provides the photo-specific settings options and current settings values.  The following definitions are assumed for individual settings and are provided for information purposes:</p>
-    <ol>
-    <li><i>White balance mode</i> is a setting that cameras use to adjust for different color temperatures.  Color temperature is
-    the temperature of background light (measured in Kelvin normally).  This setting can also be automatically
-    determined by the implementation.  If 'automatic' mode is selected, then the Kelvin setting for White Balance Mode
-    may be overridden.  Typical temprature ranges for different modes are provided below:
-    <table border="1">
-    <tr>
-        <th>Mode</th>
-        <th>Kelvin range</th>
-    </tr>
-    <tr>
-        <td>incandescent</td>
-        <td>2500-3500</td>
-    </tr>
-    <tr>
-        <td>fluorescent</td>
-        <td>4000-5000</td>
-    </tr>
-    <tr>
-        <td>warm-fluorescent</td>
-        <td>5000-5500</td>
-    </tr>
-    <tr>
-        <td>daylight</td>
-        <td>5500-6500</td>
-    </tr>
-    <tr>
-        <td>cloudy-daylight</td>
-        <td>6500-8000</td>
-    </tr>
-    <tr>
-        <td>twilight</td>
-        <td>8000-9000</td>
-    </tr>
-    <tr>
-        <td>shade</td>
-        <td>9000-10000</td>
-    </tr>
-    </table>
-    </li>
-    <li><i>Exposure</i> is the amount of light allowed to fall on the photographic medium.  Auto-exposure mode is a camera setting
-    where the exposure levels are automatically adjusted by the implementation based on the subject of the photo.</li>
-    <li><i>Exposure Compensation</i> is a numeric camera setting that adjusts the exposure level from the current value used by the implementation.  This value can
-    be used to bias the exposure level enabled by auto-exposure.</li>
-    <li>The <i>ISO</i> setting of a camera describes the sensistivity of the camera to light.  It is a numeric value, where the lower the value
-    the greater the sensitivity.  This setting in most implementations relates to shutter speed, and is sometimes known as the ASA setting.</li>
-    <li><i>Red Eye Reduction</i> is a feature in cameras that is designed to limit or prevent the appearance of
-    red pupils ("Red Eye") in photography subjects due prolonged exposure to a camera's flash.</li>
-    <li><i>Brightness</i> refers to the numeric camera setting that adjusts the perceived amount of light emitting from the photo object.  A higher brightness setting increases the intensity of darker areas in a scene while compressing the intensity of brighter parts of the scene.</li>
-    <li><i>Contrast</i> is the numeric camera setting that controls the difference in brightness between light and dark areas in a scene.  A higher contrast setting reflects an expansion in the difference in brightness.</li>
-    <li><i>Saturation</i> is a numeric camera setting that controls the intensity of color in a scene (i.e. the amount of gray in the scene).  Very low saturation levels will result in photo's closer to black-and-white.</li>
-    <li><i>Sharpness</i> is a numeric camera setting that controls the intensity of edges in a scene.  Higher sharpness settings result in higher edge intensity, while lower settings result in less contrast and blurrier edges (i.e. soft focus).</li>
-    <li><i>Zoom</i> is a numeric camera setting that controls the focal length of the lens.  The setting usually represents a ratio, e.g. 4 is a zoom ratio of 4:1.  The minimum value is usually 1, to represent a 1:1 ratio (i.e. no zoom).</li>
-    <li><i>Fill light mode</i> describes the flash setting of the capture device. </li>
-    <li><i>Focus mode</i> describes the focus setting of the capture device. </li>
-    </ol>
-    <dl title='interface PhotoCapabilities' class='idl'>
-    <dt>attribute Boolean autoWhiteBalanceMode</dt>
-    <dd>This reflects whether automated White Balance Mode selection is on or off, and is boolean - on is true</dd>
-    <dt>attribute MediaSettingsRange whiteBalanceMode</dt>
-    <dd>This reflects the current white balance mode setting. Values are of type <code>WhiteBalanceModeEnum</code>.</dd>
-    <dt>attribute ExposureMode autoExposureMode</dt>
-    <dd>This reflects the current auto exposure mode setting.  Values are of type <code>ExposureMode</code>.</dd>
-    <dt>attribute MediaSettingsRange exposureCompensation</dt>
-    <dd>This reflects the current exposure compensation setting and permitted range.  Values are numeric.</dd>
-    <dt>attribute MediaSettingsRange iso</dt>
-    <dd>This reflects the current camera ISO setting and permitted range.  Values are numeric.</dd>
-    <dd>This feature reflects the current exposure level for recorded images. Values are numeric.</dd>
-    <dt>attribute Boolean redEyeReduction</dt>
-    <dd>This reflects whether camera red eye reduction is on or off, and is boolean - on is true</dd>
-    <dt>attribute MediaSettingsRange brightness</dt>
-    <dd>This reflects the current brightness setting of the camera and permitted range. Values are numeric.</dd>
-    <dt>attribute MediaSettingsRange contrast</dt>
-    <dd>This reflects the current contrast setting of the camera and permitted range. Values are numeric.</dd>
-    <dt>attribute MediaSettingsRange saturation</dt>
-    <dd>This reflects the current saturation setting of the camera and permitted range. Values are numeric.</dd>
-    <dt>attribute MediaSettingsRange sharpness</dt>
-    <dd>This reflects the current sharpness setting of the camera and permitted range. Values are numeric.</dd>
-    <dt>attribute MediaSettingsRange imageHeight</dt>
-    <dd>This reflects the image height range supported by the UA and the current height setting.</dd>
-    <dt>attribute MediaSettingsRange imageWidth</dt>
-    <dd>This reflects the image width range supported by the UA and the current width setting.</dd>
-    <dt>attribute MediaSettingsRange zoom</dt>
-    <dd>This reflects the zoom value range supported by the UA and the current zoom setting.</dd>
-    <dt>attribute FillLightMode fillLightMode</dt>
-    <dd>This reflects the current fill light (flash) mode setting.  Values are of type <code>FillLightMode</code>.</dd>
-    <dt>attribute FocusMode focusMode</dt>
-    <dd>This reflects the current focus mode setting.  Values are of type <code>FocusMode</code>.</dd>
-    </dl>
-    <p></p>
-    </section>
 
+    <div>
+      <pre class="idl">
+        interface PhotoCapabilities {
+                    attribute boolean            autoWhiteBalanceMode;
+                    attribute MediaSettingsRange whiteBalanceMode;
+                    attribute ExposureMode       autoExposureMode;
+                    attribute MediaSettingsRange exposureCompensation;
+                    attribute MediaSettingsRange iso;
+                    attribute boolean            redEyeReduction;
+                    attribute MediaSettingsRange brightness;
+                    attribute MediaSettingsRange contrast;
+                    attribute MediaSettingsRange saturation;
+                    attribute MediaSettingsRange sharpness;
+                    attribute MediaSettingsRange imageHeight;
+                    attribute MediaSettingsRange imageWidth;
+                    attribute MediaSettingsRange zoom;
+                    attribute FillLightMode      fillLightMode;
+                    attribute FocusMode          focusMode;
+        };     
+      </pre>
+    </div>
 
     <section>
+      <h2>Attributes</h2>
+      <dl data-link-for="PhotoCapabilities" data-dfn-for="PhotoCapabilities" class="attributes">
+        <dt><dfn><code>autoWhiteBalanceMode</code></dfn> of type <span class="idlAttrType"><a>Boolean</a></span></dt>
+        <dd>This reflects whether automated White Balance Mode selection is on or off, and is boolean - on is true.</dd>
+        <dt><dfn><code>whiteBalanceMode</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
+        <dd>This reflects the current white balance mode setting. Values are of type <code>WhiteBalanceModeEnum</code>.</dd>
+        <dt><dfn><code>autoExposureMode</code></dfn> of type <span class="idlAttrType"><a>ExposureMode</a></span></dt>
+        <dd>This reflects the current auto exposure mode setting.  Values are of type <code>ExposureMode</code>.</dd>
+        <dt><dfn><code>exposureCompensation</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
+        <dd>This reflects the current exposure compensation setting and permitted range.  Values are numeric.</dd>
+        <dt><dfn><code>iso</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
+        <dd>This reflects the current camera ISO setting and permitted range.  Values are numeric.</dd>
+        <dt><dfn><code>redEyeReduction</code></dfn> of type <span class="idlAttrType"><a>Boolean</a></span></dt>
+        <dd>This reflects whether camera red eye reduction is on or off, and is boolean - on is true</dd>
+        <dt><dfn><code>brightness</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
+        <dd>This reflects the current brightness setting of the camera and permitted range. Values are numeric.</dd>
+        <dt><dfn><code>contrast</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
+        <dd>This reflects the current contrast setting of the camera and permitted range. Values are numeric.</dd>
+        <dt><dfn><code>saturation</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
+        <dd>This reflects the current saturation setting of the camera and permitted range. Values are numeric.</dd>
+        <dt><dfn><code>imageHeight</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
+        <dd>This reflects the image height range supported by the UA and the current height setting.</dd>
+        <dt><dfn><code>imageWidth</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
+        <dd>his reflects the image width range supported by the UA and the current width setting.</dd>
+        <dt><dfn><code>zoom</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
+        <dd>This reflects the zoom value range supported by the UA and the current zoom setting.</dd>
+        <dt><dfn><code>fillLightMode</code></dfn> of type <span class="idlAttrType"><a>FillLightMode</a></span></dt>
+        <dd>his reflects the current fill light (flash) mode setting.  Values are of type <code>FillLightMode</code>.</dd>
+        <dt><dfn><code>focusMode</code></dfn> of type <span class="idlAttrType"><a>FocusMode</a></span></dt>
+        <dd>This reflects the current focus mode setting.  Values are of type <code>FocusMode</code>.</dd>
+      </dl>
+    </section>
+
+    <section id="photocapabilities-discussion" class="informative">
+      <h2>Discussion</h2>
+        <p>The <code>PhotoCapabilities</code> interface provides the photo-specific settings options and current settings values.  The following definitions are assumed for individual settings and are provided for information purposes:</p>
+        <ol>
+        <li><i>White balance mode</i> is a setting that cameras use to adjust for different color temperatures.  Color temperature is the temperature of background light (measured in Kelvin normally).  This setting can also be automatically determined by the implementation.  If 'automatic' mode is selected, then the Kelvin setting for White Balance Mode may be overridden.  Typical temprature ranges for different modes are provided below:
+        <table border="1">
+        <tr>
+            <th>Mode</th>
+            <th>Kelvin range</th>
+        </tr>
+        <tr>
+            <td>incandescent</td>
+            <td>2500-3500</td>
+        </tr>
+        <tr>
+            <td>fluorescent</td>
+            <td>4000-5000</td>
+        </tr>
+        <tr>
+            <td>warm-fluorescent</td>
+            <td>5000-5500</td>
+        </tr>
+        <tr>
+            <td>daylight</td>
+            <td>5500-6500</td>
+        </tr>
+        <tr>
+            <td>cloudy-daylight</td>
+            <td>6500-8000</td>
+        </tr>
+        <tr>
+            <td>twilight</td>
+            <td>8000-9000</td>
+        </tr>
+        <tr>
+            <td>shade</td>
+            <td>9000-10000</td>
+        </tr>
+        </table>
+        </li>
+        <li><i>Exposure</i> is the amount of light allowed to fall on the photographic medium.  Auto-exposure mode is a camera setting where the exposure levels are automatically adjusted by the implementation based on the subject of the photo.</li>
+        <li><i>Exposure Compensation</i> is a numeric camera setting that adjusts the exposure level from the current value used by the implementation.  This value can be used to bias the exposure level enabled by auto-exposure.</li>
+        <li>The <i>ISO</i> setting of a camera describes the sensitivity of the camera to light. It is a numeric value, where the lower the value the greater the sensitivity.  This setting in most implementations relates to shutter speed, and is sometimes known as the ASA setting.</li>
+        <li><i>Red Eye Reduction</i> is a feature in cameras that is designed to limit or prevent the appearance of red pupils ("Red Eye") in photography subjects due prolonged exposure to a camera's flash.</li>
+        <li><i>Brightness</i> refers to the numeric camera setting that adjusts the perceived amount of light emitting from the photo object.  A higher brightness setting increases the intensity of darker areas in a scene while compressing the intensity of brighter parts of the scene.</li>
+        <li><i>Contrast</i> is the numeric camera setting that controls the difference in brightness between light and dark areas in a scene.  A higher contrast setting reflects an expansion in the difference in brightness.</li>
+        <li><i>Saturation</i> is a numeric camera setting that controls the intensity of color in a scene (i.e. the amount of gray in the scene).  Very low saturation levels will result in photo's closer to black-and-white.</li>
+        <li><i>Sharpness</i> is a numeric camera setting that controls the intensity of edges in a scene.  Higher sharpness settings result in higher edge intensity, while lower settings result in less contrast and blurrier edges (i.e. soft focus).</li>
+        <li><i>Zoom</i> is a numeric camera setting that controls the focal length of the lens.  The setting usually represents a ratio, e.g. 4 is a zoom ratio of 4:1.  The minimum value is usually 1, to represent a 1:1 ratio (i.e. no zoom).</li>
+        <li><i>Fill light mode</i> describes the flash setting of the capture device. </li>
+        <li><i>Focus mode</i> describes the focus setting of the capture device. </li>
+        </ol>
+    </section>
+    </section>
+
+    <section id="PhotoSettings">
     <h2><code>PhotoSettings</code></h2>
-    <p>The <code>PhotoSettings</code> object is optionally passed into the <code>ImageCapture.setOptions()</code> method
-    in order to modify capture device settings specific to still imagery.  Each of the attributes in this object
-    are optional.</p>
-    <dl title='dictionary PhotoSettings' class='idl'>
-    <dt>boolean autoWhiteBalanceMode</dt>
-    <dd>This reflects whether automatic White Balance Mode selection is desired.</dd>
-    <dt>unsigned long whiteBalanceMode</dt>
-    <dd>This reflects the desired white balance mode setting.</dd>
-    <dt>ExposureMode autoExposureMode</dt>
-    <dd>This reflects the desired auto exposure mode setting.  Acceptable values are of type <code>ExposureMode</code>.</dd>
-    <dt>unsigned long exposureCompensation</dt>
-    <dd>This reflects the desired exposure compensation setting.</dd>
-    <dt>unsigned long iso</dt>
-    <dd>This reflects the desired camera ISO setting.</dd>
-    <dd>This feature reflects the current exposure level for recorded images. Values are numeric.</dd>
-    <dt>boolean redEyeReduction</dt>
-    <dd>This reflects whether camera red eye reduction is desired</dd>
-    <dt>unsigned long brightness</dt>
-    <dd>This reflects the desired brightness setting of the camera.</dd>
-    <dt>unsigned long contrast</dt>
-    <dd>This reflects the desired contrast setting of the camera.</dd>
-    <dt>unsigned long saturation</dt>
-    <dd>This reflects the desired saturation setting of the camera.</dd>
-    <dt>unsigned long sharpness</dt>
-    <dd>This reflects the desired sharpness setting of the camera.</dd>
-    <dt>unsigned long zoom</dt>
-    <dd>This reflects the desired zoom setting of the camera.</dd>
-    <dt>unsigned long imageHeight</dt>
-    <dd>This reflects the desired image height.  The UA MUST select the closest height value this setting if it supports a discrete set of height options. </dd>
-    <dt>unsigned long imageWidth</dt>
-    <dd>This reflects the desired image width. The UA MUST select the closest width value this setting if it supports a discrete set of width options.</dd>
-    <dt>FillLightMode fillLightMode</dt>
-    <dd>This reflects the desired fill light (flash) mode setting.  Acceptable values are of type <code>FillLightMode</code>.</dd>
-    <dt>FocusMode focusMode</dt>
-    <dd>This reflects the desired focus mode setting.  Acceptable values are of type <code>FocusMode</code>.</dd>
-    </dl>
-    </section>
+    <p>The <code>PhotoSettings</code> object is optionally passed into the <code>setOptions()</code> method in order to modify capture device settings specific to still imagery.  Each of the attributes in this object is optional.</p>
+
+    <div>
+      <pre class="idl">
+        dictionary PhotoSettings {
+             boolean       autoWhiteBalanceMode;
+             unsigned long whiteBalanceMode;
+             ExposureMode  autoExposureMode;
+             unsigned long exposureCompensation;
+             unsigned long iso;
+             boolean       redEyeReduction;
+             unsigned long brightness;
+             unsigned long contrast;
+             unsigned long saturation;
+             unsigned long sharpness;
+             unsigned long zoom;
+             unsigned long imageHeight;
+             unsigned long imageWidth;
+             FillLightMode fillLightMode;
+             FocusMode     focusMode;
+        };      
+      </pre>
+    </div>
 
     <section>
+      <h2>Members</h2>
+      <dl data-link-for="PhotoSettings" data-dfn-for="PhotoSettings" class="attributes">
+        <dt><dfn><code>autoWhiteBalanceMode</code></dfn> of type <span class="idlAttrType"><a>boolean</a></span></dt>
+        <dd>This reflects whether automatic White Balance Mode selection is desired.</dd>
+        <dt><dfn><code>whiteBalanceMode</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
+        <dd>This reflects the desired white balance mode setting.</dd>
+        <dt><dfn><code>autoExposureMode</code></dfn> of type <span class="idlAttrType"><a>ExposureMode</a></span></dt>
+        <dd>This reflects the desired auto exposure mode setting.  Acceptable values are of type <code>ExposureMode</code>.</dd>
+        <dt><dfn><code>exposureCompensation</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
+        <dd>This reflects the desired exposure compensation setting.</dd>
+        <dt><dfn><code>iso</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
+        <dd>This reflects the desired camera ISO setting.</dd>
+        <dt><dfn><code>redEyeReduction</code></dfn> of type <span class="idlAttrType"><a>boolean</a></span></dt>
+        <dd>This reflects whether camera red eye reduction is desired</dd>
+        <dt><dfn><code>brightness</code></dfn> of type <span class="idlAttrType"><a><unsigned long/a></span></dt>
+        <dd>This reflects the desired brightness setting of the camera.</dd>
+        <dt><dfn><code>contrast</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
+        <dd>This reflects the desired contrast setting of the camera.</dd>
+        <dt><dfn><code>saturation</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
+        <dd>This reflects the desired saturation setting of the camera.</dd>
+        <dt><dfn><code>sharpness</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
+        <dd>This reflects the desired sharpness setting of the camera.</dd>
+        <dt><dfn><code>zoom</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
+        <dd>This reflects the desired zoom setting of the camera.</dd>
+        <dt><dfn><code>imageHeight</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
+        <dd>This reflects the desired image height.  The UA MUST select the closest height value this setting if it supports a discrete set of height options.</dd>
+        <dt><dfn><code>imageWidth</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
+        <dd>This reflects the desired image width. The UA MUST select the closest width value this setting if it supports a discrete set of width options.</dd>
+        <dt><dfn><code>fillLightMode</code></dfn> of type <span class="idlAttrType"><a>FillLightMode</a></span></dt>
+        <dd>This reflects the desired fill light (flash) mode setting.  Acceptable values are of type <code>FillLightMode</code>.</dd>
+        <dt><dfn><code>focusMode</code></dfn> of type <span class="idlAttrType"><a>FocusMode</a></span></dt>
+        <dd>This reflects the desired focus mode setting.  Acceptable values are of type <code>FocusMode</code>.</dd>
+      </dl>
+    </section>
+    </section>
+
+
+    <section id="MediaSettingsRange">
     <h2><code>MediaSettingsRange</code></h2>
-    <dl title='interface MediaSettingsRange' class='idl'>
-    <dt>readonly attribute unsigned long max</dt>
-    <dd>The maximum value of this setting</dd>
-    <dt>readonly attribute unsigned long min</dt>
-    <dd>The minimum value of this setting</dd>
-    <dt>readonly attribute unsigned long current</dt>
-    <dd>The current value of this setting</dd>
-    </dl>
+    <div>
+      <pre class="idl">
+        interface MediaSettingsRange {
+            readonly        attribute unsigned long max;
+            readonly        attribute unsigned long min;
+            readonly        attribute unsigned long current;
+        };
+      </pre>
+    </div>
+    <section>
+      <h2>Attributes</h2>
+      <dl data-link-for="MediaSettingsRange" data-dfn-for="MediaSettingsRange" class="attributes">
+        <dt><dfn><code>max</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span>, readonly</dt>
+        <dd>The maximum value of this setting</dd>
+        <dt><dfn><code>min</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span>, readonly</dt>
+        <dd>The minimum value of this setting</dd>
+        <dt><dfn><code>current</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span>, readonly</dt>
+        <dd>The current value of this setting</dd>
+      </dl>
+    </section>
     </section>
 
-    <section>
-    <h2><code>MediaSettingsItem</code></h2>
-    <p>The <code>MediaSettingsItem</code> interface is now defined, which allows for a single setting to be managed.</p>
-    <dl title='interface MediaSettingsItem' class='idl'>
-    <dt>readonly attribute any value</dt>
-    <dd>Value of current setting.</dd>
-    </dl>
-    </section>
 
-    <section>
+    <section id="ExposureMode">
     <h2><code>ExposureMode</code></h2>
-    <dl title='enum ExposureMode' class='idl'>
-    <dt>frame-average</dt>
-    <dd>Average of light information from entire scene</dd>
-    <dt>center-weighted</dt>
-    <dd>Sensitivity concentrated towards center of viewfinder</dd>
-    <dt>spot-metering</dt>
-    <dd>Spot-centered weighting</dd>
-    </dl>
+    <div>
+      <pre class="idl">
+        enum ExposureMode {
+            "frame-average",
+            "center-weighted",
+            "spot-metering"
+        };
+      </pre>
+    </div>
+    <section>
+      <h2>Values</h2>
+      <dl data-link-for="ExposureMode" data-dfn-for="ExposureMode" class="enum">
+        <dt><dfn><code>frame-average</code></dfn></dt>
+        <dd>Average of light information from entire scene</dd>
+        <dt><dfn><code>center-weighted</code></dfn></dt>
+        <dd>Sensitivity concentrated towards center of viewfinder</dd>
+        <dt><dfn><code>spot-metering</code></dfn></dt>
+        <dd>Spot-centered weighting</dd>
+      </dl>
+    </section>
     </section>
 
-    <section>
+
+    <section id="FillLightMode">
     <h2><code>FillLightMode</code></h2>
-    <dl title='enum FillLightMode' class='idl'>
-    <dt>unavailable</dt>
-    <dd>This source does not have an option to change fill light modes (e.g., the camera does not have a flash)</dd>
-    <dt>auto</dt>
-    <dd>The video device's fill light will be enabled when required (typically low light conditions). Otherwise it will be off. Note that auto does not guarantee that a flash will fire when takePhoto is called. Use <code>flash</code> to guarantee firing of the flash for the <code>takePhoto()</code> or <code>getFrame()</code> methods.</dd>
-    <dt>off</dt>
-    <dd>The source's fill light and/or flash will not be used.</dd>
-    <dt>flash</dt>
-    <dd>This value will always cause the flash to fire for the <code>takePhoto()</code> or <code>getFrame()</code> methods. </dd>
-    <dt>on</dt>
-    <dd>The source's fill light will be turned on (and remain on) while the source <code>MediaStreamTrack</code> is active</dd>
-    </dl>
-    </section>
-
+    <div>
+      <pre class="idl">
+        enum FillLightMode {
+            "unavailable",
+            "auto",
+            "off",
+            "flash",
+            "on"
+        };
+      </pre>
+    </div>
     <section>
-    <h2><code>FocusMode</code></h2>
-    <dl title='enum FocusMode' class='idl'>
-    <dt>unavailable</dt>
-    <dd>This source does not have an option to change focus modes.</dd>
-    <dt>auto</dt>
-    <dd>Auto-focus mode is enabled.</dd>
-    <dt>manual</dt>
-    <dd>Manual focus mode is enabled.</dd>
-    </dl>
+      <h2>Values</h2>
+      <dl data-link-for="FillLightMode" data-dfn-for="FillLightMode" class="enum">
+        <dt><dfn><code>unavailable</code></dfn></dt>
+        <dd>This source does not have an option to change fill light modes (e.g., the camera does not have a flash)</dd>
+        <dt><dfn><code>auto</code></dfn></dt>
+        <dd>The video device's fill light will be enabled when required (typically low light conditions). Otherwise it will be off. Note that auto does not guarantee that a flash will fire when takePhoto is called. Use <code>flash</code> to guarantee firing of the flash for the <code>takePhoto()</code> or <code>getFrame()</code> methods.</dd>
+        <dt><dfn><code>off</code></dfn></dt>
+        <dd>The source's fill light and/or flash will not be used.</dd>
+        <dt><dfn><code>flash</code></dfn></dt>
+        <dd>This value will always cause the flash to fire for the <code>takePhoto()</code> or <code>getFrame()</code> methods. </dd>
+        <dt><dfn><code>on</code></dfn></dt>
+        <dd>The source's fill light will be turned on (and remain on) while the source <code>MediaStreamTrack</code> is active</dd>
+      </dl>
+    </section>
     </section>
 
-    Examples
-    -------
+    <section id="FocusMode">
+    <h2><code>FocusMode</code></h2>
+    <div>
+      <pre class="idl">
+        enum FocusMode {
+            "unavailable",
+            "auto",
+            "manual"
+        };
+      </pre>
+    </div>
+    <section>
+      <h2>Values</h2>
+      <dl data-link-for="FocusMode" data-dfn-for="FocusMode" class="enum">
+        <dt><dfn><code>unavailable</code></dfn></dt>
+        <dd>This source does not have an option to change focus modes.</dd>
+        <dt><dfn><code>auto</code></dfn></dt>
+        <dd>Auto-focus mode is enabled.</dd>
+        <dt><dfn><code>manual</code></dfn></dt>
+        <dd>Manual focus mode is enabled.</dd>
+
+      </dl>
+    </section>
+    </section>
+
+
+
+    <section id="examples" class="informative">
+    <h2>Examples</h2>
 
     ##### Grabbing a Frame for Post-Processing
     <pre class='example'>
     navigator.mediaDevices.getUserMedia({video: true}).then(gotMedia, failedToGetMedia);
 
     function gotMedia(mediastream) {
-          //Extract video track.
-          var videoDevice = mediastream.getVideoTracks()[0];
-          // Check if this device supports a picture mode...
-          var captureDevice = new ImageCapture(videoDevice);
-          if (captureDevice) {
-                captureDevice.grabFrame().then(processFrame(imgData));
-          }
+        //Extract video track.
+        var videoTrack = mediastream.getVideoTracks()[0];
+        // Check if this device supports a picture mode...
+        var captureDevice = new ImageCapture(videoTrack);
+        if (captureDevice) {
+            captureDevice.grabFrame().then(processFrame(imgData));
+        }
     }
 
     function processFrame(e) {
-           imgData = e.imageData;
-           width = imgData.width;
-           height = imgData.height;
-           for (j=3; j < imgData.width; j+=4)
-                {
-                // Set all alpha values to medium opacity
-                imgData.data[j] = 128;
-                }
-           // Create new ImageObject with the modified pixel values
-           var canvas = document.createElement('canvas');
-           ctx = canvas.getContext("2d");
-           newImg = ctx.createImageData(width,height);
-           for (j=0; j < imgData.width; j++)
-                {
-                newImg.data[j] = imgData.data[j];
-                }
-           // ... and do something with the modified image ...
-           }
+        imgData = e.imageData;
+        width = imgData.width;
+        height = imgData.height;
+        for (j=3; j < imgData.width; j+=4) {
+            // Set all alpha values to medium opacity
+            imgData.data[j] = 128;
+        }
+
+        // Create new ImageObject with the modified pixel values
+        var canvas = document.createElement('canvas');
+        ctx = canvas.getContext("2d");
+        newImg = ctx.createImageData(width,height);
+        for (j=0; j < imgData.width; j++) {
+            newImg.data[j] = imgData.data[j];
+        }
+
+        // ... and do something with the modified image ...
+        }
     }
 
-    function failedToGetMedia{
-           console.log('Stream failure');
+    function failedToGetMedia(e) {
+        console.log('Stream failure: ' + e);
     }
     </pre>
 
-    ##### Taking a picture if Red Eye Reduction is activated
+    ##### Taking a picture with Red Eye Reduction supported and used
     <pre class='example'>
     navigator.getUserMedia({video: true}, gotMedia, failedToGetMedia);
 
-   function gotMedia(mediastream) {
-          //Extract video track.
-          var videoDevice = mediastream.getVideoTracks()[0];
-          // Check if this device supports a picture mode...
-          var captureDevice = new ImageCapture(videoDevice);
-          if (captureDevice) {
-                if (captureDevice.photoCapabilities.redEyeReduction) {
-                   captureDevice.setOptions({redEyeReductionSetting:true})
-                       .then(captureDevice.takePhoto()
-                       .then(showPicture(blob),function(error){alert("Failed to take photo");}));
-                   }
-                else
-                   console.log('No red eye reduction');
-                }
+    function gotMedia(mediastream) {
+        //Extract video track.
+        var videoDevice = mediastream.getVideoTracks()[0];
+        // Check if this device supports a picture mode...
+        var captureDevice = new ImageCapture(videoDevice);
+        if (captureDevice) {
+            if (captureDevice.photoCapabilities.redEyeReduction) {
+                captureDevice.setOptions({redEyeReductionSetting:true})
+                    .then(captureDevice.takePhoto()
+                    .then(showPicture(blob),function(error){alert("Failed to take photo");}));
+            } else {
+                console.log('No red eye reduction');
             }
+        }
 
     function showPicture(e) {
-           var img = document.querySelector("img");
-           img.src = URL.createObjectURL(e.data);
-           }
+        var img = document.querySelector("img");
+        img.src = URL.createObjectURL(e.data);
+    }
 
-    function failedToGetMedia{
-           console.log('Stream failure');
-           }
+    function failedToGetMedia(e) {
+        console.log('Stream failure: ' + e);
+    }
     </pre>
 
     ##### Repeated grabbing of a frame
     <pre class='example'>
     &lthtml&gt
-   &ltbody&gt
-   &ltp&gt&ltcanvas id="frame"&gt&lt/canvas&gt&lt/p&gt
-   &ltbutton onclick="stopFunction()"&gtStop frame grab&lt/button&gt
-   &ltscript&gt
-   var canvas = document.getElementById('frame');
-   navigator.getUserMedia({video: true}, gotMedia, failedToGetMedia);
+    &ltbody&gt
+    &ltp&gt&ltcanvas id="frame"&gt&lt/canvas&gt&lt/p&gt
+    &ltbutton onclick="stopFunction()"&gtStop frame grab&lt/button&gt
+    &ltscript&gt
+      var canvas = document.getElementById('frame');
+      navigator.getUserMedia({video: true}, gotMedia, failedToGetMedia);
 
-   function gotMedia(mediastream) {
-          //Extract video track.
-          var videoDevice = mediastream.getVideoTracks()[0];
-          // Check if this device supports a picture mode...
-          var captureDevice = new ImageCapture(videoDevice);
-          var frameVar;
-          if (captureDevice) {
-                frameVar = setInterval(captureDevice.grabFrame().then(processFrame()), 1000);
-                }
-            }
+      function gotMedia(mediastream) {
+        //Extract video track.
+        var videoDevice = mediastream.getVideoTracks()[0];
+        // Check if this device supports a picture mode...
+        var captureDevice = new ImageCapture(videoDevice);
+        var frameVar;
+        if (captureDevice) {
+            frameVar = setInterval(captureDevice.grabFrame().then(processFrame()), 1000);
+        }
+      }
 
-    function processFrame(e) {
-            imgData = e.imageData;
-            canvas.width = imgData.width;
-            canvas.height = imgData.height;
-            canvas.getContext('2d').drawImage(imgData, 0, 0,imgData.width,imgData.height);
-            }
+      function processFrame(e) {
+        imgData = e.imageData;
+        canvas.width = imgData.width;
+        canvas.height = imgData.height;
+        canvas.getContext('2d').drawImage(imgData, 0, 0,imgData.width,imgData.height);
+      }
 
-    function stopFunction(e) {
-            clearInterval(myVar);
-            }
-   &lt/script&gt
-   &lt/body&gt
-   &lt/html&gt
+      function stopFunction(e) {
+        clearInterval(myVar);
+      }
+    &lt/script&gt
+    &lt/body&gt
+    &lt/html&gt
     </pre>
+    </section>
   </body>
 </html>
