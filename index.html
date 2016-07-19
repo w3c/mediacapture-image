@@ -42,42 +42,88 @@
     Image Capture API
     --------------
     <p>The User Agent must support <i>Promises</i> in order to implement the Image Capture API.  Any <i>Promise</i> object is assumed to have <i>resolver</i> object, with <i>resolve()</i> and <i>reject()</i> methods associated with it.
-    The <code>MediaStreamTrack</code> passed to the constructor <em title="must" class="rfc2119">must</em> have its <code>kind</code> attribute set to "<code>video</code>" otherwise a <code>DOMException</code> of type <code>NotSupportedError</code> will be thrown.</p>
-    <dl title='[Constructor(MediaStreamTrack track)] interface ImageCapture' class='idl'>
-    <dd>interface ImageCapture</dd>
+    The <code>MediaStreamTrack</code> passed to the constructor MUST have its <code>kind</code> attribute set to "<code>video</code>" otherwise a <code>DOMException</code> of type <code>NotSupportedError</code> will be thrown.</p>
 
-    <dt>readonly attribute MediaStreamTrack videoStreamTrack</dt>
-    <dd>The MediaStreamTrack passed into the constructor</dd>
+    <div>
+      <pre class="idl">
+       [Constructor(MediaStreamTrack track)]
+        interface ImageCapture {
+          readonly        attribute MediaStreamTrack videoStreamTrack;
+          readonly        attribute MediaStream      previewStream;
+          [Throws] Promise<PhotoCapabilities> getPhotoCapabilities ();
+          [Throws] Promise<void> setOptions (PhotoSettings? photoSettings);
+          [Throws] Promise<Blob>              takePhoto ();
+          [Throws] Promise<ImageBitmap>       grabFrame ();
+        };      
+      </pre>
+    </div>
+    <section>
+      <h2>Constructors</h2>
+      <dl data-link-for="ImageCapture" data-dfn-for="ImageCapture" class="constructors">
+        <dt><dfn><code>ImageCapture</code></dfn></dt>
+        <dd>
+          <table class="parameters">
+            <tbody>
+              <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Nullable</th>
+                <th>Optional</th>
+                <th>Description</th>
+              </tr>
+              <tr>
+                <td class="prmName">track</td>
+                <td class="prmType"><code>MediaStreamTrack</code></td>
+                <td class="prmNullFalse"><span role="img" aria-label="False">&#10008;</span></td>
+                <td class="prmOptFalse"><span role="img" aria-label="False">&#10008;</span></td>
+                <td class="prmDesc">The MediaStreamTrack to be used as source of data. This will be the value of the <code>videoStreamTrack</code> attribute.</td>
+              </tr>
+            </tbody>
+          </table>
+        </dd>
+      </dl>
+    </section>
 
-    <dt>readonly attribute MediaStream previewStream</dt>
-    <dd>The MediaStream that provides a camera preview</dd>
+    <section>
+      <h2>Attributes</h2>
+      <dl data-link-for="ImageCapture" data-dfn-for="ImageCapture" class="attributes">
+        <dt><dfn><code>videoStreamTrack</code></dfn> of type <span class="idlAttrType"><a>MediaStreamTrack</a></span>, readonly</dt>
+        <dd>The MediaStreamTrack passed into the constructor.</dd>
+        <dt><dfn><code>previewStream</code></dfn> of type <span class="idlAttrType"><a>MediaStream</a></span>, readonly</dt>
+        <dd>The MediaStream that provides a camera preview.</dd>
+      </dl>
+    </section>
 
-    <dt> [Throws] Promise&lt;PhotoCapabilities&gt; getPhotoCapabilities() </dt>
-    <dd>When the <code>getPhotoCapabilities()</code> method of an <code>ImageCapture</code> object is invoked, a new <i>Promise</i> is returned. If the UA is unable to execute the <code>getPhotoCapabilities()</code> method for any reason (for example, the <code>MediaStreamTrack</code> being ended asynchronously), then the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <a href="#idl-def-ImageCaptureError" class="idlType"><code>ImageCaptureError</code></a> with the appropriate <code>errorDescription</code> set. Otherwise it <em title="must" class="rfc2119">must</em> queue a task, using the DOM manipulation task source, that runs the following steps:
-    <ol>
-        <li>Gather data from the <code>MediaStreamTrack</code> into a <a href="#idl-def-PhotoCapabilities" class="idlType"><code>PhotoCapabilities</code></a> object containing the available capabilities of the device, including ranges where appropriate. The resolved <a href="#idl-def-PhotoCapabilities" class="idlType"><code>PhotoCapabilities</code></a> will also include the current conditions in which the capabilities of the device are found. The method of doing this will depend on the underlying device. </li>
-        <li>Return a resolved promise with the <a href="#idl-def-PhotoCapabilities" class="idlType"><code>PhotoCapabilities</code></a> object.</li>
-    </dd>
+    <section>
+      <h2>Methods</h2>
+      <dl data-link-for="ImageCapture" data-dfn-for="ImageCapture" class="methods">
+        <dt><dfn><code>getPhotoCapabilities</code></dfn></dt>
+        <dd>When the <code>getPhotoCapabilities()</code> method of an <code>ImageCapture</code> object is invoked, a new <i>Promise</i> is returned. If the UA is unable to execute the <code>getPhotoCapabilities()</code> method for any reason (for example, the <code>MediaStreamTrack</code> being ended asynchronously), then the UA MUST return a promise rejected with a newly created <a href="#idl-def-ImageCaptureError" class="idlType"><code>ImageCaptureError</code></a> with the appropriate <code>errorDescription</code> set. Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:
+        <ol>
+          <li>Gather data from the <code>MediaStreamTrack</code> into a <a href="#idl-def-PhotoCapabilities" class="idlType"><code>PhotoCapabilities</code></a> object containing the available capabilities of the device, including ranges where appropriate. The resolved <a href="#idl-def-PhotoCapabilities" class="idlType"><code>PhotoCapabilities</code></a> will also include the current conditions in which the capabilities of the device are found. The method of doing this will depend on the underlying device. </li>
+          <li>Return a resolved promise with the <a href="#idl-def-PhotoCapabilities" class="idlType"><code>PhotoCapabilities</code></a> object.</li>
+        </dd>
 
-    <dt> [Throws] Promise&lt;void&gt; setOptions(PhotoSettings? photoSettings) </dt>
-    <dd>When the <code>setOptions()</code> method of an <code>ImageCapture</code> object is invoked, then a valid <code>PhotoSettings</code> object <em title="must" class="rfc2119">must</em> be passed in the method to the <code>ImageCapture</code> object.  In addition, a new <i>Promise</i> object is returned.  If the UA can successfully apply the settings, then the UA <em title="must" class="rfc2119">must</em> return a resolved promise. If the UA cannot successfully apply the settings, then the UA
-    <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <a href="#idl-def-ImageCaptureError" class="idlType"><code>ImageCaptureError</code></a> whose <code>errorDescription</code> is set to OPTIONS_ERROR.</dd>
+        <dt><dfn><code>setOptions</code></dfn></dt>
+        <dd>When the <code>setOptions()</code> method of an <code>ImageCapture</code> object is invoked, then a valid <code>PhotoSettings</code> object MUST be passed in the method to the <code>ImageCapture</code> object.  In addition, a new <i>Promise</i> object is returned.  If the UA can successfully apply the settings, then the UA MUST return a resolved promise. If the UA cannot successfully apply the settings, then the UA MUST return a promise rejected with a newly created <a href="#idl-def-ImageCaptureError" class="idlType"><code>ImageCaptureError</code></a> whose <code>errorDescription</code> is set to OPTIONS_ERROR.
+        </dd>
 
-    <dt> [Throws] Promise&lt;Blob&gt; takePhoto() </dt>
-    <dd>When the <code>takePhoto()</code> method of an <code>ImageCapture</code> object is invoked, a new <i>Promise</i> object is returned.
-	If the <code>readyState</code> of the <code>VideoStreamTrack</code> provided in the constructor is not "live", the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <a href="#idl-def-ImageCaptureError" class="idlType"><code>ImageCaptureError</code></a>  object whose <code>errorDescription</code> is set to INVALID_TRACK.  If the UA is unable to execute the <code>takePhoto()</code> method for any other reason (for example, upon invocation of multiple takePhoto() method calls in rapid succession), then the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to PHOTO_ERROR. Otherwise it <em title="must" class="rfc2119">must</em> queue a task, using the DOM manipulation task source, that runs the following steps:
-	<ol>
-		<li>Gather data from the <code>MediaStreamTrack</code> into a <code>Blob</code> containing a single still image. The method of doing this will depend on the underlying device.  Devices may temporarily stop streaming data, reconfigure themselves with the appropriate photo settings, take the photo, and then resume streaming.  In this case, the stopping and restarting of streaming <em title="should" class="rfc2119">should</em> cause <code>mute</code> and <code>unmute</code> events to fire on the Track in question.  </li>
-        <li>Return a resolved promise with the Blob object.</li>
-    </dd>
+        <dt><dfn><code>takePhoto</code></dfn></dt>
+        <dd>When the <code>takePhoto()</code> method of an <code>ImageCapture</code> object is invoked, a new <i>Promise</i> object is returned.
+        If the <code>readyState</code> of the <code>VideoStreamTrack</code> provided in the constructor is not "live", the UA MUST return a promise rejected with a newly created <a href="#idl-def-ImageCaptureError" class="idlType"><code>ImageCaptureError</code></a>  object whose <code>errorDescription</code> is set to INVALID_TRACK.  If the UA is unable to execute the <code>takePhoto()</code> method for any other reason (for example, upon invocation of multiple takePhoto() method calls in rapid succession), then the UA MUST return a promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to PHOTO_ERROR. Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:
+        <ol>
+          <li>Gather data from the <code>MediaStreamTrack</code> into a <code>Blob</code> containing a single still image. The method of doing this will depend on the underlying device.  Devices may temporarily stop streaming data, reconfigure themselves with the appropriate photo settings, take the photo, and then resume streaming.  In this case, the stopping and restarting of streaming SHOULD cause <code>mute</code> and <code>unmute</code> events to fire on the Track in question.  </li>
+          <li>Return a resolved promise with the Blob object.</li>
+        </dd>
 
-    <dt> [Throws] Promise&lt;ImageBitmap&gt; grabFrame() </dt> 
-	<dd>When the <code>grabFrame()</code> method of an <code>ImageCapture</code> object is invoked, a new <i>Promise</i> object is returned. If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the contructor is not "live", the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to INVALID_TRACK. If the UA is unable to execute the <code>grabFrame()</code> method for any other reason, then the UA <em title="must" class="rfc2119">must</em> return a promise rejected with a newly created <a href="#idl-def-ImageCaptureError" class="idlType"><code>ImageCaptureError</code></a>  object whose <code>errorDescription</code> is set to FRAME_ERROR.    Otherwise it <em title="must" class="rfc2119">must</em> queue a task, using the DOM manipulation task source, that runs the following steps:
-	<ol>
-		<li>Gathers data from the <code>MediaStreamTrack</code> into an <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object (as defined in [[!HTML51]]). The <code>width</code> and <code>height</code> of the <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object are derived from the constraints of the <code>MediaStreamTrack</code>. </li>
-	    <li>Returns a resolved promise with a newly created <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object. (Note: <code>grabFrame()</code> returns data only once upon being invoked).</li>
-	 </dd>
-	 </dl>
+        <dt><dfn><code>grabFrame</code></dfn></dt>
+        <dd>When the <code>grabFrame()</code> method of an <code>ImageCapture</code> object is invoked, a new <i>Promise</i> object is returned. If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the contructor is not "live", the UA MUST return a promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to INVALID_TRACK. If the UA is unable to execute the <code>grabFrame()</code> method for any other reason, then the UA MUST return a promise rejected with a newly created <a href="#idl-def-ImageCaptureError" class="idlType"><code>ImageCaptureError</code></a>  object whose <code>errorDescription</code> is set to FRAME_ERROR.    Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:
+        <ol>
+          <li>Gathers data from the <code>MediaStreamTrack</code> into an <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object (as defined in [[!HTML51]]). The <code>width</code> and <code>height</code> of the <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object are derived from the constraints of the <code>MediaStreamTrack</code>. </li>
+          <li>Returns a resolved promise with a newly created <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object. (Note: <code>grabFrame()</code> returns data only once upon being invoked).</li>
+        </dd>      
+      </dl>
+    </section>
 
     <code>ImageCaptureError</code>
     -----------------
@@ -212,9 +258,9 @@
     <dt>unsigned long zoom</dt>
     <dd>This reflects the desired zoom setting of the camera.</dd>
     <dt>unsigned long imageHeight</dt>
-    <dd>This reflects the desired image height.  The UA <em title="must" class="rfc2119">must</em> select the closest height value this setting if it supports a discrete set of height options. </dd>
+    <dd>This reflects the desired image height.  The UA MUST select the closest height value this setting if it supports a discrete set of height options. </dd>
     <dt>unsigned long imageWidth</dt>
-    <dd>This reflects the desired image width. The UA <em title="must" class="rfc2119">must</em> select the closest width value this setting if it supports a discrete set of width options.</dd>
+    <dd>This reflects the desired image width. The UA MUST select the closest width value this setting if it supports a discrete set of width options.</dd>
     <dt>FillLightMode fillLightMode</dt>
     <dd>This reflects the desired fill light (flash) mode setting.  Acceptable values are of type <code>FillLightMode</code>.</dd>
     <dt>FocusMode focusMode</dt>
