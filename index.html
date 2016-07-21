@@ -54,7 +54,7 @@
           [Throws] Promise<void> setOptions (PhotoSettings? photoSettings);
           [Throws] Promise<Blob>              takePhoto ();
           [Throws] Promise<ImageBitmap>       grabFrame ();
-        };      
+        };
       </pre>
     </div>
 
@@ -108,6 +108,28 @@
 
         <dt><dfn><code>setOptions</code></dfn></dt>
         <dd>When the <code>setOptions()</code> method of an <code>ImageCapture</code> object is invoked, then a valid <code>PhotoSettings</code> object MUST be passed in the method to the <code>ImageCapture</code> object.  In addition, a new <i>Promise</i> object is returned.  If the UA can successfully apply the settings, then the UA MUST return a resolved promise. If the UA cannot successfully apply the settings, then the UA MUST return a promise rejected with a newly created <a href="#idl-def-ImageCaptureError" class="idlType"><code>ImageCaptureError</code></a> whose <code>errorDescription</code> is set to OPTIONS_ERROR.
+        <table class="parameters">
+              <tbody>
+                <tr>
+                  <th>Parameter</th>
+                  <th>Type</th>
+                  <th>Nullable</th>
+                  <th>Optional</th>
+                  <th>Description</th>
+                </tr>
+                <tr>
+                  <td class="prmName">type</td>
+                  <td class="prmType"><code>PhotoSettings</code></td>
+                  <td class="prmNullFalse"><span role="img" aria-label=
+                  "False">&#10008;</span></td>
+                  <td class="prmOptTrue"><span role="img" aria-label=
+                  "True">&#10004;</span></td>
+                  <td class="prmDesc">
+                    The <code>PhotoSettings</code> dictionary to be applied.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
         </dd>
 
         <dt><dfn><code>takePhoto</code></dfn></dt>
@@ -125,7 +147,7 @@
           <li>Gathers data from the <code>MediaStreamTrack</code> into an <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object (as defined in [[!HTML51]]). The <code>width</code> and <code>height</code> of the <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object are derived from the constraints of the <code>MediaStreamTrack</code>. </li>
           <li>Returns a resolved promise with a newly created <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> object. (Note: <code>grabFrame()</code> returns data only once upon being invoked).</li>
         </ol>
-        </dd>      
+        </dd>
       </dl>
     </section>
 
@@ -137,7 +159,7 @@
       <pre class="idl">
         [NoInterfaceObject] interface ImageCaptureError {
           readonly attribute DOMString? errorDescription;
-        };      
+        };
       </pre>
     </div>
 
@@ -171,7 +193,7 @@
                     attribute MediaSettingsRange zoom;
                     attribute FillLightMode      fillLightMode;
                     attribute FocusMode          focusMode;
-        };     
+        };
       </pre>
     </div>
 
@@ -286,7 +308,7 @@
              unsigned long imageWidth;
              FillLightMode fillLightMode;
              FocusMode     focusMode;
-        };      
+        };
       </pre>
     </div>
 
