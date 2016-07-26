@@ -53,7 +53,7 @@
           readonly        attribute MediaStream      previewStream;
           [Throws] Promise<PhotoCapabilities> getPhotoCapabilities ();
           [Throws] Promise<void> setOptions (PhotoSettings? photoSettings);
-          [Throws] Promise<Blob>              takePhoto ();
+          [Throws] Promise<Blob>              takePhoto (PhotoSettings? photoSettings);
           [Throws] Promise<ImageBitmap>       grabFrame ();
         };
       </pre>
@@ -140,6 +140,31 @@
           <li>Gather data from the <code>MediaStreamTrack</code> into a <code>Blob</code> containing a single still image. The method of doing this will depend on the underlying device.  Devices may temporarily stop streaming data, reconfigure themselves with the appropriate photo settings, take the photo, and then resume streaming.  In this case, the stopping and restarting of streaming SHOULD cause <code>mute</code> and <code>unmute</code> events to fire on the Track in question.  </li>
           <li>Return a resolved promise with the Blob object.</li>
         </ol>
+
+
+        <table class="parameters">
+              <tbody>
+                <tr>
+                  <th>Parameter</th>
+                  <th>Type</th>
+                  <th>Nullable</th>
+                  <th>Optional</th>
+                  <th>Description</th>
+                </tr>
+                <tr>
+                  <td class="prmName">type</td>
+                  <td class="prmType"><code>PhotoSettings</code></td>
+                  <td class="prmNullTrue"><span role="img" aria-label=
+                  "True">&#10004;</span></td>
+                  <td class="prmOptFalse"><span role="img" aria-label=
+                  "False">&#10008;</span></td>
+                  <td class="prmDesc">
+                    The <code>PhotoSettings</code> dictionary to be applied.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+        </dd>
         </dd>
 
         <dt><dfn><code>grabFrame</code></dfn></dt>
