@@ -33,12 +33,12 @@
     </section>
 
     <section id='abstract'>
-      This document specifies the takePhoto() and grabFrame() methods, and corresponding camera settings for use with MediaStreamTracks as defined in Media Capture and Streams [[!GETUSERMEDIA]].
+      This document specifies the <code>takePhoto()</code> and <code>grabFrame()</code> methods, and corresponding camera settings for use with MediaStreamTracks (as defined in Media Capture and Streams [[!GETUSERMEDIA]]).
     </section>
 
     Introduction
     ------------
-    <p>The API defined in this document captures images from a valid MediaStreamTrack. The produced image can be in the form of a <code>Blob</code> (as defined in [[!FILE-API]]) or as an <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> (as defined in [[!HTML51]])).  The source image is provided by the capture device that provides the MediaStreamTrack.  Moreover, picture-specific settings can be optionally provided as arguments that can be applied to the device for the capture.</p>
+    <p>The API defined in this document captures images from a valid MediaStreamTrack. The produced image can be in the form of a <code><a href="https://www.w3.org/TR/FileAPI/#blob">Blob</a></code> (as defined in [[!FILE-API]]) or as an <code><a href="http://www.w3.org/TR/html51/webappapis.html#images">ImageBitmap</a></code> (as defined in [[!HTML51]])).  The source image is provided by the capture device that provides the MediaStreamTrack.  Moreover, picture-specific settings can be optionally provided as arguments that can be applied to the device for the capture.</p>
 
     <section id="ImageCaptureAPI">
     <h2>Image Capture API</h2>
@@ -51,10 +51,10 @@
         interface ImageCapture {
           readonly        attribute MediaStreamTrack videoStreamTrack;
           readonly        attribute MediaStream      previewStream;
-          [Throws] Promise<PhotoCapabilities> getPhotoCapabilities ();
-          [Throws] Promise<void> setOptions (PhotoSettings? photoSettings);
-          [Throws] Promise<Blob>              takePhoto ();
-          [Throws] Promise<ImageBitmap>       grabFrame ();
+          [Throws] Promise&ltPhotoCapabilities&gt getPhotoCapabilities ();
+          [Throws] Promise&ltvoid&gt setOptions (PhotoSettings? photoSettings);
+          [Throws] Promise&ltBlob&gt              takePhoto ();
+          [Throws] Promise&ltImageBitmap&gt       grabFrame ();
         };
       </pre>
     </div>
