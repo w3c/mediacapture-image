@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns='http://www.w3.org/1999/xhtml' lang='en'>
+<html>
   <head>
     <meta charset='utf-8'/>
     <title>MediaStream Image Capture</title>
@@ -263,7 +263,7 @@
         <p>The <code>PhotoCapabilities</code> interface provides the photo-specific settings options and current settings values.  The following definitions are assumed for individual settings and are provided for information purposes:</p>
         <ol>
         <li><i>White balance mode</i> is a setting that cameras use to adjust for different color temperatures.  Color temperature is the temperature of background light (measured in Kelvin normally).  This setting can also be automatically determined by the implementation.  If 'automatic' mode is selected, then the Kelvin setting for White Balance Mode may be overridden.  Typical temprature ranges for different modes are provided below:
-        <table border="1">
+        <table class="simple">
         <tr>
             <th>Mode</th>
             <th>Kelvin range</th>
@@ -354,7 +354,7 @@
         <dd>This reflects the desired camera ISO setting.</dd>
         <dt><dfn><code>redEyeReduction</code></dfn> of type <span class="idlAttrType"><a>boolean</a></span></dt>
         <dd>This reflects whether camera red eye reduction is desired</dd>
-        <dt><dfn><code>brightness</code></dfn> of type <span class="idlAttrType"><a><unsigned long/a></span></dt>
+        <dt><dfn><code>brightness</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
         <dd>This reflects the desired brightness setting of the camera.</dd>
         <dt><dfn><code>contrast</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
         <dd>This reflects the desired contrast setting of the camera.</dd>
