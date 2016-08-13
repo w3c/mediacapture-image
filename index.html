@@ -459,12 +459,14 @@
 
     <section id="FocusMode">
     <h2><code>FocusMode</code></h2>
+    <p>Note that <code>FocusMode</code> is used for both capabilities/status enumeration and for setting options for a capture.</p>
     <div>
       <pre class="idl">
         enum FocusMode {
             "unavailable",
-            "auto",
-            "manual"
+            "manual",
+            "single-shot",
+            "continuous"
         };
       </pre>
     </div>
@@ -473,11 +475,12 @@
       <dl data-link-for="FocusMode" data-dfn-for="FocusMode" class="enum">
         <dt><dfn><code>unavailable</code></dfn></dt>
         <dd>This source does not have an option to change focus modes.</dd>
-        <dt><dfn><code>auto</code></dfn></dt>
-        <dd>Auto-focus mode is enabled.</dd>
         <dt><dfn><code>manual</code></dfn></dt>
-        <dd>Manual focus mode is enabled.</dd>
-
+        <dd>The capture device provides the option to manually control the lens position, or such a mode is requested to be configured.</dd>
+        <dt><dfn><code>single-shot</code></dfn></dt>
+        <dd>The capture device provides single-sweep autofocus capability, or a single-sweep autofocus scan is requested.</dd>
+        <dt><dfn><code>continuous</code></dfn></dt>
+        <dd>The capture device provides continuous focusing for near-zero shutter-lag, or such continuous focus hunting mode is requested.</dd>
       </dl>
     </section>
     </section>
