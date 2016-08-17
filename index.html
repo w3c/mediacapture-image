@@ -108,7 +108,7 @@
         </dd>
 
         <dt><dfn><code>setOptions</code></dfn></dt>
-        <dd>When the <code>setOptions()</code> method of an <code>ImageCapture</code> object is invoked, then a valid <code>PhotoSettings</code> object MUST be passed in the method to the <code>ImageCapture</code> object.  In addition, a new <i>Promise</i> object is returned.  If the UA can successfully apply the settings, then the UA MUST return a resolved promise. If the UA cannot successfully apply the settings, then the UA MUST return a promise rejected with a newly created <a href="#idl-def-ImageCaptureError" class="idlType"><code>ImageCaptureError</code></a> whose <code>errorDescription</code> is set to OPTIONS_ERROR.
+        <dd>When the <code>setOptions()</code> method of an <code>ImageCapture</code> object is invoked, then a valid <code>PhotoSettings</code> object MUST be passed in the method to the <code>ImageCapture</code> object.  In addition, a new <i>Promise</i> object is returned.  If the UA can successfully apply the settings, then the UA MUST return a resolved promise. If the UA cannot successfully apply the settings, then the UA MUST return a promise rejected with a newly created <a href="#idl-def-ImageCaptureError" class="idlType"><code>ImageCaptureError</code></a> whose <code>errorDescription</code> is set to OPTIONS_ERROR. If the UA can successfully apply the settings, the effect MAY be reflected, if visible at all, in <a><code>previewStream</code></a>.
         <table class="parameters">
               <tbody>
                 <tr>
