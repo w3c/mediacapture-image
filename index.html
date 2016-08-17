@@ -335,6 +335,7 @@
              unsigned long imageWidth;
              FillLightMode fillLightMode;
              FocusMode     focusMode;
+             sequence&lt;Point2D> pointsOfInterest;
         };
       </pre>
     </div>
@@ -372,6 +373,8 @@
         <dd>This reflects the desired fill light (flash) mode setting.  Acceptable values are of type <code>FillLightMode</code>.</dd>
         <dt><dfn><code>focusMode</code></dfn> of type <span class="idlAttrType"><a>FocusMode</a></span></dt>
         <dd>This reflects the desired focus mode setting.  Acceptable values are of type <code>FocusMode</code>.</dd>
+        <dt><dfn><code>pointsOfInterest</code></dfn> of type <span class="idlAttrType"><a>Point2D</a></span></dt>
+        <dd>A <code>sequence</code> of <a>Point2D</a>s to be used as metering area centers for other settings, e.g. Focus and Exposure.</dd>
       </dl>
     </section>
     </section>
@@ -485,6 +488,26 @@
     </section>
     </section>
 
+
+    <section id="Point2D">
+    <p>A <code>Point2D</code> represents a location in a normalized square space with values in [0.0, 1.0].
+    <h2><code>Point2D</code></h2>
+    <div> <pre class="idl">
+      dictionary Point2D {
+        float x = 0.0;
+        float y = 0.0;
+      };
+    </pre></div>
+    <section>
+      <h2>Attributes</h2>
+      <dl data-link-for="Point2D" data-dfn-for="Point2D" class="attributes">
+        <dt><dfn><code>x</code></dfn> of type <span class="idlAttrType"><a>float</a></span></dt>
+        <dd>Value of the normalized horizontal (abscissa) coordinate in the range [0.0, 1.0].</dd>
+        <dt><dfn><code>y</code></dfn> of type <span class="idlAttrType"><a>float</a></span></dt>
+        <dd>Value of the normalized vertical (ordinate) coordinate in the range [0.0, 1.0].</dd>
+      </dl>
+    </section>
+    </section>
 
 
     <section id="examples" class="informative">
