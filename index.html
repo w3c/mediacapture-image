@@ -51,10 +51,10 @@
         interface ImageCapture {
           readonly        attribute MediaStreamTrack videoStreamTrack;
           readonly        attribute MediaStream      previewStream;
-          [Throws] Promise&lt;PhotoCapabilities&gt; getPhotoCapabilities ();
-          [Throws] Promise&lt;void&gt; setOptions (PhotoSettings? photoSettings);
-          [Throws] Promise&lt;Blob&gt;              takePhoto (PhotoSettings? photoSettings);
-          [Throws] Promise&lt;ImageBitmap&gt;       grabFrame ();
+          Promise&lt;PhotoCapabilities&gt; getPhotoCapabilities ();
+          Promise&lt;void&gt; setOptions (PhotoSettings? photoSettings);
+          Promise&lt;Blob&gt;              takePhoto (PhotoSettings? photoSettings);
+          Promise&lt;ImageBitmap&gt;       grabFrame ();
         };
       </pre>
     </div>
