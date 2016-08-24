@@ -207,7 +207,7 @@
         interface PhotoCapabilities {
           readonly attribute boolean            autoWhiteBalanceMode;
           readonly attribute MediaSettingsRange whiteBalanceMode;
-          readonly attribute MeteringMode       autoExposureMode;
+          readonly attribute MeteringMode       exposureMode;
           readonly attribute MediaSettingsRange exposureCompensation;
           readonly attribute MediaSettingsRange iso;
           readonly attribute boolean            redEyeReduction;
@@ -231,8 +231,8 @@
         <dd>This reflects whether automated White Balance Mode selection is on or off, and is boolean - on is true.</dd>
         <dt><dfn><code>whiteBalanceMode</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
         <dd>This reflects the current white balance mode setting. Values are of type <code>WhiteBalanceModeEnum</code>.</dd>
-        <dt><dfn><code>autoExposureMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
-        <dd>This reflects the current Auto Exposure mode setting.</dd>
+        <dt><dfn><code>exposureMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
+        <dd>This reflects the current exposure mode setting.</dd>
         <dt><dfn><code>exposureCompensation</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
         <dd>This reflects the current Exposure compensation setting and permitted range.  Values are numeric.</dd>
         <dt><dfn><code>iso</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
@@ -328,7 +328,7 @@
         dictionary PhotoSettings {
              boolean       autoWhiteBalanceMode;
              unsigned long whiteBalanceMode;
-             MeteringMode  autoExposureMode;
+             MeteringMode  exposureMode;
              unsigned long exposureCompensation;
              unsigned long iso;
              boolean       redEyeReduction;
@@ -353,8 +353,8 @@
         <dd>This reflects whether automatic White Balance Mode selection is desired.</dd>
         <dt><dfn><code>whiteBalanceMode</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
         <dd>This reflects the desired white balance mode setting.</dd>
-        <dt><dfn><code>autoExposureMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
-        <dd>This reflects the desired Auto Exposure mode setting.  Acceptable values are of type <span class="idlAttrType"><a>MeteringMode</a></span>.</dd>
+        <dt><dfn><code>exposureMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
+        <dd>This reflects the desired exposure mode setting.  Acceptable values are of type <span class="idlAttrType"><a>MeteringMode</a></span>.</dd>
         <dt><dfn><code>exposureCompensation</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
         <dd>This reflects the desired exposure compensation setting.</dd>
         <dt><dfn><code>iso</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
