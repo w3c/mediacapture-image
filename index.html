@@ -207,10 +207,11 @@
         interface PhotoCapabilities {
           readonly attribute boolean            autoWhiteBalanceMode;
           readonly attribute MediaSettingsRange whiteBalanceMode;
-          readonly attribute ExposureMode       autoExposureMode;
+          readonly attribute MeteringMode       exposureMode;
           readonly attribute MediaSettingsRange exposureCompensation;
           readonly attribute MediaSettingsRange iso;
           readonly attribute boolean            redEyeReduction;
+          readonly attribute MeteringMode       focusMode;
           readonly attribute MediaSettingsRange brightness;
           readonly attribute MediaSettingsRange contrast;
           readonly attribute MediaSettingsRange saturation;
@@ -219,7 +220,6 @@
           readonly attribute MediaSettingsRange imageWidth;
           readonly attribute MediaSettingsRange zoom;
           readonly attribute FillLightMode      fillLightMode;
-          readonly attribute FocusMode          focusMode;
         };
       </pre>
     </div>
@@ -231,20 +231,25 @@
         <dd>This reflects whether automated White Balance Mode selection is on or off, and is boolean - on is true.</dd>
         <dt><dfn><code>whiteBalanceMode</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
         <dd>This reflects the current white balance mode setting. Values are of type <code>WhiteBalanceModeEnum</code>.</dd>
-        <dt><dfn><code>autoExposureMode</code></dfn> of type <span class="idlAttrType"><a>ExposureMode</a></span></dt>
-        <dd>This reflects the current auto exposure mode setting.  Values are of type <code>ExposureMode</code>.</dd>
+        <dt><dfn><code>exposureMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
+        <dd>This reflects the current exposure mode setting.</dd>
         <dt><dfn><code>exposureCompensation</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
-        <dd>This reflects the current exposure compensation setting and permitted range.  Values are numeric.</dd>
+        <dd>This reflects the current Exposure compensation setting and permitted range.  Values are numeric.</dd>
         <dt><dfn><code>iso</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
         <dd>This reflects the current camera ISO setting and permitted range.  Values are numeric.</dd>
         <dt><dfn><code>redEyeReduction</code></dfn> of type <span class="idlAttrType"><a>boolean</a></span></dt>
         <dd>This reflects whether camera red eye reduction is on or off, and is boolean - on is true</dd>
+        <dt><dfn><code>focusMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
+        <dd>This reflects the current focus mode setting.</dd>
+
         <dt><dfn><code>brightness</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
         <dd>This reflects the current brightness setting of the camera and permitted range. Values are numeric.</dd>
         <dt><dfn><code>contrast</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
         <dd>This reflects the current contrast setting of the camera and permitted range. Values are numeric.</dd>
         <dt><dfn><code>saturation</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
         <dd>This reflects the current saturation setting of the camera and permitted range. Values are numeric.</dd>
+        <dt><dfn><code>sharpness</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
+        <dd>This reflects the current sharpness setting of the camera and permitted range. Values are numeric.</dd>
         <dt><dfn><code>imageHeight</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
         <dd>This reflects the image height range supported by the UA and the current height setting.</dd>
         <dt><dfn><code>imageWidth</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
@@ -253,8 +258,6 @@
         <dd>This reflects the zoom value range supported by the UA and the current zoom setting.</dd>
         <dt><dfn><code>fillLightMode</code></dfn> of type <span class="idlAttrType"><a>FillLightMode</a></span></dt>
         <dd>his reflects the current fill light (flash) mode setting.  Values are of type <code>FillLightMode</code>.</dd>
-        <dt><dfn><code>focusMode</code></dfn> of type <span class="idlAttrType"><a>FocusMode</a></span></dt>
-        <dd>This reflects the current focus mode setting.  Values are of type <code>FocusMode</code>.</dd>
       </dl>
       <div class="note">
       The supported resolutions are presented as segregated <code><a href="#dom-photocapabilities-imagewidth">imageWidth</a></code> and <code><a href="#dom-photocapabilities-imageheight">imageHeight</a></code> ranges to prevent increasing the fingerprinting surface and to allow the UA to make a best-effort decision with regards to actual hardware configuration.
@@ -305,13 +308,13 @@
         <li><i>Exposure Compensation</i> is a numeric camera setting that adjusts the exposure level from the current value used by the implementation.  This value can be used to bias the exposure level enabled by auto-exposure.</li>
         <li>The <i>ISO</i> setting of a camera describes the sensitivity of the camera to light. It is a numeric value, where the lower the value the greater the sensitivity.  This setting in most implementations relates to shutter speed, and is sometimes known as the ASA setting.</li>
         <li><i>Red Eye Reduction</i> is a feature in cameras that is designed to limit or prevent the appearance of red pupils ("Red Eye") in photography subjects due prolonged exposure to a camera's flash.</li>
+        <li><i>Focus mode</i> describes the focus setting of the capture device (e.g. `auto` or `manual`). </li>
         <li><i>Brightness</i> refers to the numeric camera setting that adjusts the perceived amount of light emitting from the photo object.  A higher brightness setting increases the intensity of darker areas in a scene while compressing the intensity of brighter parts of the scene.</li>
         <li><i>Contrast</i> is the numeric camera setting that controls the difference in brightness between light and dark areas in a scene.  A higher contrast setting reflects an expansion in the difference in brightness.</li>
         <li><i>Saturation</i> is a numeric camera setting that controls the intensity of color in a scene (i.e. the amount of gray in the scene).  Very low saturation levels will result in photos closer to black-and-white.</li>
         <li><i>Sharpness</i> is a numeric camera setting that controls the intensity of edges in a scene.  Higher sharpness settings result in higher edge intensity, while lower settings result in less contrast and blurrier edges (i.e. soft focus).</li>
         <li><i>Zoom</i> is a numeric camera setting that controls the focal length of the lens.  The setting usually represents a ratio, e.g. 4 is a zoom ratio of 4:1.  The minimum value is usually 1, to represent a 1:1 ratio (i.e. no zoom).</li>
         <li><i>Fill light mode</i> describes the flash setting of the capture device (e.g. `auto`, `off`, `on`). </li>
-        <li><i>Focus mode</i> describes the focus setting of the capture device (e.g. `auto` or `manual`). </li>
         </ol>
     </section>
     </section>
@@ -325,10 +328,12 @@
         dictionary PhotoSettings {
              boolean       autoWhiteBalanceMode;
              unsigned long whiteBalanceMode;
-             ExposureMode  autoExposureMode;
+             MeteringMode  exposureMode;
              unsigned long exposureCompensation;
              unsigned long iso;
              boolean       redEyeReduction;
+             MeteringMode     focusMode;
+             sequence&lt;Point2D> pointsOfInterest;
              unsigned long brightness;
              unsigned long contrast;
              unsigned long saturation;
@@ -337,8 +342,6 @@
              unsigned long imageHeight;
              unsigned long imageWidth;
              FillLightMode fillLightMode;
-             FocusMode     focusMode;
-             sequence&lt;Point2D> pointsOfInterest;
         };
       </pre>
     </div>
@@ -350,14 +353,18 @@
         <dd>This reflects whether automatic White Balance Mode selection is desired.</dd>
         <dt><dfn><code>whiteBalanceMode</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
         <dd>This reflects the desired white balance mode setting.</dd>
-        <dt><dfn><code>autoExposureMode</code></dfn> of type <span class="idlAttrType"><a>ExposureMode</a></span></dt>
-        <dd>This reflects the desired auto exposure mode setting.  Acceptable values are of type <code>ExposureMode</code>.</dd>
+        <dt><dfn><code>exposureMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
+        <dd>This reflects the desired exposure mode setting.  Acceptable values are of type <span class="idlAttrType"><a>MeteringMode</a></span>.</dd>
         <dt><dfn><code>exposureCompensation</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
         <dd>This reflects the desired exposure compensation setting.</dd>
         <dt><dfn><code>iso</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
         <dd>This reflects the desired camera ISO setting.</dd>
         <dt><dfn><code>redEyeReduction</code></dfn> of type <span class="idlAttrType"><a>boolean</a></span></dt>
         <dd>This reflects whether camera red eye reduction is desired</dd>
+        <dt><dfn><code>focusMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
+        <dd>This reflects the desired focus mode setting.  Acceptable values are of type <span class="idlAttrType"><a>MeteringMode</a></span>.</dd>
+        <dt><dfn><code>pointsOfInterest</code></dfn> of type <span class="idlAttrType">sequence&lt;<a>Point2D</a>&gt;</span></dt>
+        <dd>A <code>sequence</code> of <a>Point2D</a>s to be used as metering area centers for other settings, e.g. Focus and Exposure.</dd>
         <dt><dfn><code>brightness</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
         <dd>This reflects the desired brightness setting of the camera.</dd>
         <dt><dfn><code>contrast</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
@@ -374,10 +381,6 @@
         <dd>This reflects the desired image width. The UA MUST select the closest width value this setting if it supports a discrete set of width options.</dd>
         <dt><dfn><code>fillLightMode</code></dfn> of type <span class="idlAttrType"><a>FillLightMode</a></span></dt>
         <dd>This reflects the desired fill light (flash) mode setting.  Acceptable values are of type <code>FillLightMode</code>.</dd>
-        <dt><dfn><code>focusMode</code></dfn> of type <span class="idlAttrType"><a>FocusMode</a></span></dt>
-        <dd>This reflects the desired focus mode setting.  Acceptable values are of type <code>FocusMode</code>.</dd>
-        <dt><dfn><code>pointsOfInterest</code></dfn> of type <span class="idlAttrType"><a>Point2D</a></span></dt>
-        <dd>A <code>sequence</code> of <a>Point2D</a>s to be used as metering area centers for other settings, e.g. Focus and Exposure.</dd>
       </dl>
     </section>
     </section>
@@ -403,31 +406,6 @@
         <dd>The minimum value of this setting</dd>
         <dt><dfn><code>current</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span>, readonly</dt>
         <dd>The current value of this setting</dd>
-      </dl>
-    </section>
-    </section>
-
-
-    <section id="ExposureMode">
-    <h2><code>ExposureMode</code></h2>
-    <div>
-      <pre class="idl">
-        enum ExposureMode {
-            "frame-average",
-            "center-weighted",
-            "spot-metering"
-        };
-      </pre>
-    </div>
-    <section>
-      <h2>Values</h2>
-      <dl data-link-for="ExposureMode" data-dfn-for="ExposureMode" class="enum">
-        <dt><dfn><code>frame-average</code></dfn></dt>
-        <dd>Average of light information from entire scene</dd>
-        <dt><dfn><code>center-weighted</code></dfn></dt>
-        <dd>Sensitivity concentrated towards center of viewfinder</dd>
-        <dt><dfn><code>spot-metering</code></dfn></dt>
-        <dd>Spot-centered weighting</dd>
       </dl>
     </section>
     </section>
@@ -463,12 +441,12 @@
     </section>
     </section>
 
-    <section id="FocusMode">
-    <h2><code>FocusMode</code></h2>
-    <p>Note that <code>FocusMode</code> is used for both capabilities/status enumeration and for setting options for a capture.</p>
+    <section id="MeteringMode">
+    <h2><code>MeteringMode</code></h2>
+    <p>Note that <code>MeteringMode</code> is used for both status enumeration and for setting options for a capture.</p>
     <div>
       <pre class="idl">
-        enum FocusMode {
+        enum MeteringMode {
             "unavailable",
             "manual",
             "single-shot",
@@ -478,15 +456,15 @@
     </div>
     <section>
       <h2>Values</h2>
-      <dl data-link-for="FocusMode" data-dfn-for="FocusMode" class="enum">
+      <dl data-link-for="MeteringMode" data-dfn-for="MeteringMode" class="enum">
         <dt><dfn><code>unavailable</code></dfn></dt>
-        <dd>This source does not have an option to change focus modes.</dd>
+        <dd>This source does not have an option to change focus/exposure modes.</dd>
         <dt><dfn><code>manual</code></dfn></dt>
-        <dd>The capture device provides the option to manually control the lens position, or such a mode is requested to be configured.</dd>
+        <dd>The capture device is set to manually control the lens position/exposure time, or such a mode is requested to be configured.</dd>
         <dt><dfn><code>single-shot</code></dfn></dt>
-        <dd>The capture device provides single-sweep autofocus capability, or a single-sweep autofocus scan is requested.</dd>
+        <dd>The capture device is configured for single-sweep autofocus/one-shot exposure, or such a mode is requested.</dd>
         <dt><dfn><code>continuous</code></dfn></dt>
-        <dd>The capture device provides continuous focusing for near-zero shutter-lag, or such continuous focus hunting mode is requested.</dd>
+        <dd>The capture device is configured for continuous focusing for near-zero shutter-lag/continuous auto exposure calculation, or such continuous focus hunting/exposure calculation mode is requested.</dd>
       </dl>
     </section>
     </section>
