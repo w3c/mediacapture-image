@@ -234,7 +234,7 @@
         <dt><dfn><code>exposureMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
         <dd>This reflects the current exposure mode setting.</dd>
         <dt><dfn><code>exposureCompensation</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
-        <dd>This reflects the current Exposure compensation setting and permitted range.  Values are numeric.</dd>
+        <dd>This reflects the current Exposure compensation setting and permitted range.  Values are signed integers multiplied by 100 (to avoid using floating point). The supported range can be, and usually is, centered around 0 EV.</dd>
         <dt><dfn><code>iso</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
         <dd>This reflects the current camera ISO setting and permitted range.  Values are numeric.</dd>
         <dt><dfn><code>redEyeReduction</code></dfn> of type <span class="idlAttrType"><a>boolean</a></span></dt>
@@ -305,7 +305,7 @@
         </table>
         </li>
         <li><i>Exposure</i> is the amount of light allowed to fall on the photographic medium.  Auto-exposure mode is a camera setting where the exposure levels are automatically adjusted by the implementation based on the subject of the photo.</li>
-        <li><i>Exposure Compensation</i> is a numeric camera setting that adjusts the exposure level from the current value used by the implementation.  This value can be used to bias the exposure level enabled by auto-exposure.</li>
+        <li><i>Exposure Compensation</i> is a numeric camera setting that adjusts the exposure level from the current value used by the implementation.  This value can be used to bias the exposure level enabled by auto-exposure, and usually is a symmetric range around 0 EV (the no-compensation value).</li>
         <li>The <i>ISO</i> setting of a camera describes the sensitivity of the camera to light. It is a numeric value, where the lower the value the greater the sensitivity.  This setting in most implementations relates to shutter speed, and is sometimes known as the ASA setting.</li>
         <li><i>Red Eye Reduction</i> is a feature in cameras that is designed to limit or prevent the appearance of red pupils ("Red Eye") in photography subjects due prolonged exposure to a camera's flash.</li>
         <li><i>Focus mode</i> describes the focus setting of the capture device (e.g. `auto` or `manual`). </li>
@@ -355,7 +355,7 @@
         <dd>This reflects the desired white balance mode setting.</dd>
         <dt><dfn><code>exposureMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
         <dd>This reflects the desired exposure mode setting.  Acceptable values are of type <span class="idlAttrType"><a>MeteringMode</a></span>.</dd>
-        <dt><dfn><code>exposureCompensation</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
+        <dt><dfn><code>exposureCompensation</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span>, multiplied by 100 (to avoid using floating point). A value of 0 EV is interpreted as no exposure compensation.</dt>
         <dd>This reflects the desired exposure compensation setting.</dd>
         <dt><dfn><code>iso</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
         <dd>This reflects the desired camera ISO setting.</dd>
