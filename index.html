@@ -205,13 +205,14 @@
     <div>
       <pre class="idl">
         interface PhotoCapabilities {
-          readonly attribute boolean            autoWhiteBalanceMode;
-          readonly attribute MediaSettingsRange whiteBalanceMode;
+          readonly attribute MeteringMode       whiteBalanceMode;
+          readonly attribute unsigned long      colorTemperature;
           readonly attribute MeteringMode       exposureMode;
           readonly attribute MediaSettingsRange exposureCompensation;
           readonly attribute MediaSettingsRange iso;
           readonly attribute boolean            redEyeReduction;
           readonly attribute MeteringMode       focusMode;
+
           readonly attribute MediaSettingsRange brightness;
           readonly attribute MediaSettingsRange contrast;
           readonly attribute MediaSettingsRange saturation;
@@ -227,10 +228,10 @@
     <section>
       <h2>Attributes</h2>
       <dl data-link-for="PhotoCapabilities" data-dfn-for="PhotoCapabilities" class="attributes">
-        <dt><dfn><code>autoWhiteBalanceMode</code></dfn> of type <span class="idlAttrType"><a>boolean</a></span></dt>
-        <dd>This reflects whether automated White Balance Mode selection is on or off, and is boolean - on is true.</dd>
-        <dt><dfn><code>whiteBalanceMode</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
-        <dd>This reflects the current white balance mode setting. Values are of type <code>WhiteBalanceModeEnum</code>.</dd>
+        <dt><dfn><code>whiteBalanceMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
+        <dd>This reflects the current white balance mode setting. </dd>
+        <dt><dfn><code>colorTemperature</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
+        <dd>This value reflects the estimated correlated color temperature being used for the scene white balance calculation, and is only significant if <a>whiteBalanceMode</a> is <code>manual</code>.</dd>
         <dt><dfn><code>exposureMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
         <dd>This reflects the current exposure mode setting.</dd>
         <dt><dfn><code>exposureCompensation</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
@@ -268,7 +269,7 @@
       <h2>Discussion</h2>
         <p>The <code>PhotoCapabilities</code> interface provides the photo-specific settings options and current settings values.  The following definitions are assumed for individual settings and are provided for information purposes:</p>
         <ol>
-        <li><i>White balance mode</i> is a setting that cameras use to adjust for different color temperatures.  Color temperature is the temperature of background light (measured in Kelvin normally).  This setting can also be automatically determined by the implementation.  If 'automatic' mode is selected, then the Kelvin setting for White Balance Mode may be overridden.  Typical temprature ranges for different modes are provided below:
+        <li><i>White balance mode</i> is a setting that cameras use to adjust for different color temperatures.  Color temperature is the temperature of background light (measured in Kelvin normally).  This setting can usually be automatically and continuously determined by the implementation, but it's also common to offer a `manual` mode in which the estimated temperature of the scene illumination is hinted to the implementation.  Typical temperature ranges for popular mode are provided below:
         <table class="simple">
         <tr>
             <th>Mode</th>
@@ -326,14 +327,15 @@
     <div>
       <pre class="idl">
         dictionary PhotoSettings {
-             boolean       autoWhiteBalanceMode;
-             unsigned long whiteBalanceMode;
+             MeteringMode  whiteBalanceMode;
+             unsigned long colorTemperature;
              MeteringMode  exposureMode;
              unsigned long exposureCompensation;
              unsigned long iso;
              boolean       redEyeReduction;
-             MeteringMode     focusMode;
+             MeteringMode  focusMode;
              sequence&lt;Point2D> pointsOfInterest;
+
              unsigned long brightness;
              unsigned long contrast;
              unsigned long saturation;
@@ -349,14 +351,15 @@
     <section>
       <h2>Members</h2>
       <dl data-link-for="PhotoSettings" data-dfn-for="PhotoSettings" class="attributes">
-        <dt><dfn><code>autoWhiteBalanceMode</code></dfn> of type <span class="idlAttrType"><a>boolean</a></span></dt>
-        <dd>This reflects whether automatic White Balance Mode selection is desired.</dd>
-        <dt><dfn><code>whiteBalanceMode</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
+        <dt><dfn><code>whiteBalanceMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
         <dd>This reflects the desired white balance mode setting.</dd>
+        <dt><dfn><code>colorTemperature</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
+        <dd>Color temperature to be used for the white balance calculation of the scene.
+        This field is only signficant if <a>whiteBalanceMode</a> is `manual`.</dd>
         <dt><dfn><code>exposureMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
         <dd>This reflects the desired exposure mode setting.  Acceptable values are of type <span class="idlAttrType"><a>MeteringMode</a></span>.</dd>
-        <dt><dfn><code>exposureCompensation</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span>, multiplied by 100 (to avoid using floating point). A value of 0 EV is interpreted as no exposure compensation.</dt>
-        <dd>This reflects the desired exposure compensation setting.</dd>
+        <dt><dfn><code>exposureCompensation</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span>, multiplied by 100 (to avoid using floating point). </dt>
+        <dd>This reflects the desired exposure compensation setting.  A value of 0 EV is interpreted as no exposure compensation.</dd>
         <dt><dfn><code>iso</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
         <dd>This reflects the desired camera ISO setting.</dd>
         <dt><dfn><code>redEyeReduction</code></dfn> of type <span class="idlAttrType"><a>boolean</a></span></dt>
@@ -364,7 +367,7 @@
         <dt><dfn><code>focusMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
         <dd>This reflects the desired focus mode setting.  Acceptable values are of type <span class="idlAttrType"><a>MeteringMode</a></span>.</dd>
         <dt><dfn><code>pointsOfInterest</code></dfn> of type <span class="idlAttrType">sequence&lt;<a>Point2D</a>&gt;</span></dt>
-        <dd>A <code>sequence</code> of <a>Point2D</a>s to be used as metering area centers for other settings, e.g. Focus and Exposure.</dd>
+        <dd>A <code>sequence</code> of <a>Point2D</a>s to be used as metering area centers for other settings, e.g. Focus, Exposure and Auto White Balance.</dd>
         <dt><dfn><code>brightness</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
         <dd>This reflects the desired brightness setting of the camera.</dd>
         <dt><dfn><code>contrast</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
@@ -443,11 +446,11 @@
 
     <section id="MeteringMode">
     <h2><code>MeteringMode</code></h2>
-    <p>Note that <code>MeteringMode</code> is used for both status enumeration and for setting options for a capture.</p>
+    <p>Note that <code>MeteringMode</code> is used for both status enumeration and for setting options for capture(s).</p>
     <div>
       <pre class="idl">
         enum MeteringMode {
-            "unavailable",
+            "none",
             "manual",
             "single-shot",
             "continuous"
@@ -457,14 +460,14 @@
     <section>
       <h2>Values</h2>
       <dl data-link-for="MeteringMode" data-dfn-for="MeteringMode" class="enum">
-        <dt><dfn><code>unavailable</code></dfn></dt>
-        <dd>This source does not have an option to change focus/exposure modes.</dd>
+        <dt><dfn><code>none</code></dfn></dt>
+        <dd>This source does not offer focus/exposure/white balance mode.  For setting, this is interpreted as a command to turn off the feature.</dd>
         <dt><dfn><code>manual</code></dfn></dt>
-        <dd>The capture device is set to manually control the lens position/exposure time, or such a mode is requested to be configured.</dd>
+        <dd>The capture device is set to manually control the lens position/exposure time/white balance, or such a mode is requested to be configured.</dd>
         <dt><dfn><code>single-shot</code></dfn></dt>
-        <dd>The capture device is configured for single-sweep autofocus/one-shot exposure, or such a mode is requested.</dd>
+        <dd>The capture device is configured for single-sweep autofocus/one-shot exposure/white balance calculation, or such a mode is requested.</dd>
         <dt><dfn><code>continuous</code></dfn></dt>
-        <dd>The capture device is configured for continuous focusing for near-zero shutter-lag/continuous auto exposure calculation, or such continuous focus hunting/exposure calculation mode is requested.</dd>
+        <dd>The capture device is configured for continuous focusing for near-zero shutter-lag/continuous auto exposure/white balance calculation, or such continuous focus hunting/exposure/white balance calculation mode is requested.</dd>
       </dl>
     </section>
     </section>
