@@ -499,10 +499,10 @@
 
     ##### Grabbing a Frame for Post-Processing
     <pre class='example'>
-    navigator.mediaDevices.getUserMedia({video: true}).then(gotMedia, failedToGetMedia);
+    MediaDevices.getUserMedia({video: true}).then(gotMedia, failedToGetMedia);
 
     function gotMedia(mediastream) {
-        //Extract video track.
+        // Extract video track.
         var videoTrack = mediastream.getVideoTracks()[0];
         // Check if this device supports a picture mode...
         var captureDevice = new ImageCapture(videoTrack);
@@ -515,7 +515,7 @@
         imgData = e.imageData;
         width = imgData.width;
         height = imgData.height;
-        for (j=3; j < imgData.width; j+=4) {
+        for (j = 3; j < imgData.width; j += 4) {
             // Set all alpha values to medium opacity
             imgData.data[j] = 128;
         }
@@ -524,7 +524,7 @@
         var canvas = document.createElement('canvas');
         ctx = canvas.getContext("2d");
         newImg = ctx.createImageData(width,height);
-        for (j=0; j < imgData.width; j++) {
+        for (j = 0; j < imgData.width; j++) {
             newImg.data[j] = imgData.data[j];
         }
 
@@ -539,10 +539,10 @@
 
     ##### Taking a picture with Red Eye Reduction supported and used
     <pre class='example'>
-    navigator.getUserMedia({video: true}, gotMedia, failedToGetMedia);
+    MediaDevices.getUserMedia({video: true}).then(gotMedia, failedToGetMedia);
 
     function gotMedia(mediastream) {
-        //Extract video track.
+        // Extract video track.
         var videoDevice = mediastream.getVideoTracks()[0];
         // Check if this device supports a picture mode...
         var captureDevice = new ImageCapture(videoDevice);
@@ -575,28 +575,32 @@
     &ltbutton onclick="stopFunction()"&gtStop frame grab&lt/button&gt
     &ltscript&gt
       var canvas = document.getElementById('frame');
-      navigator.getUserMedia({video: true}, gotMedia, failedToGetMedia);
+      MediaDevices.getUserMedia({video: true}).then(gotMedia, failedToGetMedia);
 
       function gotMedia(mediastream) {
-        //Extract video track.
-        var videoDevice = mediastream.getVideoTracks()[0];
-        // Check if this device supports a picture mode...
-        var captureDevice = new ImageCapture(videoDevice);
-        var frameVar;
-        if (captureDevice) {
-            frameVar = setInterval(captureDevice.grabFrame().then(processFrame()), 1000);
-        }
+          // Extract video track.
+          var videoDevice = mediastream.getVideoTracks()[0];
+          // Check if this device supports a picture mode...
+          var captureDevice = new ImageCapture(videoDevice);
+          var frameVar;
+          if (captureDevice) {
+              frameVar = setInterval(captureDevice.grabFrame().then(processFrame()), 1000);
+          }
       }
 
       function processFrame(e) {
-        imgData = e.imageData;
-        canvas.width = imgData.width;
-        canvas.height = imgData.height;
-        canvas.getContext('2d').drawImage(imgData, 0, 0,imgData.width,imgData.height);
+          imgData = e.imageData;
+          canvas.width = imgData.width;
+          canvas.height = imgData.height;
+          canvas.getContext('2d').drawImage(imgData, 0, 0, imgData.width, imgData.height);
       }
 
       function stopFunction(e) {
-        clearInterval(myVar);
+          clearInterval(myVar);
+      }
+
+      function failedToGetMedia(e) {
+          console.log('Stream failure: ' + e);
       }
     &lt/script&gt
     &lt/body&gt
