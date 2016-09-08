@@ -499,7 +499,7 @@
 
     ##### Grabbing a Frame for Post-Processing
     <pre class='example'>
-    MediaDevices.getUserMedia({video: true}).then(gotMedia, failedToGetMedia);
+    navigator.mediaDevices.getUserMedia({video: true}).then(gotMedia, failedToGetMedia);
 
     function gotMedia(mediastream) {
         // Extract video track.
@@ -539,7 +539,7 @@
 
     ##### Taking a picture with Red Eye Reduction supported and used
     <pre class='example'>
-    MediaDevices.getUserMedia({video: true}).then(gotMedia, failedToGetMedia);
+    navigator.MediaDevices.getUserMedia({video: true}).then(gotMedia, failedToGetMedia);
 
     function gotMedia(mediastream) {
         // Extract video track.
@@ -575,7 +575,7 @@
     &ltbutton onclick="stopFunction()"&gtStop frame grab&lt/button&gt
     &ltscript&gt
       var canvas = document.getElementById('frame');
-      MediaDevices.getUserMedia({video: true}).then(gotMedia, failedToGetMedia);
+      navigator.mediaDevices.getUserMedia({video: true}).then(gotMedia, failedToGetMedia);
 
       function gotMedia(mediastream) {
           // Extract video track.
