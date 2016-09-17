@@ -83,8 +83,8 @@
         <dt><dfn><code>getPhotoCapabilities</code></dfn></dt>
         <dd>When the <code>getPhotoCapabilities()</code> method of an <code>ImageCapture</code> object is invoked, a new <i>Promise</i> is returned. If the UA is unable to execute the <code>getPhotoCapabilities()</code> method for any reason (for example, the <code>MediaStreamTrack</code> being ended asynchronously), then the UA MUST return a promise rejected with a newly created <a href="#idl-def-ImageCaptureError" class="idlType"><code>ImageCaptureError</code></a> with the appropriate <code>errorDescription</code> set. Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:
         <ol>
-          <li>Gather data from the <code>MediaStreamTrack</code> into a <a href="#idl-def-PhotoCapabilities" class="idlType"><code>PhotoCapabilities</code></a> object containing the available capabilities of the device, including ranges where appropriate. The resolved <a href="#idl-def-PhotoCapabilities" class="idlType"><code>PhotoCapabilities</code></a> will also include the current conditions in which the capabilities of the device are found. The method of doing this will depend on the underlying device. </li>
-          <li>Return a resolved promise with the <a href="#idl-def-PhotoCapabilities" class="idlType"><code>PhotoCapabilities</code></a> object.</li>
+          <li>Gather data from the <code>MediaStreamTrack</code> into a <a href="#idl-def-photocapabilities" class="idlType"><code>PhotoCapabilities</code></a> object containing the available capabilities of the device, including ranges where appropriate. The resolved <a href="#idl-def-photocapabilities" class="idlType"><code>PhotoCapabilities</code></a> will also include the current conditions in which the capabilities of the device are found. The method of doing this will depend on the underlying device. </li>
+          <li>Return a resolved promise with the <a href="#idl-def-photocapabilities" class="idlType"><code>PhotoCapabilities</code></a> object.</li>
         </ol>
         </dd>
 
