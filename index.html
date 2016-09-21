@@ -550,45 +550,42 @@
 
     ##### Repeated grabbing of a frame
     <pre class='example'>
-    &lt;html&rt;
-    &lt;body&rt;
-    &lt;p&rt;&lt;canvas id="frame"&rt;&lt;/canvas&rt;&lt;/p&rt;
-    &lt;button onclick="stopFunction()"&rt;Stop frame grab&lt;/button&rt;
-    &lt;script&rt;
-        var interval;
-        var canvas = document.getElementById('frame');
-        var videoDevice;
-        navigator.mediaDevices.getUserMedia({video: true}).then(gotMedia, failedToGetMedia);
-    
-        function gotMedia(mediastream) {
-            // Extract video track.
-            videoDevice = mediastream.getVideoTracks()[0];
-            // Check if this device supports a picture mode...
-            var captureDevice = new ImageCapture(videoDevice);
-            if (captureDevice) {
-                interval = setInterval(function () {
-                    captureDevice.grabFrame().then(processFrame)
-                }, 200);
-            }
-        }
-    
-        function processFrame(imageBitmap) {
-            canvas.width = imageBitmap.width;
-            canvas.height = imageBitmap.height;
-            canvas.getContext('2d').drawImage(imageBitmap, 0, 0);
-        }
-    
-        function stopFunction() {
-            clearInterval(interval);  // stop frame grabbing
-            videoDevice.stop();  // turn off the camera
-        }
-    
-        function failedToGetMedia(error) {
-            console.error('Stream failure', error);
-        }
-    &lt;/script&rt;
-    &lt;/body&rt;
-    &lt;/html&rt;
+    &lthtml&gt
+    &ltbody&gt
+    &ltp&gt&ltcanvas id="frame"&gt&lt/canvas&gt&lt/p&gt
+    &ltbutton onclick="stopFunction()"&gtStop frame grab&lt/button&gt
+    &ltscript&gt
+      var canvas = document.getElementById('frame');
+      navigator.mediaDevices.getUserMedia({video: true}).then(gotMedia, failedToGetMedia);
+
+      function gotMedia(mediastream) {
+          // Extract video track.
+          var videoDevice = mediastream.getVideoTracks()[0];
+          // Check if this device supports a picture mode...
+          var captureDevice = new ImageCapture(videoDevice);
+          var frameVar;
+          if (captureDevice) {
+              frameVar = setInterval(captureDevice.grabFrame().then(processFrame()), 1000);
+          }
+      }
+
+      function processFrame(e) {
+          imgData = e.imageData;
+          canvas.width = imgData.width;
+          canvas.height = imgData.height;
+          canvas.getContext('2d').drawImage(imgData, 0, 0, imgData.width, imgData.height);
+      }
+
+      function stopFunction(e) {
+          clearInterval(myVar);
+      }
+
+      function failedToGetMedia(e) {
+          console.log('Stream failure: ' + e);
+      }
+    &lt/script&gt
+    &lt/body&gt
+    &lt/html&gt
     </pre>
     </section>
   </body>
