@@ -187,7 +187,7 @@
       <pre class="idl">
         interface PhotoCapabilities {
           readonly attribute MeteringMode       whiteBalanceMode;
-          readonly attribute unsigned long      colorTemperature;
+          readonly attribute MediaSettingsRange colorTemperature;
           readonly attribute MeteringMode       exposureMode;
           readonly attribute MediaSettingsRange exposureCompensation;
           readonly attribute MediaSettingsRange iso;
@@ -211,8 +211,8 @@
       <dl data-link-for="PhotoCapabilities" data-dfn-for="PhotoCapabilities" class="attributes">
         <dt><dfn><code>whiteBalanceMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
         <dd>This reflects the current white balance mode setting. </dd>
-        <dt><dfn><code>colorTemperature</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
-        <dd>This value reflects the estimated correlated color temperature being used for the scene white balance calculation, and is only significant if <a>whiteBalanceMode</a> is <code>manual</code>.</dd>
+        <dt><dfn><code>colorTemperature</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
+        <dd>This range reflects the current correlated color temperature being used for the scene white balance calculation and its available range.</dd>
         <dt><dfn><code>exposureMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
         <dd>This reflects the current exposure mode setting.</dd>
         <dt><dfn><code>exposureCompensation</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
@@ -336,7 +336,7 @@
         <dd>This reflects the desired white balance mode setting.</dd>
         <dt><dfn><code>colorTemperature</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
         <dd>Color temperature to be used for the white balance calculation of the scene.
-        This field is only signficant if <a>whiteBalanceMode</a> is `manual`.</dd>
+        This field is only significant if <a>whiteBalanceMode</a> is <code>manual</code>.</dd>
         <dt><dfn><code>exposureMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
         <dd>This reflects the desired exposure mode setting.  Acceptable values are of type <span class="idlAttrType"><a>MeteringMode</a></span>.</dd>
         <dt><dfn><code>exposureCompensation</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span>, multiplied by 100 (to avoid using floating point). </dt>
