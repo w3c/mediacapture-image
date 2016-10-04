@@ -210,15 +210,15 @@
       <h2>Attributes</h2>
       <dl data-link-for="PhotoCapabilities" data-dfn-for="PhotoCapabilities" class="attributes">
         <dt><dfn><code>whiteBalanceMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
-        <dd>This reflects the current white balance mode setting. </dd>
+        <dd>This reflects the current <a href="#dfn-white-balance-mode">white balance mode</a> setting. </dd>
         <dt><dfn><code>colorTemperature</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
-        <dd>This range reflects the current correlated color temperature being used for the scene white balance calculation and its available range.</dd>
+        <dd>This range reflects the current correlated <a href="#dfn-color-temperature">color temperature</a> being used for the scene white balance calculation and its available range.</dd>
         <dt><dfn><code>exposureMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
-        <dd>This reflects the current exposure mode setting.</dd>
+        <dd>This reflects the current <a href="#dfn-exposure">exposure</a> mode setting.</dd>
         <dt><dfn><code>exposureCompensation</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
-        <dd>This reflects the current Exposure compensation setting and permitted range.  Values are signed integers multiplied by 100 (to avoid using floating point). The supported range can be, and usually is, centered around 0 EV.</dd>
+        <dd>This reflects the current <a href="#dfn-exposure-compensation">exposure compensation</a> setting and permitted range.  Values are signed integers multiplied by 100 (to avoid using floating point). The supported range can be, and usually is, centered around 0 EV.</dd>
         <dt><dfn><code>iso</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
-        <dd>This reflects the current camera ISO setting and permitted range.  Values are numeric.</dd>
+        <dd>This reflects the current camera <a href="#dfn-iso">ISO</a> setting and permitted range.  Values are numeric.</dd>
         <dt><dfn><code>redEyeReduction</code></dfn> of type <span class="idlAttrType"><a>boolean</a></span></dt>
         <dd>This reflects whether camera red eye reduction is on or off, and is boolean - on is true</dd>
         <dt><dfn><code>focusMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
@@ -250,7 +250,7 @@
       <h2>Discussion</h2>
         <p>The <code>PhotoCapabilities</code> interface provides the photo-specific settings options and current settings values.  The following definitions are assumed for individual settings and are provided for information purposes:</p>
         <ol>
-        <li><i>White balance mode</i> is a setting that cameras use to adjust for different color temperatures.  Color temperature is the temperature of background light (measured in Kelvin normally).  This setting can usually be automatically and continuously determined by the implementation, but it's also common to offer a `manual` mode in which the estimated temperature of the scene illumination is hinted to the implementation.  Typical temperature ranges for popular mode are provided below:
+        <li><i><dfn>White balance mode</dfn></i> is a setting that cameras use to adjust for different color temperatures.  <dfn>Color temperature</dfn> is the temperature of background light (measured in Kelvin normally).  This setting can usually be automatically and continuously determined by the implementation, but it's also common to offer a `manual` mode in which the estimated temperature of the scene illumination is hinted to the implementation.  Typical temperature ranges for popular mode are provided below:
         <table class="simple">
         <tr>
             <th>Mode</th>
@@ -286,9 +286,9 @@
         </tr>
         </table>
         </li>
-        <li><i>Exposure</i> is the amount of light allowed to fall on the photographic medium.  Auto-exposure mode is a camera setting where the exposure levels are automatically adjusted by the implementation based on the subject of the photo.</li>
-        <li><i>Exposure Compensation</i> is a numeric camera setting that adjusts the exposure level from the current value used by the implementation.  This value can be used to bias the exposure level enabled by auto-exposure, and usually is a symmetric range around 0 EV (the no-compensation value).</li>
-        <li>The <i>ISO</i> setting of a camera describes the sensitivity of the camera to light. It is a numeric value, where the lower the value the greater the sensitivity.  This setting in most implementations relates to shutter speed, and is sometimes known as the ASA setting.</li>
+        <li><i><dfn>Exposure</dfn></i> is the amount of light allowed to fall on the photographic medium.  Auto-exposure mode is a camera setting where the exposure levels are automatically adjusted by the implementation based on the subject of the photo.</li>
+        <li><i><dfn>Exposure Compensation</dfn></i> is a numeric camera setting that adjusts the exposure level from the current value used by the implementation.  This value can be used to bias the exposure level enabled by auto-exposure, and usually is a symmetric range around 0 EV (the no-compensation value).</li>
+        <li>The <i><dfn>ISO</dfn></i> setting of a camera describes the sensitivity of the camera to light. It is a numeric value, where the lower the value the greater the sensitivity.  This setting in most implementations relates to shutter speed, and is sometimes known as the ASA setting.</li>
         <li><i>Red Eye Reduction</i> is a feature in cameras that is designed to limit or prevent the appearance of red pupils ("Red Eye") in photography subjects due prolonged exposure to a camera's flash.</li>
         <li><i>Focus mode</i> describes the focus setting of the capture device (e.g. `auto` or `manual`). </li>
         <li><i><dfn>Brightness</dfn></i> refers to the numeric camera setting that adjusts the perceived amount of light emitting from the photo object.  A higher brightness setting increases the intensity of darker areas in a scene while compressing the intensity of brighter parts of the scene.</li>
@@ -333,16 +333,16 @@
       <h2>Members</h2>
       <dl data-link-for="PhotoSettings" data-dfn-for="PhotoSettings" class="attributes">
         <dt><dfn><code>whiteBalanceMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
-        <dd>This reflects the desired white balance mode setting.</dd>
+        <dd>This reflects the desired <a href="#dfn-white-balance-mode">white balance mode</a> setting.</dd>
         <dt><dfn><code>colorTemperature</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
-        <dd>Color temperature to be used for the white balance calculation of the scene.
+        <dd><a href="#dfn-color-temperature">Color temperature</a> to be used for the white balance calculation of the scene.
         This field is only significant if <a>whiteBalanceMode</a> is <code>manual</code>.</dd>
         <dt><dfn><code>exposureMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
-        <dd>This reflects the desired exposure mode setting.  Acceptable values are of type <span class="idlAttrType"><a>MeteringMode</a></span>.</dd>
+        <dd>This reflects the desired <a href="#dfn-exposure">exposure</a> mode setting.  Acceptable values are of type <span class="idlAttrType"><a>MeteringMode</a></span>.</dd>
         <dt><dfn><code>exposureCompensation</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span>, multiplied by 100 (to avoid using floating point). </dt>
-        <dd>This reflects the desired exposure compensation setting.  A value of 0 EV is interpreted as no exposure compensation.</dd>
+        <dd>This reflects the desired <a href="#dfn-exposure-compensation">exposure compensation</a> setting.  A value of 0 EV is interpreted as no exposure compensation.</dd>
         <dt><dfn><code>iso</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
-        <dd>This reflects the desired camera ISO setting.</dd>
+        <dd>This reflects the desired camera <a href="#dfn-iso">ISO</a> setting.</dd>
         <dt><dfn><code>redEyeReduction</code></dfn> of type <span class="idlAttrType"><a>boolean</a></span></dt>
         <dd>This reflects whether camera red eye reduction is desired</dd>
         <dt><dfn><code>focusMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
