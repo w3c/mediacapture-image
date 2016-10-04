@@ -455,7 +455,7 @@
 
 
     <section id="Point2D">
-    <p>A <code>Point2D</code> represents a location in a normalized square space with values in [0.0, 1.0].
+    <p>A <code>Point2D</code> represents a location in a normalized square space with values in `[0.0, 1.0]`. The origin of coordinates `(0.0, 0.0)` represents the upper leftmost corner, with the `y` coordinate pointing downwards.
     <h2><code>Point2D</code></h2>
     <div> <pre class="idl">
       dictionary Point2D {
@@ -467,9 +467,9 @@
       <h2>Attributes</h2>
       <dl data-link-for="Point2D" data-dfn-for="Point2D" class="attributes">
         <dt><dfn><code>x</code></dfn> of type <span class="idlAttrType"><a>float</a></span></dt>
-        <dd>Value of the normalized horizontal (abscissa) coordinate in the range [0.0, 1.0].</dd>
+        <dd>Value of the normalized horizontal (abscissa) coordinate in the range `[0.0, 1.0]`. Increasing `x` values correspond to increasing column indexes of an image.</dd>
         <dt><dfn><code>y</code></dfn> of type <span class="idlAttrType"><a>float</a></span></dt>
-        <dd>Value of the normalized vertical (ordinate) coordinate in the range [0.0, 1.0].</dd>
+        <dd>Value of the normalized vertical (ordinate) coordinate in the range `[0.0, 1.0]`. Increasing `y` values correspond to increasing row indexes of an image.</dd>
       </dl>
     </section>
     </section>
