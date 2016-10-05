@@ -250,54 +250,46 @@
       <h2>Discussion</h2>
         <p>The <code>PhotoCapabilities</code> interface provides the photo-specific settings options and current settings values.  The following definitions are assumed for individual settings and are provided for information purposes:</p>
         <ol>
-        <li><i><dfn>White balance mode</dfn></i> is a setting that cameras use to adjust for different color temperatures.  <dfn>Color temperature</dfn> is the temperature of background light (measured in Kelvin normally).  This setting can usually be automatically and continuously determined by the implementation, but it's also common to offer a `manual` mode in which the estimated temperature of the scene illumination is hinted to the implementation.  Typical temperature ranges for popular mode are provided below:
+        <li><i><dfn>White balance mode</dfn></i> is a setting that cameras use to adjust for different color temperatures.  <dfn>Color temperature</dfn> is the temperature of background light (usually measured in Kelvin).  This setting can usually be automatically and continuously determined by the implementation, but it's also common to offer a `manual` mode in which the estimated temperature of the scene illumination is hinted to the implementation.  Typical temperature ranges for popular modes are provided below:
         <table class="simple">
-        <tr>
-            <th>Mode</th>
-            <th>Kelvin range</th>
-        </tr>
-        <tr>
-            <td>incandescent</td>
-            <td>2500-3500</td>
-        </tr>
-        <tr>
-            <td>fluorescent</td>
-            <td>4000-5000</td>
-        </tr>
-        <tr>
-            <td>warm-fluorescent</td>
-            <td>5000-5500</td>
-        </tr>
-        <tr>
-            <td>daylight</td>
-            <td>5500-6500</td>
-        </tr>
-        <tr>
-            <td>cloudy-daylight</td>
-            <td>6500-8000</td>
-        </tr>
-        <tr>
-            <td>twilight</td>
-            <td>8000-9000</td>
-        </tr>
-        <tr>
-            <td>shade</td>
-            <td>9000-10000</td>
-        </tr>
+        <tr> <th>Mode</th> <th>Kelvin range</th> </tr>
+        <tr> <td>incandescent</td> <td>2500-3500</td> </tr>
+        <tr> <td>fluorescent</td> <td>4000-5000</td> </tr>
+        <tr> <td>warm-fluorescent</td> <td>5000-5500</td> </tr>
+        <tr> <td>daylight</td> <td>5500-6500</td> </tr>
+        <tr> <td>cloudy-daylight</td> <td>6500-8000</td> </tr>
+        <tr> <td>twilight</td> <td>8000-9000</td> </tr>
+        <tr> <td>shade</td> <td>9000-10000</td> </tr>
         </table>
         </li>
-        <li><i><dfn>Exposure</dfn></i> is the amount of light allowed to fall on the photographic medium.  Auto-exposure mode is a camera setting where the exposure levels are automatically adjusted by the implementation based on the subject of the photo.</li>
+
+        <li><i><dfn>Exposure</dfn></i> is the amount of time during which light is allowed to fall on the photosensitive device.  Auto-exposure mode is a camera setting where the exposure levels are automatically adjusted by the implementation based on the subject of the photo.</li>
+
         <li><i><dfn>Exposure Compensation</dfn></i> is a numeric camera setting that adjusts the exposure level from the current value used by the implementation.  This value can be used to bias the exposure level enabled by auto-exposure, and usually is a symmetric range around 0 EV (the no-compensation value).</li>
+
         <li>The <i><dfn>ISO</dfn></i> setting of a camera describes the sensitivity of the camera to light. It is a numeric value, where the lower the value the greater the sensitivity.  This setting in most implementations relates to shutter speed, and is sometimes known as the ASA setting.</li>
+
         <li><i>Red Eye Reduction</i> is a feature in cameras that is designed to limit or prevent the appearance of red pupils ("Red Eye") in photography subjects due prolonged exposure to a camera's flash.</li>
+
         <li><i>Focus mode</i> describes the focus setting of the capture device (e.g. `auto` or `manual`). </li>
-        <li><i><dfn>Brightness</dfn></i> refers to the numeric camera setting that adjusts the perceived amount of light emitting from the photo object.  A higher brightness setting increases the intensity of darker areas in a scene while compressing the intensity of brighter parts of the scene.</li>
-        <li><i><dfn>Contrast</dfn></i> is the numeric camera setting that controls the difference in brightness between light and dark areas in a scene.  A higher contrast setting reflects an expansion in the difference in brightness.</li>
-        <li><i><dfn>Saturation</dfn></i> is a numeric camera setting that controls the intensity of color in a scene (i.e. the amount of gray in the scene).  Very low saturation levels will result in photos closer to black-and-white.</li>
-        <li><i><dfn>Sharpness</dfn></i> is a numeric camera setting that controls the intensity of edges in a scene.  Higher sharpness settings result in higher edge intensity, while lower settings result in less contrast and blurrier edges (i.e. soft focus).</li>
+
+        <li>[[LIGHTING-VOCABULARY]] defines <i><dfn>brightness</dfn></i> as "the attribute of a visual sensation according to which an area appears to emit more or less light" and in the context of the present API, it refers to the numeric camera setting that adjusts the perceived amount of light emitting from the photo object.  A higher brightness setting increases the intensity of darker areas in a scene while compressing the intensity of brighter parts of the scene.  The range and effect of this setting is implementation dependent but in general it translates into a numerical value that is added to each pixel with saturation.</li>
+
+        <li><i><dfn>Contrast</dfn></i> is the numeric camera setting that controls the difference in brightness between light and dark areas in a scene.  A higher contrast setting reflects an expansion in the difference in brightness. The range and effect of this setting is implementation dependent but it can be understood as a transformation of the pixel values so that the luma range in the histogram becomes larger; the transformation is sometimes as simple as a gain factor.</li>
+
+        <li>[[LIGHTING-VOCABULARY]] defines <i><dfn>saturation</dfn></i> as "the colourfulness of an area judged in proportion to its brightness" and in the current context it refers to a numeric camera setting that controls the intensity of color in a scene (i.e. the amount of gray in the scene). Very low saturation levels will result in photos closer to black-and-white. Saturation is similar to <a href="#dfn-contrast">contrast</a> but referring to colors, so its implementation, albeit being platform dependent, can be understood as a gain factor applied to the chroma components of a given image.</li>
+
+        <li><i><dfn>Sharpness</dfn></i> is a numeric camera setting that controls the intensity of edges in a scene.  Higher sharpness settings result in higher contrast along the edges, while lower settings result in less contrast and blurrier edges (i.e. soft focus). The implementation is platform dependent, but it can be understood as the linear combination of an edge detection operation applied on the original image and the original image itself; the relative weights being cotrolled by this `sharpness`.</li>
+
         <li><i>Zoom</i> is a numeric camera setting that controls the focal length of the lens.  The setting usually represents a ratio, e.g. 4 is a zoom ratio of 4:1.  The minimum value is usually 1, to represent a 1:1 ratio (i.e. no zoom).</li>
+
         <li><i>Fill light mode</i> describes the flash setting of the capture device (e.g. `auto`, `off`, `on`). </li>
         </ol>
+
+      <div class="note">
+      Many of these fields are mirror hardware capabilities that can be implemented in a number of ways, preventing further definition. Moreover, hardware manufacturers tend to publish vague definitions to protect their intellectual property.
+      </div>
+
     </section>
     </section>
 
