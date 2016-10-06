@@ -210,36 +210,36 @@
       <h2>Attributes</h2>
       <dl data-link-for="PhotoCapabilities" data-dfn-for="PhotoCapabilities" class="attributes">
         <dt><dfn><code>whiteBalanceMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
-        <dd>This reflects the current white balance mode setting. </dd>
+        <dd>This reflects the current <a href="#dfn-white-balance-mode">white balance mode</a> setting. </dd>
         <dt><dfn><code>colorTemperature</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
-        <dd>This range reflects the current correlated color temperature being used for the scene white balance calculation and its available range.</dd>
+        <dd>This range reflects the current correlated <a href="#dfn-color-temperature">color temperature</a> being used for the scene white balance calculation and its available range.</dd>
         <dt><dfn><code>exposureMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
-        <dd>This reflects the current exposure mode setting.</dd>
+        <dd>This reflects the current <a href="#dfn-exposure">exposure</a> mode setting.</dd>
         <dt><dfn><code>exposureCompensation</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
-        <dd>This reflects the current Exposure compensation setting and permitted range.  Values are signed integers multiplied by 100 (to avoid using floating point). The supported range can be, and usually is, centered around 0 EV.</dd>
+        <dd>This reflects the current <a href="#dfn-exposure-compensation">exposure compensation</a> setting and permitted range.  Values are signed integers multiplied by 100 (to avoid using floating point). The supported range can be, and usually is, centered around 0 EV.</dd>
         <dt><dfn><code>iso</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
-        <dd>This reflects the current camera ISO setting and permitted range.  Values are numeric.</dd>
+        <dd>This reflects the current camera <a href="#dfn-iso">ISO</a> setting and permitted range.  Values are numeric.</dd>
         <dt><dfn><code>redEyeReduction</code></dfn> of type <span class="idlAttrType"><a>boolean</a></span></dt>
         <dd>This reflects whether camera red eye reduction is on or off, and is boolean - on is true</dd>
         <dt><dfn><code>focusMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
         <dd>This reflects the current focus mode setting.</dd>
 
         <dt><dfn><code>brightness</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
-        <dd>This reflects the current brightness setting of the camera and permitted range. Values are numeric.</dd>
+        <dd>This reflects the current <a href="#dfn-brightness">brightness</a> setting of the camera and permitted range. Values are numeric.</dd>
         <dt><dfn><code>contrast</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
-        <dd>This reflects the current contrast setting of the camera and permitted range. Values are numeric.</dd>
+        <dd>This reflects the current <a href="#dfn-contrast">contrast</a> setting of the camera and permitted range. Values are numeric.</dd>
         <dt><dfn><code>saturation</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
-        <dd>This reflects the current saturation setting of the camera and permitted range. Values are numeric.</dd>
+        <dd>This reflects the current <a href="#dfn-saturation">saturation</a> setting of the camera and permitted range. Values are numeric.</dd>
         <dt><dfn><code>sharpness</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
-        <dd>This reflects the current sharpness setting of the camera and permitted range. Values are numeric.</dd>
+        <dd>This reflects the current <a href="#dfn-sharpness">sharpness</a> setting of the camera and permitted range. Values are numeric.</dd>
         <dt><dfn><code>imageHeight</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
         <dd>This reflects the image height range supported by the UA and the current height setting.</dd>
         <dt><dfn><code>imageWidth</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
-        <dd>his reflects the image width range supported by the UA and the current width setting.</dd>
+        <dd>This reflects the image width range supported by the UA and the current width setting.</dd>
         <dt><dfn><code>zoom</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
         <dd>This reflects the zoom value range supported by the UA and the current zoom setting.</dd>
         <dt><dfn><code>fillLightMode</code></dfn> of type <span class="idlAttrType"><a>FillLightMode</a></span></dt>
-        <dd>his reflects the current fill light (flash) mode setting.  Values are of type <code>FillLightMode</code>.</dd>
+        <dd>This reflects the current fill light (flash) mode setting.  Values are of type <code>FillLightMode</code>.</dd>
       </dl>
       <div class="note">
       The supported resolutions are presented as segregated <code><a href="#dom-photocapabilities-imagewidth">imageWidth</a></code> and <code><a href="#dom-photocapabilities-imageheight">imageHeight</a></code> ranges to prevent increasing the fingerprinting surface and to allow the UA to make a best-effort decision with regards to actual hardware configuration.
@@ -250,54 +250,46 @@
       <h2>Discussion</h2>
         <p>The <code>PhotoCapabilities</code> interface provides the photo-specific settings options and current settings values.  The following definitions are assumed for individual settings and are provided for information purposes:</p>
         <ol>
-        <li><i>White balance mode</i> is a setting that cameras use to adjust for different color temperatures.  Color temperature is the temperature of background light (measured in Kelvin normally).  This setting can usually be automatically and continuously determined by the implementation, but it's also common to offer a `manual` mode in which the estimated temperature of the scene illumination is hinted to the implementation.  Typical temperature ranges for popular mode are provided below:
+        <li><i><dfn>White balance mode</dfn></i> is a setting that cameras use to adjust for different color temperatures.  <dfn>Color temperature</dfn> is the temperature of background light (usually measured in Kelvin).  This setting can usually be automatically and continuously determined by the implementation, but it's also common to offer a `manual` mode in which the estimated temperature of the scene illumination is hinted to the implementation.  Typical temperature ranges for popular modes are provided below:
         <table class="simple">
-        <tr>
-            <th>Mode</th>
-            <th>Kelvin range</th>
-        </tr>
-        <tr>
-            <td>incandescent</td>
-            <td>2500-3500</td>
-        </tr>
-        <tr>
-            <td>fluorescent</td>
-            <td>4000-5000</td>
-        </tr>
-        <tr>
-            <td>warm-fluorescent</td>
-            <td>5000-5500</td>
-        </tr>
-        <tr>
-            <td>daylight</td>
-            <td>5500-6500</td>
-        </tr>
-        <tr>
-            <td>cloudy-daylight</td>
-            <td>6500-8000</td>
-        </tr>
-        <tr>
-            <td>twilight</td>
-            <td>8000-9000</td>
-        </tr>
-        <tr>
-            <td>shade</td>
-            <td>9000-10000</td>
-        </tr>
+        <tr> <th>Mode</th> <th>Kelvin range</th> </tr>
+        <tr> <td>incandescent</td> <td>2500-3500</td> </tr>
+        <tr> <td>fluorescent</td> <td>4000-5000</td> </tr>
+        <tr> <td>warm-fluorescent</td> <td>5000-5500</td> </tr>
+        <tr> <td>daylight</td> <td>5500-6500</td> </tr>
+        <tr> <td>cloudy-daylight</td> <td>6500-8000</td> </tr>
+        <tr> <td>twilight</td> <td>8000-9000</td> </tr>
+        <tr> <td>shade</td> <td>9000-10000</td> </tr>
         </table>
         </li>
-        <li><i>Exposure</i> is the amount of light allowed to fall on the photographic medium.  Auto-exposure mode is a camera setting where the exposure levels are automatically adjusted by the implementation based on the subject of the photo.</li>
-        <li><i>Exposure Compensation</i> is a numeric camera setting that adjusts the exposure level from the current value used by the implementation.  This value can be used to bias the exposure level enabled by auto-exposure, and usually is a symmetric range around 0 EV (the no-compensation value).</li>
-        <li>The <i>ISO</i> setting of a camera describes the sensitivity of the camera to light. It is a numeric value, where the lower the value the greater the sensitivity.  This setting in most implementations relates to shutter speed, and is sometimes known as the ASA setting.</li>
+
+        <li><i><dfn>Exposure</dfn></i> is the amount of time during which light is allowed to fall on the photosensitive device.  Auto-exposure mode is a camera setting where the exposure levels are automatically adjusted by the implementation based on the subject of the photo.</li>
+
+        <li><i><dfn>Exposure Compensation</dfn></i> is a numeric camera setting that adjusts the exposure level from the current value used by the implementation.  This value can be used to bias the exposure level enabled by auto-exposure, and usually is a symmetric range around 0 EV (the no-compensation value).</li>
+
+        <li>The <i><dfn>ISO</dfn></i> setting of a camera describes the sensitivity of the camera to light. It is a numeric value, where the lower the value the greater the sensitivity.  This setting in most implementations relates to shutter speed, and is sometimes known as the ASA setting.</li>
+
         <li><i>Red Eye Reduction</i> is a feature in cameras that is designed to limit or prevent the appearance of red pupils ("Red Eye") in photography subjects due prolonged exposure to a camera's flash.</li>
+
         <li><i>Focus mode</i> describes the focus setting of the capture device (e.g. `auto` or `manual`). </li>
-        <li><i>Brightness</i> refers to the numeric camera setting that adjusts the perceived amount of light emitting from the photo object.  A higher brightness setting increases the intensity of darker areas in a scene while compressing the intensity of brighter parts of the scene.</li>
-        <li><i>Contrast</i> is the numeric camera setting that controls the difference in brightness between light and dark areas in a scene.  A higher contrast setting reflects an expansion in the difference in brightness.</li>
-        <li><i>Saturation</i> is a numeric camera setting that controls the intensity of color in a scene (i.e. the amount of gray in the scene).  Very low saturation levels will result in photos closer to black-and-white.</li>
-        <li><i>Sharpness</i> is a numeric camera setting that controls the intensity of edges in a scene.  Higher sharpness settings result in higher edge intensity, while lower settings result in less contrast and blurrier edges (i.e. soft focus).</li>
+
+        <li>[[LIGHTING-VOCABULARY]] defines <i><dfn>brightness</dfn></i> as "the attribute of a visual sensation according to which an area appears to emit more or less light" and in the context of the present API, it refers to the numeric camera setting that adjusts the perceived amount of light emitting from the photo object.  A higher brightness setting increases the intensity of darker areas in a scene while compressing the intensity of brighter parts of the scene.  The range and effect of this setting is implementation dependent but in general it translates into a numerical value that is added to each pixel with saturation.</li>
+
+        <li><i><dfn>Contrast</dfn></i> is the numeric camera setting that controls the difference in brightness between light and dark areas in a scene.  A higher contrast setting reflects an expansion in the difference in brightness. The range and effect of this setting is implementation dependent but it can be understood as a transformation of the pixel values so that the luma range in the histogram becomes larger; the transformation is sometimes as simple as a gain factor.</li>
+
+        <li>[[LIGHTING-VOCABULARY]] defines <i><dfn>saturation</dfn></i> as "the colourfulness of an area judged in proportion to its brightness" and in the current context it refers to a numeric camera setting that controls the intensity of color in a scene (i.e. the amount of gray in the scene). Very low saturation levels will result in photos closer to black-and-white. Saturation is similar to <a href="#dfn-contrast">contrast</a> but referring to colors, so its implementation, albeit being platform dependent, can be understood as a gain factor applied to the chroma components of a given image.</li>
+
+        <li><i><dfn>Sharpness</dfn></i> is a numeric camera setting that controls the intensity of edges in a scene.  Higher sharpness settings result in higher contrast along the edges, while lower settings result in less contrast and blurrier edges (i.e. soft focus). The implementation is platform dependent, but it can be understood as the linear combination of an edge detection operation applied on the original image and the original image itself; the relative weights being cotrolled by this `sharpness`.</li>
+
         <li><i>Zoom</i> is a numeric camera setting that controls the focal length of the lens.  The setting usually represents a ratio, e.g. 4 is a zoom ratio of 4:1.  The minimum value is usually 1, to represent a 1:1 ratio (i.e. no zoom).</li>
+
         <li><i>Fill light mode</i> describes the flash setting of the capture device (e.g. `auto`, `off`, `on`). </li>
         </ol>
+
+      <div class="note">
+      Many of these fields mirror hardware capabilities that can be implemented in a number of ways, preventing further definition. Moreover, hardware manufacturers tend to publish vague definitions to protect their intellectual property.
+      </div>
+
     </section>
     </section>
 
@@ -333,16 +325,16 @@
       <h2>Members</h2>
       <dl data-link-for="PhotoSettings" data-dfn-for="PhotoSettings" class="attributes">
         <dt><dfn><code>whiteBalanceMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
-        <dd>This reflects the desired white balance mode setting.</dd>
+        <dd>This reflects the desired <a href="#dfn-white-balance-mode">white balance mode</a> setting.</dd>
         <dt><dfn><code>colorTemperature</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
-        <dd>Color temperature to be used for the white balance calculation of the scene.
+        <dd><a href="#dfn-color-temperature">Color temperature</a> to be used for the white balance calculation of the scene.
         This field is only significant if <a>whiteBalanceMode</a> is <code>manual</code>.</dd>
         <dt><dfn><code>exposureMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
-        <dd>This reflects the desired exposure mode setting.  Acceptable values are of type <span class="idlAttrType"><a>MeteringMode</a></span>.</dd>
+        <dd>This reflects the desired <a href="#dfn-exposure">exposure</a> mode setting.  Acceptable values are of type <span class="idlAttrType"><a>MeteringMode</a></span>.</dd>
         <dt><dfn><code>exposureCompensation</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span>, multiplied by 100 (to avoid using floating point). </dt>
-        <dd>This reflects the desired exposure compensation setting.  A value of 0 EV is interpreted as no exposure compensation.</dd>
+        <dd>This reflects the desired <a href="#dfn-exposure-compensation">exposure compensation</a> setting.  A value of 0 EV is interpreted as no exposure compensation.</dd>
         <dt><dfn><code>iso</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
-        <dd>This reflects the desired camera ISO setting.</dd>
+        <dd>This reflects the desired camera <a href="#dfn-iso">ISO</a> setting.</dd>
         <dt><dfn><code>redEyeReduction</code></dfn> of type <span class="idlAttrType"><a>boolean</a></span></dt>
         <dd>This reflects whether camera red eye reduction is desired</dd>
         <dt><dfn><code>focusMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
@@ -350,13 +342,13 @@
         <dt><dfn><code>pointsOfInterest</code></dfn> of type <span class="idlAttrType">sequence&lt;<a>Point2D</a>&gt;</span></dt>
         <dd>A <code>sequence</code> of <a>Point2D</a>s to be used as metering area centers for other settings, e.g. Focus, Exposure and Auto White Balance.</dd>
         <dt><dfn><code>brightness</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
-        <dd>This reflects the desired brightness setting of the camera.</dd>
+        <dd>This reflects the desired <a href="#dfn-brightness">brightness</a> setting of the camera.</dd>
         <dt><dfn><code>contrast</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
-        <dd>This reflects the desired contrast setting of the camera.</dd>
+        <dd>This reflects the desired <a href="#dfn-contrast">contrast</a> setting of the camera.</dd>
         <dt><dfn><code>saturation</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
-        <dd>This reflects the desired saturation setting of the camera.</dd>
+        <dd>This reflects the desired <a href="#dfn-saturation">saturation</a> setting of the camera.</dd>
         <dt><dfn><code>sharpness</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
-        <dd>This reflects the desired sharpness setting of the camera.</dd>
+        <dd>This reflects the desired <a href="#dfn-sharpness">sharpness</a> setting of the camera.</dd>
         <dt><dfn><code>zoom</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
         <dd>This reflects the desired zoom setting of the camera.</dd>
         <dt><dfn><code>imageHeight</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
@@ -455,7 +447,7 @@
 
 
     <section id="Point2D">
-    <p>A <code>Point2D</code> represents a location in a normalized square space with values in [0.0, 1.0].
+    <p>A <code>Point2D</code> represents a location in a normalized square space with values in `[0.0, 1.0]`. The origin of coordinates `(0.0, 0.0)` represents the upper leftmost corner, with the `y` coordinate pointing downwards.
     <h2><code>Point2D</code></h2>
     <div> <pre class="idl">
       dictionary Point2D {
@@ -467,9 +459,9 @@
       <h2>Attributes</h2>
       <dl data-link-for="Point2D" data-dfn-for="Point2D" class="attributes">
         <dt><dfn><code>x</code></dfn> of type <span class="idlAttrType"><a>float</a></span></dt>
-        <dd>Value of the normalized horizontal (abscissa) coordinate in the range [0.0, 1.0].</dd>
+        <dd>Value of the normalized horizontal (abscissa) coordinate in the range `[0.0, 1.0]`. Increasing `x` values correspond to increasing column indexes of an image.</dd>
         <dt><dfn><code>y</code></dfn> of type <span class="idlAttrType"><a>float</a></span></dt>
-        <dd>Value of the normalized vertical (ordinate) coordinate in the range [0.0, 1.0].</dd>
+        <dd>Value of the normalized vertical (ordinate) coordinate in the range `[0.0, 1.0]`. Increasing `y` values correspond to increasing row indexes of an image.</dd>
       </dl>
     </section>
     </section>
