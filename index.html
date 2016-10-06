@@ -488,7 +488,7 @@
         imgData = e.imageData;
         width = imgData.width;
         height = imgData.height;
-        for (j = 3; j < imgData.width; j += 4) {
+        for (j = 3; j &lt; imgData.width; j += 4) {
             // Set all alpha values to medium opacity
             imgData.data[j] = 128;
         }
@@ -497,7 +497,7 @@
         var canvas = document.createElement('canvas');
         ctx = canvas.getContext("2d");
         newImg = ctx.createImageData(width,height);
-        for (j = 0; j < imgData.width; j++) {
+        for (j = 0; j &lt; imgData.width; j++) {
             newImg.data[j] = imgData.data[j];
         }
 
@@ -542,14 +542,14 @@
 
     ##### Repeated grabbing of a frame
     <pre class='example'>
-    &lthtml&gt
-    &ltbody&gt
-    &ltp&gt&ltcanvas id="frame"&gt&lt/canvas&gt&lt/p&gt
-    &ltbutton onclick="stopFunction()"&gtStop frame grab&lt/button&gt
-    &ltscript&gt
+    &lt;html&gt;
+    &lt;body&gt;
+    &lt;p&gt;&lt;canvas id="frame"&gt;&lt;/canvas&gt;&lt;/p&gt;
+    &lt;button onclick="stopFunction()"&gt;Stop frame grab&lt;/button&gt;
+    &lt;script&gt;
       var canvas = document.getElementById('frame');
       navigator.mediaDevices.getUserMedia({video: true}).then(gotMedia, failedToGetMedia);
-
+    
       function gotMedia(mediastream) {
           // Extract video track.
           var videoDevice = mediastream.getVideoTracks()[0];
@@ -560,24 +560,24 @@
               frameVar = setInterval(captureDevice.grabFrame().then(processFrame()), 1000);
           }
       }
-
+    
       function processFrame(e) {
           imgData = e.imageData;
           canvas.width = imgData.width;
           canvas.height = imgData.height;
           canvas.getContext('2d').drawImage(imgData, 0, 0, imgData.width, imgData.height);
       }
-
+    
       function stopFunction(e) {
           clearInterval(myVar);
       }
-
+    
       function failedToGetMedia(e) {
-          console.log('Stream failure: ' + e);
+          console.log('Stream failure:', e);
       }
-    &lt/script&gt
-    &lt/body&gt
-    &lt/html&gt
+    &lt;/script&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
     </pre>
     </section>
   </body>
