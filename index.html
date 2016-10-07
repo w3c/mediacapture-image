@@ -30,12 +30,11 @@
       <pre class="idl">
        [Constructor(MediaStreamTrack track)]
         interface ImageCapture {
-          readonly        attribute MediaStreamTrack videoStreamTrack;
-          readonly        attribute MediaStream      previewStream;
-          Promise&lt;PhotoCapabilities&gt; getPhotoCapabilities ();
-          Promise&lt;void&gt; setOptions (PhotoSettings? photoSettings);
-          Promise&lt;Blob&gt;              takePhoto (PhotoSettings? photoSettings);
-          Promise&lt;ImageBitmap&gt;       grabFrame ();
+          readonly attribute MediaStreamTrack videoStreamTrack;
+          Promise&lt;PhotoCapabilities&gt;    getPhotoCapabilities ();
+          Promise&lt;void&gt;                 setOptions (PhotoSettings? photoSettings);
+          Promise&lt;Blob&gt;                 takePhoto (PhotoSettings? photoSettings);
+          Promise&lt;ImageBitmap&gt;          grabFrame ();
         };
       </pre>
     </div>
@@ -72,8 +71,6 @@
       <dl data-link-for="ImageCapture" data-dfn-for="ImageCapture" class="attributes">
         <dt><dfn><code>videoStreamTrack</code></dfn> of type <span class="idlAttrType"><a>MediaStreamTrack</a></span>, readonly</dt>
         <dd>The MediaStreamTrack passed into the constructor.</dd>
-        <dt><dfn><code>previewStream</code></dfn> of type <span class="idlAttrType"><a>MediaStream</a></span>, readonly</dt>
-        <dd>The MediaStream that provides a camera preview.</dd>
       </dl>
     </section>
 
@@ -89,7 +86,7 @@
         </dd>
 
         <dt><dfn><code>setOptions</code></dfn></dt>
-        <dd>When the <code>setOptions()</code> method of an <code>ImageCapture</code> object is invoked, then a valid <code>PhotoSettings</code> object MUST be passed in the method to the <code>ImageCapture</code> object.  In addition, a new <i>Promise</i> object is returned.  If the UA can successfully apply the settings, then the UA MUST return a resolved promise. If the UA cannot successfully apply the settings, then the UA MUST return a promise rejected with a newly created <a href="#idl-def-ImageCaptureError" class="idlType"><code>ImageCaptureError</code></a> whose <code>errorDescription</code> is set to OPTIONS_ERROR. If the UA can successfully apply the settings, the effect MAY be reflected, if visible at all, in <a><code>previewStream</code></a>.
+        <dd>When the <code>setOptions()</code> method of an <code>ImageCapture</code> object is invoked, then a valid <code>PhotoSettings</code> object MUST be passed in the method to the <code>ImageCapture</code> object.  In addition, a new <i>Promise</i> object is returned.  If the UA can successfully apply the settings, then the UA MUST return a resolved promise. If the UA cannot successfully apply the settings, then the UA MUST return a promise rejected with a newly created <a href="#idl-def-ImageCaptureError" class="idlType"><code>ImageCaptureError</code></a> whose <code>errorDescription</code> is set to OPTIONS_ERROR. If the UA can successfully apply the settings, the effect MAY be reflected, if visible at all, in <a href="#dom-imagecapture-videostreamtrack"><code>videoStreamTrack</code></a>.
         <table class="parameters">
               <tbody>
                 <tr>
@@ -549,7 +546,7 @@
     &lt;script&gt;
       var canvas = document.getElementById('frame');
       navigator.mediaDevices.getUserMedia({video: true}).then(gotMedia, failedToGetMedia);
-    
+
       function gotMedia(mediastream) {
           // Extract video track.
           var videoDevice = mediastream.getVideoTracks()[0];
@@ -560,18 +557,18 @@
               frameVar = setInterval(captureDevice.grabFrame().then(processFrame()), 1000);
           }
       }
-    
+
       function processFrame(e) {
           imgData = e.imageData;
           canvas.width = imgData.width;
           canvas.height = imgData.height;
           canvas.getContext('2d').drawImage(imgData, 0, 0, imgData.width, imgData.height);
       }
-    
+
       function stopFunction(e) {
           clearInterval(myVar);
       }
-    
+
       function failedToGetMedia(e) {
           console.log('Stream failure:', e);
       }
