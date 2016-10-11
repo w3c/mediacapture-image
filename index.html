@@ -81,7 +81,7 @@
         <dt><dfn><code>takePhoto</code></dfn></dt>
         <dd><code>takePhoto()</code> produces the result of a single photographic exposure using the video capture device sourcing the <a><code>videoStreamTrack</code></a>, applying any <a><code>PhotoSettings</code></a> previously configured, and returning an encoded image in the form of a <a><code>Blob</code></a> if successful. When this method is invoked:
         <ol>
-         <li>If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the constructor is not `live`, throw a new <code>DOMException</code> ([[!WebIDL]]) whose name is <code>"InvalidStateError"</code>. Otherwise:</li>
+         <li>If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the constructor is not `live`, return <a>a promise rejected with</a> a new <code>DOMException</code> ([[!WebIDL]]) whose name is <code>"InvalidStateError"</code>. Otherwise:</li>
 
          <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps: </li>
          <ol>
@@ -97,7 +97,7 @@
         <dt><dfn><code>getPhotoCapabilities</code></dfn></dt>
         <dd>When  <code>getPhotoCapabilities()</code> is used to retrieve the ranges of available configuration options and their current setting values, if any. When this method is invoked:
         <ol>
-         <li>If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the constructor is not `live`, throw a new <code>DOMException</code> ([[!WebIDL]]) whose name is <code>"InvalidStateError"</code>. </li>
+         <li>If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the constructor is not `live`, return <a>a promise rejected with</a> a new <code>DOMException</code> ([[!WebIDL]]) whose name is <code>"InvalidStateError"</code>. </li>
          <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:</li>
          <ol>
           <li>Gather data from the <code>MediaStreamTrack</code> into a <a href="#idl-def-photocapabilities" class="idlType"><code>PhotoCapabilities</code></a> object containing the available capabilities of the device, including ranges where appropriate. The resolved <a href="#idl-def-photocapabilities" class="idlType"><code>PhotoCapabilities</code></a> will also include the current conditions in which the capabilities of the device are found. The method of doing this will depend on the underlying device. </li>
@@ -111,8 +111,10 @@
         <dt><dfn><code>setOptions</code></dfn></dt>
         <dd><code>setOptions()</code> is used to configure a number of settings affecting the image capture and/or the current video feed in <a><code>videoStreamTrack</code></a>. When this method is invoked:
         <ol>
-         <li>If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the constructor is not `live`, throw a new <code>DOMException</code> ([[!WebIDL]]) whose name is <code>"InvalidStateError"</code>. </li>
-         <li>If an invalid <code>PhotoSettings</code> object is passed as argument, throw a new <code>DOMException</code> ([[!WebIDL]]) whose name is <code>"SyntaxError"</code></li>
+         <li>If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the constructor is not `live`, return <a>a promise rejected with</a> a new <code>DOMException</code> ([[!WebIDL]]) whose name is <code>"InvalidStateError"</code>. </li>
+
+         <li>If an invalid <code>PhotoSettings</code> object is passed as argument, return <a>a promise rejected with</a> a new <code>DOMException</code> ([[!WebIDL]]) whose name is <code>"SyntaxError"</code></li>
+
          <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:</li>
          <ol>
            <li>Configure the underlying image capture device with the <code>settings</code> parameter.</li>
@@ -150,7 +152,7 @@
         <dt><dfn><code>grabFrame</code></dfn></dt>
         <dd><code>grabFrame()</code> takes a snapshot of the live video being held in the <a><code>videoStreamTrack</code></a>, returning an <a><code>ImageBitmap</code></a> if successful. When this method is invoked:
         <ol>
-         <li>If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the constructor is not `live`, throw a new <code>DOMException</code> ([[!WebIDL]]) whose name is <code>"InvalidStateError"</code>. Otherwise:</li>
+         <li>If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the constructor is not `live`, return <a>a promise rejected with</a> a new <code>DOMException</code> ([[!WebIDL]]) whose name is <code>"InvalidStateError"</code>. Otherwise:</li>
 
          <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps: </li>
          <ol>
