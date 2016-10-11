@@ -113,13 +113,13 @@
 
         <dt><dfn><code>takePhoto</code></dfn></dt>
         <dd>When the <code>takePhoto()</code> method of an <code>ImageCapture</code> object is invoked, a new <i>Promise</i> object is returned.
-        If the <code>readyState</code> of the <code>VideoStreamTrack</code> provided in the constructor is not "live", the UA MUST return a promise rejected with a newly created <a href="#idl-def-ImageCaptureError" class="idlType"><code>ImageCaptureError</code></a>  object whose <code>errorDescription</code> is set to INVALID_TRACK.  If the UA is unable to execute the <code>takePhoto()</code> method for any other reason (for example, upon invocation of multiple <code>takePhoto()</code> method calls in rapid succession), then the UA MUST return a Promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to PHOTO_ERROR. Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:
+        If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the constructor is not "live", the UA MUST return a promise rejected with a newly created <a href="#idl-def-ImageCaptureError" class="idlType"><code>ImageCaptureError</code></a>  object whose <code>errorDescription</code> is set to INVALID_TRACK.  If the UA is unable to execute the <code>takePhoto()</code> method for any other reason (for example, upon invocation of multiple takePhoto() method calls in rapid succession), then the UA MUST return a promise rejected with a newly created <code>ImageCaptureError</code> object whose <code>errorDescription</code> is set to PHOTO_ERROR. Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:
         <ol>
           <li>Let <var>photoSettings</var> be the method's first argument, if provided, or <code>undefined</code>.</li>
 
           <li>Gather data from the <code>MediaStreamTrack</code> into a <code>Blob</code> containing a single still image. The method of doing this will depend on the underlying device.   Devices may temporarily stop streaming data, reconfigure themselves with the appropriate photo settings, take the photo, and then resume streaming.  In this case, the stopping and restarting of streaming SHOULD cause <code>mute</code> and <code>unmute</code> events to fire on the Track in question.  </li>
-          <li>Return a resolved promise with the Blob object.</li>
 
+          <li>Return a resolved promise with the Blob object.</li>
         </ol>
         </dd>
 
@@ -370,7 +370,7 @@
             "auto",
             "off",
             "flash",
-            "on"
+            "torch"
         };
       </pre>
     </div>
@@ -385,7 +385,7 @@
         <dd>The source's fill light and/or flash will not be used.</dd>
         <dt><dfn><code>flash</code></dfn></dt>
         <dd>This value will always cause the flash to fire for the <code>takePhoto()</code> or <code>getFrame()</code> methods. </dd>
-        <dt><dfn><code>on</code></dfn></dt>
+        <dt><dfn><code>torch</code></dfn></dt>
         <dd>The source's fill light will be turned on (and remain on) while the source <code>MediaStreamTrack</code> is active</dd>
       </dl>
     </section>
