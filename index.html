@@ -158,7 +158,7 @@
 
           <li>Returns a resolved promise with a newly created <code><a href="https://www.w3.org/TR/html51/webappapis.html#webappapis-images">ImageBitmap</a></code> object. (Note: <code>grabFrame()</code> returns data only once upon being invoked).</li>
 
-          <li>If the UA is unable to execute the <code>takePhoto()</code> method for any reason (for example, upon invocation of multiple takePhoto() method calls in rapid succession), then the UA MUST return <a>a promise rejected with</a> a new <code>DOMException</code> ([[!WebIDL]]) whose name is <code>"UnknownError"</code>.</li>
+          <li>If the UA is unable to execute the <code>grabFrame()</code> method for any reason (for example, upon invocation of multiple <code>grabFrame()</code>/<code>takePhoto()</code> method calls in rapid succession), then the UA MUST return <a>a promise rejected with</a> a new <code>DOMException</code> ([[!WebIDL]]) whose name is <code>"UnknownError"</code>.</li>
 
          </ol>
         </ol>
