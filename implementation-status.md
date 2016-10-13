@@ -37,7 +37,7 @@ setOptions                | ✓       |          |     |       |         |
 └ fillLightMode           | ✓       |          |     |       |         |
 grabFrame                 | ✓       | ✓        | ✓   | ✓     | ✓       |
 
-Note: `PhotoCapabilities`/`Settings` availability depend on the actual capture device.
+Note: Values of `PhotoCapabilities`/`Settings` depend on the actual capture device configurability (e.g. if the device doesn't support `zoom`, `zoom.min` and `zoom.max` will both be 0) .
 
 ### Unsupported platforms
 
