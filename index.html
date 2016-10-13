@@ -119,10 +119,10 @@
          <ol>
            <li>Configure the underlying image capture device with the <code>settings</code> parameter.</li>
            <li>If the UA cannot successfully apply the settings, then the UA MUST return <a>a promise rejected with</a> a new <code>DOMException</code> ([[!WebIDL]]) whose name is <code>"OperationError"</code>. </li>
-           <li>If the UA can successfully apply the settings, then the UA MUST return a resolved promise.</li>
+           <li>If the UA can successfully apply the settings, then the UA MUST return a resolved promise.
            <div class="note">
             If the UA can successfully apply the settings, the effect MAY be reflected, if visible at all, in <a><code>videoStreamTrack</code></a>.
-           </div>
+           </div></li>
          </ol></li>
         </ol>
         <table class="parameters">
