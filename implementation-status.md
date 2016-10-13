@@ -17,7 +17,7 @@ Work is in progress:
 
 Feature/Platform          | Android | ChromeOS | Mac | Linux | Windows |
 ------------------------- | :-----: | :------: | :-: | :---: | :-----: |
-takePhoto()               | ✓       | ✓        | ✓   | ✓     | ✓       |
+takePhoto()               | ✓       | 55       | ✓   | 55    | 55      |
 getPhotoCapabilities      |         |          |     |       |         |
 └ whiteBalanceMode        | ✓       |          |     |       |         |
 └ colorTemperature        | ✓       |          |     |       |         |
@@ -26,30 +26,30 @@ getPhotoCapabilities      |         |          |     |       |         |
 └ redEyeReduction         | ✓       |          |     |       |         |
 └ iso                     | ✓       |          |     |       |         |
 └ focusMode               | ✓       |          |     |       |         |
-└ brightness              | ✓       | ✓        |     | ✓     |         |
-└ contrast                | ✓       | ✓        |     | ✓     |         |
-└ saturation              | ✓       | ✓        |     | ✓     |         |
-└ sharpness               | ✓       | ✓        |     | ✓     |         |
+└ brightness              | ✓       | 55       |     | 55    |         |
+└ contrast                | ✓       | 55       |     | 55    |         |
+└ saturation              | ✓       | 55       |     | 55    |         |
+└ sharpness               | ✓       | 55       |     | 55    |         |
 └ imageHeight             | ✓       |          |     |       |         |
 └ imageWidth              | ✓       |          |     |       |         |
-└ zoom                    | ✓       | ✓        |     | ✓     |         |
+└ zoom                    | ✓       | 55       |     | 55    |         |
 └ fillLightMode           | ✓       |          |     |       |         |
-setOptions                | ✓       | ✓        | ✓   | ✓     |         |
-└ whiteBalanceMode        | ✓       | ✓        | ✓   | ✓     |         |
-└ colorTemperature        | ✓       | ✓        | ✓   | ✓     |         |
-└ exposureMode            | ✓       | ✓        | ✓   | ✓     |         |
-└ exposureCompensation    | ✓       | ✓        | ✓   | ✓     |         |
-└ redEyeReduction         | ✓       | ✓        | ✓   | ✓     |         |
-└ iso                     | ✓       | ✓        | ✓   | ✓     |         |
-└ focusMode               | ✓       | ✓        | ✓   | ✓     |         |
-└ brightness              | ✓       | ✓        | ✓   | ✓     |         |
-└ contrast                | ✓       | ✓        | ✓   | ✓     |         |
-└ saturation              | ✓       | ✓        | ✓   | ✓     |         |
-└ sharpness               | ✓       | ✓        | ✓   | ✓     |         |
-└ imageHeight             | ✓       | ✓        | ✓   | ✓     |         |
-└ imageHeight             | ✓       | ✓        | ✓   | ✓     |         |
-└ zoom                    | ✓       | ✓        | ✓   | ✓     | ✓       |
-└ fillLightMode           | ✓       | ✓        | ✓   | ✓     | ✓       |
+setOptions                | ✓       |          |     |       |         |
+└ whiteBalanceMode        | ✓       |          |     |       |         |
+└ colorTemperature        | ✓       |          |     |       |         |
+└ exposureMode            | ✓       |          |     |       |         |
+└ exposureCompensation    | ✓       |          |     |       |         |
+└ redEyeReduction         | ✓       |          |     |       |         |
+└ iso                     | ✓       |          |     |       |         |
+└ focusMode               | ✓       |          |     |       |         |
+└ brightness              | ✓       | 55       |     | 55    |         |
+└ contrast                | ✓       | 55       |     | 55    |         |
+└ saturation              | ✓       | 55       |     | 55    |         |
+└ sharpness               | ✓       | 55       |     | 55    |         |
+└ imageHeight             | ✓       |          |     |       |         |
+└ imageWidth              | ✓       |          |     |       |         |
+└ zoom                    | ✓       | 55       |     | 55    |         |
+└ fillLightMode           | ✓       |          |     |       |         |
 grabFrame                 | ✓       | ✓        | ✓   | ✓     | ✓       |
 
 Note: `PhotoCapabilities`/`Settings` availability depend on the actual capture device.
