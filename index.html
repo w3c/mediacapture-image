@@ -537,29 +537,31 @@
     &lt;p&gt;&lt;canvas id="frame"&gt;&lt;/canvas&gt;&lt;/p&gt;
     &lt;button onclick="stopFunction()"&gt;Stop frame grab&lt;/button&gt;
     &lt;script&gt;
+      'use strict';
+      var interval;
       var canvas = document.getElementById('frame');
-      navigator.mediaDevices.getUserMedia({video: true}).then(gotMedia, failedToGetMedia);
-
+      var videoDevice;
+      navigator.mediaDevices.getUserMedia({video: true}).then(gotMedia).catch(failedToGetMedia);
+    
       function gotMedia(mediastream) {
           // Extract video track.
-          var videoDevice = mediastream.getVideoTracks()[0];
+          videoDevice = mediastream.getVideoTracks()[0];
           // Check if this device supports a picture mode...
           var captureDevice = new ImageCapture(videoDevice);
-          var frameVar;
-          if (captureDevice) {
-              frameVar = setInterval(captureDevice.grabFrame().then(processFrame()), 1000);
-          }
+          interval = setInterval(function () {
+            captureDevice.grabFrame().then(processFrame).catch(e => console.error(e));
+          }, 1000);
       }
-
-      function processFrame(e) {
-          imgData = e.imageData;
+    
+      function processFrame(imgData) {
           canvas.width = imgData.width;
           canvas.height = imgData.height;
-          canvas.getContext('2d').drawImage(imgData, 0, 0, imgData.width, imgData.height);
+          canvas.getContext('2d').drawImage(imgData, 0, 0);
       }
-
+    
       function stopFunction(e) {
-          clearInterval(myVar);
+          clearInterval(interval);
+          videoDevice.stop();
       }
 
       function failedToGetMedia(e) {
