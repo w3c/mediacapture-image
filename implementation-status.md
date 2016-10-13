@@ -18,22 +18,7 @@ Work is in progress:
 Feature/Platform          | Android | ChromeOS | Mac | Linux | Windows |
 ------------------------- | :-----: | :------: | :-: | :---: | :-----: |
 takePhoto()               | ✓       | 55       | ✓   | 55    | 55      |
-getPhotoCapabilities      |         |          |     |       |         |
-└ whiteBalanceMode        | ✓       |          |     |       |         |
-└ colorTemperature        | ✓       |          |     |       |         |
-└ exposureMode            | ✓       |          |     |       |         |
-└ exposureCompensation    | ✓       |          |     |       |         |
-└ redEyeReduction         | ✓       |          |     |       |         |
-└ iso                     | ✓       |          |     |       |         |
-└ focusMode               | ✓       |          |     |       |         |
-└ brightness              | ✓       | 55       |     | 55    |         |
-└ contrast                | ✓       | 55       |     | 55    |         |
-└ saturation              | ✓       | 55       |     | 55    |         |
-└ sharpness               | ✓       | 55       |     | 55    |         |
-└ imageHeight             | ✓       |          |     |       |         |
-└ imageWidth              | ✓       |          |     |       |         |
-└ zoom                    | ✓       | 55       |     | 55    |         |
-└ fillLightMode           | ✓       |          |     |       |         |
+getPhotoCapabilities/setOptions      |         |          |     |       |         |
 setOptions                | ✓       |          |     |       |         |
 └ whiteBalanceMode        | ✓       |          |     |       |         |
 └ colorTemperature        | ✓       |          |     |       |         |
