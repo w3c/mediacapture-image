@@ -17,25 +17,27 @@ Work is in progress:
 
 Feature/Platform          | Android | ChromeOS | Mac | Linux | Windows |
 ------------------------- | :-----: | :------: | :-: | :---: | :-----: |
+grabFrame()               | ✓       | ✓        | ✓   | ✓     | ✓       |
 takePhoto()               | ✓       | 55       | ✓   | 55    | 55      |
-getPhotoCapabilities/setOptions      |         |          |     |       |         |
-setOptions                | ✓       |          |     |       |         |
-└ whiteBalanceMode        | ✓       |          |     |       |         |
-└ colorTemperature        | ✓       |          |     |       |         |
-└ exposureMode            | ✓       |          |     |       |         |
-└ exposureCompensation    | ✓       |          |     |       |         |
-└ redEyeReduction         | ✓       |          |     |       |         |
-└ iso                     | ✓       |          |     |       |         |
-└ focusMode               | ✓       |          |     |       |         |
+getPhotoCapabilities()    | ✓       | 55       | 55  | 55    |         |
+setOptions()              | ✓       | 55       | 55  | 55    |         |
 └ brightness              | ✓       | 55       |     | 55    |         |
+└ colorTemperature        | ✓       |          |     |       |         |
 └ contrast                | ✓       | 55       |     | 55    |         |
-└ saturation              | ✓       | 55       |     | 55    |         |
-└ sharpness               | ✓       | 55       |     | 55    |         |
+└ exposureCompensation    | ✓       |          |     |       |         |
+└ exposureMode            | ✓       |          |     |       |         |
+└ fillLightMode           | ✓       |          |     |       |         |
+└ focusMode               | ✓       |          |     |       |         |
 └ imageHeight             | ✓       |          |     |       |         |
 └ imageWidth              | ✓       |          |     |       |         |
+└ iso                     | ✓       |          |     |       |         |
+└ pointsOfInterest        | ✓       |          |     |       |         |
+└ redEyeReduction         | ✓       |          |     |       |         |
+└ saturation              | ✓       | 55       |     | 55    |         |
+└ sharpness               | ✓       | 55       |     | 55    |         |
+└ whiteBalanceMode        | ✓       |          |     |       |         |
 └ zoom                    | ✓       | 55       |     | 55    |         |
-└ fillLightMode           | ✓       |          |     |       |         |
-grabFrame                 | ✓       | ✓        | ✓   | ✓     | ✓       |
+MediaSettingsRange.step   | 56      | 56       |     | 56    |         |
 
 Note: Values of `PhotoCapabilities`/`Settings` depend on the actual capture device configurability (e.g. if the device doesn't support `zoom`, `zoom.min` and `zoom.max` will both be 0) .
 
