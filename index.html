@@ -83,7 +83,7 @@
         <ol>
          <li>If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the constructor is not `live`, return <a>a promise rejected with</a> a new <code>DOMException</code> ([[!WebIDL]]) whose name is <code>"InvalidStateError"</code>. Otherwise:</li>
 
-         <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps: 
+         <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:
          <ol>
           <li>Gather data from the <code>MediaStreamTrack</code> into a <code>Blob</code> containing a single still image. The method of doing this will depend on the underlying device.   Devices may temporarily stop streaming data, reconfigure themselves with the appropriate photo settings, take the photo, and then resume streaming.  In this case, the stopping and restarting of streaming SHOULD cause <code>mute</code> and <code>unmute</code> events to fire on the Track in question.  </li>
 
@@ -154,7 +154,7 @@
         <ol>
          <li>If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the constructor is not `live`, return <a>a promise rejected with</a> a new <code>DOMException</code> ([[!WebIDL]]) whose name is <code>"InvalidStateError"</code>. Otherwise:</li>
 
-         <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps: 
+         <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:
          <ol>
           <li>Gather data from the <code>MediaStreamTrack</code> into an <code><a href="https://www.w3.org/TR/html51/webappapis.html#webappapis-images">ImageBitmap</a></code> object (as defined in [[!HTML51]]). The <code>width</code> and <code>height</code> of the <code><a href="https://www.w3.org/TR/html51/webappapis.html#webappapis-images">ImageBitmap</a></code> object are derived from the constraints of the <code>MediaStreamTrack</code>. </li>
 
@@ -360,6 +360,7 @@
             readonly attribute long max;
             readonly attribute long min;
             readonly attribute long current;
+            readonly attribute long step;
         };
       </pre>
     </div>
@@ -372,6 +373,8 @@
         <dd>The minimum value of this setting</dd>
         <dt><dfn><code>current</code></dfn> of type <span class="idlAttrType"><a>long</a></span>, readonly</dt>
         <dd>The current value of this setting</dd>
+        <dt><dfn><code>step</code></dfn> of type <span class="idlAttrType"><a>long</a></span>, readonly</dt>
+        <dd>The minimum difference between consecutive values of this setting.</dd>
       </dl>
     </section>
     </section>
@@ -496,7 +499,7 @@
     }
 
     function failedToGetMedia(e) {
-        console.log('Stream failure: ' + e);
+        console.error('Stream failure: ' + e);
     }
     </pre>
 
@@ -526,7 +529,7 @@
     }
 
     function failedToGetMedia(e) {
-        console.log('Stream failure: ' + e);
+        console.error('Stream failure: ' + e);
     }
     </pre>
 
@@ -542,7 +545,7 @@
       var canvas = document.getElementById('frame');
       var videoDevice;
       navigator.mediaDevices.getUserMedia({video: true}).then(gotMedia).catch(failedToGetMedia);
-    
+
       function gotMedia(mediastream) {
           // Extract video track.
           videoDevice = mediastream.getVideoTracks()[0];
@@ -552,20 +555,20 @@
             captureDevice.grabFrame().then(processFrame).catch(e => console.error(e));
           }, 1000);
       }
-    
+
       function processFrame(imgData) {
           canvas.width = imgData.width;
           canvas.height = imgData.height;
           canvas.getContext('2d').drawImage(imgData, 0, 0);
       }
-    
+
       function stopFunction(e) {
           clearInterval(interval);
           videoDevice.stop();
       }
 
       function failedToGetMedia(e) {
-          console.log('Stream failure:', e);
+          console.error('Stream failure:', e);
       }
     &lt;/script&gt;
     &lt;/body&gt;
