@@ -500,33 +500,36 @@
     }
     </pre>
 
-    ##### Taking a picture with Red Eye Reduction supported and used
+    ##### Update device zoom
     <pre class='example'>
-    navigator.mediaDevices.getUserMedia({video: true}).then(gotMedia, failedToGetMedia);
+    var imageCapture;
+
+    navigator.mediaDevices.getUserMedia({video: true}).then(gotMedia).catch(failedToGetMedia);
 
     function gotMedia(mediastream) {
-        // Extract video track.
-        var videoDevice = mediastream.getVideoTracks()[0];
-        // Check if this device supports a picture mode...
-        var captureDevice = new ImageCapture(videoDevice);
-        if (captureDevice) {
-            if (captureDevice.photoCapabilities.redEyeReduction) {
-                captureDevice.setOptions({redEyeReductionSetting:true})
-                    .then(captureDevice.takePhoto()
-                    .then(showPicture(blob),function(error){alert("Failed to take photo");}));
-            } else {
-                console.log('No red eye reduction');
-            }
-        }
-    }
+      const track = mediastream.getVideoTracks()[0];
+      imageCapture = new ImageCapture(track);
+      imageCapture.getPhotoCapabilities().then(photoCapabilities => {
 
-    function showPicture(e) {
-        var img = document.querySelector("img");
-        img.src = URL.createObjectURL(e.data);
+        // Check whether zoom is supported or not.
+        if (!photoCapabilities.zoom.min && !photoCapabilities.zoom.max) {
+          return;
+        }
+
+        // Map zoom to a slider element.
+        const input = document.querySelector('input[type="range"]');
+        input.min = photoCapabilities.zoom.min;
+        input.max = photoCapabilities.zoom.max;
+        input.step = photoCapabilities.zoom.step;
+        input.value = photoCapabilities.zoom.current;
+        input.oninput = function(event) {
+          imageCapture.setOptions({zoom: event.target.value});
+        }
+      });
     }
 
     function failedToGetMedia(e) {
-        console.log('Stream failure: ' + e);
+      console.error('Stream failure: ' + e);
     }
     </pre>
 
