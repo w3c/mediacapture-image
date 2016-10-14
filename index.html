@@ -552,7 +552,6 @@
       function gotMedia(mediastream) {
           // Extract video track.
           videoDevice = mediastream.getVideoTracks()[0];
-          // Check if this device supports a picture mode...
           var captureDevice = new ImageCapture(videoDevice);
           interval = setInterval(function () {
             captureDevice.grabFrame().then(processFrame).catch(e => console.error(e));
