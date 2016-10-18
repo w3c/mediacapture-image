@@ -12,7 +12,7 @@ different browsers.
 
 # Chrome
 Work is in progress:
-* Notes updated **2016-10-13**.
+* Notes updated **October 2016**.
 * The `chrome://flags/#enable-experimental-web-platform-features` flag must be enabled
 
 Feature/Platform          | Android | ChromeOS | Mac | Linux | Windows |
@@ -37,7 +37,7 @@ setOptions()              | ✓       | 55       | 55  | 55    |         |
 └ sharpness               | ✓       | 55       |     | 55    |         |
 └ whiteBalanceMode        | ✓       |          |     |       |         |
 └ zoom                    | ✓       | 55       |     | 55    |         |
-MediaSettingsRange.step   | 56      | 56       |     | 56    |         |
+MediaSettingsRange.step   | 55      | 55       |     | 55    |         |
 
 Note: Values of `PhotoCapabilities`/`Settings` depend on the actual capture device configurability (e.g. if the device doesn't support `zoom`, `zoom.min` and `zoom.max` will both be 0) .
 
