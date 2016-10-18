@@ -1,11 +1,11 @@
 image-capture
 =============
 
-Image Capturing for the Web.
+Image Capturing for the Web :camera:
 
 This document specifies methods and camera settings to produce photographic image capture.
 
-Specification && Samples
+Specification and Samples
 -------------
 * [Image Capture (a.k.a. MediaStream Image Capture) Specification](https://w3c.github.io/mediacapture-image/), including code samples.
 * [Implementation Status](implementation-status.md) describes various browser support on platforms, hardware compatibility, polyfills.
