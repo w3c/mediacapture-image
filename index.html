@@ -466,77 +466,67 @@
     <section id="examples" class="informative">
     <h2>Examples</h2>
 
-    ##### Grabbing a Frame for Post-Processing
+    <div class="note">
+    Slightly modified versions of these examples can be found in e.g. <a href="https://codepen.io/collection/nLeobQ/">this codepen collection</a>.
+    </div>
+
+    ##### Update camera zoom and <code>takePhoto()</code>
+    <div class="note">
+    An expanded version of this example can be found in e.g. <a href="https://codepen.io/miguelao/pen/BLPzKx/left?editors=1010">this codepen</a>.
+    </div>
     <pre class='example'>
-    navigator.mediaDevices.getUserMedia({video: true}).then(gotMedia, failedToGetMedia);
+    &lt;html&gt;
+    &lt;body&gt;
+    &lt;p>&lt;video/>&lt;/p>
+    &lt;p>&lt;img/>&lt;/p>
+    &lt;input type="range">
+    &lt;script&gt;
+      var imageCapture;
 
-    function gotMedia(mediastream) {
-        // Extract video track.
-        var videoTrack = mediastream.getVideoTracks()[0];
-        // Check if this device supports a picture mode...
-        var captureDevice = new ImageCapture(videoTrack);
-        if (captureDevice) {
-            captureDevice.grabFrame().then(processFrame(imgData));
-        }
-    }
+      navigator.mediaDevices.getUserMedia({video: true})
+          .then(gotMedia)
+          .catch(e => { console.error('getUserMedia() failed: ', e); });
 
-    function processFrame(e) {
-        imgData = e.imageData;
-        width = imgData.width;
-        height = imgData.height;
-        for (j = 3; j &lt; imgData.width; j += 4) {
-            // Set all alpha values to medium opacity
-            imgData.data[j] = 128;
-        }
+      function gotMedia(mediastream) {
+        const track = mediastream.getVideoTracks()[0];
+        imageCapture = new ImageCapture(track);
+        imageCapture.getPhotoCapabilities().then(photoCapabilities => {
 
-        // Create new ImageObject with the modified pixel values
-        var canvas = document.createElement('canvas');
-        ctx = canvas.getContext("2d");
-        newImg = ctx.createImageData(width,height);
-        for (j = 0; j &lt; imgData.width; j++) {
-            newImg.data[j] = imgData.data[j];
-        }
+          // Check whether zoom is supported or not.
+          if (!photoCapabilities.zoom.min && !photoCapabilities.zoom.max) {
+            return;
+          }
 
-        // ... and do something with the modified image ...
-        }
-    }
+          // Map zoom to a slider element.
+          const input = document.querySelector('input[type="range"]');
+          input.min = photoCapabilities.zoom.min;
+          input.max = photoCapabilities.zoom.max;
+          input.step = photoCapabilities.zoom.step;
+          input.value = photoCapabilities.zoom.current;
+          input.oninput = function(event) {
+            imageCapture.setOptions({zoom: event.target.value});
+          }
+        })
+        .catch(e => {
+          console.error("Uh, oh, getPhotoCapabilities() failed: ", e);
+        });
+      }
 
-    function failedToGetMedia(e) {
-        console.error('Stream failure: ' + e);
-    }
-    </pre>
+      function takePhoto() {
+        imageCapturer.takePhoto()
+          .then((blob) => {
+            console.log("Photo taken: " + blob.type + ", " + blob.size + "B")
 
-    ##### Update device zoom
-    <pre class='example'>
-    var imageCapture;
-
-    navigator.mediaDevices.getUserMedia({video: true}).then(gotMedia).catch(failedToGetMedia);
-
-    function gotMedia(mediastream) {
-      const track = mediastream.getVideoTracks()[0];
-      imageCapture = new ImageCapture(track);
-      imageCapture.getPhotoCapabilities().then(photoCapabilities => {
-
-        // Check whether zoom is supported or not.
-        if (!photoCapabilities.zoom.min && !photoCapabilities.zoom.max) {
-          return;
-        }
-
-        // Map zoom to a slider element.
-        const input = document.querySelector('input[type="range"]');
-        input.min = photoCapabilities.zoom.min;
-        input.max = photoCapabilities.zoom.max;
-        input.step = photoCapabilities.zoom.step;
-        input.value = photoCapabilities.zoom.current;
-        input.oninput = function(event) {
-          imageCapture.setOptions({zoom: event.target.value});
-        }
-      });
-    }
-
-    function failedToGetMedia(e) {
-      console.error('Stream failure: ' + e);
-    }
+            const imageTag = document.querySelector('input[type="img"]');
+            imageTag.src = URL.createObjectURL(blob);
+          })
+          .catch((err) => {
+            console.error("takePhoto() failed: ", e);
+          });
+      }
+    &lt;/script&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
     </pre>
 
     ##### Repeated grabbing of a frame
@@ -546,42 +536,92 @@
     <pre class='example'>
     &lt;html&gt;
     &lt;body&gt;
-    &lt;p&gt;&lt;canvas id="frame"&gt;&lt;/canvas&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;canvas id="canvas"&gt;&lt;/canvas&gt;&lt;/p&gt;
     &lt;button onclick="stopFunction()"&gt;Stop frame grab&lt;/button&gt;
     &lt;script&gt;
       'use strict';
       var interval;
-      var canvas = document.getElementById('frame');
-      var videoDevice;
-      navigator.mediaDevices.getUserMedia({video: true}).then(gotMedia).catch(failedToGetMedia);
+      var canvas = document.getElementById('canvas');
+      var videoTrack;
+      navigator.mediaDevices.getUserMedia({video: true})
+          .then(gotMedia)
+          .catch(e => { console.error('getUserMedia() failed: ', e); });
 
       function gotMedia(mediastream) {
-          // Extract video track.
-          videoDevice = mediastream.getVideoTracks()[0];
-          var captureDevice = new ImageCapture(videoDevice);
-          interval = setInterval(function () {
-            captureDevice.grabFrame().then(processFrame).catch(e => console.error(e));
-          }, 1000);
+        videoTrack = mediastream.getVideoTracks()[0];
+        var imageCapture = new ImageCapture(videoTrack);
+        interval = setInterval(function () {
+          imageCapture.grabFrame()
+              .then(processFrame)
+              .catch(e => console.error('grabFrame() failed: ' + e));
+        }, 1000);
       }
 
       function processFrame(imgData) {
-          canvas.width = imgData.width;
-          canvas.height = imgData.height;
-          canvas.getContext('2d').drawImage(imgData, 0, 0);
+        canvas.width = imgData.width;
+        canvas.height = imgData.height;
+        canvas.getContext('2d').drawImage(imgData, 0, 0);
       }
 
       function stopFunction(e) {
-          clearInterval(interval);
-          videoDevice.stop();
-      }
-
-      function failedToGetMedia(e) {
-          console.error('Stream failure:', e);
+        clearInterval(interval);
+        videoTrack.stop();
       }
     &lt;/script&gt;
     &lt;/body&gt;
     &lt;/html&gt;
     </pre>
+
+    ##### Grabbing a Frame and Post-Processing
+    <div class="note">
+    The following example can also be found in e.g. <a href="https://codepen.io/miguelao/pen/mAzXpN/left?editors=1010">this codepen</a> with minimal modifications.
+    </div>
+    <pre class='example'>
+    &lt;html&gt;
+    &lt;body&gt;
+    &lt;p&gt;&lt;canvas id="canvas"&gt;&lt;/canvas&gt;&lt;/p&gt;
+    &lt;script&gt;
+      var canvas = document.getElementById('canvas');
+      var videoTrack;
+      navigator.mediaDevices.getUserMedia({video: true})
+          .then(gotMedia)
+          .catch(e => { console.error('getUserMedia() failed: ', e); });
+
+      function gotMedia(mediastream) {
+        videoTrack = mediastream.getVideoTracks()[0];
+        var imageCapture = new ImageCapture(videoTrack);
+        imageCapture.grabFrame()
+            .then(processFrame(imgData))
+            .catch(e => console.error('grabFrame() failed: ' + e));
+      }
+
+      function processFrame(imageBitmap) {
+        videoTrack.stop();
+
+        // |imageBitmap| pixels are not directly accessible: we need to paint
+        // the grabbed frame onto a &lt;canvas&gt;, then getImageData() from it.
+        var ctx = canvas.getContext('2d');
+        canvas.width = imageBitmap.width;
+        canvas.height = imageBitmap.height;
+        ctx.drawImage(imageBitmap, 0, 0);
+
+        // Read back the pixels from the &lt;canvas&gt;, and invert the colors.
+        var imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
+
+        var data = imageData.data;
+        for (var i = 0; i < data.length; i += 4) {
+          data[i]     = 255 - data[i];     // red
+          data[i + 1] = 255 - data[i + 1]; // green
+          data[i + 2] = 255 - data[i + 2]; // blue
+        }
+        // Finally, draw the inverted image to the &lt;canvas&gt;
+        ctx.putImageData(imageData, 0, 0);
+      }
+    &lt;/script&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;
+    </pre>
+
     </section>
   </body>
 </html>
