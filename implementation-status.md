@@ -37,7 +37,7 @@ setOptions()              | ✓       | 55       | 55  | 55    |         |
 └ sharpness               | ✓       | 55       |     | 55    |         |
 └ whiteBalanceMode        | ✓       |          |     |       |         |
 └ zoom                    | ✓       | 55       |     | 55    |         |
-MediaSettingsRange.step   | 55      | 55       |     | 55    |         |
+MediaSettingsRange.step   | 56      | 56       |     | 56    |         |
 
 Note: Values of `PhotoCapabilities`/`Settings` depend on the actual capture device configurability (e.g. if the device doesn't support `zoom`, `zoom.min` and `zoom.max` will both be 0) .
 
