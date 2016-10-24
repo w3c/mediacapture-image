@@ -15,29 +15,29 @@ Work is in progress:
 * Notes updated **October 2016**.
 * The `chrome://flags/#enable-experimental-web-platform-features` flag must be enabled
 
-Feature/Platform          | Android | ChromeOS | Mac | Linux | Windows |
-------------------------- | :-----: | :------: | :-: | :---: | :-----: |
-grabFrame()               | ✓       | ✓        | ✓   | ✓     | ✓       |
-takePhoto()               | ✓       | 55       | ✓   | 55    | 55      |
-getPhotoCapabilities()    | ✓       | 55       | 55  | 55    |         |
-setOptions()              | ✓       | 55       | 55  | 55    |         |
-└ brightness              | ✓       | 55       |     | 55    |         |
-└ colorTemperature        | ✓       |          |     |       |         |
-└ contrast                | ✓       | 55       |     | 55    |         |
-└ exposureCompensation    | ✓       |          |     |       |         |
-└ exposureMode            | ✓       |          |     |       |         |
-└ fillLightMode           | ✓       |          |     |       |         |
-└ focusMode               | ✓       |          |     |       |         |
-└ imageHeight             | ✓       |          |     |       |         |
-└ imageWidth              | ✓       |          |     |       |         |
-└ iso                     | ✓       |          |     |       |         |
-└ pointsOfInterest        | ✓       |          |     |       |         |
-└ redEyeReduction         | ✓       |          |     |       |         |
-└ saturation              | ✓       | 55       |     | 55    |         |
-└ sharpness               | ✓       | 55       |     | 55    |         |
-└ whiteBalanceMode        | ✓       |          |     |       |         |
-└ zoom                    | ✓       | 55       |     | 55    |         |
-MediaSettingsRange.step   | 56      | 56       |     | 56    |         |
+Feature/Platform          | Android | Linux/ChromeOS | Mac | Windows |
+------------------------- | :-----: | :------------: | :-: | :-----: |
+grabFrame()               | ✓       | ✓              | ✓   | ✓       |
+takePhoto()               | ✓       | 55.0.2866      | ✓   |55.0.2867|
+getPhotoCapabilities()    |         |                |     |         |
+setOptions()              |         |                |     |         |
+└ brightness              |         | 55.0.2881      |     |         |
+└ colorTemperature        | ✓       | 55.0.2881      |     |         |
+└ contrast                |         | 55.0.2881      |     |         |
+└ exposureCompensation    | ✓       |                |     |         |
+└ exposureMode            | ✓       |                |     |         |
+└ fillLightMode           | ✓       |                |     |         |
+└ focusMode               | ✓       |                |     |         |
+└ imageHeight             | ✓       |                |     |         |
+└ imageWidth              | ✓       |                |     |         |
+└ iso                     | ✓       |                |     |         |
+└ pointsOfInterest        | ✓       |                |     |         |
+└ redEyeReduction         | ✓       |                |     |         |
+└ saturation              |         | 55.0.2881      |     |         |
+└ sharpness               |         | 55.0.2881      |     |         |
+└ whiteBalanceMode        | ✓       |                |     |         |
+└ zoom                    | ✓       | 55.0.2873      |     |         |
+MediaSettingsRange.step   |56.0.2891| 56.0.2891      |     |         |
 
 Note: Values of `PhotoCapabilities`/`Settings` depend on the actual capture device configurability (e.g. if the device doesn't support `zoom`, `zoom.min` and `zoom.max` will both be 0) .
 
