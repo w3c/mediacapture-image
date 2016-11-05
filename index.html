@@ -209,7 +209,7 @@
         <dt><dfn><code>exposureMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
         <dd>This reflects the current <a href="#dfn-exposure">exposure</a> mode setting.</dd>
         <dt><dfn><code>exposureCompensation</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
-        <dd>This reflects the current <a href="#dfn-exposure-compensation">exposure compensation</a> setting and permitted range.  Values are signed integers multiplied by 100 (to avoid using floating point). The supported range can be, and usually is, centered around 0 EV.</dd>
+        <dd>This reflects the current <a href="#dfn-exposure-compensation">exposure compensation</a> setting and permitted range.  The supported range can be, and usually is, centered around 0 EV.</dd>
         <dt><dfn><code>iso</code></dfn> of type <span class="idlAttrType"><a>MediaSettingsRange</a></span></dt>
         <dd>This reflects the current camera <a href="#dfn-iso">ISO</a> setting and permitted range.  Values are numeric.</dd>
         <dt><dfn><code>redEyeReduction</code></dfn> of type <span class="idlAttrType"><a>boolean</a></span></dt>
@@ -324,7 +324,7 @@
         This field is only significant if <a>whiteBalanceMode</a> is <code>manual</code>.</dd>
         <dt><dfn><code>exposureMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
         <dd>This reflects the desired <a href="#dfn-exposure">exposure</a> mode setting.  Acceptable values are of type <span class="idlAttrType"><a>MeteringMode</a></span>.</dd>
-        <dt><dfn><code>exposureCompensation</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span>, multiplied by 100 (to avoid using floating point). </dt>
+        <dt><dfn><code>exposureCompensation</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span>. </dt>
         <dd>This reflects the desired <a href="#dfn-exposure-compensation">exposure compensation</a> setting.  A value of 0 EV is interpreted as no exposure compensation.</dd>
         <dt><dfn><code>iso</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
         <dd>This reflects the desired camera <a href="#dfn-iso">ISO</a> setting.</dd>
@@ -360,23 +360,23 @@
     <div>
       <pre class="idl">
         interface MediaSettingsRange {
-            readonly attribute long max;
-            readonly attribute long min;
-            readonly attribute long current;
-            readonly attribute long step;
+            readonly attribute float max;
+            readonly attribute float min;
+            readonly attribute float current;
+            readonly attribute float step;
         };
       </pre>
     </div>
     <section>
       <h2>Attributes</h2>
       <dl data-link-for="MediaSettingsRange" data-dfn-for="MediaSettingsRange" class="attributes">
-        <dt><dfn><code>max</code></dfn> of type <span class="idlAttrType"><a>long</a></span>, readonly</dt>
+        <dt><dfn><code>max</code></dfn> of type <span class="idlAttrType"><a>float</a></span>, readonly</dt>
         <dd>The maximum value of this setting</dd>
-        <dt><dfn><code>min</code></dfn> of type <span class="idlAttrType"><a>long</a></span>, readonly</dt>
+        <dt><dfn><code>min</code></dfn> of type <span class="idlAttrType"><a>float</a></span>, readonly</dt>
         <dd>The minimum value of this setting</dd>
-        <dt><dfn><code>current</code></dfn> of type <span class="idlAttrType"><a>long</a></span>, readonly</dt>
+        <dt><dfn><code>current</code></dfn> of type <span class="idlAttrType"><a>float</a></span>, readonly</dt>
         <dd>The current value of this setting</dd>
-        <dt><dfn><code>step</code></dfn> of type <span class="idlAttrType"><a>long</a></span>, readonly</dt>
+        <dt><dfn><code>step</code></dfn> of type <span class="idlAttrType"><a>float</a></span>, readonly</dt>
         <dd>The minimum difference between consecutive values of this setting.</dd>
       </dl>
     </section>
