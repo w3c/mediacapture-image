@@ -293,22 +293,22 @@
     <div>
       <pre class="idl">
         dictionary PhotoSettings {
-             MeteringMode  whiteBalanceMode;
-             unsigned long colorTemperature;
-             MeteringMode  exposureMode;
-             unsigned long exposureCompensation;
-             unsigned long iso;
-             boolean       redEyeReduction;
-             MeteringMode  focusMode;
+             MeteringMode whiteBalanceMode;
+             double colorTemperature;
+             MeteringMode exposureMode;
+             double exposureCompensation;
+             double iso;
+             boolean redEyeReduction;
+             MeteringMode focusMode;
              sequence&lt;Point2D> pointsOfInterest;
 
-             unsigned long brightness;
-             unsigned long contrast;
-             unsigned long saturation;
-             unsigned long sharpness;
-             unsigned long zoom;
-             unsigned long imageHeight;
-             unsigned long imageWidth;
+             double brightness;
+             double contrast;
+             double saturation;
+             double sharpness;
+             double zoom;
+             double imageHeight;
+             double imageWidth;
              FillLightMode fillLightMode;
         };
       </pre>
@@ -319,14 +319,14 @@
       <dl data-link-for="PhotoSettings" data-dfn-for="PhotoSettings" class="attributes">
         <dt><dfn><code>whiteBalanceMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
         <dd>This reflects the desired <a href="#dfn-white-balance-mode">white balance mode</a> setting.</dd>
-        <dt><dfn><code>colorTemperature</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
+        <dt><dfn><code>colorTemperature</code></dfn> of type <span class="idlAttrType"><a>double</a></span></dt>
         <dd><a href="#dfn-color-temperature">Color temperature</a> to be used for the white balance calculation of the scene.
         This field is only significant if <a>whiteBalanceMode</a> is <code>manual</code>.</dd>
         <dt><dfn><code>exposureMode</code></dfn> of type <span class="idlAttrType"><a>MeteringMode</a></span></dt>
         <dd>This reflects the desired <a href="#dfn-exposure">exposure</a> mode setting.  Acceptable values are of type <span class="idlAttrType"><a>MeteringMode</a></span>.</dd>
-        <dt><dfn><code>exposureCompensation</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span>. </dt>
+        <dt><dfn><code>exposureCompensation</code></dfn> of type <span class="idlAttrType"><a>double</a></span>. </dt>
         <dd>This reflects the desired <a href="#dfn-exposure-compensation">exposure compensation</a> setting.  A value of 0 EV is interpreted as no exposure compensation.</dd>
-        <dt><dfn><code>iso</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
+        <dt><dfn><code>iso</code></dfn> of type <span class="idlAttrType"><a>double</a></span></dt>
         <dd>This reflects the desired camera <a href="#dfn-iso">ISO</a> setting.</dd>
         <dt><dfn><code>redEyeReduction</code></dfn> of type <span class="idlAttrType"><a>boolean</a></span></dt>
         <dd>This reflects whether camera red eye reduction is desired</dd>
@@ -334,19 +334,19 @@
         <dd>This reflects the desired focus mode setting.  Acceptable values are of type <span class="idlAttrType"><a>MeteringMode</a></span>.</dd>
         <dt><dfn><code>pointsOfInterest</code></dfn> of type <span class="idlAttrType">sequence&lt;<a>Point2D</a>&gt;</span></dt>
         <dd>A <code>sequence</code> of <a>Point2D</a>s to be used as metering area centers for other settings, e.g. Focus, Exposure and Auto White Balance.</dd>
-        <dt><dfn><code>brightness</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
+        <dt><dfn><code>brightness</code></dfn> of type <span class="idlAttrType"><a>double</a></span></dt>
         <dd>This reflects the desired <a href="#dfn-brightness">brightness</a> setting of the camera.</dd>
-        <dt><dfn><code>contrast</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
+        <dt><dfn><code>contrast</code></dfn> of type <span class="idlAttrType"><a>double</a></span></dt>
         <dd>This reflects the desired <a href="#dfn-contrast">contrast</a> setting of the camera.</dd>
-        <dt><dfn><code>saturation</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
+        <dt><dfn><code>saturation</code></dfn> of type <span class="idlAttrType"><a>double</a></span></dt>
         <dd>This reflects the desired <a href="#dfn-saturation">saturation</a> setting of the camera.</dd>
-        <dt><dfn><code>sharpness</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
+        <dt><dfn><code>sharpness</code></dfn> of type <span class="idlAttrType"><a>double</a></span></dt>
         <dd>This reflects the desired <a href="#dfn-sharpness">sharpness</a> setting of the camera.</dd>
-        <dt><dfn><code>zoom</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
+        <dt><dfn><code>zoom</code></dfn> of type <span class="idlAttrType"><a>double</a></span></dt>
         <dd>This reflects the desired zoom setting of the camera.</dd>
-        <dt><dfn><code>imageHeight</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
+        <dt><dfn><code>imageHeight</code></dfn> of type <span class="idlAttrType"><a>double</a></span></dt>
         <dd>This reflects the desired image height.  The UA MUST select the closest height value this setting if it supports a discrete set of height options.</dd>
-        <dt><dfn><code>imageWidth</code></dfn> of type <span class="idlAttrType"><a>unsigned long</a></span></dt>
+        <dt><dfn><code>imageWidth</code></dfn> of type <span class="idlAttrType"><a>double</a></span></dt>
         <dd>This reflects the desired image width. The UA MUST select the closest width value this setting if it supports a discrete set of width options.</dd>
         <dt><dfn><code>fillLightMode</code></dfn> of type <span class="idlAttrType"><a>FillLightMode</a></span></dt>
         <dd>This reflects the desired fill light (flash) mode setting.  Acceptable values are of type <code>FillLightMode</code>.</dd>
