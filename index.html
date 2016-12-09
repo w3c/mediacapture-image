@@ -150,6 +150,10 @@
                 </tr>
               </tbody>
             </table>
+          <div class="note">
+            Many of the <a>PhotoSettings</a> represent hardware capabilities that cannot be modified instaneously, e.g. `zoom` or `focus`. <a href="#dom-imagecapture-getphotocapabilities">setOptions()</a> will resolve the Promise as soon as possible. The actual status of any field can be monitored <a href="#dom-imagecapture-getphotocapabilities">getPhotoCapabilities()</a>.
+          </div>
+
         </dd>
 
         <dt><dfn><code>grabFrame</code></dfn></dt>
