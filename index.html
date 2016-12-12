@@ -31,16 +31,16 @@
        [Constructor(MediaStreamTrack track)]
         interface ImageCapture {
           readonly attribute MediaStreamTrack videoStreamTrack;
-          Promise&lt;Blob&gt;                 takePhoto ();
-          Promise&lt;PhotoCapabilities&gt;    getPhotoCapabilities ();
-          Promise&lt;void&gt;                 setOptions (PhotoSettings? photoSettings);
-          Promise&lt;ImageBitmap&gt;          grabFrame ();
+          Promise&lt;Blob&gt;                 takePhoto();
+          Promise&lt;PhotoCapabilities&gt;    getPhotoCapabilities();
+          Promise&lt;void&gt;                 setOptions(PhotoSettings? photoSettings);
+          Promise&lt;ImageBitmap&gt;          grabFrame();
         };
       </pre>
     </div>
 
      <div class="note">
-      <a href="#dom-imagecapture-takephoto"><code>takePhoto()</code></a> method returns a captured image encoded in the form of a <a href="https://www.w3.org/TR/FileAPI/#blob"><code>Blob</code></a>, whereas <a href="#dom-imagecapture-grabframe"><code>grabFrame()</code></a> returns a snapshot of the `MediaStreamTrack` video feed in the form of a non encoded <a href="https://www.w3.org/TR/html51/webappapis.html#imagebitmap-imagebitmap"><code>ImageBitmap</code></a>.
+      <a href="#dom-imagecapture-takephoto"><code>takePhoto()</code></a> returns a captured image encoded in the form of a <a href="https://www.w3.org/TR/FileAPI/#blob"><code>Blob</code></a>, whereas <a href="#dom-imagecapture-grabframe"><code>grabFrame()</code></a> returns a snapshot of the `MediaStreamTrack` video feed in the form of a non-encoded <a href="https://www.w3.org/TR/html51/webappapis.html#imagebitmap-imagebitmap"><code>ImageBitmap</code></a>.
     </div>
 
     <section>
@@ -81,14 +81,18 @@
     <section>
       <h2>Methods</h2>
       <dl data-link-for="ImageCapture" data-dfn-for="ImageCapture" class="methods">
-        <dt><dfn><code>takePhoto</code></dfn></dt>
-        <dd><code>takePhoto()</code> produces the result of a single photographic exposure using the video capture device sourcing the <a><code>videoStreamTrack</code></a>, applying any <a><code>PhotoSettings</code></a> previously configured, and returning an encoded image in the form of a <a><code>Blob</code></a> if successful. When this method is invoked:
+        <dt><dfn data-lt="takePhoto()">takePhoto</dfn>()</dt>
+        <dd><a>takePhoto()</a> produces the result of a single photographic exposure using the video capture device sourcing the <a>videoStreamTrack</a>, applying any <a><code>PhotoSettings</code></a> previously configured, and returning an encoded image in the form of a <code><a href="https://www.w3.org/TR/FileAPI/#blob">Blob</a></code> if successful. When this method is invoked:
         <ol>
          <li>If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the constructor is not `live`, return <a>a promise rejected with</a> a new <code>DOMException</code> ([[!WebIDL]]) whose name is <code>"InvalidStateError"</code>. Otherwise:</li>
 
          <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:
          <ol>
-          <li>Gather data from the <code>MediaStreamTrack</code> into a <code>Blob</code> containing a single still image. The method of doing this will depend on the underlying device.   Devices may temporarily stop streaming data, reconfigure themselves with the appropriate photo settings, take the photo, and then resume streaming.  In this case, the stopping and restarting of streaming SHOULD cause <code>mute</code> and <code>unmute</code> events to fire on the Track in question.  </li>
+          <li>Gather data from the <code>MediaStreamTrack</code> into a <code>Blob</code> containing a single still image. The method of doing this will depend on the underlying device.
+          <div class="note">
+          Devices MAY temporarily stop streaming data, reconfigure themselves with the appropriate photo settings, take the photo, and then resume streaming.  In this case, the stopping and restarting of streaming SHOULD cause <code>mute</code> and <code>unmute</code> events to fire on the Track in question.
+          </div>
+          </li>
 
           <li>If the UA is unable to execute the <code>takePhoto()</code> method for any reason (for example, upon invocation of multiple takePhoto() method calls in rapid succession), then the UA MUST return <a>a promise rejected with</a> a new <code>DOMException</code> ([[!WebIDL]]) whose name is <code>"UnknownError"</code>.</li>
 
@@ -97,7 +101,7 @@
         </ol>
         </dd>
 
-        <dt><dfn><code>getPhotoCapabilities</code></dfn></dt>
+        <dt><dfn data-lt="getPhotoCapabilities()">getPhotoCapabilities</dfn>()</dt>
         <dd>When  <code>getPhotoCapabilities()</code> is used to retrieve the ranges of available configuration options and their current setting values, if any. When this method is invoked:
         <ol>
          <li>If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the constructor is not `live`, return <a>a promise rejected with</a> a new <code>DOMException</code> ([[!WebIDL]]) whose name is <code>"InvalidStateError"</code>. </li>
@@ -111,8 +115,8 @@
         </ol>
         </dd>
 
-        <dt><dfn><code>setOptions</code></dfn></dt>
-        <dd><code>setOptions()</code> is used to configure a number of settings affecting the image capture and/or the current video feed in <a><code>videoStreamTrack</code></a>. When this method is invoked:
+        <dt><dfn data-lt="setOptions()">setOptions</dfn>()</dt>
+        <dd><code>setOptions()</code> is used to configure a number of settings affecting the image capture and/or the current video feed in <a>videoStreamTrack</a>. When this method is invoked:
         <ol>
          <li>If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the constructor is not `live`, return <a>a promise rejected with</a> a new <code>DOMException</code> ([[!WebIDL]]) whose name is <code>"InvalidStateError"</code>. </li>
 
@@ -120,11 +124,11 @@
 
          <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:
          <ol>
-           <li>Configure the underlying image capture device with the <code>settings</code> parameter.</li>
+           <li>Configure the underlying image capture device with the <code>settings</code> parameter.  . </li>
            <li>If the UA cannot successfully apply the settings, then the UA MUST return <a>a promise rejected with</a> a new <code>DOMException</code> ([[!WebIDL]]) whose name is <code>"OperationError"</code>. </li>
            <li>If the UA can successfully apply the settings, then the UA MUST return a resolved promise.
            <div class="note">
-            If the UA can successfully apply the settings, the effect MAY be reflected, if visible at all, in <a><code>videoStreamTrack</code></a>.
+            If the UA can successfully apply the settings, the effect MAY be reflected, if visible at all, in <a>videoStreamTrack</a>. The result of applying some of the settings MAY force the latter to not satisfy its <a href="https://www.w3.org/TR/mediacapture-streams/#tracks-and-constraints">constraints</a> (e.g. the frame rate). The result of applying some of this constraints might not be immediate.
            </div></li>
          </ol></li>
         </ol>
@@ -152,20 +156,25 @@
             </table>
         </dd>
 
-        <dt><dfn><code>grabFrame</code></dfn></dt>
-        <dd><code>grabFrame()</code> takes a snapshot of the live video being held in the <a><code>videoStreamTrack</code></a>, returning an <a><code>ImageBitmap</code></a> if successful. When this method is invoked:
+        <dt><dfn data-lt="grabFrame()">grabFrame</dfn>()</dt>
+        <dd><code>grabFrame()</code> takes a snapshot of the live video being held in the <a><code>videoStreamTrack</code></a>, returning an <a href="https://www.w3.org/TR/html51/webappapis.html#webappapis-images">ImageBitmap</a> if successful. <code>grabFrame()</code> returns data only once upon being invoked. When this method is invoked:
         <ol>
-         <li>If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the constructor is not `live`, return <a>a promise rejected with</a> a new <code>DOMException</code> ([[!WebIDL]]) whose name is <code>"InvalidStateError"</code>. Otherwise:</li>
+         <li>If the <code>readyState</code> of the <code>MediaStreamTrack</code> provided in the constructor is not `live`, return <a>a promise rejected with</a> a new <code>DOMException</code> ([[!WebIDL]]) whose name is <code>"InvalidStateError"</code>.</li>
 
          <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:
          <ol>
-          <li>Gather data from the <code>MediaStreamTrack</code> into an <code><a href="https://www.w3.org/TR/html51/webappapis.html#webappapis-images">ImageBitmap</a></code> object (as defined in [[!HTML51]]). The <code>width</code> and <code>height</code> of the <code><a href="https://www.w3.org/TR/html51/webappapis.html#webappapis-images">ImageBitmap</a></code> object are derived from the constraints of the <code>MediaStreamTrack</code>. </li>
+          <li>Gather data from the <code>MediaStreamTrack</code> into an <code><a href="https://www.w3.org/TR/html51/webappapis.html#webappapis-images">ImageBitmap</a></code> object (as defined in [[!HTML51]]). The <code>width</code> and <code>height</code> of the <code><a href="https://www.w3.org/TR/html51/webappapis.html#webappapis-images">ImageBitmap</a></code> object are derived from the constraints of the <code>MediaStreamTrack</code>.
+          <div class="note">
+          The result of <a>grabFrame()</a> is affected by any options set by <a>setOptions()</a> if those are reflected in <a><code>videoStreamTrack</code></a>.
+          </div>
+          </li>
 
-          <li>Returns a resolved promise with a newly created <code><a href="https://www.w3.org/TR/html51/webappapis.html#webappapis-images">ImageBitmap</a></code> object. (Note: <code>grabFrame()</code> returns data only once upon being invoked).</li>
+          <li>Returns a resolved promise with a newly created <code><a href="https://www.w3.org/TR/html51/webappapis.html#webappapis-images">ImageBitmap</a></code> object.</li>
 
           <li>If the UA is unable to execute the <code>grabFrame()</code> method for any reason (for example, upon invocation of multiple <code>grabFrame()</code>/<code>takePhoto()</code> method calls in rapid succession), then the UA MUST return <a>a promise rejected with</a> a new <code>DOMException</code> ([[!WebIDL]]) whose name is <code>"UnknownError"</code>.</li>
 
-         </ol></li>
+         </ol>
+         </li>
         </ol>
         </dd>
       </dl>
