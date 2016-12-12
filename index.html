@@ -124,7 +124,7 @@
 
          <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:
          <ol>
-           <li>Configure the underlying image capture device with the <code>settings</code> parameter.  . </li>
+           <li>Configure the underlying image capture device with the <code>settings</code> parameter.</li>
            <li>If the UA cannot successfully apply the settings, then the UA MUST return <a>a promise rejected with</a> a new <code>DOMException</code> ([[!WebIDL]]) whose name is <code>"OperationError"</code>. </li>
            <li>If the UA can successfully apply the settings, then the UA MUST return a resolved promise.
            <div class="note">
