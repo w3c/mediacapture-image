@@ -24,6 +24,7 @@ var respecConfig = {
     isRecTrack:   false,
     isNoTrack:    true,
     format:       'markdown',
+    implementationReportURI: "https://github.com/w3c/mediacapture-image/blob/gh-pages/implementation-status.md",
 
     otherLinks: [
     {
