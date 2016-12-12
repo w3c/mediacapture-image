@@ -51,6 +51,12 @@ var respecConfig = {
         href: "http://www.iso.org/iso/catalogue_detail.htm?csnumber=37777",
         date: "15 April 2006",
         publisher: "ISO/IEC",
+      },
+      "UVC": {
+        title: "USB Device Class Definition for Video Devices",
+        href: "http://www.usb.org/developers/docs/devclass_docs/",
+        date: "9 August 2012",
+        publisher: "USB Implementers Forum Inc.",
       }
     }
 };
