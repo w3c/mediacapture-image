@@ -43,6 +43,14 @@ var respecConfig = {
           href: "https://github.com/w3c/mediacapture-image/issues/new"
         }
       ]
+    }],
+
+    localBiblio: {
+      "ISO12232": {
+        title: "Photography -- Digital still cameras -- Determination of exposure index, ISO speed ratings, standard output sensitivity, and recommended exposure index",
+        href: "http://www.iso.org/iso/catalogue_detail.htm?csnumber=37777",
+        date: "15 April 2006",
+        publisher: "ISO/IEC",
+      }
     }
-  ]
 };
