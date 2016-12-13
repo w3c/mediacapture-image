@@ -24,25 +24,29 @@ var respecConfig = {
     isRecTrack:   false,
     isNoTrack:    true,
     format:       'markdown',
-    implementationReportURI: "https://github.com/w3c/mediacapture-image/blob/gh-pages/implementation-status.md",
 
     otherLinks: [
     {
       key: "Participate",
-      data: [
-        {
-          value: "Mailing list",
-          href: "https://lists.w3.org/Archives/Public/public-media-capture/"
-        },
-        {
-          value: "Browse open issues",
-          href: "https://github.com/w3c/mediacapture-image/issues"
-        },
-        {
-          value: "File a bug",
-          href: "https://github.com/w3c/mediacapture-image/issues/new"
-        }
-      ]
+      data: [{
+        value: "Mailing list",
+        href: "https://lists.w3.org/Archives/Public/public-media-capture/"
+      }, {
+        value: "Browse open issues",
+        href: "https://github.com/w3c/mediacapture-image/issues"
+      }, {
+        value: "File a bug",
+        href: "https://github.com/w3c/mediacapture-image/issues/new"
+      }]
+    }, {
+      key: 'Implementation',
+      data: [{
+        value: 'Implementation Status',
+        href: 'https://github.com/w3c/mediacapture-image/blob/gh-pages/implementation-status.md'
+      }, {
+        value: 'Can I use Image Capture?',
+        href: 'http://caniuse.com/#feat=imagecapture'
+      }]
     }],
 
     localBiblio: {
