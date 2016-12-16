@@ -3,6 +3,7 @@
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
   <title>"MediaStream Image Capture"</title>
+  <meta content="ED" name="w3c-status">
 <style data-fill-with="stylesheet">/******************************************************************************
  *                   Style sheet for the W3C specifications                   *
  *
@@ -1176,6 +1177,12 @@ Possible extra rowspan handling
 		}
 	}
 </style>
+<style>
+    body {
+      background: url("https://www.w3.org/StyleSheets/TR/logo-ED") top left no-repeat white;
+      background-attachment: fixed;
+    }
+  </style>
   <meta content="Bikeshed version ef1890cdd543bf72ba03a0fa16211e40619adc83" name="generator">
 <style>
 table {
@@ -1438,7 +1445,7 @@ pre.idl.highlight { color: #708090; }
         </style>
  <body class="h-entry">
   <div class="head">
-   <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
+   <p data-fill-with="logo"><a class="logo" href="http://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">"MediaStream Image Capture"</h1>
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2016-12-16">16 December 2016</time></span></h2>
    <div data-fill-with="spec-metadata">
@@ -1446,7 +1453,7 @@ pre.idl.highlight { color: #708090; }
      <dt>This version:
      <dd><a class="u-url" href="https://w3c.github.io/mediacapture-image/">https://w3c.github.io/mediacapture-image/</a>
      <dt>Feedback:
-     <dd><span><a href="mailto:public-webappsec@w3.org?subject=%5Bimage-capture%5D%20YOUR%20TOPIC%20HERE">public-webappsec@w3.org</a> with subject line “<kbd>[image-capture] <i data-lt="">… message topic …</i></kbd>” (<a href="https://lists.w3.org/Archives/Public/public-webappsec/" rel="discussion">archives</a>)</span>
+     <dd><span><a href="mailto:public-device-apis@w3.org?subject=%5Bimage-capture%5D%20YOUR%20TOPIC%20HERE">public-device-apis@w3.org</a> with subject line “<kbd>[image-capture] <i data-lt="">… message topic …</i></kbd>” (<a href="https://lists.w3.org/Archives/Public/public-device-apis/" rel="discussion">archives</a>)</span>
      <dt class="editor">Editors:
      <dd class="editor p-author h-card vcard" data-editor-id="54271"><span class="p-name fn">Giridhar Mandyam</span> (<span class="p-org org">Qualcomm Innovation Center Inc.</span>)
      <dd class="editor p-author h-card vcard" data-editor-id="82825"><a class="p-name fn u-email email" href="mailto:mcasas@google.com">Miguel Casas-Sanchez</a> (<span class="p-org org">Google Inc.</span>)
@@ -1461,33 +1468,32 @@ pre.idl.highlight { color: #708090; }
     </dl>
    </div>
    <div data-fill-with="warning"></div>
-   <p class="copyright" data-fill-with="copyright"><a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2016 <a href="https://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="https://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="https://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="https://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>). W3C <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="https://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="https://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply. </p>
+   <p class="copyright" data-fill-with="copyright"><a href="http://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2016 <a href="http://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="http://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>, <a href="http://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>, <a href="http://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>). W3C <a href="http://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>, <a href="http://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and <a href="http://www.w3.org/Consortium/Legal/2015/copyright-software-and-document">permissive document license</a> rules apply. </p>
    <hr title="Separator for header">
   </div>
   <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
   <div class="p-summary" data-fill-with="abstract">
    <p>This document specifies methods and camera settings to produce photographic image capture. The source of images is, or can be referenced via a <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code>.</p>
   </div>
-  <h2 class="no-num no-toc no-ref heading settled" id="status"><span class="content">Status of this document</span></h2>
+  <h2 class="no-num no-toc no-ref heading settled" id="sotd"><span class="content">Status of this document</span></h2>
   <div data-fill-with="status">
    <p> This is a public copy of the editors’ draft.
 	It is provided for discussion only and may change at any moment.
 	Its publication here does not imply endorsement of its contents by W3C.
 	Don’t cite this document other than as work in progress. </p>
-   <p> <strong>Changes to this document may be tracked at <a href="https://github.com/w3c/webappsec">https://github.com/w3c/webappsec</a>.</strong> </p>
-   <p> The (<a href="https://lists.w3.org/Archives/Public/public-webappsec/">archived</a>) public mailing list <a href="mailto:public-webappsec@w3.org?Subject=%5Bimage-capture%5D%20PUT%20SUBJECT%20HERE">public-webappsec@w3.org</a> (see <a href="https://www.w3.org/Mail/Request">instructions</a>)
-	is preferred for discussion of this specification.
+   <p> If you wish to make comments regarding this document, please send them to <a href="mailto:public-device-apis@w3.org?Subject=%5Bimage-capture%5D%20PUT%20SUBJECT%20HERE">public-device-apis@w3.org</a> (<a href="mailto:public-device-apis-request@w3.org?subject=subscribe">subscribe</a>, <a href="http://lists.w3.org/Archives/Public/public-device-apis/">archives</a>).
 	When sending e-mail,
 	please put the text “image-capture” in the subject,
 	preferably like this:
-	“[image-capture] <em>…summary of comment…</em>” </p>
-   <p> This document was produced by the <a href="https://www.w3.org/2011/webappsec/">Web Application Security Working Group</a>. </p>
+	“[image-capture] <em>…summary of comment…</em>”.
+	All comments are welcome. </p>
+   <p> This document was produced by the <a href="http://www.w3.org/2009/dap/">Device and Sensors Working Group</a>. </p>
    <p> This document was produced by a group operating under
-	the <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 W3C Patent Policy</a>.
-	W3C maintains a <a href="https://www.w3.org/2004/01/pp-impl/49309/status" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group;
+	the <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 W3C Patent Policy</a>.
+	W3C maintains a <a href="https://www.w3.org/2004/01/pp-impl/43696/status" rel="disclosure">public list of any patent disclosures</a> made in connection with the deliverables of the group;
 	that page also includes instructions for disclosing a patent.
-	An individual who has actual knowledge of a patent which the individual believes contains <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section 6 of the W3C Patent Policy</a>. </p>
-   <p> This document is governed by the <a href="https://www.w3.org/2015/Process-20150901/" id="w3c_process_revision">1 September 2015 W3C Process Document</a>. </p>
+	An individual who has actual knowledge of a patent which the individual believes contains <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential Claim(s)</a> must disclose the information in accordance with <a href="http://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section 6 of the W3C Patent Policy</a>. </p>
+   <p> This document is governed by the <a href="http://www.w3.org/2015/Process-20150901/" id="w3c_process_revision">1 September 2015 W3C Process Document</a>. </p>
    <p></p>
   </div>
   <div data-fill-with="at-risk"></div>
@@ -1544,6 +1550,7 @@ pre.idl.highlight { color: #708090; }
      <ol class="toc">
       <li><a href="#conventions"><span class="secno"></span> <span class="content">Document conventions</span></a>
       <li><a href="#conformant-algorithms"><span class="secno"></span> <span class="content">Conformant Algorithms</span></a>
+      <li><a href="#conformance-classes"><span class="secno"></span> <span class="content">Conformance Classes</span></a>
      </ol>
     <li>
      <a href="#index"><span class="secno"></span> <span class="content">Index</span></a>
@@ -2064,37 +2071,44 @@ pre.idl.highlight { color: #708090; }
 </pre>
    </div>
   </main>
-  <h2 class="no-ref no-num heading settled" id="conformance"><span class="content">Conformance</span><a class="self-link" href="#conformance"></a></h2>
-  <h3 class="no-ref no-num heading settled" id="conventions"><span class="content">Document conventions</span><a class="self-link" href="#conventions"></a></h3>
-  <p>Conformance requirements are expressed with a combination of
+  <div data-fill-with="conformance">
+   <h2 class="no-ref no-num heading settled" id="conformance"><span class="content">Conformance</span><a class="self-link" href="#conformance"></a></h2>
+   <h3 class="no-ref no-num heading settled" id="conventions"><span class="content">Document conventions</span><a class="self-link" href="#conventions"></a></h3>
+   <p>Conformance requirements are expressed with a combination of
     descriptive assertions and RFC 2119 terminology. The key words “MUST”,
     “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”,
     “RECOMMENDED”, “MAY”, and “OPTIONAL” in the normative parts of this
     document are to be interpreted as described in RFC 2119.
     However, for readability, these words do not appear in all uppercase
     letters in this specification. </p>
-  <p>All of the text of this specification is normative except sections
+   <p>All of the text of this specification is normative except sections
     explicitly marked as non-normative, examples, and notes. <a data-link-type="biblio" href="#biblio-rfc2119">[RFC2119]</a></p>
-  <p>Examples in this specification are introduced with the words “for example”
+   <p>Examples in this specification are introduced with the words “for example”
     or are set apart from the normative text with <code>class="example"</code>,
     like this: </p>
-  <div class="example" id="example-f839f6c8">
-   <a class="self-link" href="#example-f839f6c8"></a> 
-   <p>This is an example of an informative example.</p>
-  </div>
-  <p>Informative notes begin with the word “Note” and are set apart from the
+   <div class="example" id="example-f839f6c8">
+    <a class="self-link" href="#example-f839f6c8"></a> 
+    <p>This is an example of an informative example.</p>
+   </div>
+   <p>Informative notes begin with the word “Note” and are set apart from the
     normative text with <code>class="note"</code>, like this: </p>
-  <p class="note" role="note">Note, this is an informative note.</p>
-  <h3 class="no-ref no-num heading settled" id="conformant-algorithms"><span class="content">Conformant Algorithms</span><a class="self-link" href="#conformant-algorithms"></a></h3>
-  <p>Requirements phrased in the imperative as part of algorithms (such as
+   <p class="note" role="note">Note, this is an informative note.</p>
+   <h3 class="no-ref no-num heading settled" id="conformant-algorithms"><span class="content">Conformant Algorithms</span><a class="self-link" href="#conformant-algorithms"></a></h3>
+   <p>Requirements phrased in the imperative as part of algorithms (such as
     "strip any leading space characters" or "return false and abort these
     steps") are to be interpreted with the meaning of the key word ("must",
     "should", "may", etc) used in introducing the algorithm.</p>
-  <p>Conformance requirements phrased as algorithms or specific steps can be
+   <p>Conformance requirements phrased as algorithms or specific steps can be
     implemented in any manner, so long as the end result is equivalent. In
     particular, the algorithms defined in this specification are intended to
     be easy to understand and are not intended to be performant. Implementers
     are encouraged to optimize.</p>
+   <h3 class="no-ref no-num heading settled" id="conformance-classes"><span class="content">Conformance Classes</span><a class="self-link" href="#conformance-classes"></a></h3>
+   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="conformant-user-agent">conformant user agent<a class="self-link" href="#conformant-user-agent"></a></dfn> must implement all the requirements
+    listed in this specification that are applicable to user agents.</p>
+   <p>A <dfn data-dfn-type="dfn" data-noexport="" id="conformant-server">conformant server<a class="self-link" href="#conformant-server"></a></dfn> must implement all the requirements listed
+    in this specification that are applicable to servers.</p>
+  </div>
 <script src="https://www.w3.org/scripts/TR/2016/fixup.js"></script>
   <h2 class="no-num no-ref heading settled" id="index"><span class="content">Index</span><a class="self-link" href="#index"></a></h2>
   <h3 class="no-num no-ref heading settled" id="index-defined-here"><span class="content">Terms defined by this specification</span><a class="self-link" href="#index-defined-here"></a></h3>
@@ -2114,6 +2128,8 @@ pre.idl.highlight { color: #708090; }
      <li><a href="#dom-photosettings-colortemperature">dict-member for PhotoSettings</a><span>, in §4.1</span>
     </ul>
    <li><a href="#color-temperature">Color temperature</a><span>, in §3.2</span>
+   <li><a href="#conformant-server">conformant server</a><span>, in §Unnumbered section</span>
+   <li><a href="#conformant-user-agent">conformant user agent</a><span>, in §Unnumbered section</span>
    <li><a href="#dom-meteringmode-continuous">continuous</a><span>, in §7.1</span>
    <li><a href="#contrast">Contrast</a><span>, in §3.2</span>
    <li>
