@@ -84,10 +84,10 @@ interface ImageCapture {
       </tr>
       <tr>
         <td class="prmName">track</td>
-        <td class="prmType"><code>MediaStreamTrack</code></td>
+        <td class="prmType">{{MediaStreamTrack}}</td>
         <td class="prmNullFalse"><span role="img" aria-label="False">&#10008;</span></td>
         <td class="prmOptFalse"><span role="img" aria-label="False">&#10008;</span></td>
-        <td class="prmDesc">The {{MediaStreamTrack}} to be used as source of data. This will be the value of the {{videoStreamTrack}} attribute. The {{MediaStreamTrack}} passed to the constructor MUST have its {{kind}} attribute set to <code>"video"</code> otherwise a {{DOMException}} of type {{NotSupportedError} will be thrown.</td>
+        <td class="prmDesc">The {{MediaStreamTrack}} to be used as source of data. This will be the value of the {{videoStreamTrack}} attribute. The {{MediaStreamTrack}} passed to the constructor MUST have its {{kind}} attribute set to <code>"video"</code> otherwise a {{DOMException}} of type {{NotSupportedError}} will be thrown.</td>
       </tr>
     </tbody>
   </table>
@@ -167,13 +167,13 @@ interface ImageCapture {
       </tr>
       <tr>
         <td class="prmName">settings</td>
-        <td class="prmType"><code>PhotoSettings</code></td>
+        <td class="prmType">{{PhotoSettings}}</td>
         <td class="prmNullTrue"><span role="img" aria-label=
         "True">&#10004;</span></td>
         <td class="prmOptFalse"><span role="img" aria-label=
         "False">&#10008;</span></td>
         <td class="prmDesc">
-          The <code>PhotoSettings</code> dictionary to be applied.
+          The {{PhotoSettings}} dictionary to be applied.
         </td>
       </tr>
     </tbody>
@@ -333,22 +333,22 @@ interface ImageCapture {
 
 <pre class="idl">
   dictionary PhotoSettings {
-    MeteringMode whiteBalanceMode;
-    double colorTemperature;
-    MeteringMode exposureMode;
-    double exposureCompensation;
-    double iso;
-    boolean redEyeReduction;
-    MeteringMode focusMode;
+    MeteringMode      whiteBalanceMode;
+    double            colorTemperature;
+    MeteringMode      exposureMode;
+    double            exposureCompensation;
+    double            iso;
+    boolean           redEyeReduction;
+    MeteringMode      focusMode;
     sequence&lt;Point2D> pointsOfInterest;
 
-    double brightness;
-    double contrast;
-    double saturation;
-    double sharpness;
-    double zoom;
-    double imageHeight;
-    double imageWidth;
+    double        brightness;
+    double        contrast;
+    double        saturation;
+    double        sharpness;
+    double        zoom;
+    double        imageHeight;
+    double        imageWidth;
     FillLightMode fillLightMode;
   };
 </pre>
