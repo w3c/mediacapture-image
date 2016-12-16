@@ -19,6 +19,24 @@ Abstract: This document specifies methods and camera settings to produce photogr
 
 </pre>
 
+<style>
+table {
+  border-collapse: collapse;
+  border-left-style: hidden;
+  border-right-style: hidden;
+  text-align: left;
+}
+table caption {
+  font-weight: bold;
+  padding: 3px;
+  text-align: left;
+}
+table td, table th {
+  border: 1px solid black;
+  padding: 3px;
+}
+</style>
+
 # Introduction # {#introduction}
 
 The API defined in this document captures images from a photographic device referenced through a valid {{MediaStreamTrack}}. The produced image can be in the form of a {{Blob}} (see {{takePhoto()}} method) or as a {{ImageBitmap}} (see {{grabFrame()}}). Picture-specific settings can be optionally provided as arguments that can be applied to the device for the capture.
@@ -43,31 +61,49 @@ interface ImageCapture {
 {{takePhoto()}} returns a captured image encoded in the form of a {{Blob}}, whereas {{grabFrame()}} returns a snapshot of the {{videoStreamTrack}} video feed in the form of a non-encoded {{ImageBitmap}}.
 </div>
 
-## Attributes
+## Attributes ## {##imagecapture-attributes}
 
 <dl class="domintro">
   <dt><dfn attribute for="ImageCapture"><code>videoStreamTrack</code></dfn></dt>
   <dd>The {{MediaStreamTrack}} passed into the constructor.</dd>
 </dl>
 
-## Methods
+## Methods ## {##imagecapture-methods}
 
 <dl class="domintro">
   <dt><dfn constructor for="ImageCapture"><code>ImageCapture(MediaStreamTrack track)</code></dfn></dt>
-  <dd>Constructs a new <a>ImageCapture</a>. The {{MediaStreamTrack}} |track| will be the value of the {{videoStreamTrack}} attribute. The {{MediaStreamTrack}} passed to the constructor MUST have its `kind` attribute set to "<code>video</code>" otherwise a {{DOMException}} of type {{NotSupportedError}} will be thrown.
+  <dd>
+  <table class="parameters">
+    <tbody>
+      <tr>
+        <th>Parameter</th>
+        <th>Type</th>
+        <th>Nullable</th>
+        <th>Optional</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td class="prmName">track</td>
+        <td class="prmType"><code>MediaStreamTrack</code></td>
+        <td class="prmNullFalse"><span role="img" aria-label="False">&#10008;</span></td>
+        <td class="prmOptFalse"><span role="img" aria-label="False">&#10008;</span></td>
+        <td class="prmDesc">The {{MediaStreamTrack}} to be used as source of data. This will be the value of the {{videoStreamTrack}} attribute. The {{MediaStreamTrack}} passed to the constructor MUST have its {{kind}} attribute set to <code>"video"</code> otherwise a {{DOMException}} of type {{NotSupportedError} will be thrown.</td>
+      </tr>
+    </tbody>
+  </table>
   </dd>
 
   <dt><dfn method for="ImageCapture"><code>takePhoto()</code></dfn></dt>
   <dd>
   {{takePhoto()}} produces the result of a single photographic exposure using the video capture device sourcing the {{videoStreamTrack}}, applying any {{PhotoSettings}} previously configured, and returning an encoded image in the form of a {{Blob}} if successful. When this method is invoked:
   <ol>
-    <li>If the <code>readyState</code> of {{videoStreamTrack}} provided in the constructor is not `live`, return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{InvalidStateError}}. </li>
+    <li>If the <code>readyState</code> of {{videoStreamTrack}} provided in the constructor is not {{live}}, return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{InvalidStateError}}. </li>
 
     <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:
     <ol>
       <li>Gather data from {{videoStreamTrack}} into a {{Blob}} containing a single still image. The method of doing this will depend on the underlying device.
       <div class="note">
-        Devices MAY temporarily stop streaming data, reconfigure themselves with the appropriate photo settings, take the photo, and then resume streaming.  In this case, the stopping and restarting of streaming SHOULD cause {{mute}} and {{unmute}} events to fire on the track in question.
+        Devices MAY temporarily stop streaming data, reconfigure themselves with the appropriate photo settings, take the photo, and then resume streaming.  In this case, the stopping and restarting of streaming SHOULD cause {{onmute}} and {{onunmute}} events to fire on the track in question.
       </div>
       </li>
 
@@ -107,14 +143,14 @@ interface ImageCapture {
 
     <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:
     <ol>
-      <li>Configure the underlying image capture device with the {{settings}} parameter.</li>
+      <li>Configure the underlying image capture device with the `settings` parameter.</li>
 
       <li>If the UA cannot successfully apply the settings, then the UA MUST return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{OperationError}}.</li>
 
       <li>If the UA can successfully apply the settings, then the UA MUST return a resolved promise.
 
       <div class="note">
-        If the UA can successfully apply the settings, the effect MAY be reflected, if visible at all, in {{videoStreamTrack}}. The result of applying some of the settings MAY force the latter to not satisfy its {{constraints}} (e.g. the frame rate). The result of applying some of this constraints might not be immediate.
+        If the UA can successfully apply the settings, the effect MAY be reflected, if visible at all, in {{videoStreamTrack}}. The result of applying some of the settings MAY force the latter to not satisfy its `constraints` (e.g. the frame rate). The result of applying some of this constraints might not be immediate.
       </div></li>
     </ol>
     </li>
@@ -195,7 +231,7 @@ interface ImageCapture {
   };
 </pre>
 
-## Attributes
+## Attributes ## {##photocapabilities-attributes}
 
 <dl class="domintro">
   <dt><dfn attribute for="PhotoCapabilities"><code>whiteBalanceMode</code></dfn></dt>
@@ -220,22 +256,33 @@ interface ImageCapture {
   <dd>This reflects the current focus mode setting.</dd>
 
   <dt><dfn attribute for="PhotoCapabilities"><code>brightness</code></dfn></dt>
-  <dd></dd>
+  <dd>This reflects the current <a>brightness</a> setting of the camera and permitted range. Values are numeric. Increasing values indicate increasing brightness.</dd>
+
   <dt><dfn attribute for="PhotoCapabilities"><code>contrast</code></dfn></dt>
-  <dd></dd>
+  <dd>This reflects the current <a>contrast</a> setting of the camera and permitted range. Values are numeric.  Increasing values indicate increasing contrast.</dd>
+
   <dt><dfn attribute for="PhotoCapabilities"><code>saturation</code></dfn></dt>
-  <dd></dd>
+  <dd>This reflects the current <a>saturation</a> setting of the camera and permitted range. Values are numeric. Increasing values indicate increasing saturation.</dd>
+
   <dt><dfn attribute for="PhotoCapabilities"><code>sharpness</code></dfn></dt>
-  <dd></dd>
+  <dd>This reflects the current <a>sharpness</a> setting of the camera and permitted range. Values are numeric. Increasing values indicate increasing sharpness, and the minimum value always implies no sharpness enhancement or processing.</dd>
+
   <dt><dfn attribute for="PhotoCapabilities"><code>imageHeight</code></dfn></dt>
-  <dd></dd>
+  <dd>This reflects the image height range supported by the UA and the current height setting.</dd>
+
   <dt><dfn attribute for="PhotoCapabilities"><code>imageWidth</code></dfn></dt>
-  <dd></dd>
+  <dd>This reflects the image width range supported by the UA and the current width setting.</dd>
+
   <dt><dfn attribute for="PhotoCapabilities"><code>zoom</code></dfn></dt>
-  <dd></dd>
+  <dd>This reflects the zoom value range supported by the UA and the current zoom setting.</dd>
+
   <dt><dfn attribute for="PhotoCapabilities"><code>fillLightMode</code></dfn></dt>
-  <dd></dd>
+  <dd>This reflects the current fill light (flash) mode setting.  Values are of type {{FillLightMode}}.</dd>
 </dl>
+
+<div class="note">
+  The supported resolutions are presented as segregated {{imageWidth}} and {{imageHeight}} ranges to prevent increasing the fingerprinting surface and to allow the UA to make a best-effort decision with regards to actual hardware configuration.
+</div>
 
 ## Discussion
 <em>This section is non-normative.</em>
@@ -243,17 +290,17 @@ interface ImageCapture {
   <p>The <code>PhotoCapabilities</code> interface provides the photo-specific settings and their current values.  Many of these fields mirror hardware capabilities that are hard to define since can be implemented in a number of ways.  Moreover, hardware manufacturers tend to publish vague definitions to protect their intellectual property.  The following definitions are assumed for individual settings and are provided for information purposes:</p>
   <ol>
     <li><i><dfn>White balance mode</dfn></i> is a setting that cameras use to adjust for different color temperatures.  <dfn>Color temperature</dfn> is the temperature of background light (usually measured in Kelvin).  This setting can usually be automatically and continuously determined by the implementation, but it's also common to offer a `manual` mode in which the estimated temperature of the scene illumination is hinted to the implementation.  Typical temperature ranges for popular modes are provided below:
-        <table class="simple">
-        <tr> <th>Mode</th> <th>Kelvin range</th> </tr>
-        <tr> <td>incandescent</td> <td>2500-3500</td> </tr>
-        <tr> <td>fluorescent</td> <td>4000-5000</td> </tr>
-        <tr> <td>warm-fluorescent</td> <td>5000-5500</td> </tr>
-        <tr> <td>daylight</td> <td>5500-6500</td> </tr>
-        <tr> <td>cloudy-daylight</td> <td>6500-8000</td> </tr>
-        <tr> <td>twilight</td> <td>8000-9000</td> </tr>
-        <tr> <td>shade</td> <td>9000-10000</td> </tr>
-        </table>
-        </li>
+    <table class="simple">
+      <tr> <th>Mode</th> <th>Kelvin range</th> </tr>
+      <tr> <td>incandescent</td> <td>2500-3500</td> </tr>
+      <tr> <td>fluorescent</td> <td>4000-5000</td> </tr>
+      <tr> <td>warm-fluorescent</td> <td>5000-5500</td> </tr>
+      <tr> <td>daylight</td> <td>5500-6500</td> </tr>
+      <tr> <td>cloudy-daylight</td> <td>6500-8000</td> </tr>
+      <tr> <td>twilight</td> <td>8000-9000</td> </tr>
+      <tr> <td>shade</td> <td>9000-10000</td> </tr>
+    </table>
+    </li>
 
     <li><i><dfn>Exposure</dfn></i> is the amount of time during which light is allowed to fall on the photosensitive device.  Auto-exposure mode is a camera setting where the exposure levels are automatically adjusted by the implementation based on the subject of the photo.</li>
 
@@ -286,25 +333,82 @@ interface ImageCapture {
 
 <pre class="idl">
   dictionary PhotoSettings {
-       MeteringMode whiteBalanceMode;
-       double colorTemperature;
-       MeteringMode exposureMode;
-       double exposureCompensation;
-       double iso;
-       boolean redEyeReduction;
-       MeteringMode focusMode;
-       sequence&lt;Point2D> pointsOfInterest;
+    MeteringMode whiteBalanceMode;
+    double colorTemperature;
+    MeteringMode exposureMode;
+    double exposureCompensation;
+    double iso;
+    boolean redEyeReduction;
+    MeteringMode focusMode;
+    sequence&lt;Point2D> pointsOfInterest;
 
-       double brightness;
-       double contrast;
-       double saturation;
-       double sharpness;
-       double zoom;
-       double imageHeight;
-       double imageWidth;
-       FillLightMode fillLightMode;
+    double brightness;
+    double contrast;
+    double saturation;
+    double sharpness;
+    double zoom;
+    double imageHeight;
+    double imageWidth;
+    FillLightMode fillLightMode;
   };
 </pre>
+
+## Members ## {##photosettings-members}
+
+<dl class="domintro">
+  <dt><dfn dict-member for="PhotoSettings"><code>whiteBalanceMode</code></dfn></dt>
+  <dd>This reflects the desired <a>white balance mode</a> setting.</dd>
+
+  <dt><dfn dict-member for="PhotoSettings"><code>colorTemperature</code></dfn></dt>
+  <dd><a>Color temperature</a> to be used for the white balance calculation of the scene. This field is only significant if <a>whiteBalanceMode</a> is {{manual}}.</dd>
+
+  <dt><dfn dict-member for="PhotoSettings"><code>exposureMode</code></dfn></dt>
+  <dd>This reflects the desired <a>exposure</a> mode setting.  Acceptable values are of type {{MeteringMode}}.</dd>
+
+  <dt><dfn dict-member for="PhotoSettings"><code>exposureCompensation</code></dfn></dt>
+  <dd>This reflects the desired <a>exposure compensation</a> setting.  A value of 0 EV is interpreted as no exposure compensation.</dd>
+
+  <dt><dfn dict-member for="PhotoSettings"><code>iso</code></dfn></dt>
+  <dd>This reflects the desired camera <a>ISO</a> setting.</dd>
+
+  <dt><dfn dict-member for="PhotoSettings"><code>redEyeReduction</code></dfn></dt>
+  <dd>This reflects whether camera red eye reduction is desired</dd>
+
+  <dt><dfn dict-member for="PhotoSettings"><code>focusMode</code></dfn></dt>
+  <dd>This reflects the desired focus mode setting.  Acceptable values are of type {{MeteringMode}}.</dd>
+
+  <dt><dfn dict-member for="PhotoSettings"><code>pointsOfInterest</code></dfn></dt>
+  <dd>A `sequence` of {{Point2D}}s to be used as metering area centers for other settings, e.g. Focus, Exposure and Auto White Balance.
+  <div class="note">
+    A {{Point2D}} Point of Interest is interpreted to represent a pixel position in a normalized square space (`{x,y} &isin; [0.0, 1.0]`). The origin of coordinates `{x,y} = {0.0, 0.0}` represents the upper leftmost corner whereas the `{x,y} = {1.0, 1.0}` represents the lower rightmost corner: the <a href="#dom-point2d-x"><code>x</code></a> coordinate (columns) increases rightwards and the <a href="#dom-point2d-y"><code>y</code></a> coordinate (rows) increases downwards. Values beyond the mentioned limits will be clamped to the closest allowed value.
+  </div>
+  </dd>
+
+  <dt><dfn dict-member for="PhotoSettings"><code>brightness</code></dfn></dt>
+  <dd>This reflects the desired <a>brightness</a> setting of the camera.</dd>
+
+  <dt><dfn dict-member for="PhotoSettings"><code>contrast</code></dfn></dt>
+  <dd>This reflects the desired <a>contrast</a> setting of the camera.</dd>
+
+  <dt><dfn dict-member for="PhotoSettings"><code>saturation</code></dfn></dt>
+  <dd>This reflects the desired <a>saturation</a> setting of the camera.</dd>
+
+  <dt><dfn dict-member for="PhotoSettings"><code>sharpness</code></dfn></dt>
+  <dd>This reflects the desired <a>sharpness</a> setting of the camera.</dd>
+
+  <dt><dfn dict-member for="PhotoSettings"><code>zoom</code></dfn></dt>
+  <dd>This reflects the desired zoom setting of the camera.</dd>
+
+  <dt><dfn dict-member for="PhotoSettings"><code>imageWidth</code></dfn></dt>
+  <dd>This reflects the desired image height.  The UA MUST select the closest height value this setting if it supports a discrete set of height options.</dd>
+
+  <dt><dfn dict-member for="PhotoSettings"><code>imageHeight</code></dfn></dt>
+  <dd>This reflects the desired image width. The UA MUST select the closest width value this setting if it supports a discrete set of width options.</dd>
+
+  <dt><dfn dict-member for="PhotoSettings"><code>fillLightMode</code></dfn></dt>
+  <dd>This reflects the desired fill light (flash) mode setting.  Acceptable values are of type {{FillLightMode}}.</dd>
+
+</dl>
 
 # MediaSettingsRange
 
@@ -317,31 +421,83 @@ interface ImageCapture {
   };
 </pre>
 
-# FillLightMode
+## Attributes ## {##mediasettingsrange-attributes}
 
+<dl class="domintro">
+  <dt><dfn attribute for="MediaSettingsRange"><code>max</code></dfn></dt>
+  <dd>The maximum value of this setting</dd>
+
+  <dt><dfn attribute for="MediaSettingsRange"><code>min</code></dfn></dt>
+  <dd>The minimum value of this setting</dd>
+
+  <dt><dfn attribute for="MediaSettingsRange"><code>current</code></dfn></dt>
+  <dd>The current value of this setting</dd>
+
+  <dt><dfn attribute for="MediaSettingsRange"><code>step</code></dfn></dt>
+  <dd>The minimum difference between consecutive values of this setting.</dd>
+</dl>
+
+# FillLightMode
 
 <pre class="idl">
   enum FillLightMode {
-      "unavailable",
-      "auto",
-      "off",
-      "flash",
-      "torch"
+    "unavailable",
+    "auto",
+    "off",
+    "flash",
+    "torch"
   };
 </pre>
+
+## Values ## {##filllightmode-values}
+
+<dl class="domintro">
+  <dt><dfn enum-value for="FillLightMode"><code>unavailable</code></dfn></dt>
+  <dd>This source does not have an option to change fill light modes (e.g., the camera does not have a flash)</dd>
+
+  <dt><dfn enum-value for="FillLightMode"><code>auto</code></dfn></dt>
+  <dd>The video device's fill light will be enabled when required (typically low light conditions). Otherwise it will be off. Note that auto does not guarantee that a flash will fire when `takePhoto()` is called. Use {{flash}} to guarantee firing of the flash for  {{takePhoto()}} method.</dd>
+
+  <dt><dfn enum-value for="FillLightMode"><code>off</code></dfn></dt>
+  <dd>The source's fill light and/or flash will not be used.</dd>
+
+  <dt><dfn enum-value for="FillLightMode"><code>flash</code></dfn></dt>
+  <dd>This value will always cause the flash to fire for {{takePhoto()}} method.</dd>
+
+  <dt><dfn enum-value for="FillLightMode"><code>torch</code></dfn></dt>
+  <dd>The source's fill light will be turned on (and remain on) while the source {{videoStreamTrack}} is active</dd>
+</dl>
 
 # MeteringMode
 
 <pre class="idl">
   enum MeteringMode {
-      "none",
-      "manual",
-      "single-shot",
-      "continuous"
+    "none",
+    "manual",
+    "single-shot",
+    "continuous"
   };
 </pre>
 
+## Values ## {##meteringmode-values}
+
+<dl class="domintro">
+  <dt><dfn enum-value for="MeteringMode"><code>none</code></dfn></dt>
+  <dd>This source does not offer focus/exposure/white balance mode.  For setting, this is interpreted as a command to turn off the feature.</dd>
+
+  <dt><dfn enum-value for="MeteringMode"><code>manual</code></dfn></dt>
+  <dd>The capture device is set to manually control the lens position/exposure time/white balance, or such a mode is requested to be configured.</dd>
+
+  <dt><dfn enum-value for="MeteringMode"><code>single-shot</code></dfn></dt>
+  <dd>The capture device is configured for single-sweep autofocus/one-shot exposure/white balance calculation, or such a mode is requested.</dd>
+
+  <dt><dfn enum-value for="MeteringMode"><code>continuous</code></dfn></dt>
+  <dd>The capture device is configured for continuous focusing for near-zero shutter-lag/continuous auto exposure/white balance calculation, or such continuous focus hunting/exposure/white balance calculation mode is requested.</dd>
+</dl>
+
 # Point2D
+
+A {{Point2D}} represents a location in a two dimensional space. The origin of coordinates is situated in the upper leftmost corner of the space.
 
 <pre class="idl">
   dictionary Point2D {
@@ -349,6 +505,16 @@ interface ImageCapture {
     double y = 0.0;
   };
 </pre>
+
+## Members ## {##point2d-members}
+
+<dl class="domintro">
+  <dt><dfn dict-member for="Point2D"><code>x</code></dfn></dt>
+  <dd>Value of the horizontal (abscissa) coordinate.</dd>
+
+  <dt><dfn dict-member for="Point2D"><code>y</code></dfn></dt>
+  <dd>Value of the vertical (ordinate) coordinate.</dd>
+</dl>
 
 # Examples # {#examples}
 
@@ -419,7 +585,7 @@ interface ImageCapture {
   </pre>
 </div>
 
-## Repeated grabbing of a frame
+## Repeated grabbing of a frame with {{grabFrame()}}
 <div class="note">
   The following example can also be found in e.g. <a href="https://codepen.io/miguelao/pen/wzxxwp/left?editors=1010">this codepen</a> with minimal modifications.
 </div>
@@ -523,12 +689,18 @@ interface ImageCapture {
 
 
 
-
-
-
-
 <pre class="anchors">
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: MediaStreamTrack; url: mediastreamtrack
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: onmute; url: widl-MediaStreamTrack-onmute
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: onunmute; url: widl-MediaStreamTrack-onunmute
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: attribute; text: readyState; url: widl-MediaStreamTrack-readyState
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: attribute; text: kind; url: widl-MediaStreamTrack-kind
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: enum-value; text: live; url: idl-def-MediaStreamTrackState.live
 </pre>
 
 <pre class="link-defaults">
