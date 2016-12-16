@@ -1595,10 +1595,10 @@ pre.idl.highlight { color: #708090; }
         <th>Description
        <tr>
         <td class="prmName">track
-        <td class="prmType"><code>MediaStreamTrack</code>
+        <td class="prmType"><code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code>
         <td class="prmNullFalse"><span aria-label="False" role="img">✘</span>
         <td class="prmOptFalse"><span aria-label="False" role="img">✘</span>
-        <td class="prmDesc">The <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code> to be used as source of data. This will be the value of the <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-videostreamtrack" id="ref-for-dom-imagecapture-videostreamtrack-3">videoStreamTrack</a></code> attribute. The <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code> passed to the constructor MUST have its <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-kind">kind</a></code> attribute set to <code>"video"</code> otherwise a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> of type {{NotSupportedError} will be thrown.
+        <td class="prmDesc">The <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code> to be used as source of data. This will be the value of the <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-videostreamtrack" id="ref-for-dom-imagecapture-videostreamtrack-3">videoStreamTrack</a></code> attribute. The <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code> passed to the constructor MUST have its <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-kind">kind</a></code> attribute set to <code>"video"</code> otherwise a <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a></code> of type <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#notsupportederror">NotSupportedError</a></code> will be thrown.
      </table>
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="ImageCapture" data-dfn-type="method" data-export="" id="dom-imagecapture-takephoto"><code>takePhoto()</code></dfn>
     <dd>
@@ -1654,12 +1654,12 @@ pre.idl.highlight { color: #708090; }
         <th>Description
        <tr>
         <td class="prmName">settings
-        <td class="prmType"><code>PhotoSettings</code>
+        <td class="prmType"><code class="idl"><a data-link-type="idl" href="#dictdef-photosettings" id="ref-for-dictdef-photosettings-4">PhotoSettings</a></code>
         <td class="prmNullTrue"><span aria-label="True" role="img">✔</span>
         <td class="prmOptFalse"><span aria-label="False" role="img">✘</span>
-        <td class="prmDesc"> The <code>PhotoSettings</code> dictionary to be applied. 
+        <td class="prmDesc"> The <code class="idl"><a data-link-type="idl" href="#dictdef-photosettings" id="ref-for-dictdef-photosettings-5">PhotoSettings</a></code> dictionary to be applied. 
      </table>
-     <div class="note" role="note"> Many of the <code class="idl"><a data-link-type="idl" href="#dictdef-photosettings" id="ref-for-dictdef-photosettings-4">PhotoSettings</a></code> represent hardware capabilities that cannot be modified instaneously, e.g. `zoom` or `focus`. <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-setoptions" id="ref-for-dom-imagecapture-setoptions-3">setOptions()</a></code> will resolve the Promise as soon as possible. The actual status of any field can be monitored using <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-getphotocapabilities" id="ref-for-dom-imagecapture-getphotocapabilities-4">getPhotoCapabilities()</a></code>. </div>
+     <div class="note" role="note"> Many of the <code class="idl"><a data-link-type="idl" href="#dictdef-photosettings" id="ref-for-dictdef-photosettings-6">PhotoSettings</a></code> represent hardware capabilities that cannot be modified instaneously, e.g. `zoom` or `focus`. <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-setoptions" id="ref-for-dom-imagecapture-setoptions-3">setOptions()</a></code> will resolve the Promise as soon as possible. The actual status of any field can be monitored using <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-getphotocapabilities" id="ref-for-dom-imagecapture-getphotocapabilities-4">getPhotoCapabilities()</a></code>. </div>
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="ImageCapture" data-dfn-type="method" data-export="" id="dom-imagecapture-grabframe"><code>grabFrame()</code></dfn>
     <dd>
      <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-grabframe" id="ref-for-dom-imagecapture-grabframe-4">grabFrame()</a></code> takes a snapshot of the live video being held in <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-videostreamtrack" id="ref-for-dom-imagecapture-videostreamtrack-12">videoStreamTrack</a></code>, returning an <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/webappapis.html#imagebitmap">ImageBitmap</a></code> if successful. <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-grabframe" id="ref-for-dom-imagecapture-grabframe-5">grabFrame()</a></code> returns data only once upon being invoked. When this method is invoked: 
@@ -1779,22 +1779,22 @@ pre.idl.highlight { color: #708090; }
    </ol>
    <h2 class="heading settled" data-level="4" id="photosettings"><span class="secno">4. </span><span class="content">PhotoSettings</span><a class="self-link" href="#photosettings"></a></h2>
 <pre class="idl highlight def"><span class="kt">dictionary</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-photosettings">PhotoSettings</dfn> {
-  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-7">MeteringMode</a> <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode " href="#dom-photosettings-whitebalancemode" id="ref-for-dom-photosettings-whitebalancemode-1">whiteBalanceMode</a>;
-  <span class="kt">double</span> <a class="nv idl-code" data-link-type="dict-member" data-type="double " href="#dom-photosettings-colortemperature" id="ref-for-dom-photosettings-colortemperature-1">colorTemperature</a>;
-  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-8">MeteringMode</a> <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode " href="#dom-photosettings-exposuremode" id="ref-for-dom-photosettings-exposuremode-1">exposureMode</a>;
-  <span class="kt">double</span> <a class="nv idl-code" data-link-type="dict-member" data-type="double " href="#dom-photosettings-exposurecompensation" id="ref-for-dom-photosettings-exposurecompensation-1">exposureCompensation</a>;
-  <span class="kt">double</span> <a class="nv idl-code" data-link-type="dict-member" data-type="double " href="#dom-photosettings-iso" id="ref-for-dom-photosettings-iso-1">iso</a>;
-  <span class="kt">boolean</span> <a class="nv idl-code" data-link-type="dict-member" data-type="boolean " href="#dom-photosettings-redeyereduction" id="ref-for-dom-photosettings-redeyereduction-1">redEyeReduction</a>;
-  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-9">MeteringMode</a> <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode " href="#dom-photosettings-focusmode" id="ref-for-dom-photosettings-focusmode-1">focusMode</a>;
+  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-7">MeteringMode</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode      " href="#dom-photosettings-whitebalancemode" id="ref-for-dom-photosettings-whitebalancemode-1">whiteBalanceMode</a>;
+  <span class="kt">double</span>            <a class="nv idl-code" data-link-type="dict-member" data-type="double            " href="#dom-photosettings-colortemperature" id="ref-for-dom-photosettings-colortemperature-1">colorTemperature</a>;
+  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-8">MeteringMode</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode      " href="#dom-photosettings-exposuremode" id="ref-for-dom-photosettings-exposuremode-1">exposureMode</a>;
+  <span class="kt">double</span>            <a class="nv idl-code" data-link-type="dict-member" data-type="double            " href="#dom-photosettings-exposurecompensation" id="ref-for-dom-photosettings-exposurecompensation-1">exposureCompensation</a>;
+  <span class="kt">double</span>            <a class="nv idl-code" data-link-type="dict-member" data-type="double            " href="#dom-photosettings-iso" id="ref-for-dom-photosettings-iso-1">iso</a>;
+  <span class="kt">boolean</span>           <a class="nv idl-code" data-link-type="dict-member" data-type="boolean           " href="#dom-photosettings-redeyereduction" id="ref-for-dom-photosettings-redeyereduction-1">redEyeReduction</a>;
+  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-9">MeteringMode</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode      " href="#dom-photosettings-focusmode" id="ref-for-dom-photosettings-focusmode-1">focusMode</a>;
   <span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#dictdef-point2d" id="ref-for-dictdef-point2d-1">Point2D</a>> <a class="nv idl-code" data-link-type="dict-member" data-type="sequence<Point2D> " href="#dom-photosettings-pointsofinterest" id="ref-for-dom-photosettings-pointsofinterest-1">pointsOfInterest</a>;
 
-  <span class="kt">double</span> <a class="nv idl-code" data-link-type="dict-member" data-type="double " href="#dom-photosettings-brightness" id="ref-for-dom-photosettings-brightness-1">brightness</a>;
-  <span class="kt">double</span> <a class="nv idl-code" data-link-type="dict-member" data-type="double " href="#dom-photosettings-contrast" id="ref-for-dom-photosettings-contrast-1">contrast</a>;
-  <span class="kt">double</span> <a class="nv idl-code" data-link-type="dict-member" data-type="double " href="#dom-photosettings-saturation" id="ref-for-dom-photosettings-saturation-1">saturation</a>;
-  <span class="kt">double</span> <a class="nv idl-code" data-link-type="dict-member" data-type="double " href="#dom-photosettings-sharpness" id="ref-for-dom-photosettings-sharpness-1">sharpness</a>;
-  <span class="kt">double</span> <a class="nv idl-code" data-link-type="dict-member" data-type="double " href="#dom-photosettings-zoom" id="ref-for-dom-photosettings-zoom-1">zoom</a>;
-  <span class="kt">double</span> <a class="nv idl-code" data-link-type="dict-member" data-type="double " href="#dom-photosettings-imageheight" id="ref-for-dom-photosettings-imageheight-1">imageHeight</a>;
-  <span class="kt">double</span> <a class="nv idl-code" data-link-type="dict-member" data-type="double " href="#dom-photosettings-imagewidth" id="ref-for-dom-photosettings-imagewidth-1">imageWidth</a>;
+  <span class="kt">double</span>        <a class="nv idl-code" data-link-type="dict-member" data-type="double        " href="#dom-photosettings-brightness" id="ref-for-dom-photosettings-brightness-1">brightness</a>;
+  <span class="kt">double</span>        <a class="nv idl-code" data-link-type="dict-member" data-type="double        " href="#dom-photosettings-contrast" id="ref-for-dom-photosettings-contrast-1">contrast</a>;
+  <span class="kt">double</span>        <a class="nv idl-code" data-link-type="dict-member" data-type="double        " href="#dom-photosettings-saturation" id="ref-for-dom-photosettings-saturation-1">saturation</a>;
+  <span class="kt">double</span>        <a class="nv idl-code" data-link-type="dict-member" data-type="double        " href="#dom-photosettings-sharpness" id="ref-for-dom-photosettings-sharpness-1">sharpness</a>;
+  <span class="kt">double</span>        <a class="nv idl-code" data-link-type="dict-member" data-type="double        " href="#dom-photosettings-zoom" id="ref-for-dom-photosettings-zoom-1">zoom</a>;
+  <span class="kt">double</span>        <a class="nv idl-code" data-link-type="dict-member" data-type="double        " href="#dom-photosettings-imageheight" id="ref-for-dom-photosettings-imageheight-1">imageHeight</a>;
+  <span class="kt">double</span>        <a class="nv idl-code" data-link-type="dict-member" data-type="double        " href="#dom-photosettings-imagewidth" id="ref-for-dom-photosettings-imagewidth-1">imageWidth</a>;
   <a class="n" data-link-type="idl-name" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-4">FillLightMode</a> <a class="nv idl-code" data-link-type="dict-member" data-type="FillLightMode " href="#dom-photosettings-filllightmode" id="ref-for-dom-photosettings-filllightmode-1">fillLightMode</a>;
 };
 </pre>
@@ -2251,6 +2251,7 @@ pre.idl.highlight { color: #708090; }
     <ul>
      <li><a href="https://heycam.github.io/webidl/#dfn-DOMException">DOMException</a>
      <li><a href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a>
+     <li><a href="https://heycam.github.io/webidl/#notsupportederror">NotSupportedError</a>
      <li><a href="https://heycam.github.io/webidl/#operationerror">OperationError</a>
      <li><a href="https://heycam.github.io/webidl/#idl-promise">Promise</a>
      <li><a href="https://heycam.github.io/webidl/#syntaxerror">SyntaxError</a>
@@ -2313,22 +2314,22 @@ pre.idl.highlight { color: #708090; }
 };
 
 <span class="kt">dictionary</span> <a class="nv" href="#dictdef-photosettings">PhotoSettings</a> {
-  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode">MeteringMode</a> <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode " href="#dom-photosettings-whitebalancemode">whiteBalanceMode</a>;
-  <span class="kt">double</span> <a class="nv idl-code" data-link-type="dict-member" data-type="double " href="#dom-photosettings-colortemperature">colorTemperature</a>;
-  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode">MeteringMode</a> <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode " href="#dom-photosettings-exposuremode">exposureMode</a>;
-  <span class="kt">double</span> <a class="nv idl-code" data-link-type="dict-member" data-type="double " href="#dom-photosettings-exposurecompensation">exposureCompensation</a>;
-  <span class="kt">double</span> <a class="nv idl-code" data-link-type="dict-member" data-type="double " href="#dom-photosettings-iso">iso</a>;
-  <span class="kt">boolean</span> <a class="nv idl-code" data-link-type="dict-member" data-type="boolean " href="#dom-photosettings-redeyereduction">redEyeReduction</a>;
-  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode">MeteringMode</a> <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode " href="#dom-photosettings-focusmode">focusMode</a>;
+  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode">MeteringMode</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode      " href="#dom-photosettings-whitebalancemode">whiteBalanceMode</a>;
+  <span class="kt">double</span>            <a class="nv idl-code" data-link-type="dict-member" data-type="double            " href="#dom-photosettings-colortemperature">colorTemperature</a>;
+  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode">MeteringMode</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode      " href="#dom-photosettings-exposuremode">exposureMode</a>;
+  <span class="kt">double</span>            <a class="nv idl-code" data-link-type="dict-member" data-type="double            " href="#dom-photosettings-exposurecompensation">exposureCompensation</a>;
+  <span class="kt">double</span>            <a class="nv idl-code" data-link-type="dict-member" data-type="double            " href="#dom-photosettings-iso">iso</a>;
+  <span class="kt">boolean</span>           <a class="nv idl-code" data-link-type="dict-member" data-type="boolean           " href="#dom-photosettings-redeyereduction">redEyeReduction</a>;
+  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode">MeteringMode</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode      " href="#dom-photosettings-focusmode">focusMode</a>;
   <span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#dictdef-point2d">Point2D</a>> <a class="nv idl-code" data-link-type="dict-member" data-type="sequence<Point2D> " href="#dom-photosettings-pointsofinterest">pointsOfInterest</a>;
 
-  <span class="kt">double</span> <a class="nv idl-code" data-link-type="dict-member" data-type="double " href="#dom-photosettings-brightness">brightness</a>;
-  <span class="kt">double</span> <a class="nv idl-code" data-link-type="dict-member" data-type="double " href="#dom-photosettings-contrast">contrast</a>;
-  <span class="kt">double</span> <a class="nv idl-code" data-link-type="dict-member" data-type="double " href="#dom-photosettings-saturation">saturation</a>;
-  <span class="kt">double</span> <a class="nv idl-code" data-link-type="dict-member" data-type="double " href="#dom-photosettings-sharpness">sharpness</a>;
-  <span class="kt">double</span> <a class="nv idl-code" data-link-type="dict-member" data-type="double " href="#dom-photosettings-zoom">zoom</a>;
-  <span class="kt">double</span> <a class="nv idl-code" data-link-type="dict-member" data-type="double " href="#dom-photosettings-imageheight">imageHeight</a>;
-  <span class="kt">double</span> <a class="nv idl-code" data-link-type="dict-member" data-type="double " href="#dom-photosettings-imagewidth">imageWidth</a>;
+  <span class="kt">double</span>        <a class="nv idl-code" data-link-type="dict-member" data-type="double        " href="#dom-photosettings-brightness">brightness</a>;
+  <span class="kt">double</span>        <a class="nv idl-code" data-link-type="dict-member" data-type="double        " href="#dom-photosettings-contrast">contrast</a>;
+  <span class="kt">double</span>        <a class="nv idl-code" data-link-type="dict-member" data-type="double        " href="#dom-photosettings-saturation">saturation</a>;
+  <span class="kt">double</span>        <a class="nv idl-code" data-link-type="dict-member" data-type="double        " href="#dom-photosettings-sharpness">sharpness</a>;
+  <span class="kt">double</span>        <a class="nv idl-code" data-link-type="dict-member" data-type="double        " href="#dom-photosettings-zoom">zoom</a>;
+  <span class="kt">double</span>        <a class="nv idl-code" data-link-type="dict-member" data-type="double        " href="#dom-photosettings-imageheight">imageHeight</a>;
+  <span class="kt">double</span>        <a class="nv idl-code" data-link-type="dict-member" data-type="double        " href="#dom-photosettings-imagewidth">imageWidth</a>;
   <a class="n" data-link-type="idl-name" href="#enumdef-filllightmode">FillLightMode</a> <a class="nv idl-code" data-link-type="dict-member" data-type="FillLightMode " href="#dom-photosettings-filllightmode">fillLightMode</a>;
 };
 
@@ -2577,7 +2578,7 @@ pre.idl.highlight { color: #708090; }
    <b><a href="#dictdef-photosettings">#dictdef-photosettings</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dictdef-photosettings-1">2. Image Capture API</a>
-    <li><a href="#ref-for-dictdef-photosettings-2">2.2. Methods</a> <a href="#ref-for-dictdef-photosettings-3">(2)</a> <a href="#ref-for-dictdef-photosettings-4">(3)</a>
+    <li><a href="#ref-for-dictdef-photosettings-2">2.2. Methods</a> <a href="#ref-for-dictdef-photosettings-3">(2)</a> <a href="#ref-for-dictdef-photosettings-4">(3)</a> <a href="#ref-for-dictdef-photosettings-5">(4)</a> <a href="#ref-for-dictdef-photosettings-6">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-photosettings-whitebalancemode">
