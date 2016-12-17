@@ -10,7 +10,6 @@ Editor: Giridhar Mandyam, w3cid 54271, Qualcomm Innovation Center Inc.
 Editor: Miguel Casas-Sanchez, w3cid 82825, Google Inc., mcasas@google.com
 Abstract: This document specifies methods and camera settings to produce photographic image capture. The source of images is, or can be referenced via a {{MediaStreamTrack}}.
 
-
 !Participate: <a href="https://lists.w3.org/Archives/Public/public-media-capture/">Mailing list</a>
 !Participate: <a href="https://github.com/w3c/mediacapture-image">GitHub repo</a> (<a href="https://github.com/w3c/mediacapture-image/issues/new">new issue</a>, <a href="https://github.com/w3c/mediacapture-image/issues">open issues</a>)
 
@@ -97,7 +96,7 @@ interface ImageCapture {
   <dd>
   {{takePhoto()}} produces the result of a single photographic exposure using the video capture device sourcing the {{videoStreamTrack}}, applying any {{PhotoSettings}} previously configured, and returning an encoded image in the form of a {{Blob}} if successful. When this method is invoked:
   <ol>
-    <li>If the <code>readyState</code> of {{videoStreamTrack}} provided in the constructor is not {{live}}, return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{InvalidStateError}}. </li>
+    <li>If the {{readyState}} of {{videoStreamTrack}} provided in the constructor is not {{live}}, return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{InvalidStateError}}. </li>
 
     <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:
     <ol>
@@ -191,7 +190,7 @@ interface ImageCapture {
 
     <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:
     <ol>
-      <li>Gather data from {{videoStreamTrack}} into an {{ImageBitmap}} object. The `width` and `height` of the {{ImageBitmap}} object are derived from the constraints of a {{videoStreamTrack}}.
+      <li>Gather data from {{videoStreamTrack}} into an {{ImageBitmap}} object. The |width| and |height| of the {{ImageBitmap}} object are derived from the constraints of {{videoStreamTrack}}.
       <div class="note">
         The result of {{grabFrame()}} is affected by any options set by {{setOptions()}} if those are reflected in {{videoStreamTrack}}.
       </div>
@@ -289,7 +288,7 @@ interface ImageCapture {
 
   <p>The <code>PhotoCapabilities</code> interface provides the photo-specific settings and their current values.  Many of these fields mirror hardware capabilities that are hard to define since can be implemented in a number of ways.  Moreover, hardware manufacturers tend to publish vague definitions to protect their intellectual property.  The following definitions are assumed for individual settings and are provided for information purposes:</p>
   <ol>
-    <li><i><dfn>White balance mode</dfn></i> is a setting that cameras use to adjust for different color temperatures.  <dfn>Color temperature</dfn> is the temperature of background light (usually measured in Kelvin).  This setting can usually be automatically and continuously determined by the implementation, but it's also common to offer a `manual` mode in which the estimated temperature of the scene illumination is hinted to the implementation.  Typical temperature ranges for popular modes are provided below:
+    <li><i><dfn>White balance mode</dfn></i> is a setting that cameras use to adjust for different color temperatures.  <dfn>Color temperature</dfn> is the temperature of background light (usually measured in Kelvin).  This setting can usually be automatically and continuously determined by the implementation, but it's also common to offer a <code>manual</code> mode in which the estimated temperature of the scene illumination is hinted to the implementation.  Typical temperature ranges for popular modes are provided below:
     <table class="simple">
       <tr> <th>Mode</th> <th>Kelvin range</th> </tr>
       <tr> <td>incandescent</td> <td>2500-3500</td> </tr>
@@ -456,7 +455,7 @@ interface ImageCapture {
   <dd>This source does not have an option to change fill light modes (e.g., the camera does not have a flash)</dd>
 
   <dt><dfn enum-value for="FillLightMode"><code>auto</code></dfn></dt>
-  <dd>The video device's fill light will be enabled when required (typically low light conditions). Otherwise it will be off. Note that auto does not guarantee that a flash will fire when `takePhoto()` is called. Use {{flash}} to guarantee firing of the flash for  {{takePhoto()}} method.</dd>
+  <dd>The video device's fill light will be enabled when required (typically low light conditions). Otherwise it will be off. Note that auto does not guarantee that a flash will fire when {{takePhoto()}} is called. Use {{flash}} to guarantee firing of the flash for  {{takePhoto()}} method.</dd>
 
   <dt><dfn enum-value for="FillLightMode"><code>off</code></dfn></dt>
   <dd>The source's fill light and/or flash will not be used.</dd>
