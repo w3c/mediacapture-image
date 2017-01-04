@@ -1,7 +1,7 @@
 <pre class="metadata">
 Title: "MediaStream Image Capture"
 Repository: image-capture
-Group: dap
+Group: mediacapture
 Status: ED
 ED: https://w3c.github.io/mediacapture-image/
 Shortname: image-capture
