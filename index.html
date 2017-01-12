@@ -1540,19 +1540,34 @@ pre.idl.highlight { color: #708090; }
       <li>
        <a href="##constrainable-properties"><span class="secno">9.1</span> <span class="content">Constrainable properties</span></a>
        <ol class="toc">
-        <li><a href="###mediatracksupportedconstraints-dictionary"><span class="secno">9.1.1</span> <span class="content">MediaTrackSupportedConstraints dictionary</span></a>
-        <li><a href="###mediatrackconstraintset"><span class="secno">9.1.2</span> <span class="content">MediaTrackConstraintSet dictionary</span></a>
+        <li>
+         <a href="###mediatracksupportedconstraints"><span class="secno">9.1.1</span> <span class="content">MediaTrackSupportedConstraints dictionary</span></a>
+         <ol class="toc">
+          <li><a href="#mediatracksupportedconstraints-members"><span class="secno">9.1.1.1</span> <span class="content">Members</span></a>
+         </ol>
+        <li>
+         <a href="###mediatrackconstraintset"><span class="secno">9.1.2</span> <span class="content">MediaTrackConstraintSet dictionary</span></a>
+         <ol class="toc">
+          <li><a href="#mediatrackconstraintset-members"><span class="secno">9.1.2.1</span> <span class="content">Members</span></a>
+         </ol>
        </ol>
       <li>
        <a href="##capabilities"><span class="secno">9.2</span> <span class="content">Capabilities</span></a>
        <ol class="toc">
-        <li><a href="###mediatrackcapabilities"><span class="secno">9.2.1</span> <span class="content">MediaTrackCapabilities dictionary</span></a>
-        <li><a href="##mediatrackcapabilities-members"><span class="secno">9.2.2</span> <span class="content">Members</span></a>
+        <li>
+         <a href="###mediatrackcapabilities"><span class="secno">9.2.1</span> <span class="content">MediaTrackCapabilities dictionary</span></a>
+         <ol class="toc">
+          <li><a href="##mediatrackcapabilities-members"><span class="secno">9.2.1.1</span> <span class="content">Members</span></a>
+         </ol>
        </ol>
       <li>
-       <a href="##mediatracksettings"><span class="secno">9.3</span> <span class="content">MediaTrackSettings dictionary</span></a>
+       <a href="##settings"><span class="secno">9.3</span> <span class="content">Settings</span></a>
        <ol class="toc">
-        <li><a href="###mediatracksettings-members"><span class="secno">9.3.1</span> <span class="content">Members</span></a>
+        <li>
+         <a href="#mediatracksettings"><span class="secno">9.3.1</span> <span class="content">MediaTrackSettings dictionary</span></a>
+         <ol class="toc">
+          <li><a href="#mediatracksettings-members"><span class="secno">9.3.1.1</span> <span class="content">Members</span></a>
+         </ol>
        </ol>
      </ol>
     <li>
@@ -1935,7 +1950,7 @@ pre.idl.highlight { color: #708090; }
    </dl>
    <h2 class="heading settled" data-level="9" id="#extensions"><span class="secno">9. </span><span class="content">Extensions</span><a class="self-link" href="#%23extensions"></a></h2>
    <h3 class="heading settled" data-level="9.1" id="#constrainable-properties"><span class="secno">9.1. </span><span class="content">Constrainable properties</span><a class="self-link" href="#%23constrainable-properties"></a></h3>
-   <h4 class="heading settled" data-level="9.1.1" id="##mediatracksupportedconstraints-dictionary"><span class="secno">9.1.1. </span><span class="content">MediaTrackSupportedConstraints dictionary</span><a class="self-link" href="#%23%23mediatracksupportedconstraints-dictionary"></a></h4>
+   <h4 class="heading settled" data-level="9.1.1" id="##mediatracksupportedconstraints"><span class="secno">9.1.1. </span><span class="content">MediaTrackSupportedConstraints dictionary</span><a class="self-link" href="#%23%23mediatracksupportedconstraints"></a></h4>
    <p><code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaTrackSupportedConstraints">MediaTrackSupportedConstraints</a></code> is extended here.</p>
    <p>MCS: It’s a dictionary with the supported stuff. Some implementations would mark some as false, e.g. USB-like implementations only have brightness etc.</p>
 <pre class="idl highlight def"><span class="kt">partial</span> <span class="kt">dictionary</span> <a class="nv idl-code" data-link-type="dictionary" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaTrackSupportedConstraints">MediaTrackSupportedConstraints</a> {
@@ -1957,6 +1972,7 @@ pre.idl.highlight { color: #708090; }
   <span class="kt">boolean</span> <a class="nv idl-code" data-default="true" data-link-type="dict-member" data-type="boolean " href="#dom-mediatracksupportedconstraints-filllightmode" id="ref-for-dom-mediatracksupportedconstraints-filllightmode-1">fillLightMode</a> = <span class="kt">true</span>;
 };
 </pre>
+   <h5 class="heading settled" data-level="9.1.1.1" id="mediatracksupportedconstraints-members"><span class="secno">9.1.1.1. </span><span class="content">Members</span><a class="self-link" href="#mediatracksupportedconstraints-members"></a></h5>
    <dl class="domintro">
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSupportedConstraints" data-dfn-type="dict-member" data-export="" id="dom-mediatracksupportedconstraints-whitebalancemode"><code>whiteBalanceMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-boolean">boolean</a>, defaulting to <code>true</code></span>
     <dd>Whether <a data-link-type="dfn" href="#white-balance-mode" id="ref-for-white-balance-mode-3">white balance mode</a> constraining is supported.
@@ -1992,90 +2008,109 @@ pre.idl.highlight { color: #708090; }
    <h4 class="heading settled" data-level="9.1.2" id="##mediatrackconstraintset"><span class="secno">9.1.2. </span><span class="content">MediaTrackConstraintSet dictionary</span><a class="self-link" href="#%23%23mediatrackconstraintset"></a></h4>
    <p><code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#idlidl-def-MediaTrackConstraintSet">MediaTrackConstraintSet</a></code> is extended here.</p>
 <pre class="idl highlight def"><span class="kt">partial</span> <span class="kt">dictionary</span> <a class="nv idl-code" data-link-type="dictionary" href="https://www.w3.org/TR/mediacapture-streams/#idlidl-def-MediaTrackConstraintSet">MediaTrackConstraintSet</a> {
-  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-15">MeteringMode</a>       <dfn class="nv idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" data-type="MeteringMode       " id="dom-mediatrackconstraintset-whitebalancemode">whiteBalanceMode<a class="self-link" href="#dom-mediatrackconstraintset-whitebalancemode"></a></dfn>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-21">MediaSettingsRange</a> <dfn class="nv idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" data-type="MediaSettingsRange " id="dom-mediatrackconstraintset-colortemperature">colorTemperature<a class="self-link" href="#dom-mediatrackconstraintset-colortemperature"></a></dfn>;
-  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-16">MeteringMode</a>       <dfn class="nv idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" data-type="MeteringMode       " id="dom-mediatrackconstraintset-exposuremode">exposureMode<a class="self-link" href="#dom-mediatrackconstraintset-exposuremode"></a></dfn>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-22">MediaSettingsRange</a> <dfn class="nv idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" data-type="MediaSettingsRange " id="dom-mediatrackconstraintset-exposurecompensation">exposureCompensation<a class="self-link" href="#dom-mediatrackconstraintset-exposurecompensation"></a></dfn>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-23">MediaSettingsRange</a> <dfn class="nv idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" data-type="MediaSettingsRange " id="dom-mediatrackconstraintset-iso">iso<a class="self-link" href="#dom-mediatrackconstraintset-iso"></a></dfn>;
-  <span class="kt">boolean</span>            <dfn class="nv idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" data-type="boolean            " id="dom-mediatrackconstraintset-redeyereduction">redEyeReduction<a class="self-link" href="#dom-mediatrackconstraintset-redeyereduction"></a></dfn>;
-  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-17">MeteringMode</a>       <dfn class="nv idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" data-type="MeteringMode       " id="dom-mediatrackconstraintset-focusmode">focusMode<a class="self-link" href="#dom-mediatrackconstraintset-focusmode"></a></dfn>;
+  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-15">MeteringMode</a>       <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode       " href="#dom-mediatrackconstraintset-whitebalancemode" id="ref-for-dom-mediatrackconstraintset-whitebalancemode-1">whiteBalanceMode</a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="ConstraintDouble   " href="#dom-mediatrackconstraintset-colortemperature" id="ref-for-dom-mediatrackconstraintset-colortemperature-1">colorTemperature</a>;
+  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-16">MeteringMode</a>       <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode       " href="#dom-mediatrackconstraintset-exposuremode" id="ref-for-dom-mediatrackconstraintset-exposuremode-1">exposureMode</a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="ConstraintDouble   " href="#dom-mediatrackconstraintset-exposurecompensation" id="ref-for-dom-mediatrackconstraintset-exposurecompensation-1">exposureCompensation</a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="ConstraintDouble   " href="#dom-mediatrackconstraintset-iso" id="ref-for-dom-mediatrackconstraintset-iso-1">iso</a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainBoolean">ConstraintBoolean</a>  <a class="nv idl-code" data-link-type="dict-member" data-type="ConstraintBoolean  " href="#dom-mediatrackconstraintset-redeyereduction" id="ref-for-dom-mediatrackconstraintset-redeyereduction-1">redEyeReduction</a>;
+  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-17">MeteringMode</a>       <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode       " href="#dom-mediatrackconstraintset-focusmode" id="ref-for-dom-mediatrackconstraintset-focusmode-1">focusMode</a>;
 
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-24">MediaSettingsRange</a> <dfn class="nv idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" data-type="MediaSettingsRange " id="dom-mediatrackconstraintset-brightness">brightness<a class="self-link" href="#dom-mediatrackconstraintset-brightness"></a></dfn>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-25">MediaSettingsRange</a> <dfn class="nv idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" data-type="MediaSettingsRange " id="dom-mediatrackconstraintset-contrast">contrast<a class="self-link" href="#dom-mediatrackconstraintset-contrast"></a></dfn>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-26">MediaSettingsRange</a> <dfn class="nv idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" data-type="MediaSettingsRange " id="dom-mediatrackconstraintset-saturation">saturation<a class="self-link" href="#dom-mediatrackconstraintset-saturation"></a></dfn>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-27">MediaSettingsRange</a> <dfn class="nv idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" data-type="MediaSettingsRange " id="dom-mediatrackconstraintset-sharpness">sharpness<a class="self-link" href="#dom-mediatrackconstraintset-sharpness"></a></dfn>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-28">MediaSettingsRange</a> <dfn class="nv idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" data-type="MediaSettingsRange " id="dom-mediatrackconstraintset-imageheight">imageHeight<a class="self-link" href="#dom-mediatrackconstraintset-imageheight"></a></dfn>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-29">MediaSettingsRange</a> <dfn class="nv idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" data-type="MediaSettingsRange " id="dom-mediatrackconstraintset-imagewidth">imageWidth<a class="self-link" href="#dom-mediatrackconstraintset-imagewidth"></a></dfn>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-30">MediaSettingsRange</a> <dfn class="nv idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" data-type="MediaSettingsRange " id="dom-mediatrackconstraintset-zoom">zoom<a class="self-link" href="#dom-mediatrackconstraintset-zoom"></a></dfn>;
-  <a class="n" data-link-type="idl-name" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-7">FillLightMode</a>      <dfn class="nv idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" data-type="FillLightMode      " id="dom-mediatrackconstraintset-filllightmode">fillLightMode<a class="self-link" href="#dom-mediatrackconstraintset-filllightmode"></a></dfn>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="ConstraintDouble   " href="#dom-mediatrackconstraintset-brightness" id="ref-for-dom-mediatrackconstraintset-brightness-1">brightness</a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="ConstraintDouble   " href="#dom-mediatrackconstraintset-contrast" id="ref-for-dom-mediatrackconstraintset-contrast-1">contrast</a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="ConstraintDouble   " href="#dom-mediatrackconstraintset-saturation" id="ref-for-dom-mediatrackconstraintset-saturation-1">saturation</a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="ConstraintDouble   " href="#dom-mediatrackconstraintset-sharpness" id="ref-for-dom-mediatrackconstraintset-sharpness-1">sharpness</a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="ConstraintDouble   " href="#dom-mediatrackconstraintset-imageheight" id="ref-for-dom-mediatrackconstraintset-imageheight-1">imageHeight</a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="ConstraintDouble   " href="#dom-mediatrackconstraintset-imagewidth" id="ref-for-dom-mediatrackconstraintset-imagewidth-1">imageWidth</a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="ConstraintDouble   " href="#dom-mediatrackconstraintset-zoom" id="ref-for-dom-mediatrackconstraintset-zoom-1">zoom</a>;
+  <a class="n" data-link-type="idl-name" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-7">FillLightMode</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="FillLightMode      " href="#dom-mediatrackconstraintset-filllightmode" id="ref-for-dom-mediatrackconstraintset-filllightmode-1">fillLightMode</a>;
 };
 </pre>
+   <h5 class="heading settled" data-level="9.1.2.1" id="mediatrackconstraintset-members"><span class="secno">9.1.2.1. </span><span class="content">Members</span><a class="self-link" href="#mediatrackconstraintset-members"></a></h5>
+   <dl class="domintro">
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" id="dom-mediatrackconstraintset-whitebalancemode"><code>whiteBalanceMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-18">MeteringMode</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" id="dom-mediatrackconstraintset-colortemperature"><code>colorTemperature</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" id="dom-mediatrackconstraintset-exposuremode"><code>exposureMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-19">MeteringMode</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" id="dom-mediatrackconstraintset-exposurecompensation"><code>exposureCompensation</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" id="dom-mediatrackconstraintset-iso"><code>iso</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" id="dom-mediatrackconstraintset-redeyereduction"><code>redEyeReduction</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainBoolean">ConstraintBoolean</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" id="dom-mediatrackconstraintset-focusmode"><code>focusMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-20">MeteringMode</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" id="dom-mediatrackconstraintset-brightness"><code>brightness</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" id="dom-mediatrackconstraintset-contrast"><code>contrast</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" id="dom-mediatrackconstraintset-saturation"><code>saturation</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" id="dom-mediatrackconstraintset-sharpness"><code>sharpness</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" id="dom-mediatrackconstraintset-imageheight"><code>imageHeight</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" id="dom-mediatrackconstraintset-imagewidth"><code>imageWidth</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" id="dom-mediatrackconstraintset-zoom"><code>zoom</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" id="dom-mediatrackconstraintset-filllightmode"><code>fillLightMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-8">FillLightMode</a></span>
+   </dl>
    <h3 class="heading settled" data-level="9.2" id="#capabilities"><span class="secno">9.2. </span><span class="content">Capabilities</span><a class="self-link" href="#%23capabilities"></a></h3>
    <h4 class="heading settled" data-level="9.2.1" id="##mediatrackcapabilities"><span class="secno">9.2.1. </span><span class="content">MediaTrackCapabilities dictionary</span><a class="self-link" href="#%23%23mediatrackcapabilities"></a></h4>
    <p><code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaTrackCapabilities">MediaTrackCapabilities</a></code> is extended here</p>
 <pre class="idl highlight def"><span class="kt">partial</span> <span class="kt">dictionary</span> <a class="nv idl-code" data-link-type="dictionary" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaTrackCapabilities">MediaTrackCapabilities</a> {
-  <span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-18">MeteringMode</a>>  <a class="nv idl-code" data-link-type="dict-member" data-type="sequence<MeteringMode>  " href="#dom-mediatrackcapabilities-whitebalancemode" id="ref-for-dom-mediatrackcapabilities-whitebalancemode-1">whiteBalanceMode</a>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-31">MediaSettingsRange</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MediaSettingsRange      " href="#dom-mediatrackcapabilities-colortemperature" id="ref-for-dom-mediatrackcapabilities-colortemperature-1">colorTemperature</a>;
-  <span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-19">MeteringMode</a>>  <a class="nv idl-code" data-link-type="dict-member" data-type="sequence<MeteringMode>  " href="#dom-mediatrackcapabilities-exposuremode" id="ref-for-dom-mediatrackcapabilities-exposuremode-1">exposureMode</a>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-32">MediaSettingsRange</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MediaSettingsRange      " href="#dom-mediatrackcapabilities-exposurecompensation" id="ref-for-dom-mediatrackcapabilities-exposurecompensation-1">exposureCompensation</a>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-33">MediaSettingsRange</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MediaSettingsRange      " href="#dom-mediatrackcapabilities-iso" id="ref-for-dom-mediatrackcapabilities-iso-1">iso</a>;
+  <span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-21">MeteringMode</a>>  <a class="nv idl-code" data-link-type="dict-member" data-type="sequence<MeteringMode>  " href="#dom-mediatrackcapabilities-whitebalancemode" id="ref-for-dom-mediatrackcapabilities-whitebalancemode-1">whiteBalanceMode</a>;
+  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-21">MediaSettingsRange</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MediaSettingsRange      " href="#dom-mediatrackcapabilities-colortemperature" id="ref-for-dom-mediatrackcapabilities-colortemperature-1">colorTemperature</a>;
+  <span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-22">MeteringMode</a>>  <a class="nv idl-code" data-link-type="dict-member" data-type="sequence<MeteringMode>  " href="#dom-mediatrackcapabilities-exposuremode" id="ref-for-dom-mediatrackcapabilities-exposuremode-1">exposureMode</a>;
+  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-22">MediaSettingsRange</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MediaSettingsRange      " href="#dom-mediatrackcapabilities-exposurecompensation" id="ref-for-dom-mediatrackcapabilities-exposurecompensation-1">exposureCompensation</a>;
+  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-23">MediaSettingsRange</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MediaSettingsRange      " href="#dom-mediatrackcapabilities-iso" id="ref-for-dom-mediatrackcapabilities-iso-1">iso</a>;
   <span class="kt">sequence</span>&lt;<span class="kt">boolean</span>>       <a class="nv idl-code" data-link-type="dict-member" data-type="sequence<boolean>       " href="#dom-mediatrackcapabilities-redeyereduction" id="ref-for-dom-mediatrackcapabilities-redeyereduction-1">redEyeReduction</a>;
-  <span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-20">MeteringMode</a>>  <a class="nv idl-code" data-link-type="dict-member" data-type="sequence<MeteringMode>  " href="#dom-mediatrackcapabilities-focusmode" id="ref-for-dom-mediatrackcapabilities-focusmode-1">focusMode</a>;
+  <span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-23">MeteringMode</a>>  <a class="nv idl-code" data-link-type="dict-member" data-type="sequence<MeteringMode>  " href="#dom-mediatrackcapabilities-focusmode" id="ref-for-dom-mediatrackcapabilities-focusmode-1">focusMode</a>;
 
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-34">MediaSettingsRange</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MediaSettingsRange      " href="#dom-mediatrackcapabilities-brightness" id="ref-for-dom-mediatrackcapabilities-brightness-1">brightness</a>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-35">MediaSettingsRange</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MediaSettingsRange      " href="#dom-mediatrackcapabilities-contrast" id="ref-for-dom-mediatrackcapabilities-contrast-1">contrast</a>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-36">MediaSettingsRange</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MediaSettingsRange      " href="#dom-mediatrackcapabilities-saturation" id="ref-for-dom-mediatrackcapabilities-saturation-1">saturation</a>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-37">MediaSettingsRange</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MediaSettingsRange      " href="#dom-mediatrackcapabilities-sharpness" id="ref-for-dom-mediatrackcapabilities-sharpness-1">sharpness</a>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-38">MediaSettingsRange</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MediaSettingsRange      " href="#dom-mediatrackcapabilities-imageheight" id="ref-for-dom-mediatrackcapabilities-imageheight-1">imageHeight</a>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-39">MediaSettingsRange</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MediaSettingsRange      " href="#dom-mediatrackcapabilities-imagewidth" id="ref-for-dom-mediatrackcapabilities-imagewidth-1">imageWidth</a>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-40">MediaSettingsRange</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MediaSettingsRange      " href="#dom-mediatrackcapabilities-zoom" id="ref-for-dom-mediatrackcapabilities-zoom-1">zoom</a>;
-  <span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-8">FillLightMode</a>> <a class="nv idl-code" data-link-type="dict-member" data-type="sequence<FillLightMode> " href="#dom-mediatrackcapabilities-filllightmode" id="ref-for-dom-mediatrackcapabilities-filllightmode-1">fillLightMode</a>;
+  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-24">MediaSettingsRange</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MediaSettingsRange      " href="#dom-mediatrackcapabilities-brightness" id="ref-for-dom-mediatrackcapabilities-brightness-1">brightness</a>;
+  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-25">MediaSettingsRange</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MediaSettingsRange      " href="#dom-mediatrackcapabilities-contrast" id="ref-for-dom-mediatrackcapabilities-contrast-1">contrast</a>;
+  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-26">MediaSettingsRange</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MediaSettingsRange      " href="#dom-mediatrackcapabilities-saturation" id="ref-for-dom-mediatrackcapabilities-saturation-1">saturation</a>;
+  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-27">MediaSettingsRange</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MediaSettingsRange      " href="#dom-mediatrackcapabilities-sharpness" id="ref-for-dom-mediatrackcapabilities-sharpness-1">sharpness</a>;
+  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-28">MediaSettingsRange</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MediaSettingsRange      " href="#dom-mediatrackcapabilities-imageheight" id="ref-for-dom-mediatrackcapabilities-imageheight-1">imageHeight</a>;
+  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-29">MediaSettingsRange</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MediaSettingsRange      " href="#dom-mediatrackcapabilities-imagewidth" id="ref-for-dom-mediatrackcapabilities-imagewidth-1">imageWidth</a>;
+  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-30">MediaSettingsRange</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MediaSettingsRange      " href="#dom-mediatrackcapabilities-zoom" id="ref-for-dom-mediatrackcapabilities-zoom-1">zoom</a>;
+  <span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-9">FillLightMode</a>> <a class="nv idl-code" data-link-type="dict-member" data-type="sequence<FillLightMode> " href="#dom-mediatrackcapabilities-filllightmode" id="ref-for-dom-mediatrackcapabilities-filllightmode-1">fillLightMode</a>;
 };
 </pre>
-   <h4 class="heading settled" data-level="9.2.2" id="#mediatrackcapabilities-members"><span class="secno">9.2.2. </span><span class="content">Members</span><a class="self-link" href="#%23mediatrackcapabilities-members"></a></h4>
+   <h5 class="heading settled" data-level="9.2.1.1" id="#mediatrackcapabilities-members"><span class="secno">9.2.1.1. </span><span class="content">Members</span><a class="self-link" href="#%23mediatrackcapabilities-members"></a></h5>
    <dl class="domintro">
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-whitebalancemode"><code>whiteBalanceMode</code></dfn>, <span> of type sequence&lt;<a data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-21">MeteringMode</a>></span>
-    <dd>A `sequence` of supported <code class="idl"><a data-link-type="idl" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-22">MeteringMode</a></code> settings for <a data-link-type="dfn" href="#white-balance-mode" id="ref-for-white-balance-mode-4">white balance mode</a>.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-colortemperature"><code>colorTemperature</code></dfn>, <span> of type <a data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-41">MediaSettingsRange</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-whitebalancemode"><code>whiteBalanceMode</code></dfn>, <span> of type sequence&lt;<a data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-24">MeteringMode</a>></span>
+    <dd>A `sequence` of supported <code class="idl"><a data-link-type="idl" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-25">MeteringMode</a></code> settings for <a data-link-type="dfn" href="#white-balance-mode" id="ref-for-white-balance-mode-4">white balance mode</a>.
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-colortemperature"><code>colorTemperature</code></dfn>, <span> of type <a data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-31">MediaSettingsRange</a></span>
     <dd>This range reflects the supported correlated <a data-link-type="dfn" href="#color-temperature" id="ref-for-color-temperature-4">color temperature</a> being used for the scene white balance calculation.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-exposuremode"><code>exposureMode</code></dfn>, <span> of type sequence&lt;<a data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-23">MeteringMode</a>></span>
-    <dd>A `sequence` of supported <code class="idl"><a data-link-type="idl" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-24">MeteringMode</a></code> settings for <a data-link-type="dfn" href="#exposure" id="ref-for-exposure-4">exposure</a> calculation.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-exposurecompensation"><code>exposureCompensation</code></dfn>, <span> of type <a data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-42">MediaSettingsRange</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-exposuremode"><code>exposureMode</code></dfn>, <span> of type sequence&lt;<a data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-26">MeteringMode</a>></span>
+    <dd>A `sequence` of supported <code class="idl"><a data-link-type="idl" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-27">MeteringMode</a></code> settings for <a data-link-type="dfn" href="#exposure" id="ref-for-exposure-4">exposure</a> calculation.
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-exposurecompensation"><code>exposureCompensation</code></dfn>, <span> of type <a data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-32">MediaSettingsRange</a></span>
     <dd>This reflects the supported range of <a data-link-type="dfn" href="#exposure-compensation" id="ref-for-exposure-compensation-4">exposure compensation</a>. The supported range can be, and usually is, centered around 0 EV.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-iso"><code>iso</code></dfn>, <span> of type <a data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-43">MediaSettingsRange</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-iso"><code>iso</code></dfn>, <span> of type <a data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-33">MediaSettingsRange</a></span>
     <dd>This reflects the permitted range of <a data-link-type="dfn" href="#iso" id="ref-for-iso-4">ISO</a> values.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-redeyereduction"><code>redEyeReduction</code></dfn>, <span> of type sequence&lt;<a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-boolean">boolean</a>></span>
     <dd>A `sequence` of boolean indicating whether camera supports red eye reduction - on meaning true/active.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-focusmode"><code>focusMode</code></dfn>, <span> of type sequence&lt;<a data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-25">MeteringMode</a>></span>
-    <dd>A `sequence` of supported <code class="idl"><a data-link-type="idl" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-26">MeteringMode</a></code> settings for focus mode.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-brightness"><code>brightness</code></dfn>, <span> of type <a data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-44">MediaSettingsRange</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-focusmode"><code>focusMode</code></dfn>, <span> of type sequence&lt;<a data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-28">MeteringMode</a>></span>
+    <dd>A `sequence` of supported <code class="idl"><a data-link-type="idl" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-29">MeteringMode</a></code> settings for focus mode.
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-brightness"><code>brightness</code></dfn>, <span> of type <a data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-34">MediaSettingsRange</a></span>
     <dd>This reflects the supported range of <a data-link-type="dfn" href="#brightness" id="ref-for-brightness-5">brightness</a> setting of the camera. Values are numeric. Increasing values indicate increasing brightness.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-contrast"><code>contrast</code></dfn>, <span> of type <a data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-45">MediaSettingsRange</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-contrast"><code>contrast</code></dfn>, <span> of type <a data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-35">MediaSettingsRange</a></span>
     <dd>This reflects the supported range of <a data-link-type="dfn" href="#contrast" id="ref-for-contrast-6">contrast</a>. Values are numeric.  Increasing values indicate increasing contrast.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-saturation"><code>saturation</code></dfn>, <span> of type <a data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-46">MediaSettingsRange</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-saturation"><code>saturation</code></dfn>, <span> of type <a data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-36">MediaSettingsRange</a></span>
     <dd>This reflects the permitted range of <a data-link-type="dfn" href="#saturation" id="ref-for-saturation-5">saturation</a> setting. Values are numeric. Increasing values indicate increasing saturation.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-sharpness"><code>sharpness</code></dfn>, <span> of type <a data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-47">MediaSettingsRange</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-sharpness"><code>sharpness</code></dfn>, <span> of type <a data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-37">MediaSettingsRange</a></span>
     <dd>This reflects the permitted <a data-link-type="dfn" href="#sharpness" id="ref-for-sharpness-5">sharpness</a> range of the camera. Values are numeric. Increasing values indicate increasing sharpness, and the minimum value always implies no sharpness enhancement or processing.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-imageheight"><code>imageHeight</code></dfn>, <span> of type <a data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-48">MediaSettingsRange</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-imageheight"><code>imageHeight</code></dfn>, <span> of type <a data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-38">MediaSettingsRange</a></span>
     <dd>This reflects the image height range supported by the UA.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-imagewidth"><code>imageWidth</code></dfn>, <span> of type <a data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-49">MediaSettingsRange</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-imagewidth"><code>imageWidth</code></dfn>, <span> of type <a data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-39">MediaSettingsRange</a></span>
     <dd>This reflects the image width range supported by the UA.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-zoom"><code>zoom</code></dfn>, <span> of type <a data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-50">MediaSettingsRange</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-zoom"><code>zoom</code></dfn>, <span> of type <a data-link-type="idl-name" href="#mediasettingsrange0" id="ref-for-mediasettingsrange0-40">MediaSettingsRange</a></span>
     <dd>This reflects the zoom value range supported by the UA.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-filllightmode"><code>fillLightMode</code></dfn>, <span> of type sequence&lt;<a data-link-type="idl-name" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-9">FillLightMode</a>></span>
-    <dd>A `sequence` of supported <code class="idl"><a data-link-type="idl" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-10">FillLightMode</a></code> settings for the fill light (flash).
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackCapabilities" data-dfn-type="dict-member" data-export="" id="dom-mediatrackcapabilities-filllightmode"><code>fillLightMode</code></dfn>, <span> of type sequence&lt;<a data-link-type="idl-name" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-10">FillLightMode</a>></span>
+    <dd>A `sequence` of supported <code class="idl"><a data-link-type="idl" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-11">FillLightMode</a></code> settings for the fill light (flash).
    </dl>
    <div class="note" role="note"> The supported resolutions are presented as segregated <code class="idl"><a data-link-type="idl" href="#dom-photocapabilities-imagewidth" id="ref-for-dom-photocapabilities-imagewidth-3">imageWidth</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-photocapabilities-imageheight" id="ref-for-dom-photocapabilities-imageheight-3">imageHeight</a></code> ranges to prevent increasing the fingerprinting surface and to allow the UA to make a best-effort decision with regards to actual hardware configuration. </div>
-   <h3 class="heading settled" data-level="9.3" id="#mediatracksettings"><span class="secno">9.3. </span><span class="content">MediaTrackSettings dictionary</span><a class="self-link" href="#%23mediatracksettings"></a></h3>
+   <h3 class="heading settled" data-level="9.3" id="#settings"><span class="secno">9.3. </span><span class="content">Settings</span><a class="self-link" href="#%23settings"></a></h3>
+   <h4 class="heading settled" data-level="9.3.1" id="mediatracksettings"><span class="secno">9.3.1. </span><span class="content">MediaTrackSettings dictionary</span><a class="self-link" href="#mediatracksettings"></a></h4>
    <p>When the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-ConstrainablePattern-getSettings-Settings">getSettings</a></code> method is invoked on a video stream track, the user agent must return the following dictionary that extends the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaTrackSettings">MediaTrackSettings</a></code> dictionary:</p>
 <pre class="idl highlight def"><span class="kt">partial</span> <span class="kt">dictionary</span> <a class="nv idl-code" data-link-type="dictionary" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaTrackSettings">MediaTrackSettings</a> {
-  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-27">MeteringMode</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode      " href="#dom-mediatracksettings-whitebalancemode" id="ref-for-dom-mediatracksettings-whitebalancemode-1">whiteBalanceMode</a>;
+  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-30">MeteringMode</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode      " href="#dom-mediatracksettings-whitebalancemode" id="ref-for-dom-mediatracksettings-whitebalancemode-1">whiteBalanceMode</a>;
   <span class="kt">double</span>            <a class="nv idl-code" data-link-type="dict-member" data-type="double            " href="#dom-mediatracksettings-colortemperature" id="ref-for-dom-mediatracksettings-colortemperature-1">colorTemperature</a>;
-  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-28">MeteringMode</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode      " href="#dom-mediatracksettings-exposuremode" id="ref-for-dom-mediatracksettings-exposuremode-1">exposureMode</a>;
+  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-31">MeteringMode</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode      " href="#dom-mediatracksettings-exposuremode" id="ref-for-dom-mediatracksettings-exposuremode-1">exposureMode</a>;
   <span class="kt">double</span>            <a class="nv idl-code" data-link-type="dict-member" data-type="double            " href="#dom-mediatracksettings-exposurecompensation" id="ref-for-dom-mediatracksettings-exposurecompensation-1">exposureCompensation</a>;
   <span class="kt">double</span>            <a class="nv idl-code" data-link-type="dict-member" data-type="double            " href="#dom-mediatracksettings-iso" id="ref-for-dom-mediatracksettings-iso-1">iso</a>;
   <span class="kt">boolean</span>           <a class="nv idl-code" data-link-type="dict-member" data-type="boolean           " href="#dom-mediatracksettings-redeyereduction" id="ref-for-dom-mediatracksettings-redeyereduction-1">redEyeReduction</a>;
-  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-29">MeteringMode</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode      " href="#dom-mediatracksettings-focusmode" id="ref-for-dom-mediatracksettings-focusmode-1">focusMode</a>;
+  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-32">MeteringMode</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode      " href="#dom-mediatracksettings-focusmode" id="ref-for-dom-mediatracksettings-focusmode-1">focusMode</a>;
   <span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#dictdef-point2d" id="ref-for-dictdef-point2d-6">Point2D</a>> <a class="nv idl-code" data-link-type="dict-member" data-type="sequence<Point2D> " href="#dom-mediatracksettings-pointsofinterest" id="ref-for-dom-mediatracksettings-pointsofinterest-1">pointsOfInterest</a>;
 
   <span class="kt">double</span>        <a class="nv idl-code" data-link-type="dict-member" data-type="double        " href="#dom-mediatracksettings-brightness" id="ref-for-dom-mediatracksettings-brightness-1">brightness</a>;
@@ -2085,25 +2120,25 @@ pre.idl.highlight { color: #708090; }
   <span class="kt">double</span>        <a class="nv idl-code" data-link-type="dict-member" data-type="double        " href="#dom-mediatracksettings-zoom" id="ref-for-dom-mediatracksettings-zoom-1">zoom</a>;
   <span class="kt">double</span>        <a class="nv idl-code" data-link-type="dict-member" data-type="double        " href="#dom-mediatracksettings-imageheight" id="ref-for-dom-mediatracksettings-imageheight-1">imageHeight</a>;
   <span class="kt">double</span>        <a class="nv idl-code" data-link-type="dict-member" data-type="double        " href="#dom-mediatracksettings-imagewidth" id="ref-for-dom-mediatracksettings-imagewidth-1">imageWidth</a>;
-  <a class="n" data-link-type="idl-name" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-11">FillLightMode</a> <a class="nv idl-code" data-link-type="dict-member" data-type="FillLightMode " href="#dom-mediatracksettings-filllightmode" id="ref-for-dom-mediatracksettings-filllightmode-1">fillLightMode</a>;
+  <a class="n" data-link-type="idl-name" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-12">FillLightMode</a> <a class="nv idl-code" data-link-type="dict-member" data-type="FillLightMode " href="#dom-mediatracksettings-filllightmode" id="ref-for-dom-mediatracksettings-filllightmode-1">fillLightMode</a>;
 };
 </pre>
-   <h4 class="heading settled" data-level="9.3.1" id="##mediatracksettings-members"><span class="secno">9.3.1. </span><span class="content">Members</span><a class="self-link" href="#%23%23mediatracksettings-members"></a></h4>
+   <h5 class="heading settled" data-level="9.3.1.1" id="mediatracksettings-members"><span class="secno">9.3.1.1. </span><span class="content">Members</span><a class="self-link" href="#mediatracksettings-members"></a></h5>
    <dl class="domintro">
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-whitebalancemode"><code>whiteBalanceMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-30">MeteringMode</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-whitebalancemode"><code>whiteBalanceMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-33">MeteringMode</a></span>
     <dd>This reflects the desired <a data-link-type="dfn" href="#white-balance-mode" id="ref-for-white-balance-mode-5">white balance mode</a> setting.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-colortemperature"><code>colorTemperature</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-double">double</a></span>
     <dd><a data-link-type="dfn" href="#color-temperature" id="ref-for-color-temperature-5">Color temperature</a> to be used for the white balance calculation of the scene. This field is only significant if <code class="idl"><a data-link-type="idl" href="#dom-mediatracksettings-whitebalancemode" id="ref-for-dom-mediatracksettings-whitebalancemode-2">whiteBalanceMode</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-meteringmode-manual" id="ref-for-dom-meteringmode-manual-3">manual</a></code>.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-exposuremode"><code>exposureMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-31">MeteringMode</a></span>
-    <dd>This reflects the desired <a data-link-type="dfn" href="#exposure" id="ref-for-exposure-5">exposure</a> mode setting.  Acceptable values are of type <code class="idl"><a data-link-type="idl" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-32">MeteringMode</a></code>.
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-exposuremode"><code>exposureMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-34">MeteringMode</a></span>
+    <dd>This reflects the desired <a data-link-type="dfn" href="#exposure" id="ref-for-exposure-5">exposure</a> mode setting.  Acceptable values are of type <code class="idl"><a data-link-type="idl" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-35">MeteringMode</a></code>.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-exposurecompensation"><code>exposureCompensation</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-double">double</a></span>
     <dd>This reflects the desired <a data-link-type="dfn" href="#exposure-compensation" id="ref-for-exposure-compensation-5">exposure compensation</a> setting.  A value of 0 EV is interpreted as no exposure compensation.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-iso"><code>iso</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-double">double</a></span>
     <dd>This reflects the desired camera <a data-link-type="dfn" href="#iso" id="ref-for-iso-5">ISO</a> setting.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-redeyereduction"><code>redEyeReduction</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-boolean">boolean</a></span>
     <dd>This reflects whether camera red eye reduction is desired
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-focusmode"><code>focusMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-33">MeteringMode</a></span>
-    <dd>This reflects the desired focus mode setting.  Acceptable values are of type <code class="idl"><a data-link-type="idl" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-34">MeteringMode</a></code>.
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-focusmode"><code>focusMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-36">MeteringMode</a></span>
+    <dd>This reflects the desired focus mode setting.  Acceptable values are of type <code class="idl"><a data-link-type="idl" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-37">MeteringMode</a></code>.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-pointsofinterest"><code>pointsOfInterest</code></dfn>, <span> of type sequence&lt;<a data-link-type="idl-name" href="#dictdef-point2d" id="ref-for-dictdef-point2d-7">Point2D</a>></span>
     <dd>
      A `sequence` of <code class="idl"><a data-link-type="idl" href="#dictdef-point2d" id="ref-for-dictdef-point2d-8">Point2D</a></code>s to be used as metering area centers for other settings, e.g. Focus, Exposure and Auto White Balance. 
@@ -2122,8 +2157,8 @@ pre.idl.highlight { color: #708090; }
     <dd>This reflects the desired image height.  The UA MUST select the closest height value this setting if it supports a discrete set of height options.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-imageheight"><code>imageHeight</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-double">double</a></span>
     <dd>This reflects the desired image width. The UA MUST select the closest width value this setting if it supports a discrete set of width options.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-filllightmode"><code>fillLightMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-12">FillLightMode</a></span>
-    <dd>This reflects the desired fill light (flash) mode setting.  Acceptable values are of type <code class="idl"><a data-link-type="idl" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-13">FillLightMode</a></code>.
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-filllightmode"><code>fillLightMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-13">FillLightMode</a></span>
+    <dd>This reflects the desired fill light (flash) mode setting.  Acceptable values are of type <code class="idl"><a data-link-type="idl" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-14">FillLightMode</a></code>.
    </dl>
    <h2 class="heading settled" data-level="10" id="examples"><span class="secno">10. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h2>
    <div class="note" role="note"> Slightly modified versions of these examples can be found in e.g. <a href="https://codepen.io/collection/nLeobQ/">this codepen collection</a>. </div>
@@ -2329,20 +2364,20 @@ pre.idl.highlight { color: #708090; }
      <li><a href="#dom-photocapabilities-brightness">attribute for PhotoCapabilities</a><span>, in §3.1</span>
      <li><a href="#brightness">definition of</a><span>, in §3.2</span>
      <li><a href="#dom-photosettings-brightness">dict-member for PhotoSettings</a><span>, in §4.1</span>
-     <li><a href="#dom-mediatracksupportedconstraints-brightness">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1</span>
-     <li><a href="#dom-mediatrackconstraintset-brightness">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2</span>
-     <li><a href="#dom-mediatrackcapabilities-brightness">dict-member for MediaTrackCapabilities</a><span>, in §9.2.2</span>
-     <li><a href="#dom-mediatracksettings-brightness">dict-member for MediaTrackSettings</a><span>, in §9.3.1</span>
+     <li><a href="#dom-mediatracksupportedconstraints-brightness">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1.1</span>
+     <li><a href="#dom-mediatrackconstraintset-brightness">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2.1</span>
+     <li><a href="#dom-mediatrackcapabilities-brightness">dict-member for MediaTrackCapabilities</a><span>, in §9.2.1.1</span>
+     <li><a href="#dom-mediatracksettings-brightness">dict-member for MediaTrackSettings</a><span>, in §9.3.1.1</span>
     </ul>
    <li>
     colorTemperature
     <ul>
      <li><a href="#dom-photocapabilities-colortemperature">attribute for PhotoCapabilities</a><span>, in §3.1</span>
      <li><a href="#dom-photosettings-colortemperature">dict-member for PhotoSettings</a><span>, in §4.1</span>
-     <li><a href="#dom-mediatracksupportedconstraints-colortemperature">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1</span>
-     <li><a href="#dom-mediatrackconstraintset-colortemperature">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2</span>
-     <li><a href="#dom-mediatrackcapabilities-colortemperature">dict-member for MediaTrackCapabilities</a><span>, in §9.2.2</span>
-     <li><a href="#dom-mediatracksettings-colortemperature">dict-member for MediaTrackSettings</a><span>, in §9.3.1</span>
+     <li><a href="#dom-mediatracksupportedconstraints-colortemperature">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1.1</span>
+     <li><a href="#dom-mediatrackconstraintset-colortemperature">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2.1</span>
+     <li><a href="#dom-mediatrackcapabilities-colortemperature">dict-member for MediaTrackCapabilities</a><span>, in §9.2.1.1</span>
+     <li><a href="#dom-mediatracksettings-colortemperature">dict-member for MediaTrackSettings</a><span>, in §9.3.1.1</span>
     </ul>
    <li><a href="#color-temperature">Color temperature</a><span>, in §3.2</span>
    <li><a href="#conformant-server">conformant server</a><span>, in §Unnumbered section</span>
@@ -2354,10 +2389,10 @@ pre.idl.highlight { color: #708090; }
     <ul>
      <li><a href="#dom-photocapabilities-contrast">attribute for PhotoCapabilities</a><span>, in §3.1</span>
      <li><a href="#dom-photosettings-contrast">dict-member for PhotoSettings</a><span>, in §4.1</span>
-     <li><a href="#dom-mediatracksupportedconstraints-contrast">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1</span>
-     <li><a href="#dom-mediatrackconstraintset-contrast">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2</span>
-     <li><a href="#dom-mediatrackcapabilities-contrast">dict-member for MediaTrackCapabilities</a><span>, in §9.2.2</span>
-     <li><a href="#dom-mediatracksettings-contrast">dict-member for MediaTrackSettings</a><span>, in §9.3.1</span>
+     <li><a href="#dom-mediatracksupportedconstraints-contrast">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1.1</span>
+     <li><a href="#dom-mediatrackconstraintset-contrast">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2.1</span>
+     <li><a href="#dom-mediatrackcapabilities-contrast">dict-member for MediaTrackCapabilities</a><span>, in §9.2.1.1</span>
+     <li><a href="#dom-mediatracksettings-contrast">dict-member for MediaTrackSettings</a><span>, in §9.3.1.1</span>
     </ul>
    <li><a href="#dom-mediasettingsrange-current">current</a><span>, in §5.1</span>
    <li><a href="#exposure">Exposure</a><span>, in §3.2</span>
@@ -2366,10 +2401,10 @@ pre.idl.highlight { color: #708090; }
     <ul>
      <li><a href="#dom-photocapabilities-exposurecompensation">attribute for PhotoCapabilities</a><span>, in §3.1</span>
      <li><a href="#dom-photosettings-exposurecompensation">dict-member for PhotoSettings</a><span>, in §4.1</span>
-     <li><a href="#dom-mediatracksupportedconstraints-exposurecompensation">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1</span>
-     <li><a href="#dom-mediatrackconstraintset-exposurecompensation">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2</span>
-     <li><a href="#dom-mediatrackcapabilities-exposurecompensation">dict-member for MediaTrackCapabilities</a><span>, in §9.2.2</span>
-     <li><a href="#dom-mediatracksettings-exposurecompensation">dict-member for MediaTrackSettings</a><span>, in §9.3.1</span>
+     <li><a href="#dom-mediatracksupportedconstraints-exposurecompensation">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1.1</span>
+     <li><a href="#dom-mediatrackconstraintset-exposurecompensation">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2.1</span>
+     <li><a href="#dom-mediatrackcapabilities-exposurecompensation">dict-member for MediaTrackCapabilities</a><span>, in §9.2.1.1</span>
+     <li><a href="#dom-mediatracksettings-exposurecompensation">dict-member for MediaTrackSettings</a><span>, in §9.3.1.1</span>
     </ul>
    <li><a href="#exposure-compensation">Exposure Compensation</a><span>, in §3.2</span>
    <li>
@@ -2377,10 +2412,10 @@ pre.idl.highlight { color: #708090; }
     <ul>
      <li><a href="#dom-photocapabilities-exposuremode">attribute for PhotoCapabilities</a><span>, in §3.1</span>
      <li><a href="#dom-photosettings-exposuremode">dict-member for PhotoSettings</a><span>, in §4.1</span>
-     <li><a href="#dom-mediatracksupportedconstraints-exposuremode">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1</span>
-     <li><a href="#dom-mediatrackconstraintset-exposuremode">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2</span>
-     <li><a href="#dom-mediatrackcapabilities-exposuremode">dict-member for MediaTrackCapabilities</a><span>, in §9.2.2</span>
-     <li><a href="#dom-mediatracksettings-exposuremode">dict-member for MediaTrackSettings</a><span>, in §9.3.1</span>
+     <li><a href="#dom-mediatracksupportedconstraints-exposuremode">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1.1</span>
+     <li><a href="#dom-mediatrackconstraintset-exposuremode">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2.1</span>
+     <li><a href="#dom-mediatrackcapabilities-exposuremode">dict-member for MediaTrackCapabilities</a><span>, in §9.2.1.1</span>
+     <li><a href="#dom-mediatracksettings-exposuremode">dict-member for MediaTrackSettings</a><span>, in §9.3.1.1</span>
     </ul>
    <li><a href="#enumdef-filllightmode">FillLightMode</a><span>, in §6</span>
    <li>
@@ -2388,10 +2423,10 @@ pre.idl.highlight { color: #708090; }
     <ul>
      <li><a href="#dom-photocapabilities-filllightmode">attribute for PhotoCapabilities</a><span>, in §3.1</span>
      <li><a href="#dom-photosettings-filllightmode">dict-member for PhotoSettings</a><span>, in §4.1</span>
-     <li><a href="#dom-mediatracksupportedconstraints-filllightmode">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1</span>
-     <li><a href="#dom-mediatrackconstraintset-filllightmode">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2</span>
-     <li><a href="#dom-mediatrackcapabilities-filllightmode">dict-member for MediaTrackCapabilities</a><span>, in §9.2.2</span>
-     <li><a href="#dom-mediatracksettings-filllightmode">dict-member for MediaTrackSettings</a><span>, in §9.3.1</span>
+     <li><a href="#dom-mediatracksupportedconstraints-filllightmode">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1.1</span>
+     <li><a href="#dom-mediatrackconstraintset-filllightmode">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2.1</span>
+     <li><a href="#dom-mediatrackcapabilities-filllightmode">dict-member for MediaTrackCapabilities</a><span>, in §9.2.1.1</span>
+     <li><a href="#dom-mediatracksettings-filllightmode">dict-member for MediaTrackSettings</a><span>, in §9.3.1.1</span>
     </ul>
    <li><a href="#dom-filllightmode-flash">flash</a><span>, in §6.1</span>
    <li>
@@ -2399,10 +2434,10 @@ pre.idl.highlight { color: #708090; }
     <ul>
      <li><a href="#dom-photocapabilities-focusmode">attribute for PhotoCapabilities</a><span>, in §3.1</span>
      <li><a href="#dom-photosettings-focusmode">dict-member for PhotoSettings</a><span>, in §4.1</span>
-     <li><a href="#dom-mediatracksupportedconstraints-focusmode">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1</span>
-     <li><a href="#dom-mediatrackconstraintset-focusmode">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2</span>
-     <li><a href="#dom-mediatrackcapabilities-focusmode">dict-member for MediaTrackCapabilities</a><span>, in §9.2.2</span>
-     <li><a href="#dom-mediatracksettings-focusmode">dict-member for MediaTrackSettings</a><span>, in §9.3.1</span>
+     <li><a href="#dom-mediatracksupportedconstraints-focusmode">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1.1</span>
+     <li><a href="#dom-mediatrackconstraintset-focusmode">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2.1</span>
+     <li><a href="#dom-mediatrackcapabilities-focusmode">dict-member for MediaTrackCapabilities</a><span>, in §9.2.1.1</span>
+     <li><a href="#dom-mediatracksettings-focusmode">dict-member for MediaTrackSettings</a><span>, in §9.3.1.1</span>
     </ul>
    <li><a href="#dom-imagecapture-getphotocapabilities">getPhotoCapabilities()</a><span>, in §2.2</span>
    <li><a href="#dom-imagecapture-grabframe">grabFrame()</a><span>, in §2.2</span>
@@ -2413,20 +2448,20 @@ pre.idl.highlight { color: #708090; }
     <ul>
      <li><a href="#dom-photocapabilities-imageheight">attribute for PhotoCapabilities</a><span>, in §3.1</span>
      <li><a href="#dom-photosettings-imageheight">dict-member for PhotoSettings</a><span>, in §4.1</span>
-     <li><a href="#dom-mediatracksupportedconstraints-imageheight">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1</span>
-     <li><a href="#dom-mediatrackconstraintset-imageheight">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2</span>
-     <li><a href="#dom-mediatrackcapabilities-imageheight">dict-member for MediaTrackCapabilities</a><span>, in §9.2.2</span>
-     <li><a href="#dom-mediatracksettings-imageheight">dict-member for MediaTrackSettings</a><span>, in §9.3.1</span>
+     <li><a href="#dom-mediatracksupportedconstraints-imageheight">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1.1</span>
+     <li><a href="#dom-mediatrackconstraintset-imageheight">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2.1</span>
+     <li><a href="#dom-mediatrackcapabilities-imageheight">dict-member for MediaTrackCapabilities</a><span>, in §9.2.1.1</span>
+     <li><a href="#dom-mediatracksettings-imageheight">dict-member for MediaTrackSettings</a><span>, in §9.3.1.1</span>
     </ul>
    <li>
     imageWidth
     <ul>
      <li><a href="#dom-photocapabilities-imagewidth">attribute for PhotoCapabilities</a><span>, in §3.1</span>
      <li><a href="#dom-photosettings-imagewidth">dict-member for PhotoSettings</a><span>, in §4.1</span>
-     <li><a href="#dom-mediatracksupportedconstraints-imagewidth">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1</span>
-     <li><a href="#dom-mediatrackconstraintset-imagewidth">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2</span>
-     <li><a href="#dom-mediatrackcapabilities-imagewidth">dict-member for MediaTrackCapabilities</a><span>, in §9.2.2</span>
-     <li><a href="#dom-mediatracksettings-imagewidth">dict-member for MediaTrackSettings</a><span>, in §9.3.1</span>
+     <li><a href="#dom-mediatracksupportedconstraints-imagewidth">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1.1</span>
+     <li><a href="#dom-mediatrackconstraintset-imagewidth">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2.1</span>
+     <li><a href="#dom-mediatrackcapabilities-imagewidth">dict-member for MediaTrackCapabilities</a><span>, in §9.2.1.1</span>
+     <li><a href="#dom-mediatracksettings-imagewidth">dict-member for MediaTrackSettings</a><span>, in §9.3.1.1</span>
     </ul>
    <li><a href="#iso">ISO</a><span>, in §3.2</span>
    <li>
@@ -2434,10 +2469,10 @@ pre.idl.highlight { color: #708090; }
     <ul>
      <li><a href="#dom-photocapabilities-iso">attribute for PhotoCapabilities</a><span>, in §3.1</span>
      <li><a href="#dom-photosettings-iso">dict-member for PhotoSettings</a><span>, in §4.1</span>
-     <li><a href="#dom-mediatracksupportedconstraints-iso">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1</span>
-     <li><a href="#dom-mediatrackconstraintset-iso">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2</span>
-     <li><a href="#dom-mediatrackcapabilities-iso">dict-member for MediaTrackCapabilities</a><span>, in §9.2.2</span>
-     <li><a href="#dom-mediatracksettings-iso">dict-member for MediaTrackSettings</a><span>, in §9.3.1</span>
+     <li><a href="#dom-mediatracksupportedconstraints-iso">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1.1</span>
+     <li><a href="#dom-mediatrackconstraintset-iso">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2.1</span>
+     <li><a href="#dom-mediatrackcapabilities-iso">dict-member for MediaTrackCapabilities</a><span>, in §9.2.1.1</span>
+     <li><a href="#dom-mediatracksettings-iso">dict-member for MediaTrackSettings</a><span>, in §9.3.1.1</span>
     </ul>
    <li><a href="#dom-meteringmode-manual">manual</a><span>, in §7.1</span>
    <li><a href="#dom-mediasettingsrange-max">max</a><span>, in §5.1</span>
@@ -2453,17 +2488,17 @@ pre.idl.highlight { color: #708090; }
     pointsOfInterest
     <ul>
      <li><a href="#dom-photosettings-pointsofinterest">dict-member for PhotoSettings</a><span>, in §4.1</span>
-     <li><a href="#dom-mediatracksettings-pointsofinterest">dict-member for MediaTrackSettings</a><span>, in §9.3.1</span>
+     <li><a href="#dom-mediatracksettings-pointsofinterest">dict-member for MediaTrackSettings</a><span>, in §9.3.1.1</span>
     </ul>
    <li>
     redEyeReduction
     <ul>
      <li><a href="#dom-photocapabilities-redeyereduction">attribute for PhotoCapabilities</a><span>, in §3.1</span>
      <li><a href="#dom-photosettings-redeyereduction">dict-member for PhotoSettings</a><span>, in §4.1</span>
-     <li><a href="#dom-mediatracksupportedconstraints-redeyereduction">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1</span>
-     <li><a href="#dom-mediatrackconstraintset-redeyereduction">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2</span>
-     <li><a href="#dom-mediatrackcapabilities-redeyereduction">dict-member for MediaTrackCapabilities</a><span>, in §9.2.2</span>
-     <li><a href="#dom-mediatracksettings-redeyereduction">dict-member for MediaTrackSettings</a><span>, in §9.3.1</span>
+     <li><a href="#dom-mediatracksupportedconstraints-redeyereduction">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1.1</span>
+     <li><a href="#dom-mediatrackconstraintset-redeyereduction">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2.1</span>
+     <li><a href="#dom-mediatrackcapabilities-redeyereduction">dict-member for MediaTrackCapabilities</a><span>, in §9.2.1.1</span>
+     <li><a href="#dom-mediatracksettings-redeyereduction">dict-member for MediaTrackSettings</a><span>, in §9.3.1.1</span>
     </ul>
    <li>
     saturation
@@ -2471,10 +2506,10 @@ pre.idl.highlight { color: #708090; }
      <li><a href="#dom-photocapabilities-saturation">attribute for PhotoCapabilities</a><span>, in §3.1</span>
      <li><a href="#saturation">definition of</a><span>, in §3.2</span>
      <li><a href="#dom-photosettings-saturation">dict-member for PhotoSettings</a><span>, in §4.1</span>
-     <li><a href="#dom-mediatracksupportedconstraints-saturation">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1</span>
-     <li><a href="#dom-mediatrackconstraintset-saturation">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2</span>
-     <li><a href="#dom-mediatrackcapabilities-saturation">dict-member for MediaTrackCapabilities</a><span>, in §9.2.2</span>
-     <li><a href="#dom-mediatracksettings-saturation">dict-member for MediaTrackSettings</a><span>, in §9.3.1</span>
+     <li><a href="#dom-mediatracksupportedconstraints-saturation">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1.1</span>
+     <li><a href="#dom-mediatrackconstraintset-saturation">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2.1</span>
+     <li><a href="#dom-mediatrackcapabilities-saturation">dict-member for MediaTrackCapabilities</a><span>, in §9.2.1.1</span>
+     <li><a href="#dom-mediatracksettings-saturation">dict-member for MediaTrackSettings</a><span>, in §9.3.1.1</span>
     </ul>
    <li><a href="#dom-imagecapture-setoptions">setOptions()</a><span>, in §2.2</span>
    <li><a href="#dom-imagecapture-setoptions">setOptions(photoSettings)</a><span>, in §2.2</span>
@@ -2484,10 +2519,10 @@ pre.idl.highlight { color: #708090; }
     <ul>
      <li><a href="#dom-photocapabilities-sharpness">attribute for PhotoCapabilities</a><span>, in §3.1</span>
      <li><a href="#dom-photosettings-sharpness">dict-member for PhotoSettings</a><span>, in §4.1</span>
-     <li><a href="#dom-mediatracksupportedconstraints-sharpness">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1</span>
-     <li><a href="#dom-mediatrackconstraintset-sharpness">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2</span>
-     <li><a href="#dom-mediatrackcapabilities-sharpness">dict-member for MediaTrackCapabilities</a><span>, in §9.2.2</span>
-     <li><a href="#dom-mediatracksettings-sharpness">dict-member for MediaTrackSettings</a><span>, in §9.3.1</span>
+     <li><a href="#dom-mediatracksupportedconstraints-sharpness">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1.1</span>
+     <li><a href="#dom-mediatrackconstraintset-sharpness">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2.1</span>
+     <li><a href="#dom-mediatrackcapabilities-sharpness">dict-member for MediaTrackCapabilities</a><span>, in §9.2.1.1</span>
+     <li><a href="#dom-mediatracksettings-sharpness">dict-member for MediaTrackSettings</a><span>, in §9.3.1.1</span>
     </ul>
    <li><a href="#dom-meteringmode-single-shot">single-shot</a><span>, in §7.1</span>
    <li><a href="#dom-mediasettingsrange-step">step</a><span>, in §5.1</span>
@@ -2500,10 +2535,10 @@ pre.idl.highlight { color: #708090; }
     <ul>
      <li><a href="#dom-photocapabilities-whitebalancemode">attribute for PhotoCapabilities</a><span>, in §3.1</span>
      <li><a href="#dom-photosettings-whitebalancemode">dict-member for PhotoSettings</a><span>, in §4.1</span>
-     <li><a href="#dom-mediatracksupportedconstraints-whitebalancemode">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1</span>
-     <li><a href="#dom-mediatrackconstraintset-whitebalancemode">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2</span>
-     <li><a href="#dom-mediatrackcapabilities-whitebalancemode">dict-member for MediaTrackCapabilities</a><span>, in §9.2.2</span>
-     <li><a href="#dom-mediatracksettings-whitebalancemode">dict-member for MediaTrackSettings</a><span>, in §9.3.1</span>
+     <li><a href="#dom-mediatracksupportedconstraints-whitebalancemode">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1.1</span>
+     <li><a href="#dom-mediatrackconstraintset-whitebalancemode">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2.1</span>
+     <li><a href="#dom-mediatrackcapabilities-whitebalancemode">dict-member for MediaTrackCapabilities</a><span>, in §9.2.1.1</span>
+     <li><a href="#dom-mediatracksettings-whitebalancemode">dict-member for MediaTrackSettings</a><span>, in §9.3.1.1</span>
     </ul>
    <li><a href="#white-balance-mode">White balance mode</a><span>, in §3.2</span>
    <li><a href="#dom-point2d-x">x</a><span>, in §8.1</span>
@@ -2513,10 +2548,10 @@ pre.idl.highlight { color: #708090; }
     <ul>
      <li><a href="#dom-photocapabilities-zoom">attribute for PhotoCapabilities</a><span>, in §3.1</span>
      <li><a href="#dom-photosettings-zoom">dict-member for PhotoSettings</a><span>, in §4.1</span>
-     <li><a href="#dom-mediatracksupportedconstraints-zoom">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1</span>
-     <li><a href="#dom-mediatrackconstraintset-zoom">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2</span>
-     <li><a href="#dom-mediatrackcapabilities-zoom">dict-member for MediaTrackCapabilities</a><span>, in §9.2.2</span>
-     <li><a href="#dom-mediatracksettings-zoom">dict-member for MediaTrackSettings</a><span>, in §9.3.1</span>
+     <li><a href="#dom-mediatracksupportedconstraints-zoom">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1.1</span>
+     <li><a href="#dom-mediatrackconstraintset-zoom">dict-member for MediaTrackConstraintSet</a><span>, in §9.1.2.1</span>
+     <li><a href="#dom-mediatrackcapabilities-zoom">dict-member for MediaTrackCapabilities</a><span>, in §9.2.1.1</span>
+     <li><a href="#dom-mediatracksettings-zoom">dict-member for MediaTrackSettings</a><span>, in §9.3.1.1</span>
     </ul>
   </ul>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
@@ -2670,22 +2705,22 @@ pre.idl.highlight { color: #708090; }
 };
 
 <span class="kt">partial</span> <span class="kt">dictionary</span> <a class="nv idl-code" data-link-type="dictionary" href="https://www.w3.org/TR/mediacapture-streams/#idlidl-def-MediaTrackConstraintSet">MediaTrackConstraintSet</a> {
-  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode">MeteringMode</a>       <a class="nv" data-type="MeteringMode       " href="#dom-mediatrackconstraintset-whitebalancemode">whiteBalanceMode</a>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0">MediaSettingsRange</a> <a class="nv" data-type="MediaSettingsRange " href="#dom-mediatrackconstraintset-colortemperature">colorTemperature</a>;
-  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode">MeteringMode</a>       <a class="nv" data-type="MeteringMode       " href="#dom-mediatrackconstraintset-exposuremode">exposureMode</a>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0">MediaSettingsRange</a> <a class="nv" data-type="MediaSettingsRange " href="#dom-mediatrackconstraintset-exposurecompensation">exposureCompensation</a>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0">MediaSettingsRange</a> <a class="nv" data-type="MediaSettingsRange " href="#dom-mediatrackconstraintset-iso">iso</a>;
-  <span class="kt">boolean</span>            <a class="nv" data-type="boolean            " href="#dom-mediatrackconstraintset-redeyereduction">redEyeReduction</a>;
-  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode">MeteringMode</a>       <a class="nv" data-type="MeteringMode       " href="#dom-mediatrackconstraintset-focusmode">focusMode</a>;
+  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode">MeteringMode</a>       <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode       " href="#dom-mediatrackconstraintset-whitebalancemode">whiteBalanceMode</a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="ConstraintDouble   " href="#dom-mediatrackconstraintset-colortemperature">colorTemperature</a>;
+  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode">MeteringMode</a>       <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode       " href="#dom-mediatrackconstraintset-exposuremode">exposureMode</a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="ConstraintDouble   " href="#dom-mediatrackconstraintset-exposurecompensation">exposureCompensation</a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="ConstraintDouble   " href="#dom-mediatrackconstraintset-iso">iso</a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainBoolean">ConstraintBoolean</a>  <a class="nv idl-code" data-link-type="dict-member" data-type="ConstraintBoolean  " href="#dom-mediatrackconstraintset-redeyereduction">redEyeReduction</a>;
+  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode">MeteringMode</a>       <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode       " href="#dom-mediatrackconstraintset-focusmode">focusMode</a>;
 
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0">MediaSettingsRange</a> <a class="nv" data-type="MediaSettingsRange " href="#dom-mediatrackconstraintset-brightness">brightness</a>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0">MediaSettingsRange</a> <a class="nv" data-type="MediaSettingsRange " href="#dom-mediatrackconstraintset-contrast">contrast</a>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0">MediaSettingsRange</a> <a class="nv" data-type="MediaSettingsRange " href="#dom-mediatrackconstraintset-saturation">saturation</a>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0">MediaSettingsRange</a> <a class="nv" data-type="MediaSettingsRange " href="#dom-mediatrackconstraintset-sharpness">sharpness</a>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0">MediaSettingsRange</a> <a class="nv" data-type="MediaSettingsRange " href="#dom-mediatrackconstraintset-imageheight">imageHeight</a>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0">MediaSettingsRange</a> <a class="nv" data-type="MediaSettingsRange " href="#dom-mediatrackconstraintset-imagewidth">imageWidth</a>;
-  <a class="n" data-link-type="idl-name" href="#mediasettingsrange0">MediaSettingsRange</a> <a class="nv" data-type="MediaSettingsRange " href="#dom-mediatrackconstraintset-zoom">zoom</a>;
-  <a class="n" data-link-type="idl-name" href="#enumdef-filllightmode">FillLightMode</a>      <a class="nv" data-type="FillLightMode      " href="#dom-mediatrackconstraintset-filllightmode">fillLightMode</a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="ConstraintDouble   " href="#dom-mediatrackconstraintset-brightness">brightness</a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="ConstraintDouble   " href="#dom-mediatrackconstraintset-contrast">contrast</a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="ConstraintDouble   " href="#dom-mediatrackconstraintset-saturation">saturation</a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="ConstraintDouble   " href="#dom-mediatrackconstraintset-sharpness">sharpness</a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="ConstraintDouble   " href="#dom-mediatrackconstraintset-imageheight">imageHeight</a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="ConstraintDouble   " href="#dom-mediatrackconstraintset-imagewidth">imageWidth</a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstraintDouble</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="ConstraintDouble   " href="#dom-mediatrackconstraintset-zoom">zoom</a>;
+  <a class="n" data-link-type="idl-name" href="#enumdef-filllightmode">FillLightMode</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="FillLightMode      " href="#dom-mediatrackconstraintset-filllightmode">fillLightMode</a>;
 };
 
 <span class="kt">partial</span> <span class="kt">dictionary</span> <a class="nv idl-code" data-link-type="dictionary" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaTrackCapabilities">MediaTrackCapabilities</a> {
@@ -2853,7 +2888,7 @@ pre.idl.highlight { color: #708090; }
    <ul>
     <li><a href="#ref-for-dom-photocapabilities-imageheight-1">3. PhotoCapabilities</a>
     <li><a href="#ref-for-dom-photocapabilities-imageheight-2">3.1. Attributes</a>
-    <li><a href="#ref-for-dom-photocapabilities-imageheight-3">9.2.2. Members</a>
+    <li><a href="#ref-for-dom-photocapabilities-imageheight-3">9.2.1.1. Members</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-photocapabilities-imagewidth">
@@ -2861,7 +2896,7 @@ pre.idl.highlight { color: #708090; }
    <ul>
     <li><a href="#ref-for-dom-photocapabilities-imagewidth-1">3. PhotoCapabilities</a>
     <li><a href="#ref-for-dom-photocapabilities-imagewidth-2">3.1. Attributes</a>
-    <li><a href="#ref-for-dom-photocapabilities-imagewidth-3">9.2.2. Members</a>
+    <li><a href="#ref-for-dom-photocapabilities-imagewidth-3">9.2.1.1. Members</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-photocapabilities-zoom">
@@ -2881,9 +2916,9 @@ pre.idl.highlight { color: #708090; }
    <ul>
     <li><a href="#ref-for-white-balance-mode-1">3.1. Attributes</a>
     <li><a href="#ref-for-white-balance-mode-2">4.1. Members</a>
-    <li><a href="#ref-for-white-balance-mode-3">9.1.1. MediaTrackSupportedConstraints dictionary</a>
-    <li><a href="#ref-for-white-balance-mode-4">9.2.2. Members</a>
-    <li><a href="#ref-for-white-balance-mode-5">9.3.1. Members</a>
+    <li><a href="#ref-for-white-balance-mode-3">9.1.1.1. Members</a>
+    <li><a href="#ref-for-white-balance-mode-4">9.2.1.1. Members</a>
+    <li><a href="#ref-for-white-balance-mode-5">9.3.1.1. Members</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="color-temperature">
@@ -2891,9 +2926,9 @@ pre.idl.highlight { color: #708090; }
    <ul>
     <li><a href="#ref-for-color-temperature-1">3.1. Attributes</a>
     <li><a href="#ref-for-color-temperature-2">4.1. Members</a>
-    <li><a href="#ref-for-color-temperature-3">9.1.1. MediaTrackSupportedConstraints dictionary</a>
-    <li><a href="#ref-for-color-temperature-4">9.2.2. Members</a>
-    <li><a href="#ref-for-color-temperature-5">9.3.1. Members</a>
+    <li><a href="#ref-for-color-temperature-3">9.1.1.1. Members</a>
+    <li><a href="#ref-for-color-temperature-4">9.2.1.1. Members</a>
+    <li><a href="#ref-for-color-temperature-5">9.3.1.1. Members</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="exposure">
@@ -2901,9 +2936,9 @@ pre.idl.highlight { color: #708090; }
    <ul>
     <li><a href="#ref-for-exposure-1">3.1. Attributes</a>
     <li><a href="#ref-for-exposure-2">4.1. Members</a>
-    <li><a href="#ref-for-exposure-3">9.1.1. MediaTrackSupportedConstraints dictionary</a>
-    <li><a href="#ref-for-exposure-4">9.2.2. Members</a>
-    <li><a href="#ref-for-exposure-5">9.3.1. Members</a>
+    <li><a href="#ref-for-exposure-3">9.1.1.1. Members</a>
+    <li><a href="#ref-for-exposure-4">9.2.1.1. Members</a>
+    <li><a href="#ref-for-exposure-5">9.3.1.1. Members</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="exposure-compensation">
@@ -2911,9 +2946,9 @@ pre.idl.highlight { color: #708090; }
    <ul>
     <li><a href="#ref-for-exposure-compensation-1">3.1. Attributes</a>
     <li><a href="#ref-for-exposure-compensation-2">4.1. Members</a>
-    <li><a href="#ref-for-exposure-compensation-3">9.1.1. MediaTrackSupportedConstraints dictionary</a>
-    <li><a href="#ref-for-exposure-compensation-4">9.2.2. Members</a>
-    <li><a href="#ref-for-exposure-compensation-5">9.3.1. Members</a>
+    <li><a href="#ref-for-exposure-compensation-3">9.1.1.1. Members</a>
+    <li><a href="#ref-for-exposure-compensation-4">9.2.1.1. Members</a>
+    <li><a href="#ref-for-exposure-compensation-5">9.3.1.1. Members</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="iso">
@@ -2921,9 +2956,9 @@ pre.idl.highlight { color: #708090; }
    <ul>
     <li><a href="#ref-for-iso-1">3.1. Attributes</a>
     <li><a href="#ref-for-iso-2">4.1. Members</a>
-    <li><a href="#ref-for-iso-3">9.1.1. MediaTrackSupportedConstraints dictionary</a>
-    <li><a href="#ref-for-iso-4">9.2.2. Members</a>
-    <li><a href="#ref-for-iso-5">9.3.1. Members</a>
+    <li><a href="#ref-for-iso-3">9.1.1.1. Members</a>
+    <li><a href="#ref-for-iso-4">9.2.1.1. Members</a>
+    <li><a href="#ref-for-iso-5">9.3.1.1. Members</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="brightness">
@@ -2932,9 +2967,9 @@ pre.idl.highlight { color: #708090; }
     <li><a href="#ref-for-brightness-1">3.1. Attributes</a>
     <li><a href="#ref-for-brightness-2">3.2. Discussion</a>
     <li><a href="#ref-for-brightness-3">4.1. Members</a>
-    <li><a href="#ref-for-brightness-4">9.1.1. MediaTrackSupportedConstraints dictionary</a>
-    <li><a href="#ref-for-brightness-5">9.2.2. Members</a>
-    <li><a href="#ref-for-brightness-6">9.3.1. Members</a>
+    <li><a href="#ref-for-brightness-4">9.1.1.1. Members</a>
+    <li><a href="#ref-for-brightness-5">9.2.1.1. Members</a>
+    <li><a href="#ref-for-brightness-6">9.3.1.1. Members</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="contrast">
@@ -2943,9 +2978,9 @@ pre.idl.highlight { color: #708090; }
     <li><a href="#ref-for-contrast-1">3.1. Attributes</a>
     <li><a href="#ref-for-contrast-2">3.2. Discussion</a> <a href="#ref-for-contrast-3">(2)</a>
     <li><a href="#ref-for-contrast-4">4.1. Members</a>
-    <li><a href="#ref-for-contrast-5">9.1.1. MediaTrackSupportedConstraints dictionary</a>
-    <li><a href="#ref-for-contrast-6">9.2.2. Members</a>
-    <li><a href="#ref-for-contrast-7">9.3.1. Members</a>
+    <li><a href="#ref-for-contrast-5">9.1.1.1. Members</a>
+    <li><a href="#ref-for-contrast-6">9.2.1.1. Members</a>
+    <li><a href="#ref-for-contrast-7">9.3.1.1. Members</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="saturation">
@@ -2954,9 +2989,9 @@ pre.idl.highlight { color: #708090; }
     <li><a href="#ref-for-saturation-1">3.1. Attributes</a>
     <li><a href="#ref-for-saturation-2">3.2. Discussion</a>
     <li><a href="#ref-for-saturation-3">4.1. Members</a>
-    <li><a href="#ref-for-saturation-4">9.1.1. MediaTrackSupportedConstraints dictionary</a>
-    <li><a href="#ref-for-saturation-5">9.2.2. Members</a>
-    <li><a href="#ref-for-saturation-6">9.3.1. Members</a>
+    <li><a href="#ref-for-saturation-4">9.1.1.1. Members</a>
+    <li><a href="#ref-for-saturation-5">9.2.1.1. Members</a>
+    <li><a href="#ref-for-saturation-6">9.3.1.1. Members</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="sharpness">
@@ -2965,9 +3000,9 @@ pre.idl.highlight { color: #708090; }
     <li><a href="#ref-for-sharpness-1">3.1. Attributes</a>
     <li><a href="#ref-for-sharpness-2">3.2. Discussion</a>
     <li><a href="#ref-for-sharpness-3">4.1. Members</a>
-    <li><a href="#ref-for-sharpness-4">9.1.1. MediaTrackSupportedConstraints dictionary</a>
-    <li><a href="#ref-for-sharpness-5">9.2.2. Members</a>
-    <li><a href="#ref-for-sharpness-6">9.3.1. Members</a>
+    <li><a href="#ref-for-sharpness-4">9.1.1.1. Members</a>
+    <li><a href="#ref-for-sharpness-5">9.2.1.1. Members</a>
+    <li><a href="#ref-for-sharpness-6">9.3.1.1. Members</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dictdef-photosettings">
@@ -3079,9 +3114,8 @@ pre.idl.highlight { color: #708090; }
    <ul>
     <li><a href="#ref-for-mediasettingsrange0-1">3. PhotoCapabilities</a> <a href="#ref-for-mediasettingsrange0-2">(2)</a> <a href="#ref-for-mediasettingsrange0-3">(3)</a> <a href="#ref-for-mediasettingsrange0-4">(4)</a> <a href="#ref-for-mediasettingsrange0-5">(5)</a> <a href="#ref-for-mediasettingsrange0-6">(6)</a> <a href="#ref-for-mediasettingsrange0-7">(7)</a> <a href="#ref-for-mediasettingsrange0-8">(8)</a> <a href="#ref-for-mediasettingsrange0-9">(9)</a> <a href="#ref-for-mediasettingsrange0-10">(10)</a>
     <li><a href="#ref-for-mediasettingsrange0-11">3.1. Attributes</a> <a href="#ref-for-mediasettingsrange0-12">(2)</a> <a href="#ref-for-mediasettingsrange0-13">(3)</a> <a href="#ref-for-mediasettingsrange0-14">(4)</a> <a href="#ref-for-mediasettingsrange0-15">(5)</a> <a href="#ref-for-mediasettingsrange0-16">(6)</a> <a href="#ref-for-mediasettingsrange0-17">(7)</a> <a href="#ref-for-mediasettingsrange0-18">(8)</a> <a href="#ref-for-mediasettingsrange0-19">(9)</a> <a href="#ref-for-mediasettingsrange0-20">(10)</a>
-    <li><a href="#ref-for-mediasettingsrange0-21">9.1.2. MediaTrackConstraintSet dictionary</a> <a href="#ref-for-mediasettingsrange0-22">(2)</a> <a href="#ref-for-mediasettingsrange0-23">(3)</a> <a href="#ref-for-mediasettingsrange0-24">(4)</a> <a href="#ref-for-mediasettingsrange0-25">(5)</a> <a href="#ref-for-mediasettingsrange0-26">(6)</a> <a href="#ref-for-mediasettingsrange0-27">(7)</a> <a href="#ref-for-mediasettingsrange0-28">(8)</a> <a href="#ref-for-mediasettingsrange0-29">(9)</a> <a href="#ref-for-mediasettingsrange0-30">(10)</a>
-    <li><a href="#ref-for-mediasettingsrange0-31">9.2.1. MediaTrackCapabilities dictionary</a> <a href="#ref-for-mediasettingsrange0-32">(2)</a> <a href="#ref-for-mediasettingsrange0-33">(3)</a> <a href="#ref-for-mediasettingsrange0-34">(4)</a> <a href="#ref-for-mediasettingsrange0-35">(5)</a> <a href="#ref-for-mediasettingsrange0-36">(6)</a> <a href="#ref-for-mediasettingsrange0-37">(7)</a> <a href="#ref-for-mediasettingsrange0-38">(8)</a> <a href="#ref-for-mediasettingsrange0-39">(9)</a> <a href="#ref-for-mediasettingsrange0-40">(10)</a>
-    <li><a href="#ref-for-mediasettingsrange0-41">9.2.2. Members</a> <a href="#ref-for-mediasettingsrange0-42">(2)</a> <a href="#ref-for-mediasettingsrange0-43">(3)</a> <a href="#ref-for-mediasettingsrange0-44">(4)</a> <a href="#ref-for-mediasettingsrange0-45">(5)</a> <a href="#ref-for-mediasettingsrange0-46">(6)</a> <a href="#ref-for-mediasettingsrange0-47">(7)</a> <a href="#ref-for-mediasettingsrange0-48">(8)</a> <a href="#ref-for-mediasettingsrange0-49">(9)</a> <a href="#ref-for-mediasettingsrange0-50">(10)</a>
+    <li><a href="#ref-for-mediasettingsrange0-21">9.2.1. MediaTrackCapabilities dictionary</a> <a href="#ref-for-mediasettingsrange0-22">(2)</a> <a href="#ref-for-mediasettingsrange0-23">(3)</a> <a href="#ref-for-mediasettingsrange0-24">(4)</a> <a href="#ref-for-mediasettingsrange0-25">(5)</a> <a href="#ref-for-mediasettingsrange0-26">(6)</a> <a href="#ref-for-mediasettingsrange0-27">(7)</a> <a href="#ref-for-mediasettingsrange0-28">(8)</a> <a href="#ref-for-mediasettingsrange0-29">(9)</a> <a href="#ref-for-mediasettingsrange0-30">(10)</a>
+    <li><a href="#ref-for-mediasettingsrange0-31">9.2.1.1. Members</a> <a href="#ref-for-mediasettingsrange0-32">(2)</a> <a href="#ref-for-mediasettingsrange0-33">(3)</a> <a href="#ref-for-mediasettingsrange0-34">(4)</a> <a href="#ref-for-mediasettingsrange0-35">(5)</a> <a href="#ref-for-mediasettingsrange0-36">(6)</a> <a href="#ref-for-mediasettingsrange0-37">(7)</a> <a href="#ref-for-mediasettingsrange0-38">(8)</a> <a href="#ref-for-mediasettingsrange0-39">(9)</a> <a href="#ref-for-mediasettingsrange0-40">(10)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediasettingsrange-max">
@@ -3116,10 +3150,11 @@ pre.idl.highlight { color: #708090; }
     <li><a href="#ref-for-enumdef-filllightmode-4">4. PhotoSettings</a>
     <li><a href="#ref-for-enumdef-filllightmode-5">4.1. Members</a> <a href="#ref-for-enumdef-filllightmode-6">(2)</a>
     <li><a href="#ref-for-enumdef-filllightmode-7">9.1.2. MediaTrackConstraintSet dictionary</a>
-    <li><a href="#ref-for-enumdef-filllightmode-8">9.2.1. MediaTrackCapabilities dictionary</a>
-    <li><a href="#ref-for-enumdef-filllightmode-9">9.2.2. Members</a> <a href="#ref-for-enumdef-filllightmode-10">(2)</a>
-    <li><a href="#ref-for-enumdef-filllightmode-11">9.3. MediaTrackSettings dictionary</a>
-    <li><a href="#ref-for-enumdef-filllightmode-12">9.3.1. Members</a> <a href="#ref-for-enumdef-filllightmode-13">(2)</a>
+    <li><a href="#ref-for-enumdef-filllightmode-8">9.1.2.1. Members</a>
+    <li><a href="#ref-for-enumdef-filllightmode-9">9.2.1. MediaTrackCapabilities dictionary</a>
+    <li><a href="#ref-for-enumdef-filllightmode-10">9.2.1.1. Members</a> <a href="#ref-for-enumdef-filllightmode-11">(2)</a>
+    <li><a href="#ref-for-enumdef-filllightmode-12">9.3.1. MediaTrackSettings dictionary</a>
+    <li><a href="#ref-for-enumdef-filllightmode-13">9.3.1.1. Members</a> <a href="#ref-for-enumdef-filllightmode-14">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-filllightmode-unavailable">
@@ -3161,10 +3196,11 @@ pre.idl.highlight { color: #708090; }
     <li><a href="#ref-for-enumdef-meteringmode-7">4. PhotoSettings</a> <a href="#ref-for-enumdef-meteringmode-8">(2)</a> <a href="#ref-for-enumdef-meteringmode-9">(3)</a>
     <li><a href="#ref-for-enumdef-meteringmode-10">4.1. Members</a> <a href="#ref-for-enumdef-meteringmode-11">(2)</a> <a href="#ref-for-enumdef-meteringmode-12">(3)</a> <a href="#ref-for-enumdef-meteringmode-13">(4)</a> <a href="#ref-for-enumdef-meteringmode-14">(5)</a>
     <li><a href="#ref-for-enumdef-meteringmode-15">9.1.2. MediaTrackConstraintSet dictionary</a> <a href="#ref-for-enumdef-meteringmode-16">(2)</a> <a href="#ref-for-enumdef-meteringmode-17">(3)</a>
-    <li><a href="#ref-for-enumdef-meteringmode-18">9.2.1. MediaTrackCapabilities dictionary</a> <a href="#ref-for-enumdef-meteringmode-19">(2)</a> <a href="#ref-for-enumdef-meteringmode-20">(3)</a>
-    <li><a href="#ref-for-enumdef-meteringmode-21">9.2.2. Members</a> <a href="#ref-for-enumdef-meteringmode-22">(2)</a> <a href="#ref-for-enumdef-meteringmode-23">(3)</a> <a href="#ref-for-enumdef-meteringmode-24">(4)</a> <a href="#ref-for-enumdef-meteringmode-25">(5)</a> <a href="#ref-for-enumdef-meteringmode-26">(6)</a>
-    <li><a href="#ref-for-enumdef-meteringmode-27">9.3. MediaTrackSettings dictionary</a> <a href="#ref-for-enumdef-meteringmode-28">(2)</a> <a href="#ref-for-enumdef-meteringmode-29">(3)</a>
-    <li><a href="#ref-for-enumdef-meteringmode-30">9.3.1. Members</a> <a href="#ref-for-enumdef-meteringmode-31">(2)</a> <a href="#ref-for-enumdef-meteringmode-32">(3)</a> <a href="#ref-for-enumdef-meteringmode-33">(4)</a> <a href="#ref-for-enumdef-meteringmode-34">(5)</a>
+    <li><a href="#ref-for-enumdef-meteringmode-18">9.1.2.1. Members</a> <a href="#ref-for-enumdef-meteringmode-19">(2)</a> <a href="#ref-for-enumdef-meteringmode-20">(3)</a>
+    <li><a href="#ref-for-enumdef-meteringmode-21">9.2.1. MediaTrackCapabilities dictionary</a> <a href="#ref-for-enumdef-meteringmode-22">(2)</a> <a href="#ref-for-enumdef-meteringmode-23">(3)</a>
+    <li><a href="#ref-for-enumdef-meteringmode-24">9.2.1.1. Members</a> <a href="#ref-for-enumdef-meteringmode-25">(2)</a> <a href="#ref-for-enumdef-meteringmode-26">(3)</a> <a href="#ref-for-enumdef-meteringmode-27">(4)</a> <a href="#ref-for-enumdef-meteringmode-28">(5)</a> <a href="#ref-for-enumdef-meteringmode-29">(6)</a>
+    <li><a href="#ref-for-enumdef-meteringmode-30">9.3.1. MediaTrackSettings dictionary</a> <a href="#ref-for-enumdef-meteringmode-31">(2)</a> <a href="#ref-for-enumdef-meteringmode-32">(3)</a>
+    <li><a href="#ref-for-enumdef-meteringmode-33">9.3.1.1. Members</a> <a href="#ref-for-enumdef-meteringmode-34">(2)</a> <a href="#ref-for-enumdef-meteringmode-35">(3)</a> <a href="#ref-for-enumdef-meteringmode-36">(4)</a> <a href="#ref-for-enumdef-meteringmode-37">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-meteringmode-none">
@@ -3178,7 +3214,7 @@ pre.idl.highlight { color: #708090; }
    <ul>
     <li><a href="#ref-for-dom-meteringmode-manual-1">4.1. Members</a>
     <li><a href="#ref-for-dom-meteringmode-manual-2">7. MeteringMode</a>
-    <li><a href="#ref-for-dom-meteringmode-manual-3">9.3.1. Members</a>
+    <li><a href="#ref-for-dom-meteringmode-manual-3">9.3.1.1. Members</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-meteringmode-single-shot">
@@ -3199,8 +3235,8 @@ pre.idl.highlight { color: #708090; }
     <li><a href="#ref-for-dictdef-point2d-1">4. PhotoSettings</a>
     <li><a href="#ref-for-dictdef-point2d-2">4.1. Members</a> <a href="#ref-for-dictdef-point2d-3">(2)</a> <a href="#ref-for-dictdef-point2d-4">(3)</a>
     <li><a href="#ref-for-dictdef-point2d-5">8. Point2D</a>
-    <li><a href="#ref-for-dictdef-point2d-6">9.3. MediaTrackSettings dictionary</a>
-    <li><a href="#ref-for-dictdef-point2d-7">9.3.1. Members</a> <a href="#ref-for-dictdef-point2d-8">(2)</a> <a href="#ref-for-dictdef-point2d-9">(3)</a>
+    <li><a href="#ref-for-dictdef-point2d-6">9.3.1. MediaTrackSettings dictionary</a>
+    <li><a href="#ref-for-dictdef-point2d-7">9.3.1.1. Members</a> <a href="#ref-for-dictdef-point2d-8">(2)</a> <a href="#ref-for-dictdef-point2d-9">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-point2d-x">
@@ -3208,7 +3244,7 @@ pre.idl.highlight { color: #708090; }
    <ul>
     <li><a href="#ref-for-dom-point2d-x-1">4.1. Members</a>
     <li><a href="#ref-for-dom-point2d-x-2">8. Point2D</a>
-    <li><a href="#ref-for-dom-point2d-x-3">9.3.1. Members</a>
+    <li><a href="#ref-for-dom-point2d-x-3">9.3.1.1. Members</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-point2d-y">
@@ -3216,7 +3252,7 @@ pre.idl.highlight { color: #708090; }
    <ul>
     <li><a href="#ref-for-dom-point2d-y-1">4.1. Members</a>
     <li><a href="#ref-for-dom-point2d-y-2">8. Point2D</a>
-    <li><a href="#ref-for-dom-point2d-y-3">9.3.1. Members</a>
+    <li><a href="#ref-for-dom-point2d-y-3">9.3.1.1. Members</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediatracksupportedconstraints-whitebalancemode">
@@ -3307,6 +3343,96 @@ pre.idl.highlight { color: #708090; }
    <b><a href="#dom-mediatracksupportedconstraints-filllightmode">#dom-mediatracksupportedconstraints-filllightmode</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-mediatracksupportedconstraints-filllightmode-1">9.1.1. MediaTrackSupportedConstraints dictionary</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediatrackconstraintset-whitebalancemode">
+   <b><a href="#dom-mediatrackconstraintset-whitebalancemode">#dom-mediatrackconstraintset-whitebalancemode</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediatrackconstraintset-whitebalancemode-1">9.1.2. MediaTrackConstraintSet dictionary</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediatrackconstraintset-colortemperature">
+   <b><a href="#dom-mediatrackconstraintset-colortemperature">#dom-mediatrackconstraintset-colortemperature</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediatrackconstraintset-colortemperature-1">9.1.2. MediaTrackConstraintSet dictionary</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediatrackconstraintset-exposuremode">
+   <b><a href="#dom-mediatrackconstraintset-exposuremode">#dom-mediatrackconstraintset-exposuremode</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediatrackconstraintset-exposuremode-1">9.1.2. MediaTrackConstraintSet dictionary</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediatrackconstraintset-exposurecompensation">
+   <b><a href="#dom-mediatrackconstraintset-exposurecompensation">#dom-mediatrackconstraintset-exposurecompensation</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediatrackconstraintset-exposurecompensation-1">9.1.2. MediaTrackConstraintSet dictionary</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediatrackconstraintset-iso">
+   <b><a href="#dom-mediatrackconstraintset-iso">#dom-mediatrackconstraintset-iso</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediatrackconstraintset-iso-1">9.1.2. MediaTrackConstraintSet dictionary</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediatrackconstraintset-redeyereduction">
+   <b><a href="#dom-mediatrackconstraintset-redeyereduction">#dom-mediatrackconstraintset-redeyereduction</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediatrackconstraintset-redeyereduction-1">9.1.2. MediaTrackConstraintSet dictionary</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediatrackconstraintset-focusmode">
+   <b><a href="#dom-mediatrackconstraintset-focusmode">#dom-mediatrackconstraintset-focusmode</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediatrackconstraintset-focusmode-1">9.1.2. MediaTrackConstraintSet dictionary</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediatrackconstraintset-brightness">
+   <b><a href="#dom-mediatrackconstraintset-brightness">#dom-mediatrackconstraintset-brightness</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediatrackconstraintset-brightness-1">9.1.2. MediaTrackConstraintSet dictionary</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediatrackconstraintset-contrast">
+   <b><a href="#dom-mediatrackconstraintset-contrast">#dom-mediatrackconstraintset-contrast</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediatrackconstraintset-contrast-1">9.1.2. MediaTrackConstraintSet dictionary</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediatrackconstraintset-saturation">
+   <b><a href="#dom-mediatrackconstraintset-saturation">#dom-mediatrackconstraintset-saturation</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediatrackconstraintset-saturation-1">9.1.2. MediaTrackConstraintSet dictionary</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediatrackconstraintset-sharpness">
+   <b><a href="#dom-mediatrackconstraintset-sharpness">#dom-mediatrackconstraintset-sharpness</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediatrackconstraintset-sharpness-1">9.1.2. MediaTrackConstraintSet dictionary</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediatrackconstraintset-imageheight">
+   <b><a href="#dom-mediatrackconstraintset-imageheight">#dom-mediatrackconstraintset-imageheight</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediatrackconstraintset-imageheight-1">9.1.2. MediaTrackConstraintSet dictionary</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediatrackconstraintset-imagewidth">
+   <b><a href="#dom-mediatrackconstraintset-imagewidth">#dom-mediatrackconstraintset-imagewidth</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediatrackconstraintset-imagewidth-1">9.1.2. MediaTrackConstraintSet dictionary</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediatrackconstraintset-zoom">
+   <b><a href="#dom-mediatrackconstraintset-zoom">#dom-mediatrackconstraintset-zoom</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediatrackconstraintset-zoom-1">9.1.2. MediaTrackConstraintSet dictionary</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediatrackconstraintset-filllightmode">
+   <b><a href="#dom-mediatrackconstraintset-filllightmode">#dom-mediatrackconstraintset-filllightmode</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediatrackconstraintset-filllightmode-1">9.1.2. MediaTrackConstraintSet dictionary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediatrackcapabilities-whitebalancemode">
@@ -3402,98 +3528,98 @@ pre.idl.highlight { color: #708090; }
   <aside class="dfn-panel" data-for="dom-mediatracksettings-whitebalancemode">
    <b><a href="#dom-mediatracksettings-whitebalancemode">#dom-mediatracksettings-whitebalancemode</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediatracksettings-whitebalancemode-1">9.3. MediaTrackSettings dictionary</a>
-    <li><a href="#ref-for-dom-mediatracksettings-whitebalancemode-2">9.3.1. Members</a>
+    <li><a href="#ref-for-dom-mediatracksettings-whitebalancemode-1">9.3.1. MediaTrackSettings dictionary</a>
+    <li><a href="#ref-for-dom-mediatracksettings-whitebalancemode-2">9.3.1.1. Members</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediatracksettings-colortemperature">
    <b><a href="#dom-mediatracksettings-colortemperature">#dom-mediatracksettings-colortemperature</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediatracksettings-colortemperature-1">9.3. MediaTrackSettings dictionary</a>
+    <li><a href="#ref-for-dom-mediatracksettings-colortemperature-1">9.3.1. MediaTrackSettings dictionary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediatracksettings-exposuremode">
    <b><a href="#dom-mediatracksettings-exposuremode">#dom-mediatracksettings-exposuremode</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediatracksettings-exposuremode-1">9.3. MediaTrackSettings dictionary</a>
+    <li><a href="#ref-for-dom-mediatracksettings-exposuremode-1">9.3.1. MediaTrackSettings dictionary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediatracksettings-exposurecompensation">
    <b><a href="#dom-mediatracksettings-exposurecompensation">#dom-mediatracksettings-exposurecompensation</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediatracksettings-exposurecompensation-1">9.3. MediaTrackSettings dictionary</a>
+    <li><a href="#ref-for-dom-mediatracksettings-exposurecompensation-1">9.3.1. MediaTrackSettings dictionary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediatracksettings-iso">
    <b><a href="#dom-mediatracksettings-iso">#dom-mediatracksettings-iso</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediatracksettings-iso-1">9.3. MediaTrackSettings dictionary</a>
+    <li><a href="#ref-for-dom-mediatracksettings-iso-1">9.3.1. MediaTrackSettings dictionary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediatracksettings-redeyereduction">
    <b><a href="#dom-mediatracksettings-redeyereduction">#dom-mediatracksettings-redeyereduction</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediatracksettings-redeyereduction-1">9.3. MediaTrackSettings dictionary</a>
+    <li><a href="#ref-for-dom-mediatracksettings-redeyereduction-1">9.3.1. MediaTrackSettings dictionary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediatracksettings-focusmode">
    <b><a href="#dom-mediatracksettings-focusmode">#dom-mediatracksettings-focusmode</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediatracksettings-focusmode-1">9.3. MediaTrackSettings dictionary</a>
+    <li><a href="#ref-for-dom-mediatracksettings-focusmode-1">9.3.1. MediaTrackSettings dictionary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediatracksettings-pointsofinterest">
    <b><a href="#dom-mediatracksettings-pointsofinterest">#dom-mediatracksettings-pointsofinterest</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediatracksettings-pointsofinterest-1">9.3. MediaTrackSettings dictionary</a>
+    <li><a href="#ref-for-dom-mediatracksettings-pointsofinterest-1">9.3.1. MediaTrackSettings dictionary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediatracksettings-brightness">
    <b><a href="#dom-mediatracksettings-brightness">#dom-mediatracksettings-brightness</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediatracksettings-brightness-1">9.3. MediaTrackSettings dictionary</a>
+    <li><a href="#ref-for-dom-mediatracksettings-brightness-1">9.3.1. MediaTrackSettings dictionary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediatracksettings-contrast">
    <b><a href="#dom-mediatracksettings-contrast">#dom-mediatracksettings-contrast</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediatracksettings-contrast-1">9.3. MediaTrackSettings dictionary</a>
+    <li><a href="#ref-for-dom-mediatracksettings-contrast-1">9.3.1. MediaTrackSettings dictionary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediatracksettings-saturation">
    <b><a href="#dom-mediatracksettings-saturation">#dom-mediatracksettings-saturation</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediatracksettings-saturation-1">9.3. MediaTrackSettings dictionary</a>
+    <li><a href="#ref-for-dom-mediatracksettings-saturation-1">9.3.1. MediaTrackSettings dictionary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediatracksettings-sharpness">
    <b><a href="#dom-mediatracksettings-sharpness">#dom-mediatracksettings-sharpness</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediatracksettings-sharpness-1">9.3. MediaTrackSettings dictionary</a>
+    <li><a href="#ref-for-dom-mediatracksettings-sharpness-1">9.3.1. MediaTrackSettings dictionary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediatracksettings-zoom">
    <b><a href="#dom-mediatracksettings-zoom">#dom-mediatracksettings-zoom</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediatracksettings-zoom-1">9.3. MediaTrackSettings dictionary</a>
+    <li><a href="#ref-for-dom-mediatracksettings-zoom-1">9.3.1. MediaTrackSettings dictionary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediatracksettings-imagewidth">
    <b><a href="#dom-mediatracksettings-imagewidth">#dom-mediatracksettings-imagewidth</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediatracksettings-imagewidth-1">9.3. MediaTrackSettings dictionary</a>
+    <li><a href="#ref-for-dom-mediatracksettings-imagewidth-1">9.3.1. MediaTrackSettings dictionary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediatracksettings-imageheight">
    <b><a href="#dom-mediatracksettings-imageheight">#dom-mediatracksettings-imageheight</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediatracksettings-imageheight-1">9.3. MediaTrackSettings dictionary</a>
+    <li><a href="#ref-for-dom-mediatracksettings-imageheight-1">9.3.1. MediaTrackSettings dictionary</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediatracksettings-filllightmode">
    <b><a href="#dom-mediatracksettings-filllightmode">#dom-mediatracksettings-filllightmode</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dom-mediatracksettings-filllightmode-1">9.3. MediaTrackSettings dictionary</a>
+    <li><a href="#ref-for-dom-mediatracksettings-filllightmode-1">9.3.1. MediaTrackSettings dictionary</a>
    </ul>
   </aside>
 <script>/* script-dfn-panel */

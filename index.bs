@@ -546,6 +546,8 @@ MCS: It's a dictionary with the supported stuff. Some implementations would mark
   };
 </pre>
 
+#### Members #### {#mediatracksupportedconstraints-members}
+
 <dl class="domintro">
   <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>whiteBalanceMode</code></dfn></dt>
   <dd>Whether <a>white balance mode</a> constraining is supported.</dd>
@@ -600,23 +602,57 @@ MCS: It's a dictionary with the supported stuff. Some implementations would mark
 <pre class="idl">
   partial dictionary MediaTrackConstraintSet {
     MeteringMode       whiteBalanceMode;
-    MediaSettingsRange colorTemperature;
+    ConstraintDouble   colorTemperature;
     MeteringMode       exposureMode;
-    MediaSettingsRange exposureCompensation;
-    MediaSettingsRange iso;
-    boolean            redEyeReduction;
+    ConstraintDouble   exposureCompensation;
+    ConstraintDouble   iso;
+    ConstraintBoolean  redEyeReduction;
     MeteringMode       focusMode;
 
-    MediaSettingsRange brightness;
-    MediaSettingsRange contrast;
-    MediaSettingsRange saturation;
-    MediaSettingsRange sharpness;
-    MediaSettingsRange imageHeight;
-    MediaSettingsRange imageWidth;
-    MediaSettingsRange zoom;
+    ConstraintDouble   brightness;
+    ConstraintDouble   contrast;
+    ConstraintDouble   saturation;
+    ConstraintDouble   sharpness;
+    ConstraintDouble   imageHeight;
+    ConstraintDouble   imageWidth;
+    ConstraintDouble   zoom;
     FillLightMode      fillLightMode;
   };
 </pre>
+
+#### Members #### {#mediatrackconstraintset-members}
+
+<dl class="domintro">
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>whiteBalanceMode</code></dfn></dt>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>colorTemperature</code></dfn></dt>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>exposureMode</code></dfn></dt>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>exposureCompensation</code></dfn></dt>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>iso</code></dfn></dt>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>redEyeReduction</code></dfn></dt>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>focusMode</code></dfn></dt>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>brightness</code></dfn></dt>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>contrast</code></dfn></dt>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>saturation</code></dfn></dt>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>sharpness</code></dfn></dt>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>imageHeight</code></dfn></dt>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>imageWidth</code></dfn></dt>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>zoom</code></dfn></dt>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>fillLightMode</code></dfn></dt>
+</dl>
 
 ## Capabilities ## {##capabilities}
 
@@ -645,8 +681,7 @@ MCS: It's a dictionary with the supported stuff. Some implementations would mark
   };
 </pre>
 
-
-### Members ### {##mediatrackcapabilities-members}
+#### Members #### {##mediatrackcapabilities-members}
 
 <dl class="domintro">
   <dt><dfn dict-member for="MediaTrackCapabilities"><code>whiteBalanceMode</code></dfn></dt>
@@ -699,7 +734,9 @@ MCS: It's a dictionary with the supported stuff. Some implementations would mark
   The supported resolutions are presented as segregated {{PhotoCapabilities/imageWidth}} and {{PhotoCapabilities/imageHeight}} ranges to prevent increasing the fingerprinting surface and to allow the UA to make a best-effort decision with regards to actual hardware configuration.
 </div>
 
-## MediaTrackSettings dictionary ## {##mediatracksettings}
+## Settings ## {##settings}
+
+### MediaTrackSettings dictionary ### {#mediatracksettings}
 
 When the {{getSettings}} method is invoked on a video stream track, the user agent must return the following dictionary that extends the {{MediaTrackSettings}} dictionary:
 
@@ -725,7 +762,7 @@ When the {{getSettings}} method is invoked on a video stream track, the user age
   };
 </pre>
 
-### Members ### {###mediatracksettings-members}
+#### Members #### {#mediatracksettings-members}
 
 <dl class="domintro">
   <dt><dfn dict-member for="MediaTrackSettings"><code>whiteBalanceMode</code></dfn></dt>
@@ -978,6 +1015,9 @@ urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dictionary; text:
 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: getSettings; url: widl-ConstrainablePattern-getSettings-Settings
 
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: ConstraintDouble; url: idl-def-ConstrainDouble
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: ConstraintBoolean; url: idl-def-ConstrainBoolean
 </pre>
 
 <pre class="link-defaults">
