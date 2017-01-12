@@ -280,7 +280,7 @@ interface ImageCapture {
 </dl>
 
 <div class="note">
-  The supported resolutions are presented as segregated {{imageWidth}} and {{imageHeight}} ranges to prevent increasing the fingerprinting surface and to allow the UA to make a best-effort decision with regards to actual hardware configuration.
+  The supported resolutions are presented as segregated {{PhotoCapabilities/imageWidth}} and {{PhotoCapabilities/imageHeight}} ranges to prevent increasing the fingerprinting surface and to allow the UA to make a best-effort decision with regards to actual hardware configuration.
 </div>
 
 ## Discussion
@@ -359,7 +359,7 @@ interface ImageCapture {
   <dd>This reflects the desired <a>white balance mode</a> setting.</dd>
 
   <dt><dfn dict-member for="PhotoSettings"><code>colorTemperature</code></dfn></dt>
-  <dd><a>Color temperature</a> to be used for the white balance calculation of the scene. This field is only significant if <a>whiteBalanceMode</a> is {{manual}}.</dd>
+  <dd><a>Color temperature</a> to be used for the white balance calculation of the scene. This field is only significant if {{PhotoSettings/whiteBalanceMode}} is {{manual}}.</dd>
 
   <dt><dfn dict-member for="PhotoSettings"><code>exposureMode</code></dfn></dt>
   <dd>This reflects the desired <a>exposure</a> mode setting.  Acceptable values are of type {{MeteringMode}}.</dd>
@@ -409,7 +409,7 @@ interface ImageCapture {
 
 </dl>
 
-# MediaSettingsRange
+# MediaSettingsRange # {#mediasettingsrange}
 
 <pre class="idl">
   interface MediaSettingsRange {
@@ -513,6 +513,273 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
 
   <dt><dfn dict-member for="Point2D"><code>y</code></dfn></dt>
   <dd>Value of the vertical (ordinate) coordinate.</dd>
+</dl>
+
+# Extensions # {##extensions}
+
+## Constrainable properties ## {##constrainable-properties}
+
+### MediaTrackSupportedConstraints dictionary ### {###mediatracksupportedconstraints}
+
+{{MediaTrackSupportedConstraints}} is extended here.
+
+MCS: It's a dictionary with the supported stuff. Some implementations would mark some as false, e.g. USB-like implementations only have brightness etc.
+
+<pre class="idl">
+  partial dictionary MediaTrackSupportedConstraints {
+    boolean whiteBalanceMode = true;
+    boolean colorTemperature = true;
+    boolean exposureMode = true;
+    boolean exposureCompensation = true;
+    boolean iso = true;
+    boolean redEyeReduction = true;
+    boolean focusMode = true;
+
+    boolean brightness = true;
+    boolean contrast = true;
+    boolean saturation = true;
+    boolean sharpness = true;
+    boolean imageHeight = true;
+    boolean imageWidth = true;
+    boolean zoom = true;
+    boolean fillLightMode = true;
+  };
+</pre>
+
+<dl class="domintro">
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>whiteBalanceMode</code></dfn></dt>
+  <dd>Whether <a>white balance mode</a> constraining is supported.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>colorTemperature</code></dfn></dt>
+  <dd>Whether <a>color temperature</a> constraining is supported.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>exposureMode</code></dfn></dt>
+  <dd>Whether <a>exposure</a> constraining is supported.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>exposureCompensation</code></dfn></dt>
+  <dd>Whether <a>exposure compensation</a> constraining is supported.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>iso</code></dfn></dt>
+  <dd>Whether <a>ISO</a> constraining is supported.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>redEyeReduction</code></dfn></dt>
+  <dd>Whether red eye reduction configuration is supported.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>focusMode</code></dfn></dt>
+  <dd>Whether focus mode constraining is supported.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>brightness</code></dfn></dt>
+  <dd>Whether <a>brightness</a> constraining is supported.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>contrast</code></dfn></dt>
+  <dd>Whether <a>contrast</a> constraining is supported.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>saturation</code></dfn></dt>
+  <dd>Whether <a>saturation</a> constraining is supported.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>sharpness</code></dfn></dt>
+  <dd>Whether <a>sharpness</a> constraining is supported.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>imageHeight</code></dfn></dt>
+  <dd>Whether the exposure image height configuration is supported.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>imageWidth</code></dfn></dt>
+  <dd>Whether the exposure image width configuration is supported.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>zoom</code></dfn></dt>
+  <dd>Whether configuration of the zoom level is supported.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>fillLightMode</code></dfn></dt>
+  <dd>Whether configuration of the fill light mode (flash) is supported.</dd>
+</dl>
+
+### MediaTrackConstraintSet dictionary ### {###mediatrackconstraintset}
+
+{{MediaTrackConstraintSet}} is extended here.
+
+<pre class="idl">
+  partial dictionary MediaTrackConstraintSet {
+    MeteringMode       whiteBalanceMode;
+    MediaSettingsRange colorTemperature;
+    MeteringMode       exposureMode;
+    MediaSettingsRange exposureCompensation;
+    MediaSettingsRange iso;
+    boolean            redEyeReduction;
+    MeteringMode       focusMode;
+
+    MediaSettingsRange brightness;
+    MediaSettingsRange contrast;
+    MediaSettingsRange saturation;
+    MediaSettingsRange sharpness;
+    MediaSettingsRange imageHeight;
+    MediaSettingsRange imageWidth;
+    MediaSettingsRange zoom;
+    FillLightMode      fillLightMode;
+  };
+</pre>
+
+## Capabilities ## {##capabilities}
+
+### MediaTrackCapabilities dictionary ### {###mediatrackcapabilities}
+
+{{MediaTrackCapabilities}} is extended here
+
+<pre class="idl">
+  partial dictionary MediaTrackCapabilities {
+    sequence&lt;MeteringMode>  whiteBalanceMode;
+    MediaSettingsRange      colorTemperature;
+    sequence&lt;MeteringMode>  exposureMode;
+    MediaSettingsRange      exposureCompensation;
+    MediaSettingsRange      iso;
+    sequence&lt;boolean>       redEyeReduction;
+    sequence&lt;MeteringMode>  focusMode;
+
+    MediaSettingsRange      brightness;
+    MediaSettingsRange      contrast;
+    MediaSettingsRange      saturation;
+    MediaSettingsRange      sharpness;
+    MediaSettingsRange      imageHeight;
+    MediaSettingsRange      imageWidth;
+    MediaSettingsRange      zoom;
+    sequence&lt;FillLightMode> fillLightMode;
+  };
+</pre>
+
+
+### Members ### {##mediatrackcapabilities-members}
+
+<dl class="domintro">
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>whiteBalanceMode</code></dfn></dt>
+  <dd>A `sequence` of supported {{MeteringMode}} settings for <a>white balance mode</a>.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>colorTemperature</code></dfn></dt>
+  <dd>This range reflects the supported correlated <a>color temperature</a> being used for the scene white balance calculation.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>exposureMode</code></dfn></dt>
+  <dd>A `sequence` of supported {{MeteringMode}} settings for <a>exposure</a> calculation.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>exposureCompensation</code></dfn></dt>
+  <dd>This reflects the supported range of <a>exposure compensation</a>. The supported range can be, and usually is, centered around 0 EV.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>iso</code></dfn></dt>
+  <dd>This reflects the permitted range of <a>ISO</a> values.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>redEyeReduction</code></dfn></dt>
+  <dd>A `sequence` of boolean indicating whether camera supports red eye reduction - on meaning true/active.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>focusMode</code></dfn></dt>
+  <dd>A `sequence` of supported {{MeteringMode}} settings for focus mode.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>brightness</code></dfn></dt>
+  <dd>This reflects the supported range of <a>brightness</a> setting of the camera. Values are numeric. Increasing values indicate increasing brightness.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>contrast</code></dfn></dt>
+  <dd>This reflects the supported range of <a>contrast</a>. Values are numeric.  Increasing values indicate increasing contrast.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>saturation</code></dfn></dt>
+  <dd>This reflects the permitted range of <a>saturation</a> setting. Values are numeric. Increasing values indicate increasing saturation.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>sharpness</code></dfn></dt>
+  <dd>This reflects the permitted <a>sharpness</a> range of the camera. Values are numeric. Increasing values indicate increasing sharpness, and the minimum value always implies no sharpness enhancement or processing.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>imageHeight</code></dfn></dt>
+  <dd>This reflects the image height range supported by the UA.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>imageWidth</code></dfn></dt>
+  <dd>This reflects the image width range supported by the UA.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>zoom</code></dfn></dt>
+  <dd>This reflects the zoom value range supported by the UA.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>fillLightMode</code></dfn></dt>
+  <dd>A `sequence` of supported {{FillLightMode}} settings for the fill light (flash).</dd>
+</dl>
+
+<div class="note">
+  The supported resolutions are presented as segregated {{PhotoCapabilities/imageWidth}} and {{PhotoCapabilities/imageHeight}} ranges to prevent increasing the fingerprinting surface and to allow the UA to make a best-effort decision with regards to actual hardware configuration.
+</div>
+
+## MediaTrackSettings dictionary ## {##mediatracksettings}
+
+When the {{getSettings}} method is invoked on a video stream track, the user agent must return the following dictionary that extends the {{MediaTrackSettings}} dictionary:
+
+<pre class="idl">
+  partial dictionary MediaTrackSettings {
+    MeteringMode      whiteBalanceMode;
+    double            colorTemperature;
+    MeteringMode      exposureMode;
+    double            exposureCompensation;
+    double            iso;
+    boolean           redEyeReduction;
+    MeteringMode      focusMode;
+    sequence&lt;Point2D> pointsOfInterest;
+
+    double        brightness;
+    double        contrast;
+    double        saturation;
+    double        sharpness;
+    double        zoom;
+    double        imageHeight;
+    double        imageWidth;
+    FillLightMode fillLightMode;
+  };
+</pre>
+
+### Members ### {###mediatracksettings-members}
+
+<dl class="domintro">
+  <dt><dfn dict-member for="MediaTrackSettings"><code>whiteBalanceMode</code></dfn></dt>
+  <dd>This reflects the desired <a>white balance mode</a> setting.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSettings"><code>colorTemperature</code></dfn></dt>
+  <dd><a>Color temperature</a> to be used for the white balance calculation of the scene. This field is only significant if {{MediaTrackSettings/whiteBalanceMode}} is {{manual}}.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSettings"><code>exposureMode</code></dfn></dt>
+  <dd>This reflects the desired <a>exposure</a> mode setting.  Acceptable values are of type {{MeteringMode}}.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSettings"><code>exposureCompensation</code></dfn></dt>
+  <dd>This reflects the desired <a>exposure compensation</a> setting.  A value of 0 EV is interpreted as no exposure compensation.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSettings"><code>iso</code></dfn></dt>
+  <dd>This reflects the desired camera <a>ISO</a> setting.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSettings"><code>redEyeReduction</code></dfn></dt>
+  <dd>This reflects whether camera red eye reduction is desired</dd>
+
+  <dt><dfn dict-member for="MediaTrackSettings"><code>focusMode</code></dfn></dt>
+  <dd>This reflects the desired focus mode setting.  Acceptable values are of type {{MeteringMode}}.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSettings"><code>pointsOfInterest</code></dfn></dt>
+  <dd>A `sequence` of {{Point2D}}s to be used as metering area centers for other settings, e.g. Focus, Exposure and Auto White Balance.
+  <div class="note">
+    A {{Point2D}} Point of Interest is interpreted to represent a pixel position in a normalized square space (`{x,y} &isin; [0.0, 1.0]`). The origin of coordinates `{x,y} = {0.0, 0.0}` represents the upper leftmost corner whereas the `{x,y} = {1.0, 1.0}` represents the lower rightmost corner: the <a href="#dom-point2d-x"><code>x</code></a> coordinate (columns) increases rightwards and the <a href="#dom-point2d-y"><code>y</code></a> coordinate (rows) increases downwards. Values beyond the mentioned limits will be clamped to the closest allowed value.
+  </div>
+  </dd>
+
+  <dt><dfn dict-member for="MediaTrackSettings"><code>brightness</code></dfn></dt>
+  <dd>This reflects the desired <a>brightness</a> setting of the camera.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSettings"><code>contrast</code></dfn></dt>
+  <dd>This reflects the desired <a>contrast</a> setting of the camera.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSettings"><code>saturation</code></dfn></dt>
+  <dd>This reflects the desired <a>saturation</a> setting of the camera.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSettings"><code>sharpness</code></dfn></dt>
+  <dd>This reflects the desired <a>sharpness</a> setting of the camera.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSettings"><code>zoom</code></dfn></dt>
+  <dd>This reflects the desired zoom setting of the camera.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSettings"><code>imageWidth</code></dfn></dt>
+  <dd>This reflects the desired image height.  The UA MUST select the closest height value this setting if it supports a discrete set of height options.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSettings"><code>imageHeight</code></dfn></dt>
+  <dd>This reflects the desired image width. The UA MUST select the closest width value this setting if it supports a discrete set of width options.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSettings"><code>fillLightMode</code></dfn></dt>
+  <dd>This reflects the desired fill light (flash) mode setting.  Acceptable values are of type {{FillLightMode}}.</dd>
+
 </dl>
 
 # Examples # {#examples}
@@ -700,6 +967,17 @@ urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: attribute; text: 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: attribute; text: kind; url: widl-MediaStreamTrack-kind
 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: enum-value; text: live; url: idl-def-MediaStreamTrackState.live
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dictionary; text: MediaTrackSupportedConstraints; url: idl-def-MediaTrackSupportedConstraints
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dictionary; text: MediaTrackCapabilities; url: idl-def-MediaTrackCapabilities
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dictionary; text: MediaTrackConstraintSet; url: idlidl-def-MediaTrackConstraintSet
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dictionary; text: MediaTrackSettings; url: idl-def-MediaTrackSettings
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: getSettings; url: widl-ConstrainablePattern-getSettings-Settings
+
 </pre>
 
 <pre class="link-defaults">
@@ -708,6 +986,7 @@ spec: html
         text: allowed to show a popup
         text: in parallel
         text: incumbent settings object
+spec:webidl; type:interface; text:Promise
 </pre>
 
 <pre class="biblio">
