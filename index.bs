@@ -58,6 +58,8 @@ interface ImageCapture {
 {{takePhoto()}} returns a captured image encoded in the form of a {{Blob}}, whereas {{grabFrame()}} returns a snapshot of the {{videoStreamTrack}} video feed in the form of a non-encoded {{ImageBitmap}}.
 </div>
 
+This document defines a number of new constraints for a {{MediaStreamTrack}} that can be applied in order to make its behavior more suitable for taking pictures. The use of these constraints is via the standard {{getUserMedia()}} and {{applyConstraints()}}} methods. They will modify the behavior of the track and its source independently of the usage of the {{videoStreamTrack}} with the {{ImageCapture}} object.
+
 ## Attributes ## {#imagecapture-attributes}
 
 <dl class="domintro">
@@ -168,52 +170,52 @@ interface ImageCapture {
 
 <dl class="domintro">
   <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>whiteBalanceMode</code></dfn></dt>
-  <dd>Whether <a>white balance mode</a> constraining is supported.</dd>
+  <dd>Whether <a>white balance mode</a> constraining is recognized.</dd>
 
   <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>colorTemperature</code></dfn></dt>
-  <dd>Whether <a>color temperature</a> constraining is supported.</dd>
+  <dd>Whether <a>color temperature</a> constraining is recognized.</dd>
 
   <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>exposureMode</code></dfn></dt>
-  <dd>Whether <a>exposure</a> constraining is supported.</dd>
+  <dd>Whether <a>exposure</a> constraining is recognized.</dd>
 
   <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>exposureCompensation</code></dfn></dt>
-  <dd>Whether <a>exposure compensation</a> constraining is supported.</dd>
+  <dd>Whether <a>exposure compensation</a> constraining is recognized.</dd>
 
   <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>iso</code></dfn></dt>
-  <dd>Whether <a>ISO</a> constraining is supported.</dd>
+  <dd>Whether <a>ISO</a> constraining is recognized.</dd>
 
   <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>redEyeReduction</code></dfn></dt>
-  <dd>Whether <a>red eye reduction</a> configuration is supported.</dd>
+  <dd>Whether <a>red eye reduction</a> configuration is recognized.</dd>
 
   <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>focusMode</code></dfn></dt>
-  <dd>Whether <a>focus mode</a> constraining is supported.</dd>
+  <dd>Whether <a>focus mode</a> constraining is recognized.</dd>
 
   <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>pointsOfInterest</code></dfn></dt>
   <dd>Whether <a>points of interest</a> are supported.</dd>
 
   <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>brightness</code></dfn></dt>
-  <dd>Whether <a>brightness</a> constraining is supported.</dd>
+  <dd>Whether <a>brightness</a> constraining is recognized.</dd>
 
   <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>contrast</code></dfn></dt>
-  <dd>Whether <a>contrast</a> constraining is supported.</dd>
+  <dd>Whether <a>contrast</a> constraining is recognized.</dd>
 
   <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>saturation</code></dfn></dt>
-  <dd>Whether <a>saturation</a> constraining is supported.</dd>
+  <dd>Whether <a>saturation</a> constraining is recognized.</dd>
 
   <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>sharpness</code></dfn></dt>
-  <dd>Whether <a>sharpness</a> constraining is supported.</dd>
+  <dd>Whether <a>sharpness</a> constraining is recognized.</dd>
 
   <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>imageHeight</code></dfn></dt>
-  <dd>Whether the <a>image height</a> configuration is supported.</dd>
+  <dd>Whether the <a>image height</a> configuration is recognized.</dd>
 
   <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>imageWidth</code></dfn></dt>
-  <dd>Whether the <a>image width</a> configuration is supported.</dd>
+  <dd>Whether the <a>image width</a> configuration is recognized.</dd>
 
   <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>zoom</code></dfn></dt>
-  <dd>Whether configuration of the <a>zoom</a> level is supported.</dd>
+  <dd>Whether configuration of the <a>zoom</a> level is recognized.</dd>
 
   <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>fillLightMode</code></dfn></dt>
-  <dd>Whether configuration of the <a>fill light mode</a> is supported.</dd>
+  <dd>Whether configuration of the <a>fill light mode</a> is recognized.</dd>
 </dl>
 
 ## {{MediaTrackCapabilities}} dictionary ## {#mediatrackcapabilities-section}
@@ -301,21 +303,21 @@ interface ImageCapture {
 <pre class="idl">
   partial dictionary MediaTrackConstraintSet {
     MeteringMode       whiteBalanceMode;
-    ConstraintDouble   colorTemperature;
+    ConstrainDouble    colorTemperature;
     MeteringMode       exposureMode;
-    ConstraintDouble   exposureCompensation;
-    ConstraintDouble   iso;
+    ConstrainDouble    exposureCompensation;
+    ConstrainDouble    iso;
     ConstraintBoolean  redEyeReduction;
     MeteringMode       focusMode;
     ConstraintBoolean  pointsOfInterest;
 
-    ConstraintDouble   brightness;
-    ConstraintDouble   contrast;
-    ConstraintDouble   saturation;
-    ConstraintDouble   sharpness;
-    ConstraintDouble   imageHeight;
-    ConstraintDouble   imageWidth;
-    ConstraintDouble   zoom;
+    ConstrainDouble    brightness;
+    ConstrainDouble    contrast;
+    ConstrainDouble    saturation;
+    ConstrainDouble    sharpness;
+    ConstrainDouble    imageHeight;
+    ConstrainDouble    imageWidth;
+    ConstrainDouble    zoom;
     FillLightMode      fillLightMode;
   };
 </pre>
@@ -926,6 +928,8 @@ urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: attribute; text: 
 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: enum-value; text: live; url: idl-def-MediaStreamTrackState.live
 
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: getUserMedia(); url: dom-mediadevices-getusermedia
+
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: getSettings(); url: widl-ConstrainablePattern-getSettings-Settings
 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: getCapabilities(); url: widl-MediaStreamTrack-getCapabilities-MediaTrackCapabilities
@@ -938,7 +942,7 @@ urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: 
 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: getSupportedConstraints(); url: widl-MediaDevices-getSupportedConstraints-MediaTrackSupportedConstraints
 
-urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: ConstraintDouble; url: idl-def-ConstrainDouble
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: ConstrainDouble ; url: idl-def-ConstrainDouble
 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: ConstraintBoolean; url: idl-def-ConstrainBoolean
 
