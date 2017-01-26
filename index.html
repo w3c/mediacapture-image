@@ -1183,7 +1183,7 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version 951ee1daf34f62c5f94e8eaae01dfcf902b0487c" name="generator">
+  <meta content="Bikeshed version bc887f64e706d02aeb050c5d4ae953e7bbddb94b" name="generator">
 <style>
 table {
   border-collapse: collapse;
@@ -1447,7 +1447,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="http://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">"MediaStream Image Capture"</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-01-25">25 January 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-01-26">26 January 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1597,7 +1597,7 @@ pre.idl.highlight { color: #708090; }
 };
 </pre>
    <div class="note" role="note"> <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-takephoto" id="ref-for-dom-imagecapture-takephoto-3">takePhoto()</a></code> returns a captured image encoded in the form of a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code>, whereas <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-grabframe" id="ref-for-dom-imagecapture-grabframe-3">grabFrame()</a></code> returns a snapshot of the <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-videostreamtrack" id="ref-for-dom-imagecapture-videostreamtrack-2">videoStreamTrack</a></code> video feed in the form of a non-encoded <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/webappapis.html#imagebitmap">ImageBitmap</a></code>. </div>
-   <p>This document defines a number of new constraints for a <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code> that can be applied in order to make its behavior more suitable for taking pictures. The use of these constraints is via the standard <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#dom-mediadevices-getusermedia">getUserMedia()</a></code> and <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-applyConstraints-Promise-void--MediaTrackConstraints-constraints">applyConstraints()</a></code>} methods. They will modify the behavior of the track and its source independently of the usage of the <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-videostreamtrack" id="ref-for-dom-imagecapture-videostreamtrack-3">videoStreamTrack</a></code> with the <code class="idl"><a data-link-type="idl" href="#imagecapture" id="ref-for-imagecapture-1">ImageCapture</a></code> object.</p>
+   <p>This document defines a number of new constraints for a <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code> that can be applied in order to make its behavior more suitable for taking pictures. The use of these constraints is via the standard <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#dom-mediadevices-getusermedia">getUserMedia()</a></code> and <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-applyConstraints-Promise-void--MediaTrackConstraints-constraints">applyConstraints()</a></code> methods. They will modify the behavior of the track and its source independently of the usage of the <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-videostreamtrack" id="ref-for-dom-imagecapture-videostreamtrack-3">videoStreamTrack</a></code> with the <code class="idl"><a data-link-type="idl" href="#imagecapture" id="ref-for-imagecapture-1">ImageCapture</a></code> object.</p>
    <h3 class="heading settled" data-level="2.1" id="imagecapture-attributes"><span class="secno">2.1. </span><span class="content">Attributes</span><a class="self-link" href="#imagecapture-attributes"></a></h3>
    <dl class="domintro">
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="ImageCapture" data-dfn-type="attribute" data-export="" id="dom-imagecapture-videostreamtrack"><code>videoStreamTrack</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a>, readonly</span>
