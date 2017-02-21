@@ -12,18 +12,18 @@ different browsers.
 
 # Chrome
 Work is in progress:
-* Notes updated **October 2016**.
+* Notes updated **February 2017**.
 * The `chrome://flags/#enable-experimental-web-platform-features` flag must be enabled
 
 Feature/Platform          | Android | Linux/ChromeOS | Mac | Windows |
 ------------------------- | :-----: | :------------: | :-: | :-----: |
 grabFrame()               | ✓       | ✓              | ✓   | ✓       |
-takePhoto()               | ✓       | 55.0.2866      | ✓   |55.0.2867|
+takePhoto()               | ✓       | ✓              | ✓   | ✓       |
 getPhotoCapabilities()    |         |                |     |         |
 setOptions()              |         |                |     |         |
-└ brightness              |         | 55.0.2881      |     |         |
-└ colorTemperature        | ✓       | 55.0.2881      |     |         |
-└ contrast                |         | 55.0.2881      |     |         |
+└ brightness              |         | ✓              |     |         |
+└ colorTemperature        | ✓       | ✓              |     |         |
+└ contrast                |         | ✓              |     |         |
 └ exposureCompensation    | ✓       |                |     |         |
 └ exposureMode            | ✓       |                |     |         |
 └ fillLightMode           | ✓       |                |     |         |
@@ -33,11 +33,10 @@ setOptions()              |         |                |     |         |
 └ iso                     | ✓       |                |     |         |
 └ pointsOfInterest        | ✓       |                |     |         |
 └ redEyeReduction         | ✓       |                |     |         |
-└ saturation              |         | 55.0.2881      |     |         |
-└ sharpness               |         | 55.0.2881      |     |         |
+└ saturation              |         | ✓              |     |         |
+└ sharpness               |         | ✓              |     |         |
 └ whiteBalanceMode        | ✓       |                |     |         |
-└ zoom                    | ✓       | 55.0.2873      |     |         |
-MediaSettingsRange.step   |56.0.2891| 56.0.2891      |     |         |
+└ zoom                    | ✓       | ✓              |     |         |
 
 Note: Values of `PhotoCapabilities`/`Settings` depend on the actual capture device configurability (e.g. if the device doesn't support `zoom`, `zoom.min` and `zoom.max` will both be 0) .
 
