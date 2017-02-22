@@ -40,7 +40,7 @@ table td, table th {
 
 The API defined in this document captures images from a photographic device referenced through a valid {{MediaStreamTrack}}. The produced image can be in the form of a {{Blob}} (see {{takePhoto()}} method) or as a {{ImageBitmap}} (see {{grabFrame()}}). Picture-specific settings can be optionally provided as arguments that can be applied to the device for the capture.
 
-# Image Capture API # {#imagecaptureapi"}
+# Image Capture API # {#imagecaptureapi}
 
 The User Agent must support Promises in order to implement the Image Capture API.  Any {{Promise}} object is assumed to have a resolver object, with <code>resolve()</code> and <code>reject()</code> methods associated with it.
 
@@ -50,8 +50,6 @@ interface ImageCapture {
    readonly attribute MediaStreamTrack videoStreamTrack;
 
    Promise&lt;Blob&gt;              takePhoto();
-   Promise&lt;PhotoCapabilities&gt; getPhotoCapabilities();
-   Promise&lt;void&gt;              setOptions(optional PhotoSettings photoSettings);
    Promise&lt;ImageBitmap&gt;       grabFrame();
 };
 </pre>
@@ -60,14 +58,16 @@ interface ImageCapture {
 {{takePhoto()}} returns a captured image encoded in the form of a {{Blob}}, whereas {{grabFrame()}} returns a snapshot of the {{videoStreamTrack}} video feed in the form of a non-encoded {{ImageBitmap}}.
 </div>
 
-## Attributes ## {##imagecapture-attributes}
+This document defines a number of new constraints for a {{MediaStreamTrack}} that can be applied in order to make its behavior more suitable for taking pictures. The use of these constraints is via the standard {{getUserMedia()}} and {{applyConstraints()}} methods. They will modify the behavior of the track and its source independently of the usage of the {{videoStreamTrack}} with the {{ImageCapture}} object.
+
+## Attributes ## {#imagecapture-attributes}
 
 <dl class="domintro">
   <dt><dfn attribute for="ImageCapture"><code>videoStreamTrack</code></dfn></dt>
   <dd>The {{MediaStreamTrack}} passed into the constructor.</dd>
 </dl>
 
-## Methods ## {##imagecapture-methods}
+## Methods ## {#imagecapture-methods}
 
 <dl class="domintro">
   <dt><dfn constructor for="ImageCapture"><code>ImageCapture(MediaStreamTrack track)</code></dfn></dt>
@@ -94,7 +94,7 @@ interface ImageCapture {
 
   <dt><dfn method for="ImageCapture"><code>takePhoto()</code></dfn></dt>
   <dd>
-  {{takePhoto()}} produces the result of a single photographic exposure using the video capture device sourcing the {{videoStreamTrack}}, applying any {{PhotoSettings}} previously configured, and returning an encoded image in the form of a {{Blob}} if successful. When this method is invoked:
+  {{takePhoto()}} produces the result of a single photographic exposure using the video capture device sourcing the {{videoStreamTrack}} and including any settings previously configured, returning an encoded image in the form of a {{Blob}} if successful. When this method is invoked:
   <ol>
     <li>If the {{readyState}} of {{videoStreamTrack}} provided in the constructor is not {{live}}, return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{InvalidStateError}}. </li>
 
@@ -112,75 +112,6 @@ interface ImageCapture {
     </ol>
     </li>
   </ol>
-  </dd>
-
-  <dt><dfn method for="ImageCapture"><code>getPhotoCapabilities()</code></dfn></dt>
-  <dd>
-  When {{getPhotoCapabilities()}} is used to retrieve the ranges of available configuration options and their current setting values, if any. When this method is invoked:
-  <ol>
-    <li>If the {{readyState}} of {{videoStreamTrack}} provided in the constructor is not {{live}}, return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{InvalidStateError}}. </li>
-
-    <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:
-    <ol>
-      <li>Gather data from {{videoStreamTrack}} into a {{PhotoCapabilities}} object containing the available capabilities of the device, including ranges where appropriate. The resolved {{PhotoCapabilities}} will also include the current conditions in which the capabilities of the device are found. The method of doing this will depend on the underlying device. </li>
-
-      <li>If the UA is unable to execute the {{getPhotoCapabilities()}} method for any reason (for example, the {{MediaStreamTrack}} being ended asynchronously), then the UA MUST return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{OperationError}}.</li>
-
-      <li>Return a resolved promise with the {{PhotoCapabilities}} object.</li>
-    </ol>
-    </li>
-  </ol>
-  </dd>
-
-  <dt><dfn method for="ImageCapture"><code>setOptions()</code></dfn></dt>
-  <dd>
-  {{setOptions()}} is used to configure a number of settings affecting the image capture and/or the current video feed in {{videoStreamTrack}}. When this method is invoked:
-  <ol>
-    <li>If the {{readyState}} of a {{videoStreamTrack}} provided in the constructor is not {{live}}, return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{InvalidStateError}}. </li>
-
-    <li>If an invalid {{PhotoSettings}} object is passed as argument, return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{SyntaxError}}</li>
-
-    <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:
-    <ol>
-      <li>Configure the underlying image capture device with the `settings` parameter.</li>
-
-      <li>If the UA cannot successfully apply the settings, then the UA MUST return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{OperationError}}.</li>
-
-      <li>If the UA can successfully apply the settings, then the UA MUST return a resolved promise.
-
-      <div class="note">
-        If the UA can successfully apply the settings, the effect MAY be reflected, if visible at all, in {{videoStreamTrack}}. The result of applying some of the settings MAY force the latter to not satisfy its `constraints` (e.g. the frame rate). The result of applying some of this constraints might not be immediate.
-      </div></li>
-    </ol>
-    </li>
-  </ol>
-
-  <table class="parameters">
-    <tbody>
-      <tr>
-        <th>Parameter</th>
-        <th>Type</th>
-        <th>Nullable</th>
-        <th>Optional</th>
-        <th>Description</th>
-      </tr>
-      <tr>
-        <td class="prmName">settings</td>
-        <td class="prmType">{{PhotoSettings}}</td>
-        <td class="prmNullTrue"><span role="img" aria-label=
-        "True">&#10004;</span></td>
-        <td class="prmOptFalse"><span role="img" aria-label=
-        "False">&#10008;</span></td>
-        <td class="prmDesc">
-          The {{PhotoSettings}} dictionary to be applied.
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="note">
-    Many of the {{PhotoSettings}} represent hardware capabilities that cannot be modified instaneously, e.g. `zoom` or `focus`. {{setOptions()}} will resolve the Promise as soon as possible. The actual status of any field can be monitored using {{getPhotoCapabilities()}}.
-  </div>
   </dd>
 
   <dt><dfn method for="ImageCapture"><code>grabFrame()</code></dfn></dt>
@@ -207,131 +138,248 @@ interface ImageCapture {
 </dl>
 
 
-# PhotoCapabilities
+# Extensions # {#extensions}
+
+## {{MediaTrackSupportedConstraints}} dictionary ## {#mediatracksupportedconstraints-section}
+
+{{MediaTrackSupportedConstraints}} is extended here with the list of constraints that a User Agent recognizes for controlling the photo capabilities.  This dictionary can be retrieved using {{MediaDevices}} {{getSupportedConstraints()}} method.
 
 <pre class="idl">
-  interface PhotoCapabilities {
-    readonly attribute MeteringMode       whiteBalanceMode;
-    readonly attribute MediaSettingsRange colorTemperature;
-    readonly attribute MeteringMode       exposureMode;
-    readonly attribute MediaSettingsRange exposureCompensation;
-    readonly attribute MediaSettingsRange iso;
-    readonly attribute boolean            redEyeReduction;
-    readonly attribute MeteringMode       focusMode;
+  partial dictionary MediaTrackSupportedConstraints {
+    boolean whiteBalanceMode = true;
+    boolean colorTemperature = true;
+    boolean exposureMode = true;
+    boolean exposureCompensation = true;
+    boolean iso = true;
+    boolean redEyeReduction = true;
+    boolean focusMode = true;
+    boolean pointsOfInterest = true;
 
-    readonly attribute MediaSettingsRange brightness;
-    readonly attribute MediaSettingsRange contrast;
-    readonly attribute MediaSettingsRange saturation;
-    readonly attribute MediaSettingsRange sharpness;
-    readonly attribute MediaSettingsRange imageHeight;
-    readonly attribute MediaSettingsRange imageWidth;
-    readonly attribute MediaSettingsRange zoom;
-    readonly attribute FillLightMode      fillLightMode;
+    boolean brightness = true;
+    boolean contrast = true;
+    boolean saturation = true;
+    boolean sharpness = true;
+    boolean imageHeight = true;
+    boolean imageWidth = true;
+    boolean zoom = true;
+    boolean fillLightMode = true;
   };
 </pre>
 
-## Attributes ## {##photocapabilities-attributes}
+### Members ### {#mediatracksupportedconstraints-members}
 
 <dl class="domintro">
-  <dt><dfn attribute for="PhotoCapabilities"><code>whiteBalanceMode</code></dfn></dt>
-  <dd>This reflects the current <a>white balance mode</a> setting. </dd>
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>whiteBalanceMode</code></dfn></dt>
+  <dd>Whether <a>white balance mode</a> constraining is recognized.</dd>
 
-  <dt><dfn attribute for="PhotoCapabilities"><code>colorTemperature</code></dfn></dt>
-  <dd>This range reflects the current correlated <a>color temperature</a> being used for the scene white balance calculation and its available range.</dd>
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>colorTemperature</code></dfn></dt>
+  <dd>Whether <a>color temperature</a> constraining is recognized.</dd>
 
-  <dt><dfn attribute for="PhotoCapabilities"><code>exposureMode</code></dfn></dt>
-  <dd>This reflects the current <a>exposure</a> mode setting.</dd>
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>exposureMode</code></dfn></dt>
+  <dd>Whether <a>exposure</a> constraining is recognized.</dd>
 
-  <dt><dfn attribute for="PhotoCapabilities"><code>exposureCompensation</code></dfn></dt>
-  <dd>This reflects the current <a>exposure compensation</a> setting and permitted range.  The supported range can be, and usually is, centered around 0 EV.</dd>
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>exposureCompensation</code></dfn></dt>
+  <dd>Whether <a>exposure compensation</a> constraining is recognized.</dd>
 
-  <dt><dfn attribute for="PhotoCapabilities"><code>iso</code></dfn></dt>
-  <dd>This reflects the current camera <a>ISO</a> setting and permitted range.  Values are numeric.</dd>
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>iso</code></dfn></dt>
+  <dd>Whether <a>ISO</a> constraining is recognized.</dd>
 
-  <dt><dfn attribute for="PhotoCapabilities"><code>redEyeReduction</code></dfn></dt>
-  <dd>This reflects whether camera red eye reduction is on or off, and is boolean - on is true</dd>
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>redEyeReduction</code></dfn></dt>
+  <dd>Whether <a>red eye reduction</a> configuration is recognized.</dd>
 
-  <dt><dfn attribute for="PhotoCapabilities"><code>focusMode</code></dfn></dt>
-  <dd>This reflects the current focus mode setting.</dd>
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>focusMode</code></dfn></dt>
+  <dd>Whether <a>focus mode</a> constraining is recognized.</dd>
 
-  <dt><dfn attribute for="PhotoCapabilities"><code>brightness</code></dfn></dt>
-  <dd>This reflects the current <a>brightness</a> setting of the camera and permitted range. Values are numeric. Increasing values indicate increasing brightness.</dd>
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>pointsOfInterest</code></dfn></dt>
+  <dd>Whether <a>points of interest</a> are supported.</dd>
 
-  <dt><dfn attribute for="PhotoCapabilities"><code>contrast</code></dfn></dt>
-  <dd>This reflects the current <a>contrast</a> setting of the camera and permitted range. Values are numeric.  Increasing values indicate increasing contrast.</dd>
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>brightness</code></dfn></dt>
+  <dd>Whether <a>brightness</a> constraining is recognized.</dd>
 
-  <dt><dfn attribute for="PhotoCapabilities"><code>saturation</code></dfn></dt>
-  <dd>This reflects the current <a>saturation</a> setting of the camera and permitted range. Values are numeric. Increasing values indicate increasing saturation.</dd>
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>contrast</code></dfn></dt>
+  <dd>Whether <a>contrast</a> constraining is recognized.</dd>
 
-  <dt><dfn attribute for="PhotoCapabilities"><code>sharpness</code></dfn></dt>
-  <dd>This reflects the current <a>sharpness</a> setting of the camera and permitted range. Values are numeric. Increasing values indicate increasing sharpness, and the minimum value always implies no sharpness enhancement or processing.</dd>
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>saturation</code></dfn></dt>
+  <dd>Whether <a>saturation</a> constraining is recognized.</dd>
 
-  <dt><dfn attribute for="PhotoCapabilities"><code>imageHeight</code></dfn></dt>
-  <dd>This reflects the image height range supported by the UA and the current height setting.</dd>
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>sharpness</code></dfn></dt>
+  <dd>Whether <a>sharpness</a> constraining is recognized.</dd>
 
-  <dt><dfn attribute for="PhotoCapabilities"><code>imageWidth</code></dfn></dt>
-  <dd>This reflects the image width range supported by the UA and the current width setting.</dd>
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>imageHeight</code></dfn></dt>
+  <dd>Whether the <a>image height</a> configuration is recognized.</dd>
 
-  <dt><dfn attribute for="PhotoCapabilities"><code>zoom</code></dfn></dt>
-  <dd>This reflects the zoom value range supported by the UA and the current zoom setting.</dd>
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>imageWidth</code></dfn></dt>
+  <dd>Whether the <a>image width</a> configuration is recognized.</dd>
 
-  <dt><dfn attribute for="PhotoCapabilities"><code>fillLightMode</code></dfn></dt>
-  <dd>This reflects the current fill light (flash) mode setting.  Values are of type {{FillLightMode}}.</dd>
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>zoom</code></dfn></dt>
+  <dd>Whether configuration of the <a>zoom</a> level is recognized.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>fillLightMode</code></dfn></dt>
+  <dd>Whether configuration of the <a>fill light mode</a> is recognized.</dd>
 </dl>
 
-<div class="note">
-  The supported resolutions are presented as segregated {{imageWidth}} and {{imageHeight}} ranges to prevent increasing the fingerprinting surface and to allow the UA to make a best-effort decision with regards to actual hardware configuration.
-</div>
+## {{MediaTrackCapabilities}} dictionary ## {#mediatrackcapabilities-section}
 
-## Discussion
-<em>This section is non-normative.</em>
-
-  <p>The <code>PhotoCapabilities</code> interface provides the photo-specific settings and their current values.  Many of these fields mirror hardware capabilities that are hard to define since can be implemented in a number of ways.  Moreover, hardware manufacturers tend to publish vague definitions to protect their intellectual property.  The following definitions are assumed for individual settings and are provided for information purposes:</p>
-  <ol>
-    <li><i><dfn>White balance mode</dfn></i> is a setting that cameras use to adjust for different color temperatures.  <dfn>Color temperature</dfn> is the temperature of background light (usually measured in Kelvin).  This setting can usually be automatically and continuously determined by the implementation, but it's also common to offer a <code>manual</code> mode in which the estimated temperature of the scene illumination is hinted to the implementation.  Typical temperature ranges for popular modes are provided below:
-    <table class="simple">
-      <tr> <th>Mode</th> <th>Kelvin range</th> </tr>
-      <tr> <td>incandescent</td> <td>2500-3500</td> </tr>
-      <tr> <td>fluorescent</td> <td>4000-5000</td> </tr>
-      <tr> <td>warm-fluorescent</td> <td>5000-5500</td> </tr>
-      <tr> <td>daylight</td> <td>5500-6500</td> </tr>
-      <tr> <td>cloudy-daylight</td> <td>6500-8000</td> </tr>
-      <tr> <td>twilight</td> <td>8000-9000</td> </tr>
-      <tr> <td>shade</td> <td>9000-10000</td> </tr>
-    </table>
-    </li>
-
-    <li><i><dfn>Exposure</dfn></i> is the amount of time during which light is allowed to fall on the photosensitive device.  Auto-exposure mode is a camera setting where the exposure levels are automatically adjusted by the implementation based on the subject of the photo.</li>
-
-    <li><i><dfn>Exposure Compensation</dfn></i> is a numeric camera setting that adjusts the exposure level from the current value used by the implementation.  This value can be used to bias the exposure level enabled by auto-exposure, and usually is a symmetric range around 0 EV (the no-compensation value).</li>
-
-    <li>The <i><dfn>ISO</dfn></i> setting of a camera describes the sensitivity of the camera to light. It is a numeric value, where the lower the value the greater the sensitivity.  This value should follow the [[iso12232]] standard.</li>
-
-    <li><i>Red Eye Reduction</i> is a feature in cameras that is designed to limit or prevent the appearance of red pupils ("Red Eye") in photography subjects due prolonged exposure to a camera's flash.</li>
-
-    <li><i>Focus mode</i> describes the focus setting of the capture device (e.g. `auto` or `manual`). </li>
-
-    <li>[[LIGHTING-VOCABULARY]] defines <i><dfn>brightness</dfn></i> as "the attribute of a visual sensation according to which an area appears to emit more or less light" and in the context of the present API, it refers to the numeric camera setting that adjusts the perceived amount of light emitting from the photo object.  A higher brightness setting increases the intensity of darker areas in a scene while compressing the intensity of brighter parts of the scene.  The range and effect of this setting is implementation dependent but in general it translates into a numerical value that is added to each pixel with saturation.</li>
-
-    <li><i><dfn>Contrast</dfn></i> is the numeric camera setting that controls the difference in brightness between light and dark areas in a scene.  A higher contrast setting reflects an expansion in the difference in brightness. The range and effect of this setting is implementation dependent but it can be understood as a transformation of the pixel values so that the luma range in the histogram becomes larger; the transformation is sometimes as simple as a gain factor.</li>
-
-    <li>[[LIGHTING-VOCABULARY]] defines <i><dfn>saturation</dfn></i> as "the colourfulness of an area judged in proportion to its brightness" and in the current context it refers to a numeric camera setting that controls the intensity of color in a scene (i.e. the amount of gray in the scene). Very low saturation levels will result in photos closer to black-and-white. Saturation is similar to <a>contrast</a> but referring to colors, so its implementation, albeit being platform dependent, can be understood as a gain factor applied to the chroma components of a given image.</li>
-
-    <li><i><dfn>Sharpness</dfn></i> is a numeric camera setting that controls the intensity of edges in a scene.  Higher sharpness settings result in higher contrast along the edges, while lower settings result in less contrast and blurrier edges (i.e. soft focus). The implementation is platform dependent, but it can be understood as the linear combination of an edge detection operation applied on the original image and the original image itself; the relative weights being cotrolled by this `sharpness`.
-
-    <div class="note">
-      <a>Brightness</a>, <a>contrast</a>, <a>saturation</a> and <a>sharpness</a> are specified in [[UVC]].
-    </div></li>
-
-    <li><i>Zoom</i> is a numeric camera setting that controls the focal length of the lens.  The setting usually represents a ratio, e.g. 4 is a zoom ratio of 4:1.  The minimum value is usually 1, to represent a 1:1 ratio (i.e. no zoom).</li>
-
-    <li><i>Fill light mode</i> describes the flash setting of the capture device (e.g. `auto`, `off`, `on`). </li>
-  </ol>
-
-# PhotoSettings
+{{MediaTrackCapabilities}} is extended here with the capabilities specific to image capture. This dictionary is produced by the UA via {{getCapabilities()}} and represents the supported ranges and enumerations of the supported constraints.
 
 <pre class="idl">
-  dictionary PhotoSettings {
+  partial dictionary MediaTrackCapabilities {
+    sequence&lt;MeteringMode>  whiteBalanceMode;
+    MediaSettingsRange      colorTemperature;
+    sequence&lt;MeteringMode>  exposureMode;
+    MediaSettingsRange      exposureCompensation;
+    MediaSettingsRange      iso;
+    sequence&lt;boolean>       redEyeReduction;
+    sequence&lt;MeteringMode>  focusMode;
+
+    MediaSettingsRange      brightness;
+    MediaSettingsRange      contrast;
+    MediaSettingsRange      saturation;
+    MediaSettingsRange      sharpness;
+    MediaSettingsRange      imageHeight;
+    MediaSettingsRange      imageWidth;
+    MediaSettingsRange      zoom;
+    sequence&lt;FillLightMode> fillLightMode;
+  };
+</pre>
+
+### Members ### {#mediatrackcapabilities-members}
+
+<dl class="domintro">
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>whiteBalanceMode</code></dfn></dt>
+  <dd>A sequence of supported <a>white balance mode</a> {{MeteringMode}}s.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>colorTemperature</code></dfn></dt>
+  <dd>This range reflects the supported correlated <a>color temperature</a> to be used for the scene white balance calculation.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>exposureMode</code></dfn></dt>
+  <dd>A sequence of supported {{MeteringMode}} settings for <a>exposure</a> calculation.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>exposureCompensation</code></dfn></dt>
+  <dd>This reflects the supported range of <a>exposure compensation</a>. The supported range can be, and usually is, centered around 0 EV.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>iso</code></dfn></dt>
+  <dd>This reflects the permitted range of <a>ISO</a> values.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>redEyeReduction</code></dfn></dt>
+  <dd>A sequence of booleans indicating whether camera supports <a>red eye reduction</a> - on meaning true/active.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>focusMode</code></dfn></dt>
+  <dd>A sequence of supported {{MeteringMode}} settings for <a>focus mode</a>.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>brightness</code></dfn></dt>
+  <dd>This reflects the supported range of <a>brightness</a> setting of the camera. Values are numeric. Increasing values indicate increasing brightness.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>contrast</code></dfn></dt>
+  <dd>This reflects the supported range of <a>contrast</a>. Values are numeric.  Increasing values indicate increasing contrast.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>saturation</code></dfn></dt>
+  <dd>This reflects the permitted range of <a>saturation</a> setting. Values are numeric. Increasing values indicate increasing saturation.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>sharpness</code></dfn></dt>
+  <dd>This reflects the permitted <a>sharpness</a> range of the camera. Values are numeric. Increasing values indicate increasing sharpness, and the minimum value always implies no sharpness enhancement or processing.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>imageHeight</code></dfn></dt>
+  <dd>This reflects the <a>image height</a> range supported by the UA.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>imageWidth</code></dfn></dt>
+  <dd>This reflects the <a>image width</a> range supported by the UA.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>zoom</code></dfn></dt>
+  <dd>This reflects the <a>zoom</a> value range supported by the UA.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>fillLightMode</code></dfn></dt>
+  <dd>A sequence of supported <a>fill light mode</a> {{FillLightMode}}s settings.</dd>
+</dl>
+
+## {{MediaTrackConstraintSet}} dictionary ## {#mediatrackconstraintset-section}
+
+{{MediaTrackConstraintSet}} dictionary is used for both reading the current status with {{getConstraints()}} and for applying a set of constraints with {{applyConstraints()}}.
+
+<div class="note">
+{{MediaTrackSettings}} can be retrieved to verify the effect of the application by the user agent of the requested {{MediaTrackConstraints}}. Some constraints such as, e.g. <a>zoom</a>, might not be immediately applicable.
+</div>
+
+<pre class="idl">
+  partial dictionary MediaTrackConstraintSet {
+    MeteringMode       whiteBalanceMode;
+    ConstrainDouble    colorTemperature;
+    MeteringMode       exposureMode;
+    ConstrainDouble    exposureCompensation;
+    ConstrainDouble    iso;
+    ConstraintBoolean  redEyeReduction;
+    MeteringMode       focusMode;
+    ConstraintBoolean  pointsOfInterest;
+
+    ConstrainDouble    brightness;
+    ConstrainDouble    contrast;
+    ConstrainDouble    saturation;
+    ConstrainDouble    sharpness;
+    ConstrainDouble    imageHeight;
+    ConstrainDouble    imageWidth;
+    ConstrainDouble    zoom;
+    FillLightMode      fillLightMode;
+  };
+</pre>
+
+### Members ### {#mediatrackconstraintset-members}
+
+<dl class="domintro">
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>whiteBalanceMode</code></dfn></dt>
+  <dd>See <a>white balance mode</a> constrainable property.</dd>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>colorTemperature</code></dfn></dt>
+  <dd>See <a>color temperature</a> constrainable property.</dd>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>exposureMode</code></dfn></dt>
+  <dd>See <a>exposure</a> constrainable property.</dd>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>exposureCompensation</code></dfn></dt>
+  <dd>See <a>exposure compensation</a> constrainable property.</dd>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>iso</code></dfn></dt>
+  <dd>See <a>iso</a> constrainable property.</dd>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>redEyeReduction</code></dfn></dt>
+  <dd>See <a>red eye reduction</a> constrainable property.</dd>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>focusMode</code></dfn></dt>
+  <dd>See <a>focus mode</a> constrainable property.</dd>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>pointsOfInterest</code></dfn></dt>
+  <dd>See <a>points of interest</a> constrainable property.</dd>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>brightness</code></dfn></dt>
+  <dd>See <a>brightness</a> constrainable property.</dd>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>contrast</code></dfn></dt>
+  <dd>See <a>contrast</a> constrainable property.</dd>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>saturation</code></dfn></dt>
+  <dd>See <a>saturation</a> constrainable property.</dd>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>sharpness</code></dfn></dt>
+  <dd>See <a>sharpness</a> constrainable property.</dd>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>imageHeight</code></dfn></dt>
+  <dd>See <a>image height</a> constrainable property. The UA MUST select the closest height value of this constraint if it supports a discrete set of height options.</dd>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>imageWidth</code></dfn></dt>
+  <dd>See <a>image width</a> constrainable property. The UA MUST select the closest width value of this constraint if it supports a discrete set of width options.</dd>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>zoom</code></dfn></dt>
+  <dd>See <a>zoom</a> constrainable property.</dd>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>fillLightMode</code></dfn></dt>
+  <dd>See <a>fill light mode</a> constrainable property.</dd>
+</dl>
+
+## {{MediaTrackSettings}} dictionary ## {#mediatracksettings-section}
+
+When the {{getSettings()}} method is invoked on a video stream track, the user agent must return the extended {{MediaTrackSettings}} dictionary, representing the current status of the underlying user agent.
+
+<pre class="idl">
+  partial dictionary MediaTrackSettings {
     MeteringMode      whiteBalanceMode;
     double            colorTemperature;
     MeteringMode      exposureMode;
@@ -352,75 +400,126 @@ interface ImageCapture {
   };
 </pre>
 
-## Members ## {##photosettings-members}
+### Members ### {#mediatracksettings-members}
 
 <dl class="domintro">
-  <dt><dfn dict-member for="PhotoSettings"><code>whiteBalanceMode</code></dfn></dt>
-  <dd>This reflects the desired <a>white balance mode</a> setting.</dd>
+  <dt><dfn dict-member for="MediaTrackSettings"><code>whiteBalanceMode</code></dfn></dt>
+  <dd>Current <a>white balance mode</a> setting.</dd>
 
-  <dt><dfn dict-member for="PhotoSettings"><code>colorTemperature</code></dfn></dt>
-  <dd><a>Color temperature</a> to be used for the white balance calculation of the scene. This field is only significant if <a>whiteBalanceMode</a> is {{manual}}.</dd>
+  <dt><dfn dict-member for="MediaTrackSettings"><code>colorTemperature</code></dfn></dt>
+  <dd><a>Color temperature</a> in use for the white balance calculation of the scene. This field is only significant if {{MediaTrackSettings/whiteBalanceMode}} is {{manual}}.</dd>
 
-  <dt><dfn dict-member for="PhotoSettings"><code>exposureMode</code></dfn></dt>
-  <dd>This reflects the desired <a>exposure</a> mode setting.  Acceptable values are of type {{MeteringMode}}.</dd>
+  <dt><dfn dict-member for="MediaTrackSettings"><code>exposureMode</code></dfn></dt>
+  <dd>Current <a>exposure</a> mode setting.  Acceptable values are of type {{MeteringMode}}.</dd>
 
-  <dt><dfn dict-member for="PhotoSettings"><code>exposureCompensation</code></dfn></dt>
-  <dd>This reflects the desired <a>exposure compensation</a> setting.  A value of 0 EV is interpreted as no exposure compensation.</dd>
+  <dt><dfn dict-member for="MediaTrackSettings"><code>exposureCompensation</code></dfn></dt>
+  <dd>Current <a>exposure compensation</a> setting.  A value of 0 EV is interpreted as no exposure compensation.</dd>
 
-  <dt><dfn dict-member for="PhotoSettings"><code>iso</code></dfn></dt>
-  <dd>This reflects the desired camera <a>ISO</a> setting.</dd>
+  <dt><dfn dict-member for="MediaTrackSettings"><code>iso</code></dfn></dt>
+  <dd>Current camera <a>ISO</a> setting.</dd>
 
-  <dt><dfn dict-member for="PhotoSettings"><code>redEyeReduction</code></dfn></dt>
-  <dd>This reflects whether camera red eye reduction is desired</dd>
+  <dt><dfn dict-member for="MediaTrackSettings"><code>redEyeReduction</code></dfn></dt>
+  <dd>Current camera <a>red eye reduction</a> configuration setting.</dd>
 
-  <dt><dfn dict-member for="PhotoSettings"><code>focusMode</code></dfn></dt>
-  <dd>This reflects the desired focus mode setting.  Acceptable values are of type {{MeteringMode}}.</dd>
+  <dt><dfn dict-member for="MediaTrackSettings"><code>focusMode</code></dfn></dt>
+  <dd>Current <a>focus mode</a> setting.</dd>
 
-  <dt><dfn dict-member for="PhotoSettings"><code>pointsOfInterest</code></dfn></dt>
-  <dd>A `sequence` of {{Point2D}}s to be used as metering area centers for other settings, e.g. Focus, Exposure and Auto White Balance.
-  <div class="note">
-    A {{Point2D}} Point of Interest is interpreted to represent a pixel position in a normalized square space (`{x,y} &isin; [0.0, 1.0]`). The origin of coordinates `{x,y} = {0.0, 0.0}` represents the upper leftmost corner whereas the `{x,y} = {1.0, 1.0}` represents the lower rightmost corner: the <a href="#dom-point2d-x"><code>x</code></a> coordinate (columns) increases rightwards and the <a href="#dom-point2d-y"><code>y</code></a> coordinate (rows) increases downwards. Values beyond the mentioned limits will be clamped to the closest allowed value.
-  </div>
-  </dd>
+  <dt><dfn dict-member for="MediaTrackSettings"><code>pointsOfInterest</code></dfn></dt>
+  <dd>A sequence of {{Point2D}}s in use as <a>points of interest</a> for other settings, e.g. Focus, Exposure and Auto White Balance.</dd>
 
-  <dt><dfn dict-member for="PhotoSettings"><code>brightness</code></dfn></dt>
-  <dd>This reflects the desired <a>brightness</a> setting of the camera.</dd>
+  <dt><dfn dict-member for="MediaTrackSettings"><code>brightness</code></dfn></dt>
+  <dd>This reflects the current <a>brightness</a> setting of the camera.</dd>
 
-  <dt><dfn dict-member for="PhotoSettings"><code>contrast</code></dfn></dt>
-  <dd>This reflects the desired <a>contrast</a> setting of the camera.</dd>
+  <dt><dfn dict-member for="MediaTrackSettings"><code>contrast</code></dfn></dt>
+  <dd>This reflects the current <a>contrast</a> setting of the camera.</dd>
 
-  <dt><dfn dict-member for="PhotoSettings"><code>saturation</code></dfn></dt>
-  <dd>This reflects the desired <a>saturation</a> setting of the camera.</dd>
+  <dt><dfn dict-member for="MediaTrackSettings"><code>saturation</code></dfn></dt>
+  <dd>This reflects the current <a>saturation</a> setting of the camera.</dd>
 
-  <dt><dfn dict-member for="PhotoSettings"><code>sharpness</code></dfn></dt>
-  <dd>This reflects the desired <a>sharpness</a> setting of the camera.</dd>
+  <dt><dfn dict-member for="MediaTrackSettings"><code>sharpness</code></dfn></dt>
+  <dd>This reflects the current <a>sharpness</a> setting of the camera.</dd>
 
-  <dt><dfn dict-member for="PhotoSettings"><code>zoom</code></dfn></dt>
-  <dd>This reflects the desired zoom setting of the camera.</dd>
+  <dt><dfn dict-member for="MediaTrackSettings"><code>zoom</code></dfn></dt>
+  <dd>This reflects the current <a>zoom</a> setting of the camera.</dd>
 
-  <dt><dfn dict-member for="PhotoSettings"><code>imageWidth</code></dfn></dt>
-  <dd>This reflects the desired image height.  The UA MUST select the closest height value this setting if it supports a discrete set of height options.</dd>
+  <dt><dfn dict-member for="MediaTrackSettings"><code>imageWidth</code></dfn></dt>
+  <dd>This reflects the current <a>image height</a>.</dd>
 
-  <dt><dfn dict-member for="PhotoSettings"><code>imageHeight</code></dfn></dt>
-  <dd>This reflects the desired image width. The UA MUST select the closest width value this setting if it supports a discrete set of width options.</dd>
+  <dt><dfn dict-member for="MediaTrackSettings"><code>imageHeight</code></dfn></dt>
+  <dd>This reflects the current <a>image width</a>. </dd>
 
-  <dt><dfn dict-member for="PhotoSettings"><code>fillLightMode</code></dfn></dt>
-  <dd>This reflects the desired fill light (flash) mode setting.  Acceptable values are of type {{FillLightMode}}.</dd>
+  <dt><dfn dict-member for="MediaTrackSettings"><code>fillLightMode</code></dfn></dt>
+  <dd>This reflects the current <a>fill light mode</a> setting (flash).</dd>
 
 </dl>
 
-# MediaSettingsRange
+## Constrainable Properties ## {#constrainable-properties}
+
+  Many of these fields mirror hardware capabilities that are hard to define since can be implemented in a number of ways.  Moreover, hardware manufacturers tend to publish vague definitions to protect their intellectual property.  The following definitions are assumed for individual settings and are provided for information purposes:
+
+  <ol>
+    <li><i><dfn>White balance mode</dfn></i> is a setting that cameras use to adjust for different color temperatures.  <dfn>Color temperature</dfn> is the temperature of background light (usually measured in Kelvin).  This setting can usually be automatically and continuously determined by the implementation, but it's also common to offer a <code>manual</code> mode in which the estimated temperature of the scene illumination is hinted to the implementation.  Typical temperature ranges for popular modes are provided below:
+    <table class="simple">
+      <tr> <th>Mode</th> <th>Kelvin range</th> </tr>
+      <tr> <td>incandescent</td> <td>2500-3500</td> </tr>
+      <tr> <td>fluorescent</td> <td>4000-5000</td> </tr>
+      <tr> <td>warm-fluorescent</td> <td>5000-5500</td> </tr>
+      <tr> <td>daylight</td> <td>5500-6500</td> </tr>
+      <tr> <td>cloudy-daylight</td> <td>6500-8000</td> </tr>
+      <tr> <td>twilight</td> <td>8000-9000</td> </tr>
+      <tr> <td>shade</td> <td>9000-10000</td> </tr>
+    </table>
+    </li>
+
+    <li><i><dfn>Exposure</dfn></i> is the amount of time during which light is allowed to fall on the photosensitive device.  Auto-exposure mode is a camera setting where the exposure levels are automatically adjusted by the implementation based on the subject of the photo.</li>
+
+    <li><i><dfn>Exposure Compensation</dfn></i> is a numeric camera setting that adjusts the exposure level from the current value used by the implementation.  This value can be used to bias the exposure level enabled by auto-exposure, and usually is a symmetric range around 0 EV (the no-compensation value).</li>
+
+    <li>The <i><dfn>ISO</dfn></i> setting of a camera describes the sensitivity of the camera to light. It is a numeric value, where the lower the value the greater the sensitivity.  This value should follow the [[iso12232]] standard.</li>
+
+    <li><dfn>Red Eye Reduction</dfn> is a feature in cameras that is designed to limit or prevent the appearance of red pupils ("Red Eye") in photography subjects due prolonged exposure to a camera's flash.</li>
+
+    <li><dfn>Focus mode</dfn> describes the focus setting of the capture device (e.g. |auto| or |manual|). </li>
+
+    <li><dfn>Points of interest</dfn> describe the metering area centers used in other settings, e.g. <a>exposure</a>, each one being a {{Point2D}}.
+
+    A {{Point2D}} Point of Interest is interpreted to represent a pixel position in a normalized square space (|{x,y} &isin; [0.0, 1.0]|). The origin of coordinates |{x,y} = {0.0, 0.0}| represents the upper leftmost corner whereas the |{x,y} = {1.0, 1.0}| represents the lower rightmost corner: the <a href="#dom-point2d-x"><code>x</code></a> coordinate (columns) increases rightwards and the <a href="#dom-point2d-y"><code>y</code></a> coordinate (rows) increases downwards. Values beyond the mentioned limits will be clamped to the closest allowed value.</li>
+
+    <li>[[LIGHTING-VOCABULARY]] defines <i><dfn>brightness</dfn></i> as "the attribute of a visual sensation according to which an area appears to emit more or less light" and in the context of the present API, it refers to the numeric camera setting that adjusts the perceived amount of light emitting from the photo object.  A higher brightness setting increases the intensity of darker areas in a scene while compressing the intensity of brighter parts of the scene.  The range and effect of this setting is implementation dependent but in general it translates into a numerical value that is added to each pixel with saturation.</li>
+
+    <li><i><dfn>Contrast</dfn></i> is the numeric camera setting that controls the difference in brightness between light and dark areas in a scene.  A higher contrast setting reflects an expansion in the difference in brightness. The range and effect of this setting is implementation dependent but it can be understood as a transformation of the pixel values so that the luma range in the histogram becomes larger; the transformation is sometimes as simple as a gain factor.</li>
+
+    <li>[[LIGHTING-VOCABULARY]] defines <i><dfn>saturation</dfn></i> as "the colourfulness of an area judged in proportion to its brightness" and in the current context it refers to a numeric camera setting that controls the intensity of color in a scene (i.e. the amount of gray in the scene). Very low saturation levels will result in photos closer to black-and-white. Saturation is similar to <a>contrast</a> but referring to colors, so its implementation, albeit being platform dependent, can be understood as a gain factor applied to the chroma components of a given image.</li>
+
+    <li><i><dfn>Sharpness</dfn></i> is a numeric camera setting that controls the intensity of edges in a scene.  Higher sharpness settings result in higher contrast along the edges, while lower settings result in less contrast and blurrier edges (i.e. soft focus). The implementation is platform dependent, but it can be understood as the linear combination of an edge detection operation applied on the original image and the original image itself; the relative weights being cotrolled by this |sharpness|.
+
+    <div class="note">
+      <a>Brightness</a>, <a>contrast</a>, <a>saturation</a> and <a>sharpness</a> are specified in [[UVC]].
+    </div></li>
+
+    <li><dfn>Image width</dfn> and <dfn>image height</dfn> are...
+
+    <div class="note">
+      The supported resolutions are managed segregated e.g. {{MediaTrackCapabilities/imageWidth}} and {{MediaTrackCapabilities/imageHeight}} values/ranges to prevent increasing the fingerprinting surface and to allow the UA to make a best-effort decision with regards to actual hardware configuration vis-a-vis requested constraints.
+    </div>
+    </li>
+
+    <li><dfn>Zoom</dfn> is a numeric camera setting that controls the focal length of the lens.  The setting usually represents a ratio, e.g. 4 is a zoom ratio of 4:1.  The minimum value is usually 1, to represent a 1:1 ratio (i.e. no zoom).</li>
+
+    <li><dfn>Fill light mode</dfn> describes the flash setting of the capture device (e.g. |auto|, |off|, |on|). </li>
+  </ol>
+
+# {{MediaSettingsRange}} # {#mediasettingsrange-section}
 
 <pre class="idl">
   interface MediaSettingsRange {
       readonly attribute double max;
       readonly attribute double min;
-      readonly attribute double current;
       readonly attribute double step;
   };
 </pre>
 
-## Attributes ## {##mediasettingsrange-attributes}
+## Attributes ## {#mediasettingsrange-attributes}
 
 <dl class="domintro">
   <dt><dfn attribute for="MediaSettingsRange"><code>max</code></dfn></dt>
@@ -429,14 +528,11 @@ interface ImageCapture {
   <dt><dfn attribute for="MediaSettingsRange"><code>min</code></dfn></dt>
   <dd>The minimum value of this setting</dd>
 
-  <dt><dfn attribute for="MediaSettingsRange"><code>current</code></dfn></dt>
-  <dd>The current value of this setting</dd>
-
   <dt><dfn attribute for="MediaSettingsRange"><code>step</code></dfn></dt>
   <dd>The minimum difference between consecutive values of this setting.</dd>
 </dl>
 
-# FillLightMode
+# {{FillLightMode}} # {#filllightmode-section}
 
 <pre class="idl">
   enum FillLightMode {
@@ -448,7 +544,7 @@ interface ImageCapture {
   };
 </pre>
 
-## Values ## {##filllightmode-values}
+## Values ## {#filllightmode-values}
 
 <dl class="domintro">
   <dt><dfn enum-value for="FillLightMode"><code>unavailable</code></dfn></dt>
@@ -467,7 +563,7 @@ interface ImageCapture {
   <dd>The source's fill light will be turned on (and remain on) while the source {{videoStreamTrack}} is active</dd>
 </dl>
 
-# MeteringMode
+# {{MeteringMode}} # {#meteringmode-section}
 
 <pre class="idl">
   enum MeteringMode {
@@ -478,7 +574,7 @@ interface ImageCapture {
   };
 </pre>
 
-## Values ## {##meteringmode-values}
+## Values ## {#meteringmode-values}
 
 <dl class="domintro">
   <dt><dfn enum-value for="MeteringMode"><code>none</code></dfn></dt>
@@ -494,7 +590,7 @@ interface ImageCapture {
   <dd>The capture device is configured for continuous focusing for near-zero shutter-lag/continuous auto exposure/white balance calculation, or such continuous focus hunting/exposure/white balance calculation mode is requested.</dd>
 </dl>
 
-# Point2D
+# {{Point2D}} # {#point2d-section}
 
 A {{Point2D}} represents a location in a two dimensional space. The origin of coordinates is situated in the upper leftmost corner of the space.
 
@@ -505,7 +601,7 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
   };
 </pre>
 
-## Members ## {##point2d-members}
+## Members ## {#point2d-members}
 
 <dl class="domintro">
   <dt><dfn dict-member for="Point2D"><code>x</code></dfn></dt>
@@ -521,7 +617,7 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
   Slightly modified versions of these examples can be found in e.g. <a href="https://codepen.io/collection/nLeobQ/">this codepen collection</a>.
 </div>
 
-## Update camera zoom and {{takePhoto()}}
+## Update camera zoom and {{takePhoto()}} ## {#example1}
 
 <div class="note">
   An expanded version of this example can be found in e.g. <a href="https://codepen.io/miguelao/pen/BLPzKx/left?editors=1010">this codepen</a>.
@@ -584,7 +680,8 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
   </pre>
 </div>
 
-## Repeated grabbing of a frame with {{grabFrame()}}
+## Repeated grabbing of a frame with {{grabFrame()}} ## {#example2}
+
 <div class="note">
   The following example can also be found in e.g. <a href="https://codepen.io/miguelao/pen/wzxxwp/left?editors=1010">this codepen</a> with minimal modifications.
 </div>
@@ -631,7 +728,7 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
   </pre>
  </div>
 
-## Grabbing a Frame and Post-Processing
+## Grabbing a Frame and Post-Processing ## {#example3}
 <div class="note">
   The following example can also be found in e.g. <a href="https://codepen.io/miguelao/pen/mAzXpN/left?editors=1010">this codepen</a> with minimal modifications.
 </div>
@@ -687,6 +784,136 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
 </div>
 
 
+# Legacy API # {#legacy-api}
+<em>This section is non-normative.</em>
+
+The previous thing was:
+
+<pre class="idl">
+interface LegacyImageCapture {
+  Promise&lt;LegacyPhotoCapabilities&gt; getPhotoCapabilities();
+  Promise&lt;void&gt;                    setOptions(optional LegacyPhotoSettings photoSettings);
+};
+</pre>
+
+<dt><dfn method for="LegacyImageCapture"><code>getPhotoCapabilities()</code></dfn></dt>
+<dd>
+When {{getPhotoCapabilities()}} is used to retrieve the ranges of available configuration options and their current setting values, if any. When this method is invoked:
+<ol>
+  <li>If the {{readyState}} of {{videoStreamTrack}} provided in the constructor is not {{live}}, return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{InvalidStateError}}. </li>
+  <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:
+  <ol>
+    <li>Gather data from {{videoStreamTrack}} into a {{LegacyPhotoCapabilities}} object containing the available capabilities of the device, including ranges where appropriate. The resolved {{LegacyPhotoCapabilities}} will also include the current conditions in which the capabilities of the device are found. The method of doing this will depend on the underlying device. </li>
+
+    <li>If the UA is unable to execute the {{getPhotoCapabilities()}} method for any reason (for example, the {{MediaStreamTrack}} being ended asynchronously), then the UA MUST return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{OperationError}}.</li>
+
+    <li>Return a resolved promise with the {{LegacyPhotoCapabilities}} object.</li>
+  </ol>
+  </li>
+</ol>
+</dd>
+
+<dt><dfn method for="LegacyImageCapture"><code>setOptions()</code></dfn></dt>
+<dd>
+{{setOptions()}} is used to configure a number of settings affecting the image capture and/or the current video feed in {{videoStreamTrack}}. When this method is invoked:
+<ol>
+  <li>If the {{readyState}} of a {{videoStreamTrack}} provided in the constructor is not {{live}}, return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{InvalidStateError}}. </li>
+
+  <li>If an invalid {{LegacyPhotoSettings}} object is passed as argument, return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{SyntaxError}}</li>
+
+  <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:
+  <ol>
+    <li>Configure the underlying image capture device with the `settings` parameter.</li>
+
+    <li>If the UA cannot successfully apply the settings, then the UA MUST return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{OperationError}}.</li>
+
+    <li>If the UA can successfully apply the settings, then the UA MUST return a resolved promise.
+
+    <div class="note">
+    If the UA can successfully apply the settings, the effect MAY be reflected, if visible at all, in {{videoStreamTrack}}. The result of applying some of the settings MAY force the latter to not satisfy its `constraints` (e.g. the frame rate). The result of applying some of this constraints might not be immediate.
+    </div></li>
+  </ol>
+  </li>
+</ol>
+
+<table class="parameters">
+  <tbody>
+    <tr>
+      <th>Parameter</th>
+      <th>Type</th>
+      <th>Nullable</th>
+      <th>Optional</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td class="prmName">settings</td>
+      <td class="prmType">{{LegacyPhotoSettings}}</td>
+      <td class="prmNullTrue"><span role="img" aria-label=
+      "True">&#10004;</span></td>
+      <td class="prmOptFalse"><span role="img" aria-label=
+      "False">&#10008;</span></td>
+      <td class="prmDesc">
+        The {{LegacyPhotoSettings}} dictionary to be applied.
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="note">
+  Many of the {{LegacyPhotoSettings}} represent hardware capabilities that cannot be modified instaneously, e.g. `zoom` or `focus`. {{setOptions()}} will resolve the Promise as soon as possible. The actual status of any field can be monitored using {{getPhotoCapabilities()}}.
+</div>
+</dd>
+
+## {{LegacyPhotoCapabilities}} ## {#legacy-photocapabilities}
+
+<pre class="idl">
+interface LegacyPhotoCapabilities {
+  readonly attribute MeteringMode       whiteBalanceMode;
+  readonly attribute MediaSettingsRange colorTemperature;
+  readonly attribute MeteringMode       exposureMode;
+  readonly attribute MediaSettingsRange exposureCompensation;
+  readonly attribute MediaSettingsRange iso;
+  readonly attribute boolean            redEyeReduction;
+  readonly attribute MeteringMode       focusMode;
+
+  readonly attribute MediaSettingsRange brightness;
+  readonly attribute MediaSettingsRange contrast;
+  readonly attribute MediaSettingsRange saturation;
+  readonly attribute MediaSettingsRange sharpness;
+  readonly attribute MediaSettingsRange imageHeight;
+  readonly attribute MediaSettingsRange imageWidth;
+  readonly attribute MediaSettingsRange zoom;
+  readonly attribute FillLightMode      fillLightMode;
+};
+</pre>
+
+## {{LegacyPhotoSettings}} ## {#legacy-photosettings}
+
+<pre class="idl">
+dictionary LegacyPhotoSettings {
+  MeteringMode      whiteBalanceMode;
+  double            colorTemperature;
+  MeteringMode      exposureMode;
+  double            exposureCompensation;
+  double            iso;
+  boolean           redEyeReduction;
+  MeteringMode      focusMode;
+  sequence&lt;Point2D> pointsOfInterest;
+
+  double        brightness;
+  double        contrast;
+  double        saturation;
+  double        sharpness;
+  double        zoom;
+  double        imageHeight;
+  double        imageWidth;
+  FillLightMode fillLightMode;
+};
+</pre>
+
+
+
+
 
 <pre class="anchors">
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: MediaStreamTrack; url: mediastreamtrack
@@ -700,6 +927,34 @@ urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: attribute; text: 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: attribute; text: kind; url: widl-MediaStreamTrack-kind
 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: enum-value; text: live; url: idl-def-MediaStreamTrackState.live
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: getUserMedia(); url: dom-mediadevices-getusermedia
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: getSettings(); url: widl-ConstrainablePattern-getSettings-Settings
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: getCapabilities(); url: widl-MediaStreamTrack-getCapabilities-MediaTrackCapabilities
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: getConstraints(); url: widl-MediaStreamTrack-getConstraints-MediaTrackConstraints
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: applyConstraints(); url: widl-MediaStreamTrack-applyConstraints-Promise-void--MediaTrackConstraints-constraints
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: MediaDevices; url: mediadevices-interface-extensions
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: getSupportedConstraints(); url: widl-MediaDevices-getSupportedConstraints-MediaTrackSupportedConstraints
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: ConstrainDouble ; url: idl-def-ConstrainDouble
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: ConstraintBoolean; url: idl-def-ConstrainBoolean
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dictionary; text: MediaTrackSupportedConstraints; url: idl-def-MediaTrackSupportedConstraints
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dictionary; text: MediaTrackCapabilities; url: idl-def-MediaTrackCapabilities
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dictionary; text: MediaTrackConstraintSet; url: idl-def-MediaTrackConstraintSet
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dictionary; text: MediaTrackConstraints; url: idl-def-MediaTrackConstraints
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dictionary; text: MediaTrackSettings; url: idl-def-MediaTrackSettings
 </pre>
 
 <pre class="link-defaults">
@@ -708,6 +963,7 @@ spec: html
         text: allowed to show a popup
         text: in parallel
         text: incumbent settings object
+spec:webidl; type:interface; text:Promise
 </pre>
 
 <pre class="biblio">
