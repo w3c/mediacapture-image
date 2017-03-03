@@ -681,10 +681,6 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
 
 ## Update camera zoom and {{takePhoto()}} ## {#example1}
 
-<div class="note">
-  An expanded version of this example can be found in e.g. <a href="https://codepen.io/miguelao/pen/BLPzKx/left?editors=1010">this codepen</a>.
-</div>
-
 <div class="example" highlight="javascript">
   <pre>
     &lt;html>
@@ -705,25 +701,25 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
 
         const track = mediastream.getVideoTracks()[0];
         imageCapture = new ImageCapture(track);
-        imageCapture.getPhotoCapabilities()
-          .then(photoCapabilities => {
-            // Check whether zoom is supported or not.
-            if (!photoCapabilities.zoom.min && !photoCapabilities.zoom.max) {
-              return;
-            }
 
-            // Map zoom to a slider element.
-            const input = document.querySelector('input[type="range"]');
-            input.min = photoCapabilities.zoom.min;
-            input.max = photoCapabilities.zoom.max;
-            input.step = photoCapabilities.zoom.step;
-            input.value = photoCapabilities.zoom.current;
-            input.oninput = function(event) {
-              imageCapture.setOptions({zoom: event.target.value});
-            }
-            input.hidden = false;
-          })
-          .catch(err => console.error('getPhotoCapabilities() failed: ', err));
+        const capabilities = track.getCapabilities()
+
+        // Check whether zoom is supported or not.
+        if (!capabilities.zoom.min && !capabilities.zoom.max) {
+          return;
+        }
+
+        // Map zoom to a slider element.
+        const input = document.querySelector('input[type="range"]');
+        input.min = capabilities.zoom.min;
+        input.max = capabilities.zoom.max;
+        input.step = capabilities.zoom.step;
+        input.value = track.getSettings().zoom;
+
+        input.oninput = function(event) {
+          track.applyConstraints({zoom: {exact : event.target.value}});
+        }
+        input.hidden = false;
       }
 
       function takePhoto() {
