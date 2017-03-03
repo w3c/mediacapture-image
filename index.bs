@@ -62,8 +62,6 @@ interface ImageCapture {
 {{takePhoto()}} returns a captured image encoded in the form of a {{Blob}}, whereas {{grabFrame()}} returns a snapshot of the {{videoStreamTrack}} video feed in the form of a non-encoded {{ImageBitmap}}.
 </div>
 
-This document defines a number of new constraints for a {{MediaStreamTrack}} that can be applied in order to make its behavior more suitable for taking pictures. The use of these constraints is via the standard {{getUserMedia()}} and {{applyConstraints()}} methods. They will modify the behavior of the track and its source independently of the usage of the {{videoStreamTrack}} with the {{ImageCapture}} object.
-
 ## Attributes ## {#imagecapture-attributes}
 
 <dl class="domintro">
@@ -290,6 +288,8 @@ This document defines a number of new constraints for a {{MediaStreamTrack}} tha
 
 
 # Extensions # {#extensions}
+
+This Section defines a number of new constraints for {{MediaStreamTrack}} that can be applied in order to make its behavior more suitable for taking pictures.  Use of these constraints via {{MediaStreamTrack}}'s methods {{getCapabilities()}}, {{getSettings()}}, {{getConstraints()}} and {{applyConstraints()}} will modify the behavior of the track and its source independently of the usage of the {{videoStreamTrack}} with the {{ImageCapture}} object.
 
 ## {{MediaTrackSupportedConstraints}} dictionary ## {#mediatracksupportedconstraints-section}
 
