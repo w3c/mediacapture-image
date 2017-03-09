@@ -362,22 +362,22 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
 
 <pre class="idl">
   partial dictionary MediaTrackCapabilities {
-    sequence&lt;MeteringMode>  whiteBalanceMode;
-    sequence&lt;MeteringMode>  exposureMode;
-    sequence&lt;MeteringMode>  focusMode;
+    sequence&lt;DOMString>  whiteBalanceMode;
+    sequence&lt;DOMString>  exposureMode;
+    sequence&lt;DOMString>  focusMode;
 
-    MediaSettingsRange      exposureCompensation;
-    MediaSettingsRange      colorTemperature;
-    MediaSettingsRange      iso;
+    MediaSettingsRange   exposureCompensation;
+    MediaSettingsRange   colorTemperature;
+    MediaSettingsRange   iso;
 
-    MediaSettingsRange      brightness;
-    MediaSettingsRange      contrast;
-    MediaSettingsRange      saturation;
-    MediaSettingsRange      sharpness;
+    MediaSettingsRange   brightness;
+    MediaSettingsRange   contrast;
+    MediaSettingsRange   saturation;
+    MediaSettingsRange   sharpness;
 
-    MediaSettingsRange      zoom;
+    MediaSettingsRange   zoom;
 
-    boolean                 torch;
+    boolean              torch;
   };
 </pre>
 
@@ -385,13 +385,13 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
 
 <dl class="domintro">
   <dt><dfn dict-member for="MediaTrackCapabilities"><code>whiteBalanceMode</code></dfn></dt>
-  <dd>A sequence of supported <a>white balance mode</a> {{MeteringMode}}s.</dd>
+  <dd>A sequence of supported <a>white balance modes</a>. Each string MUST be one of the members of {{MeteringMode}}.</dd>
 
   <dt><dfn dict-member for="MediaTrackCapabilities"><code>colorTemperature</code></dfn></dt>
-  <dd>This range reflects the supported correlated <a>color temperature</a> to be used for the scene white balance calculation.</dd>
+  <dd>This range reflects the supported correlated <a>color temperatures</a> to be used for the scene white balance calculation.</dd>
 
   <dt><dfn dict-member for="MediaTrackCapabilities"><code>exposureMode</code></dfn></dt>
-  <dd>A sequence of supported {{MeteringMode}} settings for <a>exposure</a> calculation.</dd>
+  <dd>A sequence of supported <a>exposure</a> modes. Each string MUST be the members of {{MeteringMode}}.</dd>
 
   <dt><dfn dict-member for="MediaTrackCapabilities"><code>exposureCompensation</code></dfn></dt>
   <dd>This reflects the supported range of <a>exposure compensation</a>. The supported range can be, and usually is, centered around 0 EV.</dd>
@@ -400,7 +400,7 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
   <dd>This reflects the permitted range of <a>ISO</a> values.</dd>
 
   <dt><dfn dict-member for="MediaTrackCapabilities"><code>focusMode</code></dfn></dt>
-  <dd>A sequence of supported {{MeteringMode}} settings for <a>focus mode</a>.</dd>
+  <dd>A sequence of supported <a>focus modes</a>. Each string MUST be one of the members of {{MeteringMode}}.</dd>
 
   <dt><dfn dict-member for="MediaTrackCapabilities"><code>brightness</code></dfn></dt>
   <dd>This reflects the supported range of <a>brightness</a> setting of the camera. Values are numeric. Increasing values indicate increasing brightness.</dd>
@@ -500,9 +500,9 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
 
 <pre class="idl">
   partial dictionary MediaTrackSettings {
-    MeteringMode      whiteBalanceMode;
-    MeteringMode      exposureMode;
-    MeteringMode      focusMode;
+    DOMString         whiteBalanceMode;
+    DOMString         exposureMode;
+    DOMString         focusMode;
     sequence&lt;Point2D> pointsOfInterest;
 
     double            exposureCompensation;
@@ -524,10 +524,10 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
 
 <dl class="domintro">
   <dt><dfn dict-member for="MediaTrackSettings"><code>whiteBalanceMode</code></dfn></dt>
-  <dd>Current <a>white balance mode</a> setting.</dd>
+  <dd>Current <a>white balance mode</a> setting. The string MUST be one of the members of {{MeteringMode}}.</dd>
 
   <dt><dfn dict-member for="MediaTrackSettings"><code>exposureMode</code></dfn></dt>
-  <dd>Current <a>exposure</a> mode setting.</dd>
+  <dd>Current <a>exposure</a> mode setting. The string MUST be one of the members of {{MeteringMode}}.</dd>
 
   <dt><dfn dict-member for="MediaTrackSettings"><code>colorTemperature</code></dfn></dt>
   <dd><a>Color temperature</a> in use for the white balance calculation of the scene. This field is only significant if {{MediaTrackSettings/whiteBalanceMode}} is {{manual}}.</dd>
@@ -539,7 +539,7 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
   <dd>Current camera <a>ISO</a> setting.</dd>
 
   <dt><dfn dict-member for="MediaTrackSettings"><code>focusMode</code></dfn></dt>
-  <dd>Current <a>focus mode</a> setting.</dd>
+  <dd>Current <a>focus mode</a> setting. The string MUST be one of the members of {{MeteringMode}}.</dd>
 
   <dt><dfn dict-member for="MediaTrackSettings"><code>pointsOfInterest</code></dfn></dt>
   <dd>A sequence of {{Point2D}}s in use as <a>points of interest</a> for other settings, e.g. Focus, Exposure and Auto White Balance.</dd>
