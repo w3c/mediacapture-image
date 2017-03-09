@@ -434,7 +434,7 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
     ConstrainDOMString whiteBalanceMode;
     ConstrainDOMString exposureMode;
     ConstrainDOMString focusMode;
-    sequence&lt;Point2D>  pointsOfInterest;
+    ConstrainPoint2D   pointsOfInterest;
 
     ConstrainDouble    exposureCompensation;
     ConstrainDouble    colorTemperature;
@@ -526,6 +526,9 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
   <dt><dfn dict-member for="MediaTrackSettings"><code>whiteBalanceMode</code></dfn></dt>
   <dd>Current <a>white balance mode</a> setting.</dd>
 
+  <dt><dfn dict-member for="MediaTrackSettings"><code>exposureMode</code></dfn></dt>
+  <dd>Current <a>exposure</a> mode setting.</dd>
+
   <dt><dfn dict-member for="MediaTrackSettings"><code>colorTemperature</code></dfn></dt>
   <dd><a>Color temperature</a> in use for the white balance calculation of the scene. This field is only significant if {{MediaTrackSettings/whiteBalanceMode}} is {{manual}}.</dd>
 
@@ -560,6 +563,28 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
   <dd>Current camera <a>torch</a> configuration setting.</dd>
 
 </dl>
+
+## Additional Constrainable Properties ## {#additional-constrainable-props}
+
+<pre class="idl">
+  dictionary ConstrainPoint2DParameters {
+    sequence&lt;Point2D> exact;
+    sequence&lt;Point2D> ideal;
+  };
+
+  typedef (sequence&lt;Point2D> or ConstrainPoint2DParameters) ConstrainPoint2D;
+</pre>
+
+### Members ### {#constraintpoint2d-members}
+
+<dl class="domintro">
+  <dt><dfn dict-member for="ConstrainPoint2DParameters"><code>exact</code></dfn></dt>
+  <dd>The exact required value of <a>points of interest</a>.</dd>
+
+  <dt><dfn dict-member for="ConstrainPoint2DParameters"><code>ideal</code></dfn></dt>
+  <dd>The ideal (target) value of <a>points of interest</a>.</dd>
+</dl>
+
 
 # Photo Capabilities and Constrainable Properties # {#constrainable-properties}
 

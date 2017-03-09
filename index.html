@@ -1183,7 +1183,7 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version a6131d0f0d71a5d2f11cad5e820bf054589b34b7" name="generator">
+  <meta content="Bikeshed version 9a16729f5dbf458a556c2e0e347b203ca14e2c7d" name="generator">
 <style>
 table {
   border-collapse: collapse;
@@ -1445,9 +1445,9 @@ pre.idl.highlight { color: #708090; }
         </style>
  <body class="h-entry">
   <div class="head">
-   <p data-fill-with="logo"><a class="logo" href="http://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
+   <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">"MediaStream Image Capture"</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-03-06">6 March 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-03-09">9 March 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1545,6 +1545,11 @@ pre.idl.highlight { color: #708090; }
        <a href="#mediatracksettings-section"><span class="secno">7.4</span> <span class="content"><code class="idl"><span>MediaTrackSettings</span></code> dictionary</span></a>
        <ol class="toc">
         <li><a href="#mediatracksettings-members"><span class="secno">7.4.1</span> <span class="content">Members</span></a>
+       </ol>
+      <li>
+       <a href="#additional-constrainable-props"><span class="secno">7.5</span> <span class="content">Additional Constrainable Properties</span></a>
+       <ol class="toc">
+        <li><a href="#constraintpoint2d-members"><span class="secno">7.5.1</span> <span class="content">Members</span></a>
        </ol>
      </ol>
     <li><a href="#constrainable-properties"><span class="secno">8</span> <span class="content">Photo Capabilities and Constrainable Properties</span></a>
@@ -1865,7 +1870,7 @@ pre.idl.highlight { color: #708090; }
   <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-constraindomstring">ConstrainDOMString</a> <a class="nv idl-code" data-link-type="dict-member" data-type="ConstrainDOMString " href="#dom-mediatrackconstraintset-whitebalancemode" id="ref-for-dom-mediatrackconstraintset-whitebalancemode-1">whiteBalanceMode</a>;
   <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-constraindomstring">ConstrainDOMString</a> <a class="nv idl-code" data-link-type="dict-member" data-type="ConstrainDOMString " href="#dom-mediatrackconstraintset-exposuremode" id="ref-for-dom-mediatrackconstraintset-exposuremode-1">exposureMode</a>;
   <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-constraindomstring">ConstrainDOMString</a> <a class="nv idl-code" data-link-type="dict-member" data-type="ConstrainDOMString " href="#dom-mediatrackconstraintset-focusmode" id="ref-for-dom-mediatrackconstraintset-focusmode-1">focusMode</a>;
-  <span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#dictdef-point2d" id="ref-for-dictdef-point2d-1">Point2D</a>>  <a class="nv idl-code" data-link-type="dict-member" data-type="sequence<Point2D>  " href="#dom-mediatrackconstraintset-pointsofinterest" id="ref-for-dom-mediatrackconstraintset-pointsofinterest-1">pointsOfInterest</a>;
+  <a class="n" data-link-type="idl-name" href="#typedefdef-constrainpoint2d" id="ref-for-typedefdef-constrainpoint2d-1">ConstrainPoint2D</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="ConstrainPoint2D   " href="#dom-mediatrackconstraintset-pointsofinterest" id="ref-for-dom-mediatrackconstraintset-pointsofinterest-1">pointsOfInterest</a>;
 
   <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstrainDouble</a>    <a class="nv idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-exposurecompensation" id="ref-for-dom-mediatrackconstraintset-exposurecompensation-1">exposureCompensation</a>;
   <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstrainDouble</a>    <a class="nv idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-colortemperature" id="ref-for-dom-mediatrackconstraintset-colortemperature-1">colorTemperature</a>;
@@ -1895,7 +1900,7 @@ pre.idl.highlight { color: #708090; }
     <dd>See <a data-link-type="dfn" href="#exposure-compensation" id="ref-for-exposure-compensation-3">exposure compensation</a> constrainable property.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" id="dom-mediatrackconstraintset-iso"><code>iso</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstrainDouble</a></span>
     <dd>See <a data-link-type="dfn" href="#iso" id="ref-for-iso-3">iso</a> constrainable property.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" id="dom-mediatrackconstraintset-pointsofinterest"><code>pointsOfInterest</code></dfn>, <span> of type sequence&lt;<a data-link-type="idl-name" href="#dictdef-point2d" id="ref-for-dictdef-point2d-2">Point2D</a>></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" id="dom-mediatrackconstraintset-pointsofinterest"><code>pointsOfInterest</code></dfn>, <span> of type <a data-link-type="idl-name" href="#typedefdef-constrainpoint2d" id="ref-for-typedefdef-constrainpoint2d-2">ConstrainPoint2D</a></span>
     <dd>See <a data-link-type="dfn" href="#points-of-interest" id="ref-for-points-of-interest-2">points of interest</a> constrainable property.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export="" id="dom-mediatrackconstraintset-brightness"><code>brightness</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstrainDouble</a></span>
     <dd>See <a data-link-type="dfn" href="#brightness" id="ref-for-brightness-3">brightness</a> constrainable property.
@@ -1914,9 +1919,9 @@ pre.idl.highlight { color: #708090; }
    <p>When the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-ConstrainablePattern-getSettings-Settings">getSettings()</a></code> method is invoked on a video stream track, the user agent must return the extended <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaTrackSettings">MediaTrackSettings</a></code> dictionary, representing the current status of the underlying user agent.</p>
 <pre class="idl highlight def"><span class="kt">partial</span> <span class="kt">dictionary</span> <a class="nv idl-code" data-link-type="dictionary" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaTrackSettings">MediaTrackSettings</a> {
   <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-13">MeteringMode</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode      " href="#dom-mediatracksettings-whitebalancemode" id="ref-for-dom-mediatracksettings-whitebalancemode-1">whiteBalanceMode</a>;
-  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-14">MeteringMode</a>      <dfn class="nv idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" data-type="MeteringMode      " id="dom-mediatracksettings-exposuremode">exposureMode<a class="self-link" href="#dom-mediatracksettings-exposuremode"></a></dfn>;
+  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-14">MeteringMode</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode      " href="#dom-mediatracksettings-exposuremode" id="ref-for-dom-mediatracksettings-exposuremode-1">exposureMode</a>;
   <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-15">MeteringMode</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode      " href="#dom-mediatracksettings-focusmode" id="ref-for-dom-mediatracksettings-focusmode-1">focusMode</a>;
-  <span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#dictdef-point2d" id="ref-for-dictdef-point2d-3">Point2D</a>> <a class="nv idl-code" data-link-type="dict-member" data-type="sequence<Point2D> " href="#dom-mediatracksettings-pointsofinterest" id="ref-for-dom-mediatracksettings-pointsofinterest-1">pointsOfInterest</a>;
+  <span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#dictdef-point2d" id="ref-for-dictdef-point2d-1">Point2D</a>> <a class="nv idl-code" data-link-type="dict-member" data-type="sequence<Point2D> " href="#dom-mediatracksettings-pointsofinterest" id="ref-for-dom-mediatracksettings-pointsofinterest-1">pointsOfInterest</a>;
 
   <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double"><span class="kt">double</span></a>            <a class="nv idl-code" data-link-type="dict-member" data-type="double            " href="#dom-mediatracksettings-exposurecompensation" id="ref-for-dom-mediatracksettings-exposurecompensation-1">exposureCompensation</a>;
   <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double"><span class="kt">double</span></a>            <a class="nv idl-code" data-link-type="dict-member" data-type="double            " href="#dom-mediatracksettings-colortemperature" id="ref-for-dom-mediatracksettings-colortemperature-1">colorTemperature</a>;
@@ -1936,16 +1941,18 @@ pre.idl.highlight { color: #708090; }
    <dl class="domintro">
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-whitebalancemode"><code>whiteBalanceMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-16">MeteringMode</a></span>
     <dd>Current <a data-link-type="dfn" href="#white-balance-mode" id="ref-for-white-balance-mode-4">white balance mode</a> setting.
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-exposuremode"><code>exposureMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-17">MeteringMode</a></span>
+    <dd>Current <a data-link-type="dfn" href="#exposure" id="ref-for-exposure-4">exposure</a> mode setting.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-colortemperature"><code>colorTemperature</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-double">double</a></span>
     <dd><a data-link-type="dfn" href="#color-temperature" id="ref-for-color-temperature-4">Color temperature</a> in use for the white balance calculation of the scene. This field is only significant if <code class="idl"><a data-link-type="idl" href="#dom-mediatracksettings-whitebalancemode" id="ref-for-dom-mediatracksettings-whitebalancemode-2">whiteBalanceMode</a></code> is <code class="idl"><a data-link-type="idl" href="#dom-meteringmode-manual" id="ref-for-dom-meteringmode-manual-1">manual</a></code>.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-exposurecompensation"><code>exposureCompensation</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-double">double</a></span>
     <dd>Current <a data-link-type="dfn" href="#exposure-compensation" id="ref-for-exposure-compensation-4">exposure compensation</a> setting.  A value of 0 EV is interpreted as no exposure compensation.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-iso"><code>iso</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-double">double</a></span>
     <dd>Current camera <a data-link-type="dfn" href="#iso" id="ref-for-iso-4">ISO</a> setting.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-focusmode"><code>focusMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-17">MeteringMode</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-focusmode"><code>focusMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-18">MeteringMode</a></span>
     <dd>Current <a data-link-type="dfn" href="#focus-mode" id="ref-for-focus-mode-4">focus mode</a> setting.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-pointsofinterest"><code>pointsOfInterest</code></dfn>, <span> of type sequence&lt;<a data-link-type="idl-name" href="#dictdef-point2d" id="ref-for-dictdef-point2d-4">Point2D</a>></span>
-    <dd>A sequence of <code class="idl"><a data-link-type="idl" href="#dictdef-point2d" id="ref-for-dictdef-point2d-5">Point2D</a></code>s in use as <a data-link-type="dfn" href="#points-of-interest" id="ref-for-points-of-interest-3">points of interest</a> for other settings, e.g. Focus, Exposure and Auto White Balance.
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-pointsofinterest"><code>pointsOfInterest</code></dfn>, <span> of type sequence&lt;<a data-link-type="idl-name" href="#dictdef-point2d" id="ref-for-dictdef-point2d-2">Point2D</a>></span>
+    <dd>A sequence of <code class="idl"><a data-link-type="idl" href="#dictdef-point2d" id="ref-for-dictdef-point2d-3">Point2D</a></code>s in use as <a data-link-type="dfn" href="#points-of-interest" id="ref-for-points-of-interest-3">points of interest</a> for other settings, e.g. Focus, Exposure and Auto White Balance.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-brightness"><code>brightness</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-double">double</a></span>
     <dd>This reflects the current <a data-link-type="dfn" href="#brightness" id="ref-for-brightness-4">brightness</a> setting of the camera.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-contrast"><code>contrast</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-double">double</a></span>
@@ -1958,6 +1965,21 @@ pre.idl.highlight { color: #708090; }
     <dd>This reflects the current <a data-link-type="dfn" href="#zoom" id="ref-for-zoom-5">zoom</a> setting of the camera.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export="" id="dom-mediatracksettings-torch"><code>torch</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-boolean">boolean</a></span>
     <dd>Current camera <a data-link-type="dfn" href="#torch" id="ref-for-torch-4">torch</a> configuration setting.
+   </dl>
+   <h3 class="heading settled" data-level="7.5" id="additional-constrainable-props"><span class="secno">7.5. </span><span class="content">Additional Constrainable Properties</span><a class="self-link" href="#additional-constrainable-props"></a></h3>
+<pre class="idl highlight def"><span class="kt">dictionary</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-constrainpoint2dparameters">ConstrainPoint2DParameters</dfn> {
+  <span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#dictdef-point2d" id="ref-for-dictdef-point2d-4">Point2D</a>> <a class="nv idl-code" data-link-type="dict-member" data-type="sequence<Point2D> " href="#dom-constrainpoint2dparameters-exact" id="ref-for-dom-constrainpoint2dparameters-exact-1">exact</a>;
+  <span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#dictdef-point2d" id="ref-for-dictdef-point2d-5">Point2D</a>> <a class="nv idl-code" data-link-type="dict-member" data-type="sequence<Point2D> " href="#dom-constrainpoint2dparameters-ideal" id="ref-for-dom-constrainpoint2dparameters-ideal-1">ideal</a>;
+};
+
+<span class="kt">typedef</span> (<span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#dictdef-point2d" id="ref-for-dictdef-point2d-6">Point2D</a>> <span class="kt">or</span> <a class="n" data-link-type="idl-name" href="#dictdef-constrainpoint2dparameters" id="ref-for-dictdef-constrainpoint2dparameters-1">ConstrainPoint2DParameters</a>) <dfn class="nv dfn-paneled idl-code" data-dfn-type="typedef" data-export="" id="typedefdef-constrainpoint2d">ConstrainPoint2D</dfn>;
+</pre>
+   <h4 class="heading settled" data-level="7.5.1" id="constraintpoint2d-members"><span class="secno">7.5.1. </span><span class="content">Members</span><a class="self-link" href="#constraintpoint2d-members"></a></h4>
+   <dl class="domintro">
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="ConstrainPoint2DParameters" data-dfn-type="dict-member" data-export="" id="dom-constrainpoint2dparameters-exact"><code>exact</code></dfn>, <span> of type sequence&lt;<a data-link-type="idl-name" href="#dictdef-point2d" id="ref-for-dictdef-point2d-7">Point2D</a>></span>
+    <dd>The exact required value of <a data-link-type="dfn" href="#points-of-interest" id="ref-for-points-of-interest-4">points of interest</a>.
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="ConstrainPoint2DParameters" data-dfn-type="dict-member" data-export="" id="dom-constrainpoint2dparameters-ideal"><code>ideal</code></dfn>, <span> of type sequence&lt;<a data-link-type="idl-name" href="#dictdef-point2d" id="ref-for-dictdef-point2d-8">Point2D</a>></span>
+    <dd>The ideal (target) value of <a data-link-type="dfn" href="#points-of-interest" id="ref-for-points-of-interest-5">points of interest</a>.
    </dl>
    <h2 class="heading settled" data-level="8" id="constrainable-properties"><span class="secno">8. </span><span class="content">Photo Capabilities and Constrainable Properties</span><a class="self-link" href="#constrainable-properties"></a></h2>
    <div class="note" role="note"> Many of the mentioned photo and video capabilities mirror hardware features that are hard to define since can be implemented in a number of ways.  Moreover, manufacturers tend to publish vague definitions to protect their intellectual property. </div>
@@ -1994,8 +2016,8 @@ pre.idl.highlight { color: #708090; }
     <li><i><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="exposure">Exposure</dfn></i> is the amount of time during which light is allowed to fall on the photosensitive device.  Auto-exposure mode is a camera setting where the exposure levels are automatically adjusted by the implementation based on the subject of the photo.
     <li><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="focus-mode">Focus mode</dfn> describes the focus setting of the capture device (e.g. <var>auto</var> or <var>manual</var>). 
     <li>
-     <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="points-of-interest">Points of interest</dfn> describe the metering area centers used in other settings, e.g. <a data-link-type="dfn" href="#exposure" id="ref-for-exposure-4">exposure</a>, <a data-link-type="dfn" href="#white-balance-mode" id="ref-for-white-balance-mode-5">white balance mode</a> and <a data-link-type="dfn" href="#focus-mode" id="ref-for-focus-mode-5">focus mode</a> each one being a <code class="idl"><a data-link-type="idl" href="#dictdef-point2d" id="ref-for-dictdef-point2d-6">Point2D</a></code> (usually these three controls are modified simultaneously by the so-called <code>3A</code> algorithm: auto-focus, auto-exposure, auto-white-balance). 
-     <p>A <code class="idl"><a data-link-type="idl" href="#dictdef-point2d" id="ref-for-dictdef-point2d-7">Point2D</a></code> Point of Interest is interpreted to represent a pixel position in a normalized square space (|{x,y} ∈ [0.0, 1.0]|). The origin of coordinates |{x,y} = {0.0, 0.0}| represents the upper leftmost corner whereas the |{x,y} = {1.0, 1.0}| represents the lower rightmost corner: the <a href="#dom-point2d-x" id="ref-for-dom-point2d-x-1"><code>x</code></a> coordinate (columns) increases rightwards and the <a href="#dom-point2d-y" id="ref-for-dom-point2d-y-1"><code>y</code></a> coordinate (rows) increases downwards. Values beyond the mentioned limits will be clamped to the closest allowed value.</p>
+     <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="points-of-interest">Points of interest</dfn> describe the metering area centers used in other settings, e.g. <a data-link-type="dfn" href="#exposure" id="ref-for-exposure-5">exposure</a>, <a data-link-type="dfn" href="#white-balance-mode" id="ref-for-white-balance-mode-5">white balance mode</a> and <a data-link-type="dfn" href="#focus-mode" id="ref-for-focus-mode-5">focus mode</a> each one being a <code class="idl"><a data-link-type="idl" href="#dictdef-point2d" id="ref-for-dictdef-point2d-9">Point2D</a></code> (usually these three controls are modified simultaneously by the so-called <code>3A</code> algorithm: auto-focus, auto-exposure, auto-white-balance). 
+     <p>A <code class="idl"><a data-link-type="idl" href="#dictdef-point2d" id="ref-for-dictdef-point2d-10">Point2D</a></code> Point of Interest is interpreted to represent a pixel position in a normalized square space (|{x,y} ∈ [0.0, 1.0]|). The origin of coordinates |{x,y} = {0.0, 0.0}| represents the upper leftmost corner whereas the |{x,y} = {1.0, 1.0}| represents the lower rightmost corner: the <a href="#dom-point2d-x" id="ref-for-dom-point2d-x-1"><code>x</code></a> coordinate (columns) increases rightwards and the <a href="#dom-point2d-y" id="ref-for-dom-point2d-y-1"><code>y</code></a> coordinate (rows) increases downwards. Values beyond the mentioned limits will be clamped to the closest allowed value.</p>
     <p></p>
     <li><i><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="exposure-compensation">Exposure Compensation</dfn></i> is a numeric camera setting that adjusts the exposure level from the current value used by the implementation.  This value can be used to bias the exposure level enabled by auto-exposure, and usually is a symmetric range around 0 EV (the no-compensation value).
     <li>The <i><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="iso">ISO</dfn></i> setting of a camera describes the sensitivity of the camera to light. It is a numeric value, where the lower the value the greater the sensitivity.  This value should follow the <a data-link-type="biblio" href="#biblio-iso12232">[iso12232]</a> standard.
@@ -2012,7 +2034,7 @@ pre.idl.highlight { color: #708090; }
     <li><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="zoom">Zoom</dfn> is a numeric camera setting that controls the focal length of the lens.  The setting usually represents a ratio, e.g. 4 is a zoom ratio of 4:1.  The minimum value is usually 1, to represent a 1:1 ratio (i.e. no zoom).
     <li><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="fill-light-mode">Fill light mode</dfn> describes the flash setting of the capture device (e.g. <var>auto</var>, <var>off</var>, <var>on</var>). <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="torch">Torch</dfn> describes the setting of the source’s fill light as  continuously connected, staying on as long as <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-videostreamtrack" id="ref-for-dom-imagecapture-videostreamtrack-14">videoStreamTrack</a></code> is active.
    </ol>
-   <h2 class="heading settled" data-level="9" id="meteringmode-section"><span class="secno">9. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-18">MeteringMode</a></code></span><a class="self-link" href="#meteringmode-section"></a></h2>
+   <h2 class="heading settled" data-level="9" id="meteringmode-section"><span class="secno">9. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-19">MeteringMode</a></code></span><a class="self-link" href="#meteringmode-section"></a></h2>
 <pre class="idl highlight def"><span class="kt">enum</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="enum" data-export="" id="enumdef-meteringmode">MeteringMode</dfn> {
   <a class="s idl-code" data-link-type="enum-value" href="#dom-meteringmode-none" id="ref-for-dom-meteringmode-none-1">"none"</a>,
   <a class="s idl-code" data-link-type="enum-value" href="#dom-meteringmode-manual" id="ref-for-dom-meteringmode-manual-2">"manual"</a>,
@@ -2031,8 +2053,8 @@ pre.idl.highlight { color: #708090; }
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MeteringMode" data-dfn-type="enum-value" data-export="" id="dom-meteringmode-continuous"><code>continuous</code></dfn>
     <dd>The capture device is configured for continuous focusing for near-zero shutter-lag/continuous auto exposure/white balance calculation, or such continuous focus hunting/exposure/white balance calculation mode is requested.
    </dl>
-   <h2 class="heading settled" data-level="10" id="point2d-section"><span class="secno">10. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#dictdef-point2d" id="ref-for-dictdef-point2d-8">Point2D</a></code></span><a class="self-link" href="#point2d-section"></a></h2>
-   <p>A <code class="idl"><a data-link-type="idl" href="#dictdef-point2d" id="ref-for-dictdef-point2d-9">Point2D</a></code> represents a location in a two dimensional space. The origin of coordinates is situated in the upper leftmost corner of the space.</p>
+   <h2 class="heading settled" data-level="10" id="point2d-section"><span class="secno">10. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#dictdef-point2d" id="ref-for-dictdef-point2d-11">Point2D</a></code></span><a class="self-link" href="#point2d-section"></a></h2>
+   <p>A <code class="idl"><a data-link-type="idl" href="#dictdef-point2d" id="ref-for-dictdef-point2d-12">Point2D</a></code> represents a location in a two dimensional space. The origin of coordinates is situated in the upper leftmost corner of the space.</p>
 <pre class="idl highlight def"><span class="kt">dictionary</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-point2d">Point2D</dfn> {
   <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double"><span class="kt">double</span></a> <a class="nv idl-code" data-default="0.0" data-link-type="dict-member" data-type="double " href="#dom-point2d-x" id="ref-for-dom-point2d-x-2">x</a> = 0.0;
   <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double"><span class="kt">double</span></a> <a class="nv idl-code" data-default="0.0" data-link-type="dict-member" data-type="double " href="#dom-point2d-y" id="ref-for-dom-point2d-y-2">y</a> = 0.0;
@@ -2262,6 +2284,8 @@ pre.idl.highlight { color: #708090; }
    <li><a href="#color-temperature">Color temperature</a><span>, in §8</span>
    <li><a href="#conformant-server">conformant server</a><span>, in §Unnumbered section</span>
    <li><a href="#conformant-user-agent">conformant user agent</a><span>, in §Unnumbered section</span>
+   <li><a href="#typedefdef-constrainpoint2d">ConstrainPoint2D</a><span>, in §7.5</span>
+   <li><a href="#dictdef-constrainpoint2dparameters">ConstrainPoint2DParameters</a><span>, in §7.5</span>
    <li><a href="#dom-meteringmode-continuous">continuous</a><span>, in §9.1</span>
    <li><a href="#contrast">Contrast</a><span>, in §8</span>
    <li>
@@ -2272,6 +2296,7 @@ pre.idl.highlight { color: #708090; }
      <li><a href="#dom-mediatrackconstraintset-contrast">dict-member for MediaTrackConstraintSet</a><span>, in §7.3.1</span>
      <li><a href="#dom-mediatracksettings-contrast">dict-member for MediaTrackSettings</a><span>, in §7.4.1</span>
     </ul>
+   <li><a href="#dom-constrainpoint2dparameters-exact">exact</a><span>, in §7.5.1</span>
    <li><a href="#exposure">Exposure</a><span>, in §8</span>
    <li>
     exposureCompensation
@@ -2288,7 +2313,7 @@ pre.idl.highlight { color: #708090; }
      <li><a href="#dom-mediatracksupportedconstraints-exposuremode">dict-member for MediaTrackSupportedConstraints</a><span>, in §7.1.1</span>
      <li><a href="#dom-mediatrackcapabilities-exposuremode">dict-member for MediaTrackCapabilities</a><span>, in §7.2.1</span>
      <li><a href="#dom-mediatrackconstraintset-exposuremode">dict-member for MediaTrackConstraintSet</a><span>, in §7.3.1</span>
-     <li><a href="#dom-mediatracksettings-exposuremode">dict-member for MediaTrackSettings</a><span>, in §7.4</span>
+     <li><a href="#dom-mediatracksettings-exposuremode">dict-member for MediaTrackSettings</a><span>, in §7.4.1</span>
     </ul>
    <li><a href="#enumdef-filllightmode">FillLightMode</a><span>, in §6</span>
    <li><a href="#fill-light-mode">Fill light mode</a><span>, in §8</span>
@@ -2310,6 +2335,7 @@ pre.idl.highlight { color: #708090; }
     </ul>
    <li><a href="#dom-imagecapture-getphotocapabilities">getPhotoCapabilities()</a><span>, in §2.2</span>
    <li><a href="#dom-imagecapture-grabframe">grabFrame()</a><span>, in §2.2</span>
+   <li><a href="#dom-constrainpoint2dparameters-ideal">ideal</a><span>, in §7.5.1</span>
    <li><a href="#imagecapture">ImageCapture</a><span>, in §2</span>
    <li><a href="#dom-imagecapture-imagecapture">ImageCapture(track)</a><span>, in §2.2</span>
    <li>
@@ -2546,7 +2572,7 @@ pre.idl.highlight { color: #708090; }
   <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-constraindomstring">ConstrainDOMString</a> <a class="nv idl-code" data-link-type="dict-member" data-type="ConstrainDOMString " href="#dom-mediatrackconstraintset-whitebalancemode">whiteBalanceMode</a>;
   <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-constraindomstring">ConstrainDOMString</a> <a class="nv idl-code" data-link-type="dict-member" data-type="ConstrainDOMString " href="#dom-mediatrackconstraintset-exposuremode">exposureMode</a>;
   <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-constraindomstring">ConstrainDOMString</a> <a class="nv idl-code" data-link-type="dict-member" data-type="ConstrainDOMString " href="#dom-mediatrackconstraintset-focusmode">focusMode</a>;
-  <span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#dictdef-point2d">Point2D</a>>  <a class="nv idl-code" data-link-type="dict-member" data-type="sequence<Point2D>  " href="#dom-mediatrackconstraintset-pointsofinterest">pointsOfInterest</a>;
+  <a class="n" data-link-type="idl-name" href="#typedefdef-constrainpoint2d">ConstrainPoint2D</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="ConstrainPoint2D   " href="#dom-mediatrackconstraintset-pointsofinterest">pointsOfInterest</a>;
 
   <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstrainDouble</a>    <a class="nv idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-exposurecompensation">exposureCompensation</a>;
   <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble">ConstrainDouble</a>    <a class="nv idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-colortemperature">colorTemperature</a>;
@@ -2564,7 +2590,7 @@ pre.idl.highlight { color: #708090; }
 
 <span class="kt">partial</span> <span class="kt">dictionary</span> <a class="nv idl-code" data-link-type="dictionary" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaTrackSettings">MediaTrackSettings</a> {
   <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode">MeteringMode</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode      " href="#dom-mediatracksettings-whitebalancemode">whiteBalanceMode</a>;
-  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode">MeteringMode</a>      <a class="nv" data-type="MeteringMode      " href="#dom-mediatracksettings-exposuremode">exposureMode</a>;
+  <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode">MeteringMode</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode      " href="#dom-mediatracksettings-exposuremode">exposureMode</a>;
   <a class="n" data-link-type="idl-name" href="#enumdef-meteringmode">MeteringMode</a>      <a class="nv idl-code" data-link-type="dict-member" data-type="MeteringMode      " href="#dom-mediatracksettings-focusmode">focusMode</a>;
   <span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#dictdef-point2d">Point2D</a>> <a class="nv idl-code" data-link-type="dict-member" data-type="sequence<Point2D> " href="#dom-mediatracksettings-pointsofinterest">pointsOfInterest</a>;
 
@@ -2581,6 +2607,13 @@ pre.idl.highlight { color: #708090; }
 
   <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-boolean"><span class="kt">boolean</span></a>           <a class="nv idl-code" data-link-type="dict-member" data-type="boolean           " href="#dom-mediatracksettings-torch">torch</a>;
 };
+
+<span class="kt">dictionary</span> <a class="nv" href="#dictdef-constrainpoint2dparameters">ConstrainPoint2DParameters</a> {
+  <span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#dictdef-point2d">Point2D</a>> <a class="nv idl-code" data-link-type="dict-member" data-type="sequence<Point2D> " href="#dom-constrainpoint2dparameters-exact">exact</a>;
+  <span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#dictdef-point2d">Point2D</a>> <a class="nv idl-code" data-link-type="dict-member" data-type="sequence<Point2D> " href="#dom-constrainpoint2dparameters-ideal">ideal</a>;
+};
+
+<span class="kt">typedef</span> (<span class="kt">sequence</span>&lt;<a class="n" data-link-type="idl-name" href="#dictdef-point2d">Point2D</a>> <span class="kt">or</span> <a class="n" data-link-type="idl-name" href="#dictdef-constrainpoint2dparameters">ConstrainPoint2DParameters</a>) <a class="nv" href="#typedefdef-constrainpoint2d">ConstrainPoint2D</a>;
 
 <span class="kt">enum</span> <a class="nv" href="#enumdef-meteringmode">MeteringMode</a> {
   <a class="s idl-code" data-link-type="enum-value" href="#dom-meteringmode-none">"none"</a>,
@@ -3014,6 +3047,12 @@ pre.idl.highlight { color: #708090; }
     <li><a href="#ref-for-dom-mediatracksettings-whitebalancemode-2">7.4.1. Members</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="dom-mediatracksettings-exposuremode">
+   <b><a href="#dom-mediatracksettings-exposuremode">#dom-mediatracksettings-exposuremode</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediatracksettings-exposuremode-1">7.4. MediaTrackSettings dictionary</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="dom-mediatracksettings-colortemperature">
    <b><a href="#dom-mediatracksettings-colortemperature">#dom-mediatracksettings-colortemperature</a></b><b>Referenced in:</b>
    <ul>
@@ -3080,6 +3119,31 @@ pre.idl.highlight { color: #708090; }
     <li><a href="#ref-for-dom-mediatracksettings-torch-1">7.4. MediaTrackSettings dictionary</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="dictdef-constrainpoint2dparameters">
+   <b><a href="#dictdef-constrainpoint2dparameters">#dictdef-constrainpoint2dparameters</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dictdef-constrainpoint2dparameters-1">7.5. Additional Constrainable Properties</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="typedefdef-constrainpoint2d">
+   <b><a href="#typedefdef-constrainpoint2d">#typedefdef-constrainpoint2d</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-typedefdef-constrainpoint2d-1">7.3. MediaTrackConstraintSet dictionary</a>
+    <li><a href="#ref-for-typedefdef-constrainpoint2d-2">7.3.1. Members</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-constrainpoint2dparameters-exact">
+   <b><a href="#dom-constrainpoint2dparameters-exact">#dom-constrainpoint2dparameters-exact</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-constrainpoint2dparameters-exact-1">7.5. Additional Constrainable Properties</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-constrainpoint2dparameters-ideal">
+   <b><a href="#dom-constrainpoint2dparameters-ideal">#dom-constrainpoint2dparameters-ideal</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-constrainpoint2dparameters-ideal-1">7.5. Additional Constrainable Properties</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="white-balance-mode">
    <b><a href="#white-balance-mode">#white-balance-mode</a></b><b>Referenced in:</b>
    <ul>
@@ -3105,7 +3169,8 @@ pre.idl.highlight { color: #708090; }
     <li><a href="#ref-for-exposure-1">7.1.1. Members</a>
     <li><a href="#ref-for-exposure-2">7.2.1. Members</a>
     <li><a href="#ref-for-exposure-3">7.3.1. Members</a>
-    <li><a href="#ref-for-exposure-4">8. Photo Capabilities and Constrainable Properties</a>
+    <li><a href="#ref-for-exposure-4">7.4.1. Members</a>
+    <li><a href="#ref-for-exposure-5">8. Photo Capabilities and Constrainable Properties</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="focus-mode">
@@ -3124,6 +3189,7 @@ pre.idl.highlight { color: #708090; }
     <li><a href="#ref-for-points-of-interest-1">7.1.1. Members</a>
     <li><a href="#ref-for-points-of-interest-2">7.3.1. Members</a>
     <li><a href="#ref-for-points-of-interest-3">7.4.1. Members</a>
+    <li><a href="#ref-for-points-of-interest-4">7.5.1. Members</a> <a href="#ref-for-points-of-interest-5">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="exposure-compensation">
@@ -3238,8 +3304,8 @@ pre.idl.highlight { color: #708090; }
     <li><a href="#ref-for-enumdef-meteringmode-4">7.2.1. Members</a> <a href="#ref-for-enumdef-meteringmode-5">(2)</a> <a href="#ref-for-enumdef-meteringmode-6">(3)</a> <a href="#ref-for-enumdef-meteringmode-7">(4)</a> <a href="#ref-for-enumdef-meteringmode-8">(5)</a> <a href="#ref-for-enumdef-meteringmode-9">(6)</a>
     <li><a href="#ref-for-enumdef-meteringmode-10">7.3.1. Members</a> <a href="#ref-for-enumdef-meteringmode-11">(2)</a> <a href="#ref-for-enumdef-meteringmode-12">(3)</a>
     <li><a href="#ref-for-enumdef-meteringmode-13">7.4. MediaTrackSettings dictionary</a> <a href="#ref-for-enumdef-meteringmode-14">(2)</a> <a href="#ref-for-enumdef-meteringmode-15">(3)</a>
-    <li><a href="#ref-for-enumdef-meteringmode-16">7.4.1. Members</a> <a href="#ref-for-enumdef-meteringmode-17">(2)</a>
-    <li><a href="#ref-for-enumdef-meteringmode-18">9. MeteringMode</a>
+    <li><a href="#ref-for-enumdef-meteringmode-16">7.4.1. Members</a> <a href="#ref-for-enumdef-meteringmode-17">(2)</a> <a href="#ref-for-enumdef-meteringmode-18">(3)</a>
+    <li><a href="#ref-for-enumdef-meteringmode-19">9. MeteringMode</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-meteringmode-none">
@@ -3270,12 +3336,12 @@ pre.idl.highlight { color: #708090; }
   <aside class="dfn-panel" data-for="dictdef-point2d">
    <b><a href="#dictdef-point2d">#dictdef-point2d</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-dictdef-point2d-1">7.3. MediaTrackConstraintSet dictionary</a>
-    <li><a href="#ref-for-dictdef-point2d-2">7.3.1. Members</a>
-    <li><a href="#ref-for-dictdef-point2d-3">7.4. MediaTrackSettings dictionary</a>
-    <li><a href="#ref-for-dictdef-point2d-4">7.4.1. Members</a> <a href="#ref-for-dictdef-point2d-5">(2)</a>
-    <li><a href="#ref-for-dictdef-point2d-6">8. Photo Capabilities and Constrainable Properties</a> <a href="#ref-for-dictdef-point2d-7">(2)</a>
-    <li><a href="#ref-for-dictdef-point2d-8">10. Point2D</a> <a href="#ref-for-dictdef-point2d-9">(2)</a>
+    <li><a href="#ref-for-dictdef-point2d-1">7.4. MediaTrackSettings dictionary</a>
+    <li><a href="#ref-for-dictdef-point2d-2">7.4.1. Members</a> <a href="#ref-for-dictdef-point2d-3">(2)</a>
+    <li><a href="#ref-for-dictdef-point2d-4">7.5. Additional Constrainable Properties</a> <a href="#ref-for-dictdef-point2d-5">(2)</a> <a href="#ref-for-dictdef-point2d-6">(3)</a>
+    <li><a href="#ref-for-dictdef-point2d-7">7.5.1. Members</a> <a href="#ref-for-dictdef-point2d-8">(2)</a>
+    <li><a href="#ref-for-dictdef-point2d-9">8. Photo Capabilities and Constrainable Properties</a> <a href="#ref-for-dictdef-point2d-10">(2)</a>
+    <li><a href="#ref-for-dictdef-point2d-11">10. Point2D</a> <a href="#ref-for-dictdef-point2d-12">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-point2d-x">
