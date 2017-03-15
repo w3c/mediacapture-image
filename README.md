@@ -1,7 +1,4 @@
-image-capture
-=============
-
-Image Capturing for the Web :camera:
+# Image Capturing for the Web :camera: [![Build Status](https://travis-ci.org/w3c/mediacapture-image.svg?branch=master)](https://travis-ci.org/w3c/mediacapture-image)
 
 This document specifies methods and camera settings to produce photographic image capture.
 
@@ -15,7 +12,9 @@ Specification and Samples
 Notes on bikeshedding :bicyclist:
 --------------
 
-To compile `index.bs` into `index.html` , I'm using the online compiler:
+Branch gh-pages is automatically updated from master branch upon commit.
+
+During development it's often a good idea to try and render MediaRecorder.bs locally, for that, and using the online compiler:
 
 ```
 curl https://api.csswg.org/bikeshed/ -F file=@index.bs -F force=1 > index.html
