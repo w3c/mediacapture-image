@@ -1,7 +1,4 @@
-image-capture
-=============
-
-Image Capturing for the Web :camera:
+# Image Capturing for the Web :camera: [![Build Status](https://travis-ci.org/w3c/mediacapture-image.svg?branch=master)](https://travis-ci.org/w3c/mediacapture-image)
 
 This document specifies methods and camera settings to produce photographic image capture.
 
