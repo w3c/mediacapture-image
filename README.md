@@ -12,9 +12,9 @@ Specification and Samples
 Notes on bikeshedding :bicyclist:
 --------------
 
-Branch gh-pages is automatically updated from master branch upon commit.
+Branch `gh-pages` is automatically updated from master `branch` upon commit.
 
-During development it's often a good idea to try and render MediaRecorder.bs locally, for that, and using the online compiler:
+During development it's often a good idea to try and render `index.bs` locally, for that, and using the online compiler:
 
 ```
 curl https://api.csswg.org/bikeshed/ -F file=@index.bs -F force=1 > index.html
