@@ -45,9 +45,9 @@ The API defined in this document captures images from a photographic device refe
 The User Agent must support Promises in order to implement the Image Capture API.  Any {{Promise}} object is assumed to have a resolver object, with <code>resolve()</code> and <code>reject()</code> methods associated with it.
 
 <pre class="idl">
-[Constructor(MediaStreamTrack track)]
+[Constructor(MediaStreamTrack videoTrack)]
 interface ImageCapture {
-   readonly attribute MediaStreamTrack videoStreamTrack;
+   readonly attribute MediaStreamTrack track;
 
    Promise&lt;Blob&gt;              takePhoto();
    Promise&lt;PhotoCapabilities&gt; getPhotoCapabilities();
@@ -57,20 +57,20 @@ interface ImageCapture {
 </pre>
 
 <div class="note">
-{{takePhoto()}} returns a captured image encoded in the form of a {{Blob}}, whereas {{grabFrame()}} returns a snapshot of the {{videoStreamTrack}} video feed in the form of a non-encoded {{ImageBitmap}}.
+{{takePhoto()}} returns a captured image encoded in the form of a {{Blob}}, whereas {{grabFrame()}} returns a snapshot of the {{track}} video feed in the form of a non-encoded {{ImageBitmap}}.
 </div>
 
 ## Attributes ## {##imagecapture-attributes}
 
 <dl class="domintro">
-  <dt><dfn attribute for="ImageCapture"><code>videoStreamTrack</code></dfn></dt>
+  <dt><dfn attribute for="ImageCapture"><code>track</code></dfn></dt>
   <dd>The {{MediaStreamTrack}} passed into the constructor.</dd>
 </dl>
 
 ## Methods ## {##imagecapture-methods}
 
 <dl class="domintro">
-  <dt><dfn constructor for="ImageCapture"><code>ImageCapture(MediaStreamTrack track)</code></dfn></dt>
+  <dt><dfn constructor for="ImageCapture"><code>ImageCapture(MediaStreamTrack videoTrack)</code></dfn></dt>
   <dd>
   <table class="parameters">
     <tbody>
@@ -82,11 +82,11 @@ interface ImageCapture {
         <th>Description</th>
       </tr>
       <tr>
-        <td class="prmName">track</td>
+        <td class="prmName">videoTrack</td>
         <td class="prmType">{{MediaStreamTrack}}</td>
         <td class="prmNullFalse"><span role="img" aria-label="False">&#10008;</span></td>
         <td class="prmOptFalse"><span role="img" aria-label="False">&#10008;</span></td>
-        <td class="prmDesc">The {{MediaStreamTrack}} to be used as source of data. This will be the value of the {{videoStreamTrack}} attribute. The {{MediaStreamTrack}} passed to the constructor MUST have its {{kind}} attribute set to <code>"video"</code> otherwise a {{DOMException}} of type {{NotSupportedError}} will be thrown.</td>
+        <td class="prmDesc">The {{MediaStreamTrack}} to be used as source of data. This will be the value of the {{track}} attribute. The {{MediaStreamTrack}} passed to the constructor MUST have its {{kind}} attribute set to <code>"video"</code> otherwise a {{DOMException}} of type {{NotSupportedError}} will be thrown.</td>
       </tr>
     </tbody>
   </table>
@@ -94,13 +94,13 @@ interface ImageCapture {
 
   <dt><dfn method for="ImageCapture"><code>takePhoto()</code></dfn></dt>
   <dd>
-  {{takePhoto()}} produces the result of a single photographic exposure using the video capture device sourcing the {{videoStreamTrack}}, applying any {{PhotoSettings}} previously configured, and returning an encoded image in the form of a {{Blob}} if successful. When this method is invoked:
+  {{takePhoto()}} produces the result of a single photographic exposure using the video capture device sourcing the {{track}}, applying any {{PhotoSettings}} previously configured, and returning an encoded image in the form of a {{Blob}} if successful. When this method is invoked:
   <ol>
-    <li>If the {{readyState}} of {{videoStreamTrack}} provided in the constructor is not {{live}}, return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{InvalidStateError}}. </li>
+    <li>If the {{readyState}} of {{track}} provided in the constructor is not {{live}}, return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{InvalidStateError}}. </li>
 
     <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:
     <ol>
-      <li>Gather data from {{videoStreamTrack}} into a {{Blob}} containing a single still image. The method of doing this will depend on the underlying device.
+      <li>Gather data from {{track}} into a {{Blob}} containing a single still image. The method of doing this will depend on the underlying device.
       <div class="note">
         Devices MAY temporarily stop streaming data, reconfigure themselves with the appropriate photo settings, take the photo, and then resume streaming.  In this case, the stopping and restarting of streaming SHOULD cause {{onmute}} and {{onunmute}} events to fire on the track in question.
       </div>
@@ -118,11 +118,11 @@ interface ImageCapture {
   <dd>
   When {{getPhotoCapabilities()}} is used to retrieve the ranges of available configuration options and their current setting values, if any. When this method is invoked:
   <ol>
-    <li>If the {{readyState}} of {{videoStreamTrack}} provided in the constructor is not {{live}}, return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{InvalidStateError}}. </li>
+    <li>If the {{readyState}} of {{track}} provided in the constructor is not {{live}}, return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{InvalidStateError}}. </li>
 
     <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:
     <ol>
-      <li>Gather data from {{videoStreamTrack}} into a {{PhotoCapabilities}} object containing the available capabilities of the device, including ranges where appropriate. The resolved {{PhotoCapabilities}} will also include the current conditions in which the capabilities of the device are found. The method of doing this will depend on the underlying device. </li>
+      <li>Gather data from {{track}} into a {{PhotoCapabilities}} object containing the available capabilities of the device, including ranges where appropriate. The resolved {{PhotoCapabilities}} will also include the current conditions in which the capabilities of the device are found. The method of doing this will depend on the underlying device. </li>
 
       <li>If the UA is unable to execute the {{getPhotoCapabilities()}} method for any reason (for example, the {{MediaStreamTrack}} being ended asynchronously), then the UA MUST return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{OperationError}}.</li>
 
@@ -134,9 +134,9 @@ interface ImageCapture {
 
   <dt><dfn method for="ImageCapture"><code>setOptions()</code></dfn></dt>
   <dd>
-  {{setOptions()}} is used to configure a number of settings affecting the image capture and/or the current video feed in {{videoStreamTrack}}. When this method is invoked:
+  {{setOptions()}} is used to configure a number of settings affecting the image capture and/or the current video feed in {{track}}. When this method is invoked:
   <ol>
-    <li>If the {{readyState}} of a {{videoStreamTrack}} provided in the constructor is not {{live}}, return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{InvalidStateError}}. </li>
+    <li>If the {{readyState}} of a {{track}} provided in the constructor is not {{live}}, return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{InvalidStateError}}. </li>
 
     <li>If an invalid {{PhotoSettings}} object is passed as argument, return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{SyntaxError}}</li>
 
@@ -149,7 +149,7 @@ interface ImageCapture {
       <li>If the UA can successfully apply the settings, then the UA MUST return a resolved promise.
 
       <div class="note">
-        If the UA can successfully apply the settings, the effect MAY be reflected, if visible at all, in {{videoStreamTrack}}. The result of applying some of the settings MAY force the latter to not satisfy its `constraints` (e.g. the frame rate). The result of applying some of this constraints might not be immediate.
+        If the UA can successfully apply the settings, the effect MAY be reflected, if visible at all, in {{track}}. The result of applying some of the settings MAY force the latter to not satisfy its `constraints` (e.g. the frame rate). The result of applying some of this constraints might not be immediate.
       </div></li>
     </ol>
     </li>
@@ -184,15 +184,15 @@ interface ImageCapture {
   </dd>
 
   <dt><dfn method for="ImageCapture"><code>grabFrame()</code></dfn></dt>
-  <dd>{{grabFrame()}} takes a snapshot of the live video being held in {{videoStreamTrack}}, returning an {{ImageBitmap}} if successful. {{grabFrame()}} returns data only once upon being invoked. When this method is invoked:
+  <dd>{{grabFrame()}} takes a snapshot of the live video being held in {{track}}, returning an {{ImageBitmap}} if successful. {{grabFrame()}} returns data only once upon being invoked. When this method is invoked:
   <ol>
-    <li>If the {{readyState}} of {{videoStreamTrack}} provided in the constructor is not {{live}}, return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{InvalidStateError}}.</li>
+    <li>If the {{readyState}} of {{track}} provided in the constructor is not {{live}}, return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{InvalidStateError}}.</li>
 
     <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps:
     <ol>
-      <li>Gather data from {{videoStreamTrack}} into an {{ImageBitmap}} object. The |width| and |height| of the {{ImageBitmap}} object are derived from the constraints of {{videoStreamTrack}}.
+      <li>Gather data from {{track}} into an {{ImageBitmap}} object. The |width| and |height| of the {{ImageBitmap}} object are derived from the constraints of {{track}}.
       <div class="note">
-        The result of {{grabFrame()}} is affected by any options set by {{setOptions()}} if those are reflected in {{videoStreamTrack}}.
+        The result of {{grabFrame()}} is affected by any options set by {{setOptions()}} if those are reflected in {{track}}.
       </div>
       </li>
 
@@ -207,7 +207,7 @@ interface ImageCapture {
 </dl>
 
 
-# PhotoCapabilities
+# PhotoCapabilities # {#photocapabilities-section}
 
 <pre class="idl">
   interface PhotoCapabilities {
@@ -280,7 +280,7 @@ interface ImageCapture {
 </dl>
 
 <div class="note">
-  The supported resolutions are presented as segregated {{imageWidth}} and {{imageHeight}} ranges to prevent increasing the fingerprinting surface and to allow the UA to make a best-effort decision with regards to actual hardware configuration.
+  The supported resolutions are presented as segregated {{PhotoCapabilities/imageWidth}} and {{PhotoCapabilities/imageHeight}} ranges to prevent increasing the fingerprinting surface and to allow the UA to make a best-effort decision with regards to actual hardware configuration.
 </div>
 
 ## Discussion
@@ -359,7 +359,7 @@ interface ImageCapture {
   <dd>This reflects the desired <a>white balance mode</a> setting.</dd>
 
   <dt><dfn dict-member for="PhotoSettings"><code>colorTemperature</code></dfn></dt>
-  <dd><a>Color temperature</a> to be used for the white balance calculation of the scene. This field is only significant if <a>whiteBalanceMode</a> is {{manual}}.</dd>
+  <dd><a>Color temperature</a> to be used for the white balance calculation of the scene. This field is only significant if {{PhotoSettings/whiteBalanceMode}} is {{manual}}.</dd>
 
   <dt><dfn dict-member for="PhotoSettings"><code>exposureMode</code></dfn></dt>
   <dd>This reflects the desired <a>exposure</a> mode setting.  Acceptable values are of type {{MeteringMode}}.</dd>
@@ -409,7 +409,7 @@ interface ImageCapture {
 
 </dl>
 
-# MediaSettingsRange
+# MediaSettingsRange # {#mediasettingsrange-section}
 
 <pre class="idl">
   interface MediaSettingsRange {
@@ -464,7 +464,7 @@ interface ImageCapture {
   <dd>This value will always cause the flash to fire for {{takePhoto()}} method.</dd>
 
   <dt><dfn enum-value for="FillLightMode"><code>torch</code></dfn></dt>
-  <dd>The source's fill light will be turned on (and remain on) while the source {{videoStreamTrack}} is active</dd>
+  <dd>The source's fill light will be turned on (and remain on) while the source {{ImageCapture/track}} is active</dd>
 </dl>
 
 # MeteringMode
