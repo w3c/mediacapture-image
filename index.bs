@@ -179,10 +179,10 @@ interface ImageCapture {
 
 <pre class="idl">
   interface PhotoCapabilities {
-    readonly attribute sequence&lt;boolean>       redEyeReduction;
-    readonly attribute MediaSettingsRange      imageHeight;
-    readonly attribute MediaSettingsRange      imageWidth;
-    readonly attribute sequence&lt;FillLightMode> fillLightMode;
+    readonly attribute FrozenArray&lt;boolean>       redEyeReduction;
+    readonly attribute MediaSettingsRange         imageHeight;
+    readonly attribute MediaSettingsRange         imageWidth;
+    readonly attribute FrozenArray&lt;FillLightMode> fillLightMode;
   };
 </pre>
 
