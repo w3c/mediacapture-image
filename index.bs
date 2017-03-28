@@ -187,10 +187,10 @@ interface ImageCapture {
 
 <pre class="idl">
   interface PhotoCapabilities {
-    readonly attribute FillLightMode      fillLightMode;
-    readonly attribute MediaSettingsRange imageHeight;
-    readonly attribute MediaSettingsRange imageWidth;
-    readonly attribute sequence&lt;boolean>  redEyeReduction;
+    readonly attribute FrozenArray&lt;boolean>       redEyeReduction;
+    readonly attribute MediaSettingsRange         imageHeight;
+    readonly attribute MediaSettingsRange         imageWidth;
+    readonly attribute FrozenArray&lt;FillLightMode> fillLightMode;
   };
 </pre>
 
@@ -201,13 +201,13 @@ interface ImageCapture {
   <dd>If the source cannot do <a>red eye reduction</a> a single false is reported. If  <a>red eye reduction</a> cannot be turned off, a single true is reported. If the script can control the feature, the source reports a list with both true and false as possible values.</dd>
 
   <dt><dfn attribute for="PhotoCapabilities"><code>imageHeight</code></dfn></dt>
-  <dd>This reflects the <a>image height</a> range supported by the UA and the current height setting.</dd>
+  <dd>This reflects the <a>image height</a> range supported by the UA.</dd>
 
   <dt><dfn attribute for="PhotoCapabilities"><code>imageWidth</code></dfn></dt>
-  <dd>This reflects the <a>image width</a> range supported by the UA and the current width setting.</dd>
+  <dd>This reflects the <a>image width</a> range supported by the UA.</dd>
 
   <dt><dfn attribute for="PhotoCapabilities"><code>fillLightMode</code></dfn></dt>
-  <dd>This reflects the supported <a>fill light mode</a> (flash) settings.  Values are of type {{FillLightMode}}.</dd>
+  <dd>This reflects the supported <a>fill light mode</a> (flash) settings, if any.</dd>
 </dl>
 
 <div class="note">
@@ -269,7 +269,6 @@ interface ImageCapture {
 
 <pre class="idl">
   enum FillLightMode {
-    "unavailable",
     "auto",
     "off",
     "flash",
@@ -279,9 +278,6 @@ interface ImageCapture {
 ## Values ## {#filllightmode-values}
 
 <dl class="domintro">
-  <dt><dfn enum-value for="FillLightMode"><code>unavailable</code></dfn></dt>
-  <dd>This source does not have an option to change fill light modes (e.g., the camera does not have a flash)</dd>
-
   <dt><dfn enum-value for="FillLightMode"><code>auto</code></dfn></dt>
   <dd>The video device's fill light will be enabled when required (typically low light conditions). Otherwise it will be off. Note that auto does not guarantee that a flash will fire when {{takePhoto()}} is called. Use {{flash}} to guarantee firing of the flash for  {{takePhoto()}} method.</dd>
 
