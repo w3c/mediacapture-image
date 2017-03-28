@@ -279,13 +279,13 @@ interface ImageCapture {
 
 <dl class="domintro">
   <dt><dfn enum-value for="RedEyeReduction"><code>never</code></dfn></dt>
-  <dd><a>Red eye reduction</a> is not available in the device, and can't be set.</dd>
+  <dd><a>Red eye reduction</a> is not available in the device.</dd>
 
   <dt><dfn enum-value for="RedEyeReduction"><code>always</code></dfn></dt>
-  <dd><a>Red eye reduction</a> is available in the device and is configured to true always.</dd>
+  <dd><a>Red eye reduction</a> is available in the device and it is always configured to true.</dd>
 
   <dt><dfn enum-value for="RedEyeReduction"><code>controllable</code></dfn></dt>
-  <dd><a>Red eye reduction</a> is available in the device and is controllable by the user via {{PhotoSettings/redEyeReduction}}.</dd>
+  <dd><a>Red eye reduction</a> is available in the device and it is controllable by the user via {{PhotoSettings/redEyeReduction}}.</dd>
 </dl>
 
 
