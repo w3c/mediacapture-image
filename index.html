@@ -1183,7 +1183,7 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version 26ea3a45cb5052b41bc87174096f9f0093d5064f" name="generator">
+  <meta content="Bikeshed version e11cf4436dc5745990e8b213b04fc77cd8a5bb31" name="generator">
   <link href="https://w3c.github.io/mediacapture-image/" rel="canonical">
 <style>
 table {
@@ -1448,7 +1448,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">"MediaStream Image Capture"</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-03-27">27 March 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-03-28">28 March 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1698,27 +1698,27 @@ For instance, embedding the user’s location in the metadata of the digitzed im
    </dl>
    <h2 class="heading settled" data-level="4" id="#photocapabilities-section"><span class="secno">4. </span><span class="content">PhotoCapabilities</span><a class="self-link" href="#%23photocapabilities-section"></a></h2>
 <pre class="idl highlight def"><span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="photocapabilities">PhotoCapabilities</dfn> {
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-1">FillLightMode</a>      <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="FillLightMode" href="#dom-photocapabilities-filllightmode" id="ref-for-dom-photocapabilities-filllightmode-1">fillLightMode</a>;
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#mediasettingsrange" id="ref-for-mediasettingsrange-1">MediaSettingsRange</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="MediaSettingsRange" href="#dom-photocapabilities-imageheight" id="ref-for-dom-photocapabilities-imageheight-1">imageHeight</a>;
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#mediasettingsrange" id="ref-for-mediasettingsrange-2">MediaSettingsRange</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="MediaSettingsRange" href="#dom-photocapabilities-imagewidth" id="ref-for-dom-photocapabilities-imagewidth-1">imageWidth</a>;
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">sequence</span>&lt;<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-boolean"><span class="kt">boolean</span></a>>  <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="sequence<boolean>" href="#dom-photocapabilities-redeyereduction" id="ref-for-dom-photocapabilities-redeyereduction-1">redEyeReduction</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">FrozenArray</span>&lt;<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-boolean"><span class="kt">boolean</span></a>>       <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="FrozenArray<boolean>" href="#dom-photocapabilities-redeyereduction" id="ref-for-dom-photocapabilities-redeyereduction-1">redEyeReduction</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#mediasettingsrange" id="ref-for-mediasettingsrange-1">MediaSettingsRange</a>         <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="MediaSettingsRange" href="#dom-photocapabilities-imageheight" id="ref-for-dom-photocapabilities-imageheight-1">imageHeight</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#mediasettingsrange" id="ref-for-mediasettingsrange-2">MediaSettingsRange</a>         <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="MediaSettingsRange" href="#dom-photocapabilities-imagewidth" id="ref-for-dom-photocapabilities-imagewidth-1">imageWidth</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">FrozenArray</span>&lt;<a class="n" data-link-type="idl-name" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-1">FillLightMode</a>> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="FrozenArray<FillLightMode>" href="#dom-photocapabilities-filllightmode" id="ref-for-dom-photocapabilities-filllightmode-1">fillLightMode</a>;
 };
 </pre>
    <h3 class="heading settled" data-level="4.1" id="#photocapabilities-attributes"><span class="secno">4.1. </span><span class="content">Attributes</span><a class="self-link" href="#%23photocapabilities-attributes"></a></h3>
    <dl class="domintro">
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="PhotoCapabilities" data-dfn-type="attribute" data-export="" id="dom-photocapabilities-redeyereduction"><code>redEyeReduction</code></dfn>, <span> of type sequence&lt;<a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-boolean">boolean</a>>, readonly</span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="PhotoCapabilities" data-dfn-type="attribute" data-export="" id="dom-photocapabilities-redeyereduction"><code>redEyeReduction</code></dfn>, <span> of type FrozenArray&lt;<a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-boolean">boolean</a>>, readonly</span>
     <dd>If the source cannot do <a data-link-type="dfn" href="#red-eye-reduction" id="ref-for-red-eye-reduction-1">red eye reduction</a> a single false is reported. If <a data-link-type="dfn" href="#red-eye-reduction" id="ref-for-red-eye-reduction-2">red eye reduction</a> cannot be turned off, a single true is reported. If the script can control the feature, the source reports a list with both true and false as possible values.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="PhotoCapabilities" data-dfn-type="attribute" data-export="" id="dom-photocapabilities-imageheight"><code>imageHeight</code></dfn>, <span> of type <a data-link-type="idl-name" href="#mediasettingsrange" id="ref-for-mediasettingsrange-3">MediaSettingsRange</a>, readonly</span>
-    <dd>This reflects the <a data-link-type="dfn" href="#image-height" id="ref-for-image-height-1">image height</a> range supported by the UA and the current height setting.
+    <dd>This reflects the <a data-link-type="dfn" href="#image-height" id="ref-for-image-height-1">image height</a> range supported by the UA.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="PhotoCapabilities" data-dfn-type="attribute" data-export="" id="dom-photocapabilities-imagewidth"><code>imageWidth</code></dfn>, <span> of type <a data-link-type="idl-name" href="#mediasettingsrange" id="ref-for-mediasettingsrange-4">MediaSettingsRange</a>, readonly</span>
-    <dd>This reflects the <a data-link-type="dfn" href="#image-width" id="ref-for-image-width-1">image width</a> range supported by the UA and the current width setting.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="PhotoCapabilities" data-dfn-type="attribute" data-export="" id="dom-photocapabilities-filllightmode"><code>fillLightMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-2">FillLightMode</a>, readonly</span>
-    <dd>This reflects the supported <a data-link-type="dfn" href="#fill-light-mode" id="ref-for-fill-light-mode-1">fill light mode</a> (flash) settings.  Values are of type <code class="idl"><a data-link-type="idl" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-3">FillLightMode</a></code>.
+    <dd>This reflects the <a data-link-type="dfn" href="#image-width" id="ref-for-image-width-1">image width</a> range supported by the UA.
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="PhotoCapabilities" data-dfn-type="attribute" data-export="" id="dom-photocapabilities-filllightmode"><code>fillLightMode</code></dfn>, <span> of type FrozenArray&lt;<a data-link-type="idl-name" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-2">FillLightMode</a>>, readonly</span>
+    <dd>This reflects the supported <a data-link-type="dfn" href="#fill-light-mode" id="ref-for-fill-light-mode-1">fill light mode</a> (flash) settings, if any.
    </dl>
    <div class="note" role="note"> The supported resolutions are presented as segregated <code class="idl"><a data-link-type="idl" href="#dom-photocapabilities-imagewidth" id="ref-for-dom-photocapabilities-imagewidth-2">imageWidth</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-photocapabilities-imageheight" id="ref-for-dom-photocapabilities-imageheight-2">imageHeight</a></code> ranges to prevent increasing the fingerprinting surface and to allow the UA to make a best-effort decision with regards to actual hardware configuration. </div>
    <h2 class="heading settled" data-level="5" id="#photosettings-section"><span class="secno">5. </span><span class="content">PhotoSettings</span><a class="self-link" href="#%23photosettings-section"></a></h2>
 <pre class="idl highlight def"><span class="kt">dictionary</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-photosettings">PhotoSettings</dfn> {
-  <a class="n" data-link-type="idl-name" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-4">FillLightMode</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="FillLightMode   " href="#dom-photosettings-filllightmode" id="ref-for-dom-photosettings-filllightmode-1">fillLightMode</a>;
+  <a class="n" data-link-type="idl-name" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-3">FillLightMode</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="FillLightMode   " href="#dom-photosettings-filllightmode" id="ref-for-dom-photosettings-filllightmode-1">fillLightMode</a>;
   <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double"><span class="kt">double</span></a>          <a class="nv idl-code" data-link-type="dict-member" data-type="double          " href="#dom-photosettings-imageheight" id="ref-for-dom-photosettings-imageheight-1">imageHeight</a>;
   <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double"><span class="kt">double</span></a>          <a class="nv idl-code" data-link-type="dict-member" data-type="double          " href="#dom-photosettings-imagewidth" id="ref-for-dom-photosettings-imagewidth-1">imageWidth</a>;
   <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-boolean"><span class="kt">boolean</span></a>         <a class="nv idl-code" data-link-type="dict-member" data-type="boolean         " href="#dom-photosettings-redeyereduction" id="ref-for-dom-photosettings-redeyereduction-1">redEyeReduction</a>;
@@ -1732,7 +1732,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
     <dd>This reflects the desired <a data-link-type="dfn" href="#image-height" id="ref-for-image-height-2">image height</a>.  The UA MUST select the closest height value this setting if it supports a discrete set of height options.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="PhotoSettings" data-dfn-type="dict-member" data-export="" id="dom-photosettings-imageheight"><code>imageHeight</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-double">double</a></span>
     <dd>This reflects the desired <a data-link-type="dfn" href="#image-width" id="ref-for-image-width-2">image width</a>. The UA MUST select the closest width value this setting if it supports a discrete set of width options.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="PhotoSettings" data-dfn-type="dict-member" data-export="" id="dom-photosettings-filllightmode"><code>fillLightMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-5">FillLightMode</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="PhotoSettings" data-dfn-type="dict-member" data-export="" id="dom-photosettings-filllightmode"><code>fillLightMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-4">FillLightMode</a></span>
     <dd>This reflects the desired <a data-link-type="dfn" href="#fill-light-mode" id="ref-for-fill-light-mode-2">fill light mode</a> (flash) setting.
    </dl>
    <h2 class="heading settled" data-level="6" id="mediasettingsrange-section"><span class="secno">6. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#mediasettingsrange" id="ref-for-mediasettingsrange-5">MediaSettingsRange</a></code></span><a class="self-link" href="#mediasettingsrange-section"></a></h2>
@@ -1751,9 +1751,8 @@ For instance, embedding the user’s location in the metadata of the digitzed im
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaSettingsRange" data-dfn-type="attribute" data-export="" id="dom-mediasettingsrange-step"><code>step</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-double">double</a>, readonly</span>
     <dd>The minimum difference between consecutive values of this setting.
    </dl>
-   <h2 class="heading settled" data-level="7" id="filllightmode-section"><span class="secno">7. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-6">FillLightMode</a></code></span><a class="self-link" href="#filllightmode-section"></a></h2>
+   <h2 class="heading settled" data-level="7" id="filllightmode-section"><span class="secno">7. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-5">FillLightMode</a></code></span><a class="self-link" href="#filllightmode-section"></a></h2>
 <pre class="idl highlight def"><span class="kt">enum</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="enum" data-export="" id="enumdef-filllightmode">FillLightMode</dfn> {
-  <a class="s idl-code" data-link-type="enum-value" href="#dom-filllightmode-unavailable" id="ref-for-dom-filllightmode-unavailable-1">"unavailable"</a>,
   <a class="s idl-code" data-link-type="enum-value" href="#dom-filllightmode-auto" id="ref-for-dom-filllightmode-auto-1">"auto"</a>,
   <a class="s idl-code" data-link-type="enum-value" href="#dom-filllightmode-off" id="ref-for-dom-filllightmode-off-1">"off"</a>,
   <a class="s idl-code" data-link-type="enum-value" href="#dom-filllightmode-flash" id="ref-for-dom-filllightmode-flash-1">"flash"</a>,
@@ -1761,8 +1760,6 @@ For instance, embedding the user’s location in the metadata of the digitzed im
 </pre>
    <h3 class="heading settled" data-level="7.1" id="filllightmode-values"><span class="secno">7.1. </span><span class="content">Values</span><a class="self-link" href="#filllightmode-values"></a></h3>
    <dl class="domintro">
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="FillLightMode" data-dfn-type="enum-value" data-export="" id="dom-filllightmode-unavailable"><code>unavailable</code></dfn>
-    <dd>This source does not have an option to change fill light modes (e.g., the camera does not have a flash)
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="FillLightMode" data-dfn-type="enum-value" data-export="" id="dom-filllightmode-auto"><code>auto</code></dfn>
     <dd>The video device’s fill light will be enabled when required (typically low light conditions). Otherwise it will be off. Note that auto does not guarantee that a flash will fire when <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-takephoto" id="ref-for-dom-imagecapture-takephoto-9">takePhoto()</a></code> is called. Use <code class="idl"><a data-link-type="idl" href="#dom-filllightmode-flash" id="ref-for-dom-filllightmode-flash-2">flash</a></code> to guarantee firing of the flash for <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-takephoto" id="ref-for-dom-imagecapture-takephoto-10">takePhoto()</a></code> method.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="FillLightMode" data-dfn-type="enum-value" data-export="" id="dom-filllightmode-off"><code>off</code></dfn>
@@ -2424,7 +2421,6 @@ For instance, embedding the user’s location in the metadata of the digitzed im
     </ul>
    <li><a href="#torch">Torch</a><span>, in §9</span>
    <li><a href="#dom-imagecapture-track">track</a><span>, in §3.1</span>
-   <li><a href="#dom-filllightmode-unavailable">unavailable</a><span>, in §7.1</span>
    <li>
     whiteBalanceMode
     <ul>
@@ -2514,10 +2510,10 @@ For instance, embedding the user’s location in the metadata of the digitzed im
 };
 
 <span class="kt">interface</span> <a class="nv" href="#photocapabilities">PhotoCapabilities</a> {
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#enumdef-filllightmode">FillLightMode</a>      <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="FillLightMode" href="#dom-photocapabilities-filllightmode">fillLightMode</a>;
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#mediasettingsrange">MediaSettingsRange</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="MediaSettingsRange" href="#dom-photocapabilities-imageheight">imageHeight</a>;
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#mediasettingsrange">MediaSettingsRange</a> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="MediaSettingsRange" href="#dom-photocapabilities-imagewidth">imageWidth</a>;
-  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">sequence</span>&lt;<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-boolean"><span class="kt">boolean</span></a>>  <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="sequence<boolean>" href="#dom-photocapabilities-redeyereduction">redEyeReduction</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">FrozenArray</span>&lt;<a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-boolean"><span class="kt">boolean</span></a>>       <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="FrozenArray<boolean>" href="#dom-photocapabilities-redeyereduction">redEyeReduction</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#mediasettingsrange">MediaSettingsRange</a>         <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="MediaSettingsRange" href="#dom-photocapabilities-imageheight">imageHeight</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#mediasettingsrange">MediaSettingsRange</a>         <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="MediaSettingsRange" href="#dom-photocapabilities-imagewidth">imageWidth</a>;
+  <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">FrozenArray</span>&lt;<a class="n" data-link-type="idl-name" href="#enumdef-filllightmode">FillLightMode</a>> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="FrozenArray<FillLightMode>" href="#dom-photocapabilities-filllightmode">fillLightMode</a>;
 };
 
 <span class="kt">dictionary</span> <a class="nv" href="#dictdef-photosettings">PhotoSettings</a> {
@@ -2534,7 +2530,6 @@ For instance, embedding the user’s location in the metadata of the digitzed im
 };
 
 <span class="kt">enum</span> <a class="nv" href="#enumdef-filllightmode">FillLightMode</a> {
-  <a class="s idl-code" data-link-type="enum-value" href="#dom-filllightmode-unavailable">"unavailable"</a>,
   <a class="s idl-code" data-link-type="enum-value" href="#dom-filllightmode-auto">"auto"</a>,
   <a class="s idl-code" data-link-type="enum-value" href="#dom-filllightmode-off">"off"</a>,
   <a class="s idl-code" data-link-type="enum-value" href="#dom-filllightmode-flash">"flash"</a>,
@@ -2790,16 +2785,10 @@ For instance, embedding the user’s location in the metadata of the digitzed im
    <b><a href="#enumdef-filllightmode">#enumdef-filllightmode</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-enumdef-filllightmode-1">4. PhotoCapabilities</a>
-    <li><a href="#ref-for-enumdef-filllightmode-2">4.1. Attributes</a> <a href="#ref-for-enumdef-filllightmode-3">(2)</a>
-    <li><a href="#ref-for-enumdef-filllightmode-4">5. PhotoSettings</a>
-    <li><a href="#ref-for-enumdef-filllightmode-5">5.1. Members</a>
-    <li><a href="#ref-for-enumdef-filllightmode-6">7. FillLightMode</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="dom-filllightmode-unavailable">
-   <b><a href="#dom-filllightmode-unavailable">#dom-filllightmode-unavailable</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-filllightmode-unavailable-1">7. FillLightMode</a>
+    <li><a href="#ref-for-enumdef-filllightmode-2">4.1. Attributes</a>
+    <li><a href="#ref-for-enumdef-filllightmode-3">5. PhotoSettings</a>
+    <li><a href="#ref-for-enumdef-filllightmode-4">5.1. Members</a>
+    <li><a href="#ref-for-enumdef-filllightmode-5">7. FillLightMode</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-filllightmode-auto">
