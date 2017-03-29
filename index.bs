@@ -44,10 +44,10 @@ Reading capabilities and settings and applying constraints is done in one of two
 
 # Security and Privacy Considerations # (#securityandprivacy)
 
-The <a href="https://w3c.github.io/mediacapture-main/#privacy-and-security-considerations"> privacy and security considerations</a> discussed in 
+The <a href="https://w3c.github.io/mediacapture-main/#privacy-and-security-considerations"> privacy and security considerations</a> discussed in
 [[GETUSERMEDIA]] apply to this extension specification.
 
-Moreover, implementors should take care to prevent additional leakage of privacy-sensitive data from captured images. 
+Moreover, implementors should take care to prevent additional leakage of privacy-sensitive data from captured images.
 For instance, embedding the user’s location in the metadata of the digitzed image (e.g. EXIF) might transmit more private data than the user is expecting.
 
 # Image Capture API # {#imagecaptureapi}
@@ -187,7 +187,7 @@ interface ImageCapture {
 
 <pre class="idl">
   interface PhotoCapabilities {
-    readonly attribute FrozenArray&lt;boolean>       redEyeReduction;
+    readonly attribute RedEyeReduction            redEyeReduction;
     readonly attribute MediaSettingsRange         imageHeight;
     readonly attribute MediaSettingsRange         imageWidth;
     readonly attribute FrozenArray&lt;FillLightMode> fillLightMode;
@@ -198,7 +198,7 @@ interface ImageCapture {
 
 <dl class="domintro">
   <dt><dfn attribute for="PhotoCapabilities"><code>redEyeReduction</code></dfn></dt>
-  <dd>If the source cannot do <a>red eye reduction</a> a single false is reported. If  <a>red eye reduction</a> cannot be turned off, a single true is reported. If the script can control the feature, the source reports a list with both true and false as possible values.</dd>
+  <dd>The <a>red eye reduction</a> capacity of the source.</dd>
 
   <dt><dfn attribute for="PhotoCapabilities"><code>imageHeight</code></dfn></dt>
   <dd>This reflects the <a>image height</a> range supported by the UA.</dd>
@@ -264,6 +264,31 @@ interface ImageCapture {
   <dt><dfn attribute for="MediaSettingsRange"><code>step</code></dfn></dt>
   <dd>The minimum difference between consecutive values of this setting.</dd>
 </dl>
+
+# {{RedEyeReduction}} # {#redeyereduction-section}
+
+<pre class="idl">
+  enum RedEyeReduction {
+    "never",
+    "always",
+    "controllable",
+  };
+</pre>
+
+## Values ## {#redeyereduction-values}
+
+<dl class="domintro">
+  <dt><dfn enum-value for="RedEyeReduction"><code>never</code></dfn></dt>
+  <dd><a>Red eye reduction</a> is not available in the device.</dd>
+
+  <dt><dfn enum-value for="RedEyeReduction"><code>always</code></dfn></dt>
+  <dd><a>Red eye reduction</a> is available in the device and it is always configured to true.</dd>
+
+  <dt><dfn enum-value for="RedEyeReduction"><code>controllable</code></dfn></dt>
+  <dd><a>Red eye reduction</a> is available in the device and it is controllable by the user via {{PhotoSettings/redEyeReduction}}.</dd>
+</dl>
+
+
 
 # {{FillLightMode}} # {#filllightmode-section}
 
