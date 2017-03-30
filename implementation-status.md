@@ -12,33 +12,53 @@ different browsers.
 
 # Chrome
 Work is in progress:
-* Notes updated **February 2017**.
+* Notes updated **March 2017**.
 * The `chrome://flags/#enable-experimental-web-platform-features` flag must be enabled
+
+Method                    |Available|
+------------------------- | :-----: |
+grabFrame()               | ✓       |
+takePhoto()               | ✓       |
+
+Method                    |Available|
+------------------------- | :-----: |
+getPhotoCapabilities()    | ✓       |
+setOptions()              | ✓       |
+
+MediaStreamTrack methods  | Available   |
+------------------------- | :---------: |
+getCapabilities()         | 59.0.3051.0 |
+applyConstraints()        | 59.0.3051.0 |
+getConstraints()          | 59.0.3051.0 |
+getSettings()             | 59.0.3051.0 |
+
+MediaDevices methods      | Available   |
+------------------------- | :---------: |
+getSupportedConstraints() | 59.0.3041.0 |
+
+The individual features per platform availability:
 
 Feature/Platform          | Android | Linux/ChromeOS | Mac | Windows |
 ------------------------- | :-----: | :------------: | :-: | :-----: |
-grabFrame()               | ✓       | ✓              | ✓   | ✓       |
-takePhoto()               | ✓       | ✓              | ✓   | ✓       |
-getPhotoCapabilities()    |         |                |     |         |
-setOptions()              |         |                |     |         |
+`Photo{Capabilities/Settings}`|     |                |     |         |
+└ fillLightMode           | ✓       |                |     |         |
+└ imageHeight             | ✓       |                |     |         |
+└ imageWidth              | ✓       |                |     |         |
+└ redEyeReduction         | ✓       |                |     |         |
+`MediaTrack`*             |         |                |     |         |
 └ brightness              |         | ✓              |     |         |
 └ colorTemperature        | ✓       | ✓              |     |         |
 └ contrast                |         | ✓              |     |         |
 └ exposureCompensation    | ✓       |                |     |         |
 └ exposureMode            | ✓       |                |     |         |
-└ fillLightMode           | ✓       |                |     |         |
 └ focusMode               | ✓       |                |     |         |
-└ imageHeight             | ✓       |                |     |         |
-└ imageWidth              | ✓       |                |     |         |
 └ iso                     | ✓       |                |     |         |
 └ pointsOfInterest        | ✓       |                |     |         |
-└ redEyeReduction         | ✓       |                |     |         |
 └ saturation              |         | ✓              |     |         |
 └ sharpness               |         | ✓              |     |         |
 └ whiteBalanceMode        | ✓       |                |     |         |
 └ zoom                    | ✓       | ✓              |     |         |
 
-Note: Values of `PhotoCapabilities`/`Settings` depend on the actual capture device configurability (e.g. if the device doesn't support `zoom`, `zoom.min` and `zoom.max` will both be 0) .
 
 ### Unsupported platforms
 
