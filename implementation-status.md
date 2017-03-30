@@ -45,7 +45,7 @@ Feature/Platform          | Android | Linux/ChromeOS | Mac | Windows |
 └ imageHeight             | ✓       |                |     |         |
 └ imageWidth              | ✓       |                |     |         |
 └ redEyeReduction         | ✓       |                |     |         |
-`MediaStreamTrack`*       |         |                |     |         |
+`MediaTrack`*             |         |                |     |         |
 └ brightness              |         | ✓              |     |         |
 └ colorTemperature        | ✓       | ✓              |     |         |
 └ contrast                |         | ✓              |     |         |
