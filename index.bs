@@ -730,6 +730,10 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
 
 ## Update camera zoom and {{takePhoto()}} ## {#example1}
 
+<div class="note">
+  The following example can also be found in e.g. <a href="https://codepen.io/miguelao/pen/BLPzKx/left?editors=1010">this codepen</a> with minimal modifications.
+</div>
+
 <div class="example" highlight="javascript">
   <pre>
     &lt;html>
@@ -752,9 +756,8 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
         imageCapture = new ImageCapture(track);
 
         const capabilities = track.getCapabilities()
-
         // Check whether zoom is supported or not.
-        if (!capabilities.zoom.min && !capabilities.zoom.max) {
+        if (!capabilities.zoom) {
           return;
         }
 
@@ -766,7 +769,7 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
         input.value = track.getSettings().zoom;
 
         input.oninput = function(event) {
-          track.applyConstraints({zoom: {exact : event.target.value}});
+          track.applyConstraints({advanced : [{zoom: event.target.value}] });
         }
         input.hidden = false;
       }
