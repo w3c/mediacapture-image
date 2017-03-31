@@ -1183,7 +1183,7 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version 0f4697271bbbaeef35323d2211ff865ee6dd1178" name="generator">
+  <meta content="Bikeshed version b734e371910e25ac23b774dca3dea5cfc7b7fc0b" name="generator">
   <link href="https://w3c.github.io/mediacapture-image/" rel="canonical">
 <style>
 table {
@@ -1448,7 +1448,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">"MediaStream Image Capture"</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-03-30">30 March 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-03-31">31 March 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2094,8 +2094,9 @@ For instance, embedding the user’s location in the metadata of the digitzed im
    <h2 class="heading settled" data-level="13" id="examples"><span class="secno">13. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h2>
    <div class="note" role="note"> Slightly modified versions of these examples can be found in e.g. <a href="https://codepen.io/collection/nLeobQ/">this codepen collection</a>. </div>
    <h3 class="heading settled" data-level="13.1" id="example1"><span class="secno">13.1. </span><span class="content">Update camera zoom and <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-takephoto" id="ref-for-dom-imagecapture-takephoto-12">takePhoto()</a></code></span><a class="self-link" href="#example1"></a></h3>
-   <div class="example" id="example-7aa485c5">
-    <a class="self-link" href="#example-7aa485c5"></a> 
+   <div class="note" role="note"> The following example can also be found in e.g. <a href="https://codepen.io/miguelao/pen/BLPzKx/left?editors=1010">this codepen</a> with minimal modifications. </div>
+   <div class="example" id="example-c89d7f05">
+    <a class="self-link" href="#example-c89d7f05"></a> 
 <pre class="highlight"><span class="o">&lt;</span>html<span class="o">></span>
 <span class="o">&lt;</span>body<span class="o">></span>
 <span class="o">&lt;</span>video autoplay<span class="o">></span><span class="o">&lt;</span>/video>
@@ -2116,9 +2117,8 @@ For instance, embedding the user’s location in the metadata of the digitzed im
     imageCapture <span class="o">=</span> <span class="k">new</span> ImageCapture<span class="p">(</span>track<span class="p">)</span><span class="p">;</span>
 
     <span class="kr">const</span> capabilities <span class="o">=</span> track<span class="p">.</span>getCapabilities<span class="p">(</span><span class="p">)</span>
-
     <span class="c1">// Check whether zoom is supported or not.
-</span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span>capabilities<span class="p">.</span>zoom<span class="p">.</span>min <span class="o">&amp;&amp;</span> <span class="o">!</span>capabilities<span class="p">.</span>zoom<span class="p">.</span>max<span class="p">)</span> <span class="p">{</span>
+</span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span>capabilities<span class="p">.</span>zoom<span class="p">)</span> <span class="p">{</span>
       <span class="k">return</span><span class="p">;</span>
     <span class="p">}</span>
 
@@ -2130,7 +2130,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
     input<span class="p">.</span>value <span class="o">=</span> track<span class="p">.</span>getSettings<span class="p">(</span><span class="p">)</span><span class="p">.</span>zoom<span class="p">;</span>
 
     input<span class="p">.</span>oninput <span class="o">=</span> <span class="kd">function</span><span class="p">(</span>event<span class="p">)</span> <span class="p">{</span>
-      track<span class="p">.</span>applyConstraints<span class="p">(</span><span class="p">{</span>zoom<span class="o">:</span> <span class="p">{</span>exact <span class="o">:</span> event<span class="p">.</span>target<span class="p">.</span>value<span class="p">}</span><span class="p">}</span><span class="p">)</span><span class="p">;</span>
+      track<span class="p">.</span>applyConstraints<span class="p">(</span><span class="p">{</span>advanced <span class="o">:</span> <span class="p">[</span><span class="p">{</span>zoom<span class="o">:</span> event<span class="p">.</span>target<span class="p">.</span>value<span class="p">}</span><span class="p">]</span> <span class="p">}</span><span class="p">)</span><span class="p">;</span>
     <span class="p">}</span>
     input<span class="p">.</span>hidden <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
   <span class="p">}</span>
