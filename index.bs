@@ -4,6 +4,7 @@ Repository: image-capture
 Group: mediacapture
 Status: ED
 ED: https://w3c.github.io/mediacapture-image/
+TR: https://www.w3.org/TR/image-capture/
 Shortname: image-capture
 Level: 1
 Editor: Giridhar Mandyam, w3cid 54271, Qualcomm Innovation Center Inc.
