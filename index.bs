@@ -43,7 +43,7 @@ The API defined in this document captures images from a photographic device refe
 
 Reading capabilities and settings and applying constraints is done in one of two ways depending on whether it impacts the video {{MediaStreamTrack}} or not.  Photo-specific capabilities, default values and current settings can be retrieved via {{getPhotoCapabilities()}} and configured via {{takePhoto()}}'s {{PhotoSettings}} argument.  Manipulating video-related capabilities, current settings and constraints is done via the MediaStreamTrack <a href="#extensions">extension mechanism</a>.
 
-# Security and Privacy Considerations # (#securityandprivacy)
+# Security and Privacy Considerations # {#securityandprivacy}
 
 The <a href="https://w3c.github.io/mediacapture-main/#privacy-and-security-considerations"> privacy and security considerations</a> discussed in
 [[GETUSERMEDIA]] apply to this extension specification.
