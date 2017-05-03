@@ -12,8 +12,8 @@ different browsers.
 
 # Chrome
 Work is in progress:
-* Notes updated **March 2017**.
-* The `chrome://flags/#enable-experimental-web-platform-features` flag must be enabled
+* Notes updated **May 2017**.
+* *No flag needed in M59*  (before that, use the `chrome://flags/#enable-experimental-web-platform-features` flag).
 
 Method                    |Available|
 ------------------------- | :-----: |
@@ -27,38 +27,39 @@ setOptions()              | ✓       |
 
 MediaStreamTrack methods  | Available   |
 ------------------------- | :---------: |
-getCapabilities()         | 59.0.3051.0 |
-applyConstraints()        | 59.0.3051.0 |
-getConstraints()          | 59.0.3051.0 |
-getSettings()             | 59.0.3051.0 |
+getCapabilities()         | M59 |
+applyConstraints()        | M59 |
+getConstraints()          | M59 |
+getSettings()             | M59 |
 
 MediaDevices methods      | Available   |
 ------------------------- | :---------: |
-getSupportedConstraints() | 59.0.3041.0 |
+getSupportedConstraints() | M59         |
 
 The individual features per platform availability:
 
-Feature/Platform          | Android | Linux/ChromeOS | Mac | Windows |
-------------------------- | :-----: | :------------: | :-: | :-----: |
-`Photo{Capabilities/Settings}`|     |                |     |         |
-└ fillLightMode           | ✓       |                |     |         |
-└ imageHeight             | ✓       |                |     |         |
-└ imageWidth              | ✓       |                |     |         |
-└ redEyeReduction         | ✓       |                |     |         |
-`MediaTrack`*             |         |                |     |         |
-└ brightness              |         | ✓              |     |         |
-└ colorTemperature        | ✓       | ✓              |     |         |
-└ contrast                |         | ✓              |     |         |
-└ exposureCompensation    | ✓       |                |     |         |
-└ exposureMode            | ✓       |                |     |         |
-└ focusMode               | ✓       |                |     |         |
-└ iso                     | ✓       |                |     |         |
-└ pointsOfInterest        | ✓       |                |     |         |
-└ saturation              |         | ✓              |     |         |
-└ sharpness               |         | ✓              |     |         |
-└ whiteBalanceMode        | ✓       |                |     |         |
-└ zoom                    | ✓       | ✓              |     |         |
+Feature/Platform          | Android | Linux/ChromeOS | Windows | Mac |
+------------------------- | :-----: | :------------: | :-----: | :-: |
+`Photo{Capabilities/Settings}`|     |                |         |     |
+└ fillLightMode           | ✓       |                |         |     |
+└ imageHeight             | ✓       |                |         |     |
+└ imageWidth              | ✓       |                |         |     |
+└ redEyeReduction         | ✓       |                |         |     |
+`MediaTrack`*             |         |                |         |     |
+└ brightness              |         | ✓              |         |     |
+└ colorTemperature        | ✓       | ✓              | M60 [1] |     |
+└ contrast                |         | ✓              | M60 [1] |     |
+└ exposureCompensation    | ✓       |                | M60 [1] |     |
+└ exposureMode            | ✓       | ✓              | M60 [1] |     |
+└ focusMode               | ✓       | ✓              | M60 [1] |     |
+└ iso                     | ✓       |                |         |     |
+└ pointsOfInterest        | ✓       |                |         |     |
+└ saturation              |         | ✓              | M60 [1] |     |
+└ sharpness               |         | ✓              | M60 [1] |     |
+└ whiteBalanceMode        | ✓       | ✓              | M60 [1] |     |
+└ zoom                    | ✓       | ✓              | M60 [1] |     |
 
+[1] [crbug.com/657128](https://crbug.com/657128).
 
 ### Unsupported platforms
 
