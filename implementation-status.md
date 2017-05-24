@@ -42,14 +42,14 @@ Feature/Platform          | Android | Linux/ChromeOS | Windows | Mac |
 ------------------------- | :-----: | :------------: | :-----: | :-: |
 `Photo{Capabilities/Settings}`|     |                |         |     |
 └ fillLightMode           | ✓       |                |         |     |
-└ imageHeight             | ✓       |                |         |     |
-└ imageWidth              | ✓       |                |         |     |
+└ imageHeight             | ✓       | ✓              | ✓       | ✓   |
+└ imageWidth              | ✓       | ✓              | ✓       | ✓   |
 └ redEyeReduction         | ✓       |                |         |     |
 `MediaTrack`*             |         |                |         |     |
 └ brightness              |         | ✓              |         |     |
-└ colorTemperature        | ✓       | ✓              | M60 [1] |     |
+└ colorTemperature        | ✓ [2]   | ✓              | M60 [1] |     |
 └ contrast                |         | ✓              | M60 [1] |     |
-└ exposureCompensation    | ✓       |                | M60 [1] |     |
+└ exposureCompensation    | ✓ [3]   | ✓              | M60 [1] |     |
 └ exposureMode            | ✓       | ✓              | M60 [1] |     |
 └ focusMode               | ✓       | ✓              | M60 [1] |     |
 └ iso                     | ✓       |                |         |     |
@@ -60,6 +60,8 @@ Feature/Platform          | Android | Linux/ChromeOS | Windows | Mac |
 └ zoom                    | ✓       | ✓              | M60 [1] |     |
 
 [1] [crbug.com/657128](https://crbug.com/657128).
+[2] [crbug.com/724626](https://crbug.com/724626).
+[3] [crbug.com/724730](https://crbug.com/724730).
 
 ### Unsupported platforms
 
