@@ -14,7 +14,7 @@ Abstract: This document specifies methods and camera settings to produce photogr
 !Participate: <a href="https://lists.w3.org/Archives/Public/public-media-capture/">Mailing list</a>
 !Participate: <a href="https://github.com/w3c/mediacapture-image">GitHub repo</a> (<a href="https://github.com/w3c/mediacapture-image/issues/new">new issue</a>, <a href="https://github.com/w3c/mediacapture-image/issues">open issues</a>)
 
-!Implementation: <a href="https://github.com/w3c/mediacapture-image/blob/gh-pages/implementation-status.md">Implementation Status</a>
+!Implementation: <a href="https://github.com/w3c/mediacapture-image/blob/master/implementation-status.md">Implementation Status</a>
 !Implementation: <a href="http://caniuse.com/#feat=imagecapture">Can I use Image Capture?</a>
 
 </pre>

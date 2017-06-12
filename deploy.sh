@@ -25,8 +25,9 @@ cd ..
 # Clean out existing contents
 rm -rf out/index.html
 
-# Run our compile script
+# Copy files
 cp -fv index.html ./out
+cp -fv *.md ./out
 
 # Now let's go have some fun with the cloned repo
 cd out
@@ -34,7 +35,7 @@ git config user.name "Travis CI"
 git config user.email "miguelecasassanchez@gmail.com"
 
 # If there are no changes to the compiled out (e.g. this is a README update) then just bail.
-if [ -z `git diff --exit-code` ]; then
+if git diff --quiet; then
     echo "No changes to the output on this push; exiting."
     exit 0
 fi
@@ -42,6 +43,7 @@ fi
 # Commit the "changes", i.e. the new version.
 # The delta will show diffs between new and old versions.
 git add -f index.html
+git add -f *.md
 git commit -m "Deploy to GitHub Pages: ${SHA}"
 
 # Get the deploy key by using Travis's stored variables to decrypt deploy_key.enc
