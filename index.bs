@@ -10,6 +10,7 @@ Level: 1
 Editor: Giridhar Mandyam, w3cid 54271, Qualcomm Innovation Center Inc.
 Editor: Miguel Casas-Sanchez, w3cid 82825, Google Inc., mcasas@google.com
 Abstract: This document specifies methods and camera settings to produce photographic image capture. The source of images is, or can be referenced via a {{MediaStreamTrack}}.
+Previous Version: https://www.w3.org/TR/2017/WD-image-capture-20170104/
 
 !Participate: <a href="https://lists.w3.org/Archives/Public/public-media-capture/">Mailing list</a>
 !Participate: <a href="https://github.com/w3c/mediacapture-image">GitHub repo</a> (<a href="https://github.com/w3c/mediacapture-image/issues/new">new issue</a>, <a href="https://github.com/w3c/mediacapture-image/issues">open issues</a>)
@@ -41,7 +42,7 @@ table td, table th {
 
 The API defined in this document captures images from a photographic device referenced through a valid {{MediaStreamTrack}}. The produced image can be in the form of a {{Blob}} (see {{takePhoto()}} method) or as a {{ImageBitmap}} (see {{grabFrame()}}).
 
-Reading capabilities and settings and applying constraints is done in one of two ways depending on whether it impacts the video {{MediaStreamTrack}} or not.  Photo-specific capabilities, default values and current settings can be retrieved via {{getPhotoCapabilities()}} and configured via {{takePhoto()}}'s {{PhotoSettings}} argument.  Manipulating video-related capabilities, current settings and constraints is done via the MediaStreamTrack <a href="#extensions">extension mechanism</a>.
+Reading capabilities and settings and applying constraints is done in one of two ways depending on whether it impacts the video {{MediaStreamTrack}} or not.  Photo-specific capabilities and current settings can be retrieved via {{getPhotoCapabilities()}}/{{getPhotoSettings()}} and configured via {{takePhoto()}}'s {{PhotoSettings}} argument.  Manipulating video-related capabilities, current settings and constraints is done via the MediaStreamTrack <a href="#extensions">extension mechanism</a>.
 
 # Security and Privacy Considerations # {#securityandprivacy}
 
@@ -60,6 +61,7 @@ The User Agent must support Promises in order to implement the Image Capture API
 interface ImageCapture {
    Promise&lt;Blob&gt;              takePhoto(optional PhotoSettings photoSettings);
    Promise&lt;PhotoCapabilities&gt; getPhotoCapabilities();
+   Promise&lt;PhotoSettings&gt;     getPhotoSettings();
 
    Promise&lt;ImageBitmap&gt;       grabFrame();
 
@@ -148,17 +150,35 @@ interface ImageCapture {
 
   <dt><dfn method for="ImageCapture"><code>getPhotoCapabilities()</code></dfn></dt>
   <dd>
-  {{getPhotoCapabilities()}} is used to retrieve the ranges of available configuration options and their current setting values, if any. When this method is invoked:
+  {{getPhotoCapabilities()}} is used to retrieve the ranges of available configuration options, if any. When this method is invoked:
   <ol>
     <li>If the {{readyState}} of {{track}} provided in the constructor is not {{live}}, return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{InvalidStateError}}. </li>
 
     <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps in parallel:
     <ol>
-      <li>Gather data from {{track}} into a {{PhotoCapabilities}} object containing the available capabilities of the device, including ranges where appropriate. The resolved {{PhotoCapabilities}} will also include the current conditions in which the capabilities of the device are found. The method of doing this will depend on the underlying device. </li>
+      <li>Gather data from {{track}} into a {{PhotoCapabilities}} object containing the available capabilities of the device, including ranges where appropriate. The method of doing this will depend on the underlying device. </li>
 
       <li>If the UA is unable to execute the {{getPhotoCapabilities()}} method for any reason (for example, the {{MediaStreamTrack}} being ended asynchronously), then the UA MUST return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{OperationError}}.</li>
 
       <li>Return a promise resolved with the {{PhotoCapabilities}} object.</li>
+    </ol>
+    </li>
+  </ol>
+  </dd>
+
+  <dt><dfn method for="ImageCapture"><code>getPhotoSettings()</code></dfn></dt>
+  <dd>
+  {{getPhotoSettings()}} is used to retrieve the current configuration settings values, if any. When this method is invoked:
+  <ol>
+    <li>If the {{readyState}} of {{track}} provided in the constructor is not {{live}}, return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{InvalidStateError}}. </li>
+
+    <li>Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps in parallel:
+    <ol>
+      <li>Gather data from {{track}} into a {{PhotoSettings}} containing the current conditions in which the device is found. The method of doing this will depend on the underlying device. </li>
+
+      <li>If the UA is unable to execute the {{getPhotoSettings()}} method for any reason (for example, the {{MediaStreamTrack}} being ended asynchronously), then the UA MUST return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{OperationError}}.</li>
+
+      <li>Return a promise resolved with the {{PhotoSettings}} object.</li>
     </ol>
     </li>
   </ol>
@@ -184,7 +204,7 @@ interface ImageCapture {
 
 </dl>
 
-# PhotoCapabilities # {##photocapabilities-section}
+# PhotoCapabilities # {#photocapabilities-section}
 
 <pre class="idl">
   interface PhotoCapabilities {
@@ -195,7 +215,7 @@ interface ImageCapture {
   };
 </pre>
 
-## Attributes ## {##photocapabilities-attributes}
+## Attributes ## {#photocapabilities-attributes}
 
 <dl class="domintro">
   <dt><dfn attribute for="PhotoCapabilities"><code>redEyeReduction</code></dfn></dt>
@@ -215,7 +235,7 @@ interface ImageCapture {
   The supported resolutions are presented as segregated {{PhotoCapabilities/imageWidth}} and {{PhotoCapabilities/imageHeight}} ranges to prevent increasing the fingerprinting surface and to allow the UA to make a best-effort decision with regards to actual hardware configuration.
 </div>
 
-# PhotoSettings # {##photosettings-section}
+# PhotoSettings # {#photosettings-section}
 
 <pre class="idl">
   dictionary PhotoSettings {
@@ -226,7 +246,7 @@ interface ImageCapture {
   };
 </pre>
 
-## Members ## {##photosettings-members}
+## Members ## {#photosettings-members}
 
 <dl class="domintro">
   <dt><dfn dict-member for="PhotoSettings"><code>redEyeReduction</code></dfn></dt>
