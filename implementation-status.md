@@ -51,6 +51,7 @@ Feature/Platform          | Android | Linux/ChromeOS | Windows | Mac |
 └ contrast                |         | ✓              | M60 [1] |     |
 └ exposureCompensation    | ✓ [3]   | ✓              | M60 [1] |     |
 └ exposureMode            | ✓       | ✓              | M60 [1] |     |
+└ focusDistance           |         |                |         |     |
 └ focusMode               | ✓       | ✓              | M60 [1] |     |
 └ iso                     | ✓       |                |         |     |
 └ pointsOfInterest        | ✓       |                |         |     |
