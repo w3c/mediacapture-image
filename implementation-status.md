@@ -12,7 +12,7 @@ different browsers.
 
 # Chrome
 Work is in progress:
-* Notes updated **May 2017**.
+* Notes updated **June 2017**.
 * *No flag needed in M59*  (before that, use the `chrome://flags/#enable-experimental-web-platform-features` flag).
 
 Method                    |Available|
@@ -23,7 +23,10 @@ takePhoto()               | ✓       |
 Method                    |Available|
 ------------------------- | :-----: |
 getPhotoCapabilities()    | ✓       |
+getPhotoSettings()        | M61 [1] |
 setOptions()              | ✓       |
+
+[1] [crbug.com/732521](https://crbug.com/732521).
 
 MediaStreamTrack methods  | Available   |
 ------------------------- | :---------: |
