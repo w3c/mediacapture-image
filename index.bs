@@ -338,6 +338,7 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
     boolean contrast = true;
     boolean saturation = true;
     boolean sharpness = true;
+    boolean focusDistance = true;
     boolean zoom = true;
     boolean torch = true;
   };
@@ -379,6 +380,9 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
   <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>sharpness</code></dfn></dt>
   <dd>Whether <a>sharpness</a> constraining is recognized.</dd>
 
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>focusDistance</code></dfn></dt>
+  <dd>Whether <a>focus distance</a> constraining is recognized.</dd>
+
   <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>zoom</code></dfn></dt>
   <dd>Whether configuration of the <a>zoom</a> level is recognized.</dd>
 
@@ -405,6 +409,7 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
     MediaSettingsRange   saturation;
     MediaSettingsRange   sharpness;
 
+    MediaSettingsRange   focusDistance;
     MediaSettingsRange   zoom;
 
     boolean              torch;
@@ -444,6 +449,9 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
   <dt><dfn dict-member for="MediaTrackCapabilities"><code>sharpness</code></dfn></dt>
   <dd>This reflects the permitted <a>sharpness</a> range of the camera. Values are numeric. Increasing values indicate increasing sharpness, and the minimum value always implies no sharpness enhancement or processing.</dd>
 
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>focusDistance</code></dfn></dt>
+  <dd>This reflects the <a>focus distance</a> value range supported by the UA.</dd>
+
   <dt><dfn dict-member for="MediaTrackCapabilities"><code>zoom</code></dfn></dt>
   <dd>This reflects the <a>zoom</a> value range supported by the UA.</dd>
 
@@ -475,6 +483,7 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
     ConstrainDouble    saturation;
     ConstrainDouble    sharpness;
 
+    ConstrainDouble    focusDistance;
     ConstrainDouble    zoom;
 
     ConstrainBoolean   torch;
@@ -517,6 +526,9 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
   <dt><dfn dict-member for="MediaTrackConstraintSet"><code>sharpness</code></dfn></dt>
   <dd>See <a>sharpness</a> constrainable property.</dd>
 
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>focusDistance</code></dfn></dt>
+  <dd>See <a>focus distance</a> constrainable property.</dd>
+
   <dt><dfn dict-member for="MediaTrackConstraintSet"><code>zoom</code></dfn></dt>
   <dd>See <a>zoom</a> constrainable property.</dd>
 
@@ -544,6 +556,7 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
     double            saturation;
     double            sharpness;
 
+    double            focusDistance;
     double            zoom;
 
     boolean           torch;
@@ -585,6 +598,9 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
 
   <dt><dfn dict-member for="MediaTrackSettings"><code>sharpness</code></dfn></dt>
   <dd>This reflects the current <a>sharpness</a> setting of the camera.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSettings"><code>focusDistance</code></dfn></dt>
+  <dd>This reflects the current <a>focus distance</a> setting of the camera.</dd>
 
   <dt><dfn dict-member for="MediaTrackSettings"><code>zoom</code></dfn></dt>
   <dd>This reflects the current <a>zoom</a> setting of the camera.</dd>
@@ -669,6 +685,8 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
       The supported resolutions are managed segregated e.g. {{PhotoCapabilities/imageWidth}} and {{PhotoCapabilities/imageHeight}} values/ranges to prevent increasing the fingerprinting surface and to allow the UA to make a best-effort decision with regards to actual hardware configuration vis-a-vis requested constraints.
     </div>
     </li>
+
+    <li><dfn>Focus distance</dfn> is a numeric camera setting that controls the focus distance of the lens.  The setting usually represents distance in meters to the optimal focus distance.</li>
 
     <li><dfn>Zoom</dfn> is a numeric camera setting that controls the focal length of the lens.  The setting usually represents a ratio, e.g. 4 is a zoom ratio of 4:1.  The minimum value is usually 1, to represent a 1:1 ratio (i.e. no zoom).</li>
 
@@ -894,6 +912,65 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
   </pre>
 </div>
 
+## Update camera focus distance and {{takePhoto()}} ## {#example4}
+
+<div class="example" highlight="javascript">
+  <pre>
+    &lt;html>
+    &lt;body>
+    &lt;video autoplay>&lt;/video>
+    &lt;img>
+    &lt;input type="range" hidden>
+    &lt;script>
+      var imageCapture;
+
+      navigator.mediaDevices.getUserMedia({video: true})
+        .then(gotMedia)
+        .catch(err => console.error('getUserMedia() failed: ', err));
+
+      function gotMedia(mediastream) {
+        const video = document.querySelector('video');
+        video.srcObject = mediastream;
+
+        const track = mediastream.getVideoTracks()[0];
+        imageCapture = new ImageCapture(track);
+
+        const capabilities = track.getCapabilities()
+        // Check whether focus distance is supported or not.
+        if (!capabilities.focusDistance) {
+          return;
+        }
+
+        // Map focus distance to a slider element.
+        const input = document.querySelector('input[type="range"]');
+        input.min = capabilities.focusDistance.min;
+        input.max = capabilities.focusDistance.max;
+        input.step = capabilities.focusDistance.step;
+        input.value = track.getSettings().focusDistance;
+
+        input.oninput = function(event) {
+          track.applyConstraints({
+            advanced : [{focusMode: "manual", focusDistance: event.target.value}]
+          });
+        }
+        input.hidden = false;
+      }
+
+      function takePhoto() {
+        imageCapture.takePhoto()
+          .then(blob => {
+            console.log('Photo taken: ' + blob.type + ', ' + blob.size + 'B');
+
+            const image = document.querySelector('img');
+            image.src = URL.createObjectURL(blob);
+          })
+          .catch(err => console.error('takePhoto() failed: ', err));
+      }
+    &lt;/script>
+    &lt;/body>
+    &lt;/html>
+  </pre>
+</div>
 
 
 
