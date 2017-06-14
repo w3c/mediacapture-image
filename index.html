@@ -1448,13 +1448,16 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">"MediaStream Image Capture"</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-06-13">13 June 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-06-14">14 June 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
      <dd><a class="u-url" href="https://w3c.github.io/mediacapture-image/">https://w3c.github.io/mediacapture-image/</a>
      <dt>Latest published version:
      <dd><a href="https://www.w3.org/TR/image-capture/">https://www.w3.org/TR/image-capture/</a>
+     <dt>Previous Versions:
+     <dd><a href="https://www.w3.org/TR/2017/WD-image-capture-20170104/" rel="prev">https://www.w3.org/TR/2017/WD-image-capture-20170104/</a>
+     <dd><a href="" rel="prev"></a>
      <dt>Feedback:
      <dd><span><a href="mailto:public-media-capture@w3.org?subject=%5Bimage-capture%5D%20YOUR%20TOPIC%20HERE">public-media-capture@w3.org</a> with subject line “<kbd>[image-capture] <i data-lt="">… message topic …</i></kbd>” (<a href="https://lists.w3.org/Archives/Public/public-media-capture/" rel="discussion">archives</a>)</span>
      <dt class="editor">Editors:
@@ -1507,14 +1510,14 @@ pre.idl.highlight { color: #708090; }
       <li><a href="#imagecapture-methods"><span class="secno">3.2</span> <span class="content">Methods</span></a>
      </ol>
     <li>
-     <a href="##photocapabilities-section"><span class="secno">4</span> <span class="content">PhotoCapabilities</span></a>
+     <a href="#photocapabilities-section"><span class="secno">4</span> <span class="content">PhotoCapabilities</span></a>
      <ol class="toc">
-      <li><a href="##photocapabilities-attributes"><span class="secno">4.1</span> <span class="content">Attributes</span></a>
+      <li><a href="#photocapabilities-attributes"><span class="secno">4.1</span> <span class="content">Attributes</span></a>
      </ol>
     <li>
-     <a href="##photosettings-section"><span class="secno">5</span> <span class="content">PhotoSettings</span></a>
+     <a href="#photosettings-section"><span class="secno">5</span> <span class="content">PhotoSettings</span></a>
      <ol class="toc">
-      <li><a href="##photosettings-members"><span class="secno">5.1</span> <span class="content">Members</span></a>
+      <li><a href="#photosettings-members"><span class="secno">5.1</span> <span class="content">Members</span></a>
      </ol>
     <li>
      <a href="#mediasettingsrange-section"><span class="secno">6</span> <span class="content"><code class="idl"><span>MediaSettingsRange</span></code></span></a>
@@ -1604,7 +1607,7 @@ pre.idl.highlight { color: #708090; }
   <main>
    <h2 class="heading settled" data-level="1" id="introduction"><span class="secno">1. </span><span class="content">Introduction</span><a class="self-link" href="#introduction"></a></h2>
    <p>The API defined in this document captures images from a photographic device referenced through a valid <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code>. The produced image can be in the form of a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> (see <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-takephoto" id="ref-for-dom-imagecapture-takephoto-1">takePhoto()</a></code> method) or as a <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/imagebitmap-and-animations.html#imagebitmap">ImageBitmap</a></code> (see <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-grabframe" id="ref-for-dom-imagecapture-grabframe-1">grabFrame()</a></code>).</p>
-   <p>Reading capabilities and settings and applying constraints is done in one of two ways depending on whether it impacts the video <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code> or not.  Photo-specific capabilities, default values and current settings can be retrieved via <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-getphotocapabilities" id="ref-for-dom-imagecapture-getphotocapabilities-1">getPhotoCapabilities()</a></code> and configured via <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-takephoto" id="ref-for-dom-imagecapture-takephoto-2">takePhoto()</a></code>'s <code class="idl"><a data-link-type="idl" href="#dictdef-photosettings" id="ref-for-dictdef-photosettings-1">PhotoSettings</a></code> argument.  Manipulating video-related capabilities, current settings and constraints is done via the MediaStreamTrack <a href="#extensions">extension mechanism</a>.</p>
+   <p>Reading capabilities and settings and applying constraints is done in one of two ways depending on whether it impacts the video <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code> or not.  Photo-specific capabilities and current settings can be retrieved via <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-getphotocapabilities" id="ref-for-dom-imagecapture-getphotocapabilities-1">getPhotoCapabilities()</a></code>/<code class="idl"><a data-link-type="idl" href="#dom-imagecapture-getphotosettings" id="ref-for-dom-imagecapture-getphotosettings-1">getPhotoSettings()</a></code> and configured via <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-takephoto" id="ref-for-dom-imagecapture-takephoto-2">takePhoto()</a></code>'s <code class="idl"><a data-link-type="idl" href="#dictdef-photosettings" id="ref-for-dictdef-photosettings-1">PhotoSettings</a></code> argument.  Manipulating video-related capabilities, current settings and constraints is done via the MediaStreamTrack <a href="#extensions">extension mechanism</a>.</p>
    <h2 class="heading settled" data-level="2" id="securityandprivacy"><span class="secno">2. </span><span class="content">Security and Privacy Considerations</span><a class="self-link" href="#securityandprivacy"></a></h2>
    <p>The <a href="https://w3c.github.io/mediacapture-main/#privacy-and-security-considerations"> privacy and security considerations</a> discussed in <a data-link-type="biblio" href="#biblio-getusermedia">[GETUSERMEDIA]</a> apply to this extension specification.</p>
    <p>Moreover, implementors should take care to prevent additional leakage of privacy-sensitive data from captured images.
@@ -1615,6 +1618,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
 <span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="imagecapture"><code>ImageCapture</code></dfn> {
    <span class="kt">Promise</span>&lt;<a class="n" data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a>>              <a class="nv idl-code" data-link-type="method" href="#dom-imagecapture-takephoto" id="ref-for-dom-imagecapture-takephoto-3">takePhoto</a>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-photosettings" id="ref-for-dictdef-photosettings-2">PhotoSettings</a> <dfn class="nv dfn-paneled idl-code" data-dfn-for="ImageCapture/takePhoto(photoSettings), ImageCapture/takePhoto()" data-dfn-type="argument" data-export="" id="dom-imagecapture-takephoto-photosettings-photosettings"><code>photoSettings</code></dfn>);
    <span class="kt">Promise</span>&lt;<a class="n" data-link-type="idl-name" href="#photocapabilities" id="ref-for-photocapabilities-1">PhotoCapabilities</a>> <a class="nv idl-code" data-link-type="method" href="#dom-imagecapture-getphotocapabilities" id="ref-for-dom-imagecapture-getphotocapabilities-2">getPhotoCapabilities</a>();
+   <span class="kt">Promise</span>&lt;<a class="n" data-link-type="idl-name" href="#dictdef-photosettings" id="ref-for-dictdef-photosettings-3">PhotoSettings</a>>     <a class="nv idl-code" data-link-type="method" href="#dom-imagecapture-getphotosettings" id="ref-for-dom-imagecapture-getphotosettings-2">getPhotoSettings</a>();
 
    <span class="kt">Promise</span>&lt;<a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/imagebitmap-and-animations.html#imagebitmap">ImageBitmap</a>>       <a class="nv idl-code" data-link-type="method" href="#dom-imagecapture-grabframe" id="ref-for-dom-imagecapture-grabframe-2">grabFrame</a>();
 
@@ -1648,7 +1652,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
      </table>
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="ImageCapture" data-dfn-type="method" data-export="" data-lt="takePhoto(photoSettings)|takePhoto()" id="dom-imagecapture-takephoto"><code><code>takePhoto(optional PhotoSettings photoSettings)</code></code></dfn>
     <dd>
-      <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-takephoto" id="ref-for-dom-imagecapture-takephoto-5">takePhoto()</a></code> produces the result of a single photographic exposure using the video capture device sourcing the <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-track" id="ref-for-dom-imagecapture-track-4">track</a></code> and including any <code class="idl"><a data-link-type="idl" href="#dictdef-photosettings" id="ref-for-dictdef-photosettings-3">PhotoSettings</a></code> configured, returning an encoded image in the form of a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> if successful. When this method is invoked: 
+      <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-takephoto" id="ref-for-dom-imagecapture-takephoto-5">takePhoto()</a></code> produces the result of a single photographic exposure using the video capture device sourcing the <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-track" id="ref-for-dom-imagecapture-track-4">track</a></code> and including any <code class="idl"><a data-link-type="idl" href="#dictdef-photosettings" id="ref-for-dictdef-photosettings-4">PhotoSettings</a></code> configured, returning an encoded image in the form of a <code class="idl"><a data-link-type="idl" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a></code> if successful. When this method is invoked: 
      <ol>
       <li>If the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-readyState">readyState</a></code> of <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-track" id="ref-for-dom-imagecapture-track-5">track</a></code> provided in the constructor is not <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaStreamTrackState.live">live</a></code>, return <a data-link-type="dfn" href="https://www.w3.org/2001/tag/doc/promises-guide/#a-promise-rejected-with">a promise rejected with</a> a new <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> whose name is <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code>. 
       <li>
@@ -1671,39 +1675,52 @@ For instance, embedding the user’s location in the metadata of the digitzed im
         <th>Description
        <tr>
         <td class="prmName">settings
-        <td class="prmType"><code class="idl"><a data-link-type="idl" href="#dictdef-photosettings" id="ref-for-dictdef-photosettings-4">PhotoSettings</a></code>
+        <td class="prmType"><code class="idl"><a data-link-type="idl" href="#dictdef-photosettings" id="ref-for-dictdef-photosettings-5">PhotoSettings</a></code>
         <td class="prmNullTrue"><span aria-label="True" role="img">✔</span>
         <td class="prmOptFalse"><span aria-label="False" role="img">✘</span>
-        <td class="prmDesc">The <code class="idl"><a data-link-type="idl" href="#dictdef-photosettings" id="ref-for-dictdef-photosettings-5">PhotoSettings</a></code> dictionary to be applied.
+        <td class="prmDesc">The <code class="idl"><a data-link-type="idl" href="#dictdef-photosettings" id="ref-for-dictdef-photosettings-6">PhotoSettings</a></code> dictionary to be applied.
      </table>
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="ImageCapture" data-dfn-type="method" data-export="" id="dom-imagecapture-getphotocapabilities"><code><code>getPhotoCapabilities()</code></code></dfn>
     <dd>
-      <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-getphotocapabilities" id="ref-for-dom-imagecapture-getphotocapabilities-3">getPhotoCapabilities()</a></code> is used to retrieve the ranges of available configuration options and their current setting values, if any. When this method is invoked: 
+      <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-getphotocapabilities" id="ref-for-dom-imagecapture-getphotocapabilities-3">getPhotoCapabilities()</a></code> is used to retrieve the ranges of available configuration options, if any. When this method is invoked: 
      <ol>
       <li>If the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-readyState">readyState</a></code> of <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-track" id="ref-for-dom-imagecapture-track-7">track</a></code> provided in the constructor is not <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaStreamTrackState.live">live</a></code>, return <a data-link-type="dfn" href="https://www.w3.org/2001/tag/doc/promises-guide/#a-promise-rejected-with">a promise rejected with</a> a new <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> whose name is <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code>. 
       <li>
        Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps in parallel: 
        <ol>
-        <li>Gather data from <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-track" id="ref-for-dom-imagecapture-track-8">track</a></code> into a <code class="idl"><a data-link-type="idl" href="#photocapabilities" id="ref-for-photocapabilities-2">PhotoCapabilities</a></code> object containing the available capabilities of the device, including ranges where appropriate. The resolved <code class="idl"><a data-link-type="idl" href="#photocapabilities" id="ref-for-photocapabilities-3">PhotoCapabilities</a></code> will also include the current conditions in which the capabilities of the device are found. The method of doing this will depend on the underlying device. 
+        <li>Gather data from <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-track" id="ref-for-dom-imagecapture-track-8">track</a></code> into a <code class="idl"><a data-link-type="idl" href="#photocapabilities" id="ref-for-photocapabilities-2">PhotoCapabilities</a></code> object containing the available capabilities of the device, including ranges where appropriate. The method of doing this will depend on the underlying device. 
         <li>If the UA is unable to execute the <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-getphotocapabilities" id="ref-for-dom-imagecapture-getphotocapabilities-4">getPhotoCapabilities()</a></code> method for any reason (for example, the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code> being ended asynchronously), then the UA MUST return <a data-link-type="dfn" href="https://www.w3.org/2001/tag/doc/promises-guide/#a-promise-rejected-with">a promise rejected with</a> a new <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> whose name is <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#operationerror">OperationError</a></code>.
-        <li>Return a promise resolved with the <code class="idl"><a data-link-type="idl" href="#photocapabilities" id="ref-for-photocapabilities-4">PhotoCapabilities</a></code> object.
+        <li>Return a promise resolved with the <code class="idl"><a data-link-type="idl" href="#photocapabilities" id="ref-for-photocapabilities-3">PhotoCapabilities</a></code> object.
+       </ol>
+     </ol>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="ImageCapture" data-dfn-type="method" data-export="" id="dom-imagecapture-getphotosettings"><code><code>getPhotoSettings()</code></code></dfn>
+    <dd>
+      <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-getphotosettings" id="ref-for-dom-imagecapture-getphotosettings-3">getPhotoSettings()</a></code> is used to retrieve the current configuration settings values, if any. When this method is invoked: 
+     <ol>
+      <li>If the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-readyState">readyState</a></code> of <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-track" id="ref-for-dom-imagecapture-track-9">track</a></code> provided in the constructor is not <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaStreamTrackState.live">live</a></code>, return <a data-link-type="dfn" href="https://www.w3.org/2001/tag/doc/promises-guide/#a-promise-rejected-with">a promise rejected with</a> a new <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> whose name is <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code>. 
+      <li>
+       Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps in parallel: 
+       <ol>
+        <li>Gather data from <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-track" id="ref-for-dom-imagecapture-track-10">track</a></code> into a <code class="idl"><a data-link-type="idl" href="#dictdef-photosettings" id="ref-for-dictdef-photosettings-7">PhotoSettings</a></code> containing the current conditions in which the device is found. The method of doing this will depend on the underlying device. 
+        <li>If the UA is unable to execute the <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-getphotosettings" id="ref-for-dom-imagecapture-getphotosettings-4">getPhotoSettings()</a></code> method for any reason (for example, the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code> being ended asynchronously), then the UA MUST return <a data-link-type="dfn" href="https://www.w3.org/2001/tag/doc/promises-guide/#a-promise-rejected-with">a promise rejected with</a> a new <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> whose name is <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#operationerror">OperationError</a></code>.
+        <li>Return a promise resolved with the <code class="idl"><a data-link-type="idl" href="#dictdef-photosettings" id="ref-for-dictdef-photosettings-8">PhotoSettings</a></code> object.
        </ol>
      </ol>
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="ImageCapture" data-dfn-type="method" data-export="" id="dom-imagecapture-grabframe"><code><code>grabFrame()</code></code></dfn>
     <dd>
-     <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-grabframe" id="ref-for-dom-imagecapture-grabframe-4">grabFrame()</a></code> takes a snapshot of the live video being held in <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-track" id="ref-for-dom-imagecapture-track-9">track</a></code>, returning an <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/imagebitmap-and-animations.html#imagebitmap">ImageBitmap</a></code> if successful. <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-grabframe" id="ref-for-dom-imagecapture-grabframe-5">grabFrame()</a></code> returns data only once upon being invoked. When this method is invoked: 
+     <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-grabframe" id="ref-for-dom-imagecapture-grabframe-4">grabFrame()</a></code> takes a snapshot of the live video being held in <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-track" id="ref-for-dom-imagecapture-track-11">track</a></code>, returning an <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/imagebitmap-and-animations.html#imagebitmap">ImageBitmap</a></code> if successful. <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-grabframe" id="ref-for-dom-imagecapture-grabframe-5">grabFrame()</a></code> returns data only once upon being invoked. When this method is invoked: 
      <ol>
-      <li>If the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-readyState">readyState</a></code> of <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-track" id="ref-for-dom-imagecapture-track-10">track</a></code> provided in the constructor is not <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaStreamTrackState.live">live</a></code>, return <a data-link-type="dfn" href="https://www.w3.org/2001/tag/doc/promises-guide/#a-promise-rejected-with">a promise rejected with</a> a new <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> whose name is <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code>.
+      <li>If the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-readyState">readyState</a></code> of <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-track" id="ref-for-dom-imagecapture-track-12">track</a></code> provided in the constructor is not <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaStreamTrackState.live">live</a></code>, return <a data-link-type="dfn" href="https://www.w3.org/2001/tag/doc/promises-guide/#a-promise-rejected-with">a promise rejected with</a> a new <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> whose name is <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#invalidstateerror">InvalidStateError</a></code>.
       <li>
        Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps in parallel: 
        <ol>
-        <li>Gather data from <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-track" id="ref-for-dom-imagecapture-track-11">track</a></code> into an <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/imagebitmap-and-animations.html#imagebitmap">ImageBitmap</a></code> object. The <var>width</var> and <var>height</var> of the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/imagebitmap-and-animations.html#imagebitmap">ImageBitmap</a></code> object are derived from the constraints of <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-track" id="ref-for-dom-imagecapture-track-12">track</a></code>. 
+        <li>Gather data from <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-track" id="ref-for-dom-imagecapture-track-13">track</a></code> into an <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/imagebitmap-and-animations.html#imagebitmap">ImageBitmap</a></code> object. The <var>width</var> and <var>height</var> of the <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/imagebitmap-and-animations.html#imagebitmap">ImageBitmap</a></code> object are derived from the constraints of <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-track" id="ref-for-dom-imagecapture-track-14">track</a></code>. 
         <li>Returns a promise resolved with a newly created <code class="idl"><a data-link-type="idl" href="https://html.spec.whatwg.org/multipage/imagebitmap-and-animations.html#imagebitmap">ImageBitmap</a></code> object.
         <li>If the UA is unable to execute the <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-grabframe" id="ref-for-dom-imagecapture-grabframe-6">grabFrame()</a></code> method for any reason (for example, upon invocation of multiple <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-grabframe" id="ref-for-dom-imagecapture-grabframe-7">grabFrame()</a></code>/<code class="idl"><a data-link-type="idl" href="#dom-imagecapture-takephoto" id="ref-for-dom-imagecapture-takephoto-8">takePhoto()</a></code> method calls in rapid succession), then the UA MUST return <a data-link-type="dfn" href="https://www.w3.org/2001/tag/doc/promises-guide/#a-promise-rejected-with">a promise rejected with</a> a new <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> whose name is <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#unknownerror">UnknownError</a></code>.
        </ol>
      </ol>
    </dl>
-   <h2 class="heading settled" data-level="4" id="#photocapabilities-section"><span class="secno">4. </span><span class="content">PhotoCapabilities</span><a class="self-link" href="#%23photocapabilities-section"></a></h2>
+   <h2 class="heading settled" data-level="4" id="photocapabilities-section"><span class="secno">4. </span><span class="content">PhotoCapabilities</span><a class="self-link" href="#photocapabilities-section"></a></h2>
 <pre class="idl highlight def"><span class="kt">interface</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="interface" data-export="" id="photocapabilities"><code>PhotoCapabilities</code></dfn> {
   <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#enumdef-redeyereduction" id="ref-for-enumdef-redeyereduction-1">RedEyeReduction</a>            <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="RedEyeReduction" href="#dom-photocapabilities-redeyereduction" id="ref-for-dom-photocapabilities-redeyereduction-1">redEyeReduction</a>;
   <span class="kt">readonly</span> <span class="kt">attribute</span> <a class="n" data-link-type="idl-name" href="#mediasettingsrange" id="ref-for-mediasettingsrange-1">MediaSettingsRange</a>         <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="MediaSettingsRange" href="#dom-photocapabilities-imageheight" id="ref-for-dom-photocapabilities-imageheight-1">imageHeight</a>;
@@ -1711,7 +1728,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
   <span class="kt">readonly</span> <span class="kt">attribute</span> <span class="kt">FrozenArray</span>&lt;<a class="n" data-link-type="idl-name" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-1">FillLightMode</a>> <a class="nv idl-code" data-link-type="attribute" data-readonly="" data-type="FrozenArray<FillLightMode>" href="#dom-photocapabilities-filllightmode" id="ref-for-dom-photocapabilities-filllightmode-1">fillLightMode</a>;
 };
 </pre>
-   <h3 class="heading settled" data-level="4.1" id="#photocapabilities-attributes"><span class="secno">4.1. </span><span class="content">Attributes</span><a class="self-link" href="#%23photocapabilities-attributes"></a></h3>
+   <h3 class="heading settled" data-level="4.1" id="photocapabilities-attributes"><span class="secno">4.1. </span><span class="content">Attributes</span><a class="self-link" href="#photocapabilities-attributes"></a></h3>
    <dl class="domintro">
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="PhotoCapabilities" data-dfn-type="attribute" data-export="" id="dom-photocapabilities-redeyereduction"><code><code>redEyeReduction</code></code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-redeyereduction" id="ref-for-enumdef-redeyereduction-2">RedEyeReduction</a>, readonly</span>
     <dd>The <a data-link-type="dfn" href="#red-eye-reduction" id="ref-for-red-eye-reduction-1">red eye reduction</a> capacity of the source.
@@ -1723,7 +1740,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
     <dd>This reflects the supported <a data-link-type="dfn" href="#fill-light-mode" id="ref-for-fill-light-mode-1">fill light mode</a> (flash) settings, if any.
    </dl>
    <div class="note" role="note"> The supported resolutions are presented as segregated <code class="idl"><a data-link-type="idl" href="#dom-photocapabilities-imagewidth" id="ref-for-dom-photocapabilities-imagewidth-2">imageWidth</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-photocapabilities-imageheight" id="ref-for-dom-photocapabilities-imageheight-2">imageHeight</a></code> ranges to prevent increasing the fingerprinting surface and to allow the UA to make a best-effort decision with regards to actual hardware configuration. </div>
-   <h2 class="heading settled" data-level="5" id="#photosettings-section"><span class="secno">5. </span><span class="content">PhotoSettings</span><a class="self-link" href="#%23photosettings-section"></a></h2>
+   <h2 class="heading settled" data-level="5" id="photosettings-section"><span class="secno">5. </span><span class="content">PhotoSettings</span><a class="self-link" href="#photosettings-section"></a></h2>
 <pre class="idl highlight def"><span class="kt">dictionary</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="dictionary" data-export="" id="dictdef-photosettings"><code>PhotoSettings</code></dfn> {
   <a class="n" data-link-type="idl-name" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode-3">FillLightMode</a>   <a class="nv idl-code" data-link-type="dict-member" data-type="FillLightMode   " href="#dom-photosettings-filllightmode" id="ref-for-dom-photosettings-filllightmode-1">fillLightMode</a>;
   <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double"><span class="kt">double</span></a>          <a class="nv idl-code" data-link-type="dict-member" data-type="double          " href="#dom-photosettings-imageheight" id="ref-for-dom-photosettings-imageheight-1">imageHeight</a>;
@@ -1731,7 +1748,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
   <a class="n idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-boolean"><span class="kt">boolean</span></a>         <a class="nv idl-code" data-link-type="dict-member" data-type="boolean         " href="#dom-photosettings-redeyereduction" id="ref-for-dom-photosettings-redeyereduction-1">redEyeReduction</a>;
 };
 </pre>
-   <h3 class="heading settled" data-level="5.1" id="#photosettings-members"><span class="secno">5.1. </span><span class="content">Members</span><a class="self-link" href="#%23photosettings-members"></a></h3>
+   <h3 class="heading settled" data-level="5.1" id="photosettings-members"><span class="secno">5.1. </span><span class="content">Members</span><a class="self-link" href="#photosettings-members"></a></h3>
    <dl class="domintro">
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="PhotoSettings" data-dfn-type="dict-member" data-export="" id="dom-photosettings-redeyereduction"><code><code>redEyeReduction</code></code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-boolean">boolean</a></span>
     <dd>This reflects whether camera <a data-link-type="dfn" href="#red-eye-reduction" id="ref-for-red-eye-reduction-2">red eye reduction</a> is desired
@@ -1791,7 +1808,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
     <dd>This value will always cause the flash to fire for <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-takephoto" id="ref-for-dom-imagecapture-takephoto-11">takePhoto()</a></code> method.
    </dl>
    <h2 class="heading settled" data-level="9" id="extensions"><span class="secno">9. </span><span class="content">Extensions</span><a class="self-link" href="#extensions"></a></h2>
-   <p>This Section defines a number of new set of <a data-link-type="dfn" href="https://www.w3.org/TR/mediacapture-streams/#defining-a-new-constrainable-property">Constrainable Properties</a> for <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code> that can be applied in order to make its behavior more suitable for taking pictures.  Use of these constraints via <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code>'s methods <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-getCapabilities-MediaTrackCapabilities">getCapabilities()</a></code>, <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-ConstrainablePattern-getSettings-Settings">getSettings()</a></code>, <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-getConstraints-MediaTrackConstraints">getConstraints()</a></code> and <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-applyConstraints-Promise-void--MediaTrackConstraints-constraints">applyConstraints()</a></code> will modify the behavior of  the <code class="idl"><a data-link-type="idl" href="#imagecapture" id="ref-for-imagecapture-1">ImageCapture</a></code> object’s <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-track" id="ref-for-dom-imagecapture-track-13">track</a></code>.</p>
+   <p>This Section defines a number of new set of <a data-link-type="dfn" href="https://www.w3.org/TR/mediacapture-streams/#defining-a-new-constrainable-property">Constrainable Properties</a> for <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code> that can be applied in order to make its behavior more suitable for taking pictures.  Use of these constraints via <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code>'s methods <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-getCapabilities-MediaTrackCapabilities">getCapabilities()</a></code>, <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-ConstrainablePattern-getSettings-Settings">getSettings()</a></code>, <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-getConstraints-MediaTrackConstraints">getConstraints()</a></code> and <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-applyConstraints-Promise-void--MediaTrackConstraints-constraints">applyConstraints()</a></code> will modify the behavior of  the <code class="idl"><a data-link-type="idl" href="#imagecapture" id="ref-for-imagecapture-1">ImageCapture</a></code> object’s <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-track" id="ref-for-dom-imagecapture-track-15">track</a></code>.</p>
    <h3 class="heading settled" data-level="9.1" id="mediatracksupportedconstraints-section"><span class="secno">9.1. </span><span class="content"><code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaTrackSupportedConstraints">MediaTrackSupportedConstraints</a></code> dictionary</span><a class="self-link" href="#mediatracksupportedconstraints-section"></a></h3>
    <p><code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaTrackSupportedConstraints">MediaTrackSupportedConstraints</a></code> is extended here with the list of constraints that a User Agent recognizes for controlling the photo capabilities.  This dictionary can be retrieved using <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediadevices-interface-extensions">MediaDevices</a></code> <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaDevices-getSupportedConstraints-MediaTrackSupportedConstraints">getSupportedConstraints()</a></code> method.</p>
 <pre class="idl highlight def"><span class="kt">partial</span> <span class="kt">dictionary</span> <a class="nv idl-code" data-link-type="dictionary" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaTrackSupportedConstraints">MediaTrackSupportedConstraints</a> {
@@ -2071,7 +2088,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
      <div class="note" role="note"> The supported resolutions are managed segregated e.g. <code class="idl"><a data-link-type="idl" href="#dom-photocapabilities-imagewidth" id="ref-for-dom-photocapabilities-imagewidth-3">imageWidth</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-photocapabilities-imageheight" id="ref-for-dom-photocapabilities-imageheight-3">imageHeight</a></code> values/ranges to prevent increasing the fingerprinting surface and to allow the UA to make a best-effort decision with regards to actual hardware configuration vis-a-vis requested constraints. </div>
     <li><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="focus-distance">Focus distance</dfn> is a numeric camera setting that controls the focus distance of the lens.  The setting usually represents distance in meters to the optimal focus distance.
     <li><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="zoom">Zoom</dfn> is a numeric camera setting that controls the focal length of the lens.  The setting usually represents a ratio, e.g. 4 is a zoom ratio of 4:1.  The minimum value is usually 1, to represent a 1:1 ratio (i.e. no zoom).
-    <li><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="fill-light-mode">Fill light mode</dfn> describes the flash setting of the capture device (e.g. <var>auto</var>, <var>off</var>, <var>on</var>). <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="torch">Torch</dfn> describes the setting of the source’s fill light as  continuously connected, staying on as long as <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-track" id="ref-for-dom-imagecapture-track-14">track</a></code> is active.
+    <li><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="fill-light-mode">Fill light mode</dfn> describes the flash setting of the capture device (e.g. <var>auto</var>, <var>off</var>, <var>on</var>). <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="torch">Torch</dfn> describes the setting of the source’s fill light as  continuously connected, staying on as long as <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-track" id="ref-for-dom-imagecapture-track-16">track</a></code> is active.
    </ol>
    <h2 class="heading settled" data-level="11" id="meteringmode-section"><span class="secno">11. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode-10">MeteringMode</a></code></span><a class="self-link" href="#meteringmode-section"></a></h2>
 <pre class="idl highlight def"><span class="kt">enum</span> <dfn class="nv dfn-paneled idl-code" data-dfn-type="enum" data-export="" id="enumdef-meteringmode"><code>MeteringMode</code></dfn> {
@@ -2414,7 +2431,6 @@ For instance, embedding the user’s location in the metadata of the digitzed im
      <li><a href="#dom-mediatrackconstraintset-exposuremode">dict-member for MediaTrackConstraintSet</a><span>, in §9.3.1</span>
      <li><a href="#dom-mediatracksettings-exposuremode">dict-member for MediaTrackSettings</a><span>, in §9.4.1</span>
     </ul>
-   <li><a href="#enumdef-filllightmode">FillLightMode</a><span>, in §8</span>
    <li><a href="#fill-light-mode">Fill light mode</a><span>, in §10</span>
    <li>
     fillLightMode
@@ -2422,6 +2438,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
      <li><a href="#dom-photocapabilities-filllightmode">attribute for PhotoCapabilities</a><span>, in §4.1</span>
      <li><a href="#dom-photosettings-filllightmode">dict-member for PhotoSettings</a><span>, in §5.1</span>
     </ul>
+   <li><a href="#enumdef-filllightmode">FillLightMode</a><span>, in §8</span>
    <li><a href="#dom-filllightmode-flash">flash</a><span>, in §8.1</span>
    <li>
     focusDistance
@@ -2442,6 +2459,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
      <li><a href="#dom-mediatracksettings-focusmode">dict-member for MediaTrackSettings</a><span>, in §9.4.1</span>
     </ul>
    <li><a href="#dom-imagecapture-getphotocapabilities">getPhotoCapabilities()</a><span>, in §3.2</span>
+   <li><a href="#dom-imagecapture-getphotosettings">getPhotoSettings()</a><span>, in §3.2</span>
    <li><a href="#dom-imagecapture-grabframe">grabFrame()</a><span>, in §3.2</span>
    <li><a href="#dom-constrainpoint2dparameters-ideal">ideal</a><span>, in §9.5.1</span>
    <li><a href="#imagecapture">ImageCapture</a><span>, in §3</span>
@@ -2610,6 +2628,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
 <span class="kt">interface</span> <a class="nv" href="#imagecapture"><code>ImageCapture</code></a> {
    <span class="kt">Promise</span>&lt;<a class="n" data-link-type="idl-name" href="https://w3c.github.io/FileAPI/#dfn-Blob">Blob</a>>              <a class="nv idl-code" data-link-type="method" href="#dom-imagecapture-takephoto">takePhoto</a>(<span class="kt">optional</span> <a class="n" data-link-type="idl-name" href="#dictdef-photosettings">PhotoSettings</a> <a class="nv" href="#dom-imagecapture-takephoto-photosettings-photosettings"><code>photoSettings</code></a>);
    <span class="kt">Promise</span>&lt;<a class="n" data-link-type="idl-name" href="#photocapabilities">PhotoCapabilities</a>> <a class="nv idl-code" data-link-type="method" href="#dom-imagecapture-getphotocapabilities">getPhotoCapabilities</a>();
+   <span class="kt">Promise</span>&lt;<a class="n" data-link-type="idl-name" href="#dictdef-photosettings">PhotoSettings</a>>     <a class="nv idl-code" data-link-type="method" href="#dom-imagecapture-getphotosettings">getPhotoSettings</a>();
 
    <span class="kt">Promise</span>&lt;<a class="n" data-link-type="idl-name" href="https://html.spec.whatwg.org/multipage/imagebitmap-and-animations.html#imagebitmap">ImageBitmap</a>>       <a class="nv idl-code" data-link-type="method" href="#dom-imagecapture-grabframe">grabFrame</a>();
 
@@ -2765,9 +2784,9 @@ For instance, embedding the user’s location in the metadata of the digitzed im
    <b><a href="#dom-imagecapture-track">#dom-imagecapture-track</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-imagecapture-track-1">3. Image Capture API</a> <a href="#ref-for-dom-imagecapture-track-2">(2)</a>
-    <li><a href="#ref-for-dom-imagecapture-track-3">3.2. Methods</a> <a href="#ref-for-dom-imagecapture-track-4">(2)</a> <a href="#ref-for-dom-imagecapture-track-5">(3)</a> <a href="#ref-for-dom-imagecapture-track-6">(4)</a> <a href="#ref-for-dom-imagecapture-track-7">(5)</a> <a href="#ref-for-dom-imagecapture-track-8">(6)</a> <a href="#ref-for-dom-imagecapture-track-9">(7)</a> <a href="#ref-for-dom-imagecapture-track-10">(8)</a> <a href="#ref-for-dom-imagecapture-track-11">(9)</a> <a href="#ref-for-dom-imagecapture-track-12">(10)</a>
-    <li><a href="#ref-for-dom-imagecapture-track-13">9. Extensions</a>
-    <li><a href="#ref-for-dom-imagecapture-track-14">10. Photo Capabilities and Constrainable Properties</a>
+    <li><a href="#ref-for-dom-imagecapture-track-3">3.2. Methods</a> <a href="#ref-for-dom-imagecapture-track-4">(2)</a> <a href="#ref-for-dom-imagecapture-track-5">(3)</a> <a href="#ref-for-dom-imagecapture-track-6">(4)</a> <a href="#ref-for-dom-imagecapture-track-7">(5)</a> <a href="#ref-for-dom-imagecapture-track-8">(6)</a> <a href="#ref-for-dom-imagecapture-track-9">(7)</a> <a href="#ref-for-dom-imagecapture-track-10">(8)</a> <a href="#ref-for-dom-imagecapture-track-11">(9)</a> <a href="#ref-for-dom-imagecapture-track-12">(10)</a> <a href="#ref-for-dom-imagecapture-track-13">(11)</a> <a href="#ref-for-dom-imagecapture-track-14">(12)</a>
+    <li><a href="#ref-for-dom-imagecapture-track-15">9. Extensions</a>
+    <li><a href="#ref-for-dom-imagecapture-track-16">10. Photo Capabilities and Constrainable Properties</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-imagecapture-imagecapture">
@@ -2795,6 +2814,14 @@ For instance, embedding the user’s location in the metadata of the digitzed im
     <li><a href="#ref-for-dom-imagecapture-getphotocapabilities-3">3.2. Methods</a> <a href="#ref-for-dom-imagecapture-getphotocapabilities-4">(2)</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="dom-imagecapture-getphotosettings">
+   <b><a href="#dom-imagecapture-getphotosettings">#dom-imagecapture-getphotosettings</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-imagecapture-getphotosettings-1">1. Introduction</a>
+    <li><a href="#ref-for-dom-imagecapture-getphotosettings-2">3. Image Capture API</a>
+    <li><a href="#ref-for-dom-imagecapture-getphotosettings-3">3.2. Methods</a> <a href="#ref-for-dom-imagecapture-getphotosettings-4">(2)</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="dom-imagecapture-grabframe">
    <b><a href="#dom-imagecapture-grabframe">#dom-imagecapture-grabframe</a></b><b>Referenced in:</b>
    <ul>
@@ -2808,7 +2835,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
    <b><a href="#photocapabilities">#photocapabilities</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-photocapabilities-1">3. Image Capture API</a>
-    <li><a href="#ref-for-photocapabilities-2">3.2. Methods</a> <a href="#ref-for-photocapabilities-3">(2)</a> <a href="#ref-for-photocapabilities-4">(3)</a>
+    <li><a href="#ref-for-photocapabilities-2">3.2. Methods</a> <a href="#ref-for-photocapabilities-3">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-photocapabilities-redeyereduction">
@@ -2843,8 +2870,8 @@ For instance, embedding the user’s location in the metadata of the digitzed im
    <b><a href="#dictdef-photosettings">#dictdef-photosettings</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dictdef-photosettings-1">1. Introduction</a>
-    <li><a href="#ref-for-dictdef-photosettings-2">3. Image Capture API</a>
-    <li><a href="#ref-for-dictdef-photosettings-3">3.2. Methods</a> <a href="#ref-for-dictdef-photosettings-4">(2)</a> <a href="#ref-for-dictdef-photosettings-5">(3)</a>
+    <li><a href="#ref-for-dictdef-photosettings-2">3. Image Capture API</a> <a href="#ref-for-dictdef-photosettings-3">(2)</a>
+    <li><a href="#ref-for-dictdef-photosettings-4">3.2. Methods</a> <a href="#ref-for-dictdef-photosettings-5">(2)</a> <a href="#ref-for-dictdef-photosettings-6">(3)</a> <a href="#ref-for-dictdef-photosettings-7">(4)</a> <a href="#ref-for-dictdef-photosettings-8">(5)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-photosettings-redeyereduction">
