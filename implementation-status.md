@@ -42,6 +42,7 @@ Feature/Platform          | Android                               | Linux/Chrome
 └ imageHeight             | ✓                                     | ✓              | ✓                                       | ✓   |
 └ imageWidth              | ✓                                     | ✓              | ✓                                       | ✓   |
 └ redEyeReduction         | ✓                                     |                |                                         |     |
+└ imageFormat             |                                       |                |                                         |     |
 `MediaTrack`*             |                                       |                |                                         |     |
 └ brightness              |                                       | ✓              |                                         |     |
 └ colorTemperature        |60 ([724626](https://crbug.com/724626))| ✓              | 60 ([657128](https://crbug.com/657128)) |     |
