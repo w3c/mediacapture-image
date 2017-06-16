@@ -1448,7 +1448,7 @@ pre.idl.highlight { color: #708090; }
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">"MediaStream Image Capture"</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-06-14">14 June 2017</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2017-06-16">16 June 2017</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1689,7 +1689,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
        Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps in parallel: 
        <ol>
         <li>Gather data from <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-track" id="ref-for-dom-imagecapture-track-8">track</a></code> into a <code class="idl"><a data-link-type="idl" href="#photocapabilities" id="ref-for-photocapabilities-2">PhotoCapabilities</a></code> object containing the available capabilities of the device, including ranges where appropriate. The method of doing this will depend on the underlying device. 
-        <li>If the UA is unable to execute the <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-getphotocapabilities" id="ref-for-dom-imagecapture-getphotocapabilities-4">getPhotoCapabilities()</a></code> method for any reason (for example, the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code> being ended asynchronously), then the UA MUST return <a data-link-type="dfn" href="https://www.w3.org/2001/tag/doc/promises-guide/#a-promise-rejected-with">a promise rejected with</a> a new <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> whose name is <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#operationerror">OperationError</a></code>.
+        <li>If the UA is unable to to gather the data for any reason (for example, the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code> being ended asynchronously), then the UA MUST return <a data-link-type="dfn" href="https://www.w3.org/2001/tag/doc/promises-guide/#a-promise-rejected-with">a promise rejected with</a> a new <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> whose name is <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#operationerror">OperationError</a></code>.
         <li>Return a promise resolved with the <code class="idl"><a data-link-type="idl" href="#photocapabilities" id="ref-for-photocapabilities-3">PhotoCapabilities</a></code> object.
        </ol>
      </ol>
@@ -1702,7 +1702,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
        Otherwise it MUST queue a task, using the DOM manipulation task source, that runs the following steps in parallel: 
        <ol>
         <li>Gather data from <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-track" id="ref-for-dom-imagecapture-track-10">track</a></code> into a <code class="idl"><a data-link-type="idl" href="#dictdef-photosettings" id="ref-for-dictdef-photosettings-7">PhotoSettings</a></code> containing the current conditions in which the device is found. The method of doing this will depend on the underlying device. 
-        <li>If the UA is unable to execute the <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-getphotosettings" id="ref-for-dom-imagecapture-getphotosettings-4">getPhotoSettings()</a></code> method for any reason (for example, the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code> being ended asynchronously), then the UA MUST return <a data-link-type="dfn" href="https://www.w3.org/2001/tag/doc/promises-guide/#a-promise-rejected-with">a promise rejected with</a> a new <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> whose name is <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#operationerror">OperationError</a></code>.
+        <li>If the UA is unable to gather the data for any reason (for example, the <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#mediastreamtrack">MediaStreamTrack</a></code> being ended asynchronously), then the UA MUST return <a data-link-type="dfn" href="https://www.w3.org/2001/tag/doc/promises-guide/#a-promise-rejected-with">a promise rejected with</a> a new <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#idl-DOMException">DOMException</a></code> whose name is <code class="idl"><a data-link-type="idl" href="https://heycam.github.io/webidl/#operationerror">OperationError</a></code>.
         <li>Return a promise resolved with the <code class="idl"><a data-link-type="idl" href="#dictdef-photosettings" id="ref-for-dictdef-photosettings-8">PhotoSettings</a></code> object.
        </ol>
      </ol>
@@ -2811,7 +2811,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
    <ul>
     <li><a href="#ref-for-dom-imagecapture-getphotocapabilities-1">1. Introduction</a>
     <li><a href="#ref-for-dom-imagecapture-getphotocapabilities-2">3. Image Capture API</a>
-    <li><a href="#ref-for-dom-imagecapture-getphotocapabilities-3">3.2. Methods</a> <a href="#ref-for-dom-imagecapture-getphotocapabilities-4">(2)</a>
+    <li><a href="#ref-for-dom-imagecapture-getphotocapabilities-3">3.2. Methods</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-imagecapture-getphotosettings">
@@ -2819,7 +2819,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
    <ul>
     <li><a href="#ref-for-dom-imagecapture-getphotosettings-1">1. Introduction</a>
     <li><a href="#ref-for-dom-imagecapture-getphotosettings-2">3. Image Capture API</a>
-    <li><a href="#ref-for-dom-imagecapture-getphotosettings-3">3.2. Methods</a> <a href="#ref-for-dom-imagecapture-getphotosettings-4">(2)</a>
+    <li><a href="#ref-for-dom-imagecapture-getphotosettings-3">3.2. Methods</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-imagecapture-grabframe">
