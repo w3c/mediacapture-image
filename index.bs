@@ -292,7 +292,7 @@ interface ImageCapture {
   enum RedEyeReduction {
     "never",
     "always",
-    "controllable",
+    "controllable"
   };
 </pre>
 
@@ -317,7 +317,7 @@ interface ImageCapture {
   enum FillLightMode {
     "auto",
     "off",
-    "flash",
+    "flash"
   };
 </pre>
 
