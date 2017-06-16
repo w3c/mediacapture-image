@@ -158,7 +158,7 @@ interface ImageCapture {
     <ol>
       <li>Gather data from {{track}} into a {{PhotoCapabilities}} object containing the available capabilities of the device, including ranges where appropriate. The method of doing this will depend on the underlying device. </li>
 
-      <li>If the UA is unable to execute the {{getPhotoCapabilities()}} method for any reason (for example, the {{MediaStreamTrack}} being ended asynchronously), then the UA MUST return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{OperationError}}.</li>
+      <li>If the UA is unable to to gather the data for any reason (for example, the {{MediaStreamTrack}} being ended asynchronously), then the UA MUST return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{OperationError}}.</li>
 
       <li>Return a promise resolved with the {{PhotoCapabilities}} object.</li>
     </ol>
@@ -176,7 +176,7 @@ interface ImageCapture {
     <ol>
       <li>Gather data from {{track}} into a {{PhotoSettings}} containing the current conditions in which the device is found. The method of doing this will depend on the underlying device. </li>
 
-      <li>If the UA is unable to execute the {{getPhotoSettings()}} method for any reason (for example, the {{MediaStreamTrack}} being ended asynchronously), then the UA MUST return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{OperationError}}.</li>
+      <li>If the UA is unable to gather the data for any reason (for example, the {{MediaStreamTrack}} being ended asynchronously), then the UA MUST return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{OperationError}}.</li>
 
       <li>Return a promise resolved with the {{PhotoSettings}} object.</li>
     </ol>
