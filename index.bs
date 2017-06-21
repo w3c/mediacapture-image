@@ -6,7 +6,7 @@ Status: ED
 ED: https://w3c.github.io/mediacapture-image/
 TR: https://www.w3.org/TR/image-capture/
 Shortname: image-capture
-Level: 1
+Level: none
 Editor: Giridhar Mandyam, w3cid 54271, Qualcomm Innovation Center Inc.
 Editor: Miguel Casas-Sanchez, w3cid 82825, Google Inc., mcasas@google.com
 Abstract: This document specifies methods and camera settings to produce photographic image capture. The source of images is, or can be referenced via a {{MediaStreamTrack}}.
