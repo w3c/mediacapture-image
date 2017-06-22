@@ -1,5 +1,5 @@
 <pre class="metadata">
-Title: "MediaStream Image Capture"
+Title: MediaStream Image Capture
 Repository: image-capture
 Group: mediacapture
 Status: ED
