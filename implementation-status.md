@@ -12,7 +12,7 @@ different browsers.
 
 # Chrome
 * Notes updated **June 2017**.
-* *No flag needed after M59*  (before that, use the `chrome://flags/#enable-experimental-web-platform-features` flag).
+* *No flag needed after M59*  (before that, use `chrome://flags/#enable-experimental-web-platform-features`).
 
 ImageCapture method       |Available                               |
 ------------------------- | :------------------------------------- |
