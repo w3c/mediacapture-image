@@ -11,61 +11,51 @@ different browsers.
 <a href="#samsung-internet"><img width=64 src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/samsung-internet/samsung-internet_128x128.png" alt="Samsung Internet browser logo"></a>
 
 # Chrome
-Work is in progress:
 * Notes updated **June 2017**.
-* *No flag needed in M59*  (before that, use the `chrome://flags/#enable-experimental-web-platform-features` flag).
+* *No flag needed after M59*  (before that, use the `chrome://flags/#enable-experimental-web-platform-features` flag).
 
-Method                    |Available|
-------------------------- | :-----: |
-grabFrame()               | ✓       |
-takePhoto()               | ✓       |
+ImageCapture method       |Available                               |
+------------------------- | :------------------------------------- |
+grabFrame()               | ✓                                      |
+takePhoto()               | ✓                                      |
+getPhotoCapabilities()    | ✓                                      |
+getPhotoSettings()        | 61 ([732521](https://crbug.com/732521))|
+setOptions()              | ✓                                      |
 
-Method                    |Available|
-------------------------- | :-----: |
-getPhotoCapabilities()    | ✓       |
-getPhotoSettings()        | M61 [1] |
-setOptions()              | ✓       |
+MediaStreamTrack methods  | Available  |
+------------------------- | :--------- |
+getCapabilities()         | ✓          |
+applyConstraints()        | ✓          |
+getConstraints()          | ✓          |
+getSettings()             | ✓          |
 
-[1] [crbug.com/732521](https://crbug.com/732521).
+MediaDevices methods      | Available  |
+------------------------- | :--------- |
+getSupportedConstraints() | ✓          |
 
-MediaStreamTrack methods  | Available   |
-------------------------- | :---------: |
-getCapabilities()         | M59 |
-applyConstraints()        | M59 |
-getConstraints()          | M59 |
-getSettings()             | M59 |
+Individual features per-platform availability:
 
-MediaDevices methods      | Available   |
-------------------------- | :---------: |
-getSupportedConstraints() | M59         |
-
-The individual features per platform availability:
-
-Feature/Platform          | Android | Linux/ChromeOS | Windows | Mac |
-------------------------- | :-----: | :------------: | :-----: | :-: |
-`Photo{Capabilities/Settings}`|     |                |         |     |
-└ fillLightMode           | ✓       |                |         |     |
-└ imageHeight             | ✓       | ✓              | ✓       | ✓   |
-└ imageWidth              | ✓       | ✓              | ✓       | ✓   |
-└ redEyeReduction         | ✓       |                |         |     |
-`MediaTrack`*             |         |                |         |     |
-└ brightness              |         | ✓              |         |     |
-└ colorTemperature        | ✓ [2]   | ✓              | M60 [1] |     |
-└ contrast                |         | ✓              | M60 [1] |     |
-└ exposureCompensation    | ✓ [3]   | ✓              | M60 [1] |     |
-└ exposureMode            | ✓       | ✓              | M60 [1] |     |
-└ focusDistance           |         |                |         |     |
-└ focusMode               | ✓       | ✓              | M60 [1] |     |
-└ iso                     | ✓       |                |         |     |
-└ pointsOfInterest        | ✓       |                |         |     |
-└ saturation              |         | ✓              | M60 [1] |     |
-└ sharpness               |         | ✓              | M60 [1] |     |
-└ whiteBalanceMode        | ✓       | ✓              | M60 [1] |     |
-└ zoom                    | ✓       | ✓              | M60 [1] |     |
-
-[1] [crbug.com/657128](https://crbug.com/657128).
-[2] [crbug.com/724626](https://crbug.com/724626).
-[3] [crbug.com/724730](https://crbug.com/724730).
+Feature/Platform          | Android                               | Linux/ChromeOS | Windows                                 | Mac |
+------------------------- | :------------------------------------ | :------------  | :-------------------------------------- | :-  |
+`Photo{Capabilities/Settings}`|                                   |                |                                         |     |
+└ fillLightMode           | ✓                                     |                |                                         |     |
+└ imageHeight             | ✓                                     | ✓              | ✓                                       | ✓   |
+└ imageWidth              | ✓                                     | ✓              | ✓                                       | ✓   |
+└ redEyeReduction         | ✓                                     |                |                                         |     |
+`MediaTrack`*             |                                       |                |                                         |     |
+└ brightness              |                                       | ✓              |                                         |     |
+└ colorTemperature        | ✓ ([724626](https://crbug.com/724626))| ✓              | 60 ([657128](https://crbug.com/657128)) |     |
+└ contrast                |                                       | ✓              | 60 ([657128](https://crbug.com/657128)) |     |
+└ exposureCompensation    | ✓ ([724730](https://crbug.com/724730))| ✓              | 60 ([657128](https://crbug.com/657128)) |     |
+└ exposureMode            | ✓                                     | ✓              | 60 ([657128](https://crbug.com/657128)) |     |
+└ focusDistance           |   ([724626](https://crbug.com/724626))|                |                                         |     |
+└ focusMode               | ✓                                     | ✓              | 60 ([657128](https://crbug.com/657128)) |     |
+└ iso                     | ✓                                     |                |                                         |     |
+└ pointsOfInterest        | ✓                                     |                |                                         |     |
+└ saturation              |                                       | ✓              | 60 ([657128](https://crbug.com/657128)) |     |
+└ sharpness               |                                       | ✓              | 60 ([657128](https://crbug.com/657128)) |     |
+└ whiteBalanceMode        | ✓                                     | ✓              | 60 ([657128](https://crbug.com/657128)) |     |
+└ zoom                    | ✓                                     | ✓              | 60 ([657128](https://crbug.com/657128)) |     |
 
 ### Unsupported platforms
 
