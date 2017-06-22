@@ -44,11 +44,11 @@ Feature/Platform          | Android                               | Linux/Chrome
 └ redEyeReduction         | ✓                                     |                |                                         |     |
 `MediaTrack`*             |                                       |                |                                         |     |
 └ brightness              |                                       | ✓              |                                         |     |
-└ colorTemperature        | ✓ ([724626](https://crbug.com/724626))| ✓              | 60 ([657128](https://crbug.com/657128)) |     |
+└ colorTemperature        |60 ([724626](https://crbug.com/724626))| ✓              | 60 ([657128](https://crbug.com/657128)) |     |
 └ contrast                |                                       | ✓              | 60 ([657128](https://crbug.com/657128)) |     |
-└ exposureCompensation    | ✓ ([724730](https://crbug.com/724730))| ✓              | 60 ([657128](https://crbug.com/657128)) |     |
+└ exposureCompensation    |   ([724730](https://crbug.com/724730))| ✓              | 60 ([657128](https://crbug.com/657128)) |     |
 └ exposureMode            | ✓                                     | ✓              | 60 ([657128](https://crbug.com/657128)) |     |
-└ focusDistance           |   ([724626](https://crbug.com/724626))|                |                                         |     |
+└ focusDistance           |   ([732807](https://crbug.com/732807))|                |                                         |     |
 └ focusMode               | ✓                                     | ✓              | 60 ([657128](https://crbug.com/657128)) |     |
 └ iso                     | ✓                                     |                |                                         |     |
 └ pointsOfInterest        | ✓                                     |                |                                         |     |
