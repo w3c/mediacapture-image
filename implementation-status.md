@@ -51,9 +51,11 @@ Feature/Platform          | Android                               | Linux/Chrome
 └ focusDistance           |   ([732807](https://crbug.com/732807))|                |                                         |     |
 └ focusMode               | ✓                                     | ✓              | 60 ([657128](https://crbug.com/657128)) |     |
 └ iso                     | ✓                                     |                |                                         |     |
+└ pan                     |                                       |                |                                         |     |
 └ pointsOfInterest        | ✓                                     |                |                                         |     |
 └ saturation              |                                       | ✓              | 60 ([657128](https://crbug.com/657128)) |     |
 └ sharpness               |                                       | ✓              | 60 ([657128](https://crbug.com/657128)) |     |
+└ tilt                    |                                       |                |                                         |     |
 └ whiteBalanceMode        | ✓                                     | ✓              | 60 ([657128](https://crbug.com/657128)) |     |
 └ zoom                    | ✓                                     | ✓              | 60 ([657128](https://crbug.com/657128)) |     |
 
