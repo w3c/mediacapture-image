@@ -40,7 +40,7 @@ table td, table th {
 
 # Introduction # {#introduction}
 
-The API defined in this document captures images from a photographic device referenced through a valid {{MediaStreamTrack}}. The produced image can be in the form of a {{Blob}} (see {{takePhoto()}} method) or as a {{ImageBitmap}} (see {{grabFrame()}}).
+The API defined in this document captures images from a photographic device referenced through a valid {{MediaStreamTrack}} [[!GETUSERMEDIA]]. The produced image can be in the form of a {{Blob}} (see {{takePhoto()}} method) or as a {{ImageBitmap}} (see {{grabFrame()}}).
 
 Reading capabilities and settings and applying constraints is done in one of two ways depending on whether it impacts the video {{MediaStreamTrack}} or not.  Photo-specific capabilities and current settings can be retrieved via {{getPhotoCapabilities()}}/{{getPhotoSettings()}} and configured via {{takePhoto()}}'s {{PhotoSettings}} argument.  Manipulating video-related capabilities, current settings and constraints is done via the MediaStreamTrack <a href="#extensions">extension mechanism</a>.
 
@@ -481,7 +481,7 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
 
 ## {{MediaTrackConstraintSet}} dictionary ## {#mediatrackconstraintset-section}
 
-{{MediaTrackConstraintSet}} dictionary is used for both reading the current status with {{getConstraints()}} and for applying a set of constraints with {{applyConstraints()}}.
+{{MediaTrackConstraintSet}} [[!GETUSERMEDIA]] dictionary is used for both reading the current status with {{getConstraints()}} and for applying a set of constraints with {{applyConstraints()}}.
 
 <div class="note">
 {{MediaTrackSettings}} can be retrieved to verify the effect of the application by the user agent of the requested {{MediaTrackConstraints}}. Some constraints such as, e.g. <a>zoom</a>, might not be immediately applicable.
