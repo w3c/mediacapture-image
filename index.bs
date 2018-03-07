@@ -617,7 +617,7 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
   <dd><a>Color temperature</a> in use for the white balance calculation of the scene. This field is only significant if {{MediaTrackSettings/whiteBalanceMode}} is {{manual}}.</dd>
 
   <dt><dfn dict-member for="MediaTrackSettings"><code>exposureCompensation</code></dfn></dt>
-  <dd>Current <a>exposure compensation</a> setting.  A value of 0 EV is interpreted as no exposure compensation.</dd>
+  <dd>Current <a>exposure compensation</a> setting.  A value of 0 EV is interpreted as no exposure compensation. This field is only significat if {{MediaTrackSettings/exposureMode}} is </dd>
 
   <dt><dfn dict-member for="MediaTrackSettings"><code>exposureTime</code></dfn></dt>
   <dd>Current <a>exposure time</a> setting. This field is only significant if {{MediaTrackSettings/exposureMode}} is {{manual}}.</dd>
@@ -696,7 +696,7 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
     </table>
     </li>
 
-    <li><i><dfn>Exposure</dfn></i> is the amount of light that is allowed to fall on the photosensitive device.  Auto-exposure mode is a camera setting where the exposure time and/or camera aperture are automatically adjusted by the implementation based on the subject of the photo. In manual exposure mode, these parameters are set to fixed absolute values.</li>
+    <li><i><dfn>Exposure</dfn></i> is the amount of light that is allowed to fall on the photosensitive device. In auto-exposure modes ({{MeteringMode/single-shot}} or {{MeteringMode/continuous}} {{MediaTrackSettings/exposureMode}}), the exposure time and/or camera aperture are automatically adjusted by the implementation based on the subject of the photo. In {{MeteringMode/manual}} {{MediaTrackSettings/exposureMode}}, these parameters are set to fixed absolute values.</li>
 
     <li><dfn>Focus mode</dfn> describes the focus setting of the capture device (e.g. |auto| or |manual|). </li>
 
@@ -704,9 +704,9 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
 
     A {{Point2D}} Point of Interest is interpreted to represent a pixel position in a normalized square space (|{x,y} &isin; [0.0, 1.0]|). The origin of coordinates |{x,y} = {0.0, 0.0}| represents the upper leftmost corner whereas the |{x,y} = {1.0, 1.0}| represents the lower rightmost corner: the <a href="#dom-point2d-x"><code>x</code></a> coordinate (columns) increases rightwards and the <a href="#dom-point2d-y"><code>y</code></a> coordinate (rows) increases downwards. Values beyond the mentioned limits will be clamped to the closest allowed value.</li>
 
-    <li><i><dfn>Exposure Compensation</dfn></i> is a numeric camera setting that adjusts the exposure level from the current value used by the implementation.  This value can be used to bias the exposure level enabled by auto-exposure, and usually is a symmetric range around 0 EV (the no-compensation value). This value is only used in <a href="#dom-meteringmode-single-shot">single-shot</a> and <a href="#dom-meteringmode-continuous">continuous</a> exposure modes.</li>
+    <li><i><dfn>Exposure Compensation</dfn></i> is a numeric camera setting that adjusts the exposure level from the current value used by the implementation.  This value can be used to bias the exposure level enabled by auto-exposure, and usually is a symmetric range around 0 EV (the no-compensation value). This value is only used in {{MeteringMode/single-shot}} and {{MeteringMode/continuous}} {{MediaTrackSettings/exposureMode}}.</li>
 
-    <li><i><dfn>Exposure Time</dfn></i> is a numeric camera setting that controls the length of time during which light is allowed to fall on the photosensitive device. This value is used in <a href="#dom-meteringmode-manual">manual</a> exposure mode to control exposure. The value is in 100 microsecond units. That is, a value of 1.0 means an exposure time of 1/10000th of a second and a value of 10000.0 means an exposure time of 1 second.</li>
+    <li><i><dfn>Exposure Time</dfn></i> is a numeric camera setting that controls the length of time during which light is allowed to fall on the photosensitive device. This value is used in {{MeteringMode/manual}} {{MediaTrackSettings/exposureMode}} to control exposure. The value is in 100 microsecond units. That is, a value of 1.0 means an exposure time of 1/10000th of a second and a value of 10000.0 means an exposure time of 1 second.</li>
 
     <li>The <i><dfn>ISO</dfn></i> setting of a camera describes the sensitivity of the camera to light. It is a numeric value, where the lower the value the greater the sensitivity.  This value should follow the [[iso12232]] standard.</li>
 
