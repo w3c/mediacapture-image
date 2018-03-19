@@ -465,7 +465,7 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
   <dd>This reflects the supported range of <a>exposure compensation</a>. The supported range can be, and usually is, centered around 0 EV.</dd>
 
   <dt><dfn dict-member for="MediaTrackCapabilities"><code>exposureTime</code></dfn></dt>
-  <dd>This reflects the supported range of <a>exposure time</a>.</dd>
+  <dd>This reflects the supported range of <a>exposure time</a>. Values are numeric. Increasing values indicate increasing exposure time.</dd>
 
   <dt><dfn dict-member for="MediaTrackCapabilities"><code>iso</code></dfn></dt>
   <dd>This reflects the permitted range of <a>ISO</a> values.</dd>
@@ -617,7 +617,7 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
   <dd><a>Color temperature</a> in use for the white balance calculation of the scene. This field is only significant if {{MediaTrackSettings/whiteBalanceMode}} is {{manual}}.</dd>
 
   <dt><dfn dict-member for="MediaTrackSettings"><code>exposureCompensation</code></dfn></dt>
-  <dd>Current <a>exposure compensation</a> setting.  A value of 0 EV is interpreted as no exposure compensation. This field is only significat if {{MediaTrackSettings/exposureMode}} is </dd>
+  <dd>Current <a>exposure compensation</a> setting.  A value of 0 EV is interpreted as no exposure compensation. This field is only significant if {{MediaTrackSettings/exposureMode}} is {{MeteringMode/continuous}} or {{MeteringMode/single-shot}}</dd>
 
   <dt><dfn dict-member for="MediaTrackSettings"><code>exposureTime</code></dfn></dt>
   <dd>Current <a>exposure time</a> setting. This field is only significant if {{MediaTrackSettings/exposureMode}} is {{manual}}.</dd>
