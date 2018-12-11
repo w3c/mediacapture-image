@@ -220,6 +220,7 @@ interface ImageCapture {
     readonly attribute MediaSettingsRange         imageHeight;
     readonly attribute MediaSettingsRange         imageWidth;
     readonly attribute FrozenArray&lt;FillLightMode> fillLightMode;
+    readonly attribute FrozenArray&lt;DOMString>     imageFormat;
   };
 </pre>
 
@@ -237,6 +238,10 @@ interface ImageCapture {
 
   <dt><dfn attribute for="PhotoCapabilities"><code>fillLightMode</code></dfn></dt>
   <dd>This reflects the supported <a>fill light mode</a> (flash) settings, if any.</dd>
+
+  <dt><dfn attribute for="PhotoCapabilities"><code>imageFormat</code></dfn></dt>
+  <dd>This reflects the available <a>image format</a>s supported by the UA. The UA MUST support at
+  least one image format.</dd>
 </dl>
 
 <div class="note">
@@ -251,6 +256,7 @@ interface ImageCapture {
     double          imageHeight;
     double          imageWidth;
     boolean         redEyeReduction;
+    DOMString       imageFormat;
   };
 </pre>
 
@@ -268,6 +274,9 @@ interface ImageCapture {
 
   <dt><dfn dict-member for="PhotoSettings"><code>fillLightMode</code></dfn></dt>
   <dd>This reflects the desired <a>fill light mode</a> (flash) setting.</dd>
+
+  <dt><dfn dict-member for="PhotoSettings"><code>imageFormat</code></dfn></dt>
+  <dd>This reflects the desired <a>image format</a> setting.</dd>
 </dl>
 
 
@@ -737,6 +746,9 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
     <li><dfn>Zoom</dfn> is a numeric camera setting that controls the focal length of the lens.  The setting usually represents a ratio, e.g. 4 is a zoom ratio of 4:1.  The minimum value is usually 1, to represent a 1:1 ratio (i.e. no zoom).</li>
 
     <li><dfn>Fill light mode</dfn> describes the flash setting of the capture device (e.g. |auto|, |off|, |on|). <dfn>Torch</dfn> describes the setting of the source's fill light as  continuously connected, staying on as long as {{track}} is active.</li>
+
+    <li><dfn>Image format</dfn> is the ASCII-encoded string in lower case describing the format of an image. The <a>image format</a> string MUST be a <a>valid MIME type</a>, whose <a>type</a> MUST be an </a>image media type</a> and <a>subtype</a> MAY be one of the <a>IANA registered image subtypes</a>. The UA should be able to display any of the supported image formats.
+    </li>
   </ol>
 
 # {{MeteringMode}} # {#meteringmode-section}
@@ -1067,6 +1079,16 @@ urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dictionary; text:
 
 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dfn; text: constrainable property; url: defining-a-new-constrainable-property
+
+urlPrefix: https://mimesniff.spec.whatwg.org/#; spec: MIMESNIFF
+    type: dfn
+        text: valid mime type; url: valid-mime-type
+        text: type; url: type
+        text: subtype; url: subtype
+        text: image media type; url: image-type
+urlPrefix: https://www.iana.org/assignments/media-types/; spec: IANA-MEDIA-TYPES
+    type: dfn
+        text: IANA registered image subtypes; url: image
 </pre>
 
 <pre class="link-defaults">
