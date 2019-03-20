@@ -35,29 +35,29 @@ getSupportedConstraints() | ✓          |
 
 Individual features per-platform availability:
 
-Feature/Platform          | Android                               | Linux/ChromeOS | Windows                                 | Mac |
-------------------------- | :------------------------------------ | :------------  | :-------------------------------------- | :-  |
-`Photo{Capabilities/Settings}`|                                   |                |                                         |     |
-└ fillLightMode           | ✓                                     |                |                                         |     |
-└ imageHeight             | ✓                                     | ✓              | ✓                                       | ✓   |
-└ imageWidth              | ✓                                     | ✓              | ✓                                       | ✓   |
-└ redEyeReduction         | ✓                                     |                |                                         |     |
-`MediaTrack`*             |                                       |                |                                         |     |
-└ brightness              |                                       | ✓              |                                         |     |
-└ colorTemperature        |60 ([724626](https://crbug.com/724626))| ✓              | 60 ([657128](https://crbug.com/657128)) |     |
-└ contrast                |                                       | ✓              | 60 ([657128](https://crbug.com/657128)) |     |
-└ exposureCompensation    |   ([724730](https://crbug.com/724730))| ✓              | 60 ([657128](https://crbug.com/657128)) |     |
-└ exposureMode            | ✓                                     | ✓              | 60 ([657128](https://crbug.com/657128)) |     |
-└ focusDistance           |   ([732807](https://crbug.com/732807))|                |                                         |     |
-└ focusMode               | ✓                                     | ✓              | 60 ([657128](https://crbug.com/657128)) |     |
-└ iso                     | ✓                                     |                |                                         |     |
-└ pan                     |                                       |                |                                         |     |
-└ pointsOfInterest        | ✓                                     |                |                                         |     |
-└ saturation              |                                       | ✓              | 60 ([657128](https://crbug.com/657128)) |     |
-└ sharpness               |                                       | ✓              | 60 ([657128](https://crbug.com/657128)) |     |
-└ tilt                    |                                       |                |                                         |     |
-└ whiteBalanceMode        | ✓                                     | ✓              | 60 ([657128](https://crbug.com/657128)) |     |
-└ zoom                    | ✓                                     | ✓              | 60 ([657128](https://crbug.com/657128)) |     |
+Feature/Platform          | Android                               | Linux/ChromeOS                       | Windows                                 | Mac |
+------------------------- | :------------------------------------ | :------------                        | :-------------------------------------- | :-  |
+`Photo{Capabilities/Settings}`|                                   |                                      |                                         |     |
+└ fillLightMode           | ✓                                     |                                      |                                         |     |
+└ imageHeight             | ✓                                     | ✓                                    | ✓                                       | ✓   |
+└ imageWidth              | ✓                                     | ✓                                    | ✓                                       | ✓   |
+└ redEyeReduction         | ✓                                     |                                      |                                         |     |
+`MediaTrack`*             |                                       |                                      |                                         |     |
+└ brightness              |                                       | ✓                                    |                                         |     |
+└ colorTemperature        |60 ([724626](https://crbug.com/724626))| ✓                                    | 60 ([657128](https://crbug.com/657128)) |     |
+└ contrast                |                                       | ✓                                    | 60 ([657128](https://crbug.com/657128)) |     |
+└ exposureCompensation    |   ([724730](https://crbug.com/724730))| ✓                                    | 60 ([657128](https://crbug.com/657128)) |     |
+└ exposureMode            | ✓                                     | ✓                                    | 60 ([657128](https://crbug.com/657128)) |     |
+└ focusDistance           |   ([732807](https://crbug.com/732807))|                                      |                                         |     |
+└ focusMode               | ✓                                     | ✓                                    | 60 ([657128](https://crbug.com/657128)) |     |
+└ iso                     | ✓                                     |                                      |                                         |     |
+└ pan                     |                                       | ([934063](https://crbug.com/934063)) | ([934063](https://crbug.com/934063))    |     |
+└ pointsOfInterest        | ✓                                     |                                      |                                         |     |
+└ saturation              |                                       | ✓                                    | 60 ([657128](https://crbug.com/657128)) |     |
+└ sharpness               |                                       | ✓                                    | 60 ([657128](https://crbug.com/657128)) |     |
+└ tilt                    |                                       | ([934063](https://crbug.com/934063)) | ([934063](https://crbug.com/934063))    |     |
+└ whiteBalanceMode        | ✓                                     | ✓                                    | 60 ([657128](https://crbug.com/657128)) |     |
+└ zoom                    | ✓                                     | ✓                                    | 60 ([657128](https://crbug.com/657128)) |     |
 
 ### Unsupported platforms
 
