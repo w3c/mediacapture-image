@@ -47,8 +47,9 @@ Feature/Platform          | Android                               | Linux/Chrome
 └ colorTemperature        |60 ([724626](https://crbug.com/724626))| ✓                                    | 60 ([657128](https://crbug.com/657128)) |     |
 └ contrast                |                                       | ✓                                    | 60 ([657128](https://crbug.com/657128)) |     |
 └ exposureCompensation    |   ([724730](https://crbug.com/724730))| ✓                                    | 60 ([657128](https://crbug.com/657128)) |     |
+└ exposureTime            |72 ([823316](https://crbug.com/823316))| ✓              |
 └ exposureMode            | ✓                                     | ✓                                    | 60 ([657128](https://crbug.com/657128)) |     |
-└ focusDistance           |   ([732807](https://crbug.com/732807))|                                      |                                         |     |
+└ focusDistance           |72 ([732807](https://crbug.com/732807))| ✓                                     |                                         |     |
 └ focusMode               | ✓                                     | ✓                                    | 60 ([657128](https://crbug.com/657128)) |     |
 └ iso                     | ✓                                     |                                      |                                         |     |
 └ pan                     |                                       | ([934063](https://crbug.com/934063)) | ([934063](https://crbug.com/934063))    |     |
