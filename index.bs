@@ -59,7 +59,7 @@ The User Agent must support Promises in order to implement the Image Capture API
 <pre class="idl">
 [Exposed=Window, Constructor(MediaStreamTrack videoTrack)]
 interface ImageCapture {
-   Promise&lt;Blob&gt;              takePhoto(optional PhotoSettings photoSettings);
+   Promise&lt;Blob&gt;              takePhoto(optional PhotoSettings photoSettings = {});
    Promise&lt;PhotoCapabilities&gt; getPhotoCapabilities();
    Promise&lt;PhotoSettings&gt;     getPhotoSettings();
 
