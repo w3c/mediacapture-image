@@ -523,27 +523,27 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
 
 <pre class="idl">
   partial dictionary MediaTrackConstraintSet {
-    ConstrainDOMString whiteBalanceMode;
-    ConstrainDOMString exposureMode;
-    ConstrainDOMString focusMode;
-    ConstrainPoint2D   pointsOfInterest;
+    ConstrainDOMString           whiteBalanceMode;
+    ConstrainDOMString           exposureMode;
+    ConstrainDOMString           focusMode;
+    ConstrainPoint2D             pointsOfInterest;
 
-    ConstrainDouble    exposureCompensation;
-    ConstrainDouble    exposureTime;
-    ConstrainDouble    colorTemperature;
-    ConstrainDouble    iso;
+    ConstrainDouble              exposureCompensation;
+    ConstrainDouble              exposureTime;
+    ConstrainDouble              colorTemperature;
+    ConstrainDouble              iso;
 
-    ConstrainDouble    brightness;
-    ConstrainDouble    contrast;
-    ConstrainDouble    saturation;
-    ConstrainDouble    sharpness;
+    ConstrainDouble              brightness;
+    ConstrainDouble              contrast;
+    ConstrainDouble              saturation;
+    ConstrainDouble              sharpness;
 
-    ConstrainDouble    focusDistance;
-    ConstrainDouble    pan;
-    ConstrainDouble    tilt;
-    ConstrainDouble    zoom;
+    ConstrainDouble              focusDistance;
+    (boolean or ConstrainDouble) pan;
+    (boolean or ConstrainDouble) tilt;
+    (boolean or ConstrainDouble) zoom;
 
-    ConstrainBoolean   torch;
+    ConstrainBoolean             torch;
   };
 </pre>
 
@@ -581,7 +581,9 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
   <dd>See <a>contrast</a> constrainable property.</dd>
 
   <dt><dfn dict-member for="MediaTrackConstraintSet"><code>pan</code></dfn></dt>
-  <dd>See <a>pan</a> constrainable property.</dd>
+  <dd>A value of true is equivalent to a value of empty {{ConstrainDouble}}.
+      A value of false is equivalent to a value of null.
+      See <a>pan</a> constrainable property.</dd>
 
   <dt><dfn dict-member for="MediaTrackConstraintSet"><code>saturation</code></dfn></dt>
   <dd>See <a>saturation</a> constrainable property.</dd>
@@ -593,10 +595,14 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
   <dd>See <a>focus distance</a> constrainable property.</dd>
 
   <dt><dfn dict-member for="MediaTrackConstraintSet"><code>tilt</code></dfn></dt>
-  <dd>See <a>tilt</a> constrainable property.</dd>
+  <dd>A value of true is equivalent to a value of empty {{ConstrainDouble}}.
+      A value of false is equivalent to a value of null.
+      See <a>tilt</a> constrainable property.</dd>
 
   <dt><dfn dict-member for="MediaTrackConstraintSet"><code>zoom</code></dfn></dt>
-  <dd>See <a>zoom</a> constrainable property.</dd>
+  <dd>A value of true is equivalent to a value of empty {{ConstrainDouble}}.
+      A value of false is equivalent to a value of null.
+      See <a>zoom</a> constrainable property.</dd>
 
   <dt><dfn dict-member for="MediaTrackConstraintSet"><code>torch</code></dfn></dt>
   <dd>See <a>torch</a> constrainable property.</dd>
@@ -768,15 +774,21 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
 
     <li><dfn>Focus distance</dfn> is a numeric camera setting that controls the focus distance of the lens.  The setting usually represents distance in meters to the optimal focus distance.</li>
 
-    <li><dfn>Pan</dfn> is a numeric camera setting that controls the pan of the camera.  The setting represents pan in arc seconds, which are 1/3600th of a degree.  Values are in the range from –180*3600 arc seconds to +180*3600 arc seconds.  Positive values pan the camera clockwise as viewed from above, and negative values pan the camera counter clockwise as viewed from above.</li>
+    <li><dfn>Pan</dfn> is a numeric camera setting that controls the pan of the camera. The setting represents pan in arc seconds, which are 1/3600th of a degree. Values are in the range from –180*3600 arc seconds to +180*3600 arc seconds. Positive values pan the camera clockwise as viewed from above, and negative values pan the camera counter clockwise as viewed from above.
 
-    <li><dfn>Tilt</dfn> is a numeric camera setting that controls the tilt of the camera.  The setting represents tilt in arc seconds, which are 1/3600th of a degree.  Values are in the range from –180*3600 arc seconds to +180*3600 arc seconds.  Positive values tilt the camera upward when viewed from the front, and negative values tilt the camera downward as viewed from the front.
+    Any algorithm which uses a {{MediaTrackConstraintSet}} object and its {{MediaTrackConstraintSet/pan}} attribute which is not equivalent to null MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to "camera" and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its deviceId member set to any appropriate device's deviceId.</li>
+
+    <li><dfn>Tilt</dfn> is a numeric camera setting that controls the tilt of the camera. The setting represents tilt in arc seconds, which are 1/3600th of a degree. Values are in the range from –180*3600 arc seconds to +180*3600 arc seconds. Positive values tilt the camera upward when viewed from the front, and negative values tilt the camera downward as viewed from the front.
+
+    Any algorithm which uses a {{MediaTrackConstraintSet}} object and its {{MediaTrackConstraintSet/tilt}} attribute which is not equivalent to null MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to "camera" and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its deviceId member set to any appropriate device's deviceId.
 
     <div class="note">
-      There is no defined order when applying <a>pan</a> and <a>tilt</a>, the UA is allowed to apply them in any order.  In practice this should not matter since these values are absolute, so order will not affect the final position.  However, if applying pan and tilt is slow enough, the order in which they are applied may be visually noticeable.
+      There is no defined order when applying <a>pan</a> and <a>tilt</a>, the UA is allowed to apply them in any order. In practice this should not matter since these values are absolute, so order will not affect the final position. However, if applying pan and tilt is slow enough, the order in which they are applied may be visually noticeable.
     </div></li>
 
-    <li><dfn>Zoom</dfn> is a numeric camera setting that controls the focal length of the lens.  The setting usually represents a ratio, e.g. 4 is a zoom ratio of 4:1.  The minimum value is usually 1, to represent a 1:1 ratio (i.e. no zoom).</li>
+    <li><dfn>Zoom</dfn> is a numeric camera setting that controls the focal length of the lens. The setting usually represents a ratio, e.g. 4 is a zoom ratio of 4:1. The minimum value is usually 1, to represent a 1:1 ratio (i.e. no zoom).
+
+    Any algorithm which uses a {{MediaTrackConstraintSet}} object and its {{MediaTrackConstraintSet/zoom}} attribute which is not equivalent to null MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to "camera" and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its deviceId member set to any appropriate device's deviceId.</li>
 
     <li><dfn>Fill light mode</dfn> describes the flash setting of the capture device (e.g. |auto|, |off|, |on|). <dfn>Torch</dfn> describes the setting of the source's fill light as  continuously connected, staying on as long as {{track}} is active.</li>
   </ol>
@@ -835,10 +847,10 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
   Slightly modified versions of these examples can be found in e.g. <a href="https://codepen.io/collection/nLeobQ/">this codepen collection</a>.
 </div>
 
-## Update camera zoom and {{takePhoto()}} ## {#example1}
+## Update camera pan, tilt and zoom and {{takePhoto()}} ## {#example1}
 
 <div class="note">
-  The following example can also be found in e.g. <a href="https://codepen.io/miguelao/pen/BLPzKx/left?editors=1010">this codepen</a> with minimal modifications.
+  The following example can also be found in e.g. <a href="https://codepen.io/eehakkin/pen/XWbOVxp/left?editors=1010">this codepen</a> with minimal modifications.
 </div>
 
 <div class="example" highlight="javascript">
@@ -847,11 +859,24 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
     &lt;body>
     &lt;video autoplay>&lt;/video>
     &lt;img>
-    &lt;input type="range" hidden>
+    &lt;div hidden>
+      &lt;input id="pan" name="pan" title="Pan" type="range" />
+      &lt;label for="pan">Pan&lt;/label>
+    &lt;/div>
+    &lt;div hidden>
+      &lt;input id="tilt" name="tilt" title="Tilt" type="range" />
+      &lt;label for="tilt">Tilt&lt;/label>
+    &lt;/div>
+    &lt;div hidden>
+      &lt;input id="zoom" name="zoom" title="Zoom" type="range" />
+      &lt;label for="zoom">Zoom&lt;/label>
+    &lt;/div>
     &lt;script>
       var imageCapture;
 
-      navigator.mediaDevices.getUserMedia({video: true})
+      navigator.mediaDevices.getUserMedia({
+          video: {pan: true, tilt: true, zoom: true}
+        })
         .then(gotMedia)
         .catch(err => console.error('getUserMedia() failed: ', err));
 
@@ -863,22 +888,49 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
         imageCapture = new ImageCapture(track);
 
         const capabilities = track.getCapabilities()
+        const settings = track.getSettings();
+
+        // Check whether pan is supported or not.
+        if (capabilities.pan) {
+          // Map pan to a slider element.
+          const input = document.querySelector('input[name="pan"][type="range"]');
+          input.min = capabilities.pan.min;
+          input.max = capabilities.pan.max;
+          input.step = capabilities.pan.step;
+          input.value = settings.pan;
+          input.oninput = function(event) {
+            track.applyConstraints({advanced: [{pan: event.target.value}]});
+          };
+          input.parentElement.hidden = false;
+        }
+
+        // Check whether tilt is supported or not.
+        if (capabilities.tilt) {
+          // Map tilt to a slider element.
+          const input = document.querySelector('input[name="tilt"][type="range"]');
+          input.min = capabilities.tilt.min;
+          input.max = capabilities.tilt.max;
+          input.step = capabilities.tilt.step;
+          input.value = settings.tilt;
+          input.oninput = function(event) {
+            track.applyConstraints({advanced: [{tilt: event.target.value}]});
+          };
+          input.parentElement.hidden = false;
+        }
+
         // Check whether zoom is supported or not.
-        if (!capabilities.zoom) {
-          return;
+        if (capabilities.zoom) {
+          // Map zoom to a slider element.
+          const input = document.querySelector('input[name="zoom"][type="range"]');
+          input.min = capabilities.zoom.min;
+          input.max = capabilities.zoom.max;
+          input.step = capabilities.zoom.step;
+          input.value = settings.zoom;
+          input.oninput = function(event) {
+            track.applyConstraints({advanced: [{zoom: event.target.value}]});
+          };
+          input.parentElement.hidden = false;
         }
-
-        // Map zoom to a slider element.
-        const input = document.querySelector('input[type="range"]');
-        input.min = capabilities.zoom.min;
-        input.max = capabilities.zoom.max;
-        input.step = capabilities.zoom.step;
-        input.value = track.getSettings().zoom;
-
-        input.oninput = function(event) {
-          track.applyConstraints({advanced : [{zoom: event.target.value}] });
-        }
-        input.hidden = false;
       }
 
       function takePhoto() {
