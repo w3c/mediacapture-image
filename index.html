@@ -1228,9 +1228,9 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version 2d9ffc40, updated Fri Mar 20 17:26:52 2020 -0700" name="generator">
+  <meta content="Bikeshed version 959d006d, updated Sat Mar 28 12:38:37 2020 -0700" name="generator">
   <link href="https://www.w3.org/TR/image-capture/" rel="canonical">
-  <meta content="0d839803d0152f524220052e4a9be437d26d6aae" name="document-revision">
+  <meta content="f36239990736f8f8c7265b5714ad961e5db40d8d" name="document-revision">
 <style>
 table {
   border-collapse: collapse;
@@ -1494,7 +1494,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">MediaStream Image Capture</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2020-03-23">23 March 2020</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2020-03-30">30 March 2020</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1625,7 +1625,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
     <li>
      <a href="#examples"><span class="secno">13</span> <span class="content">Examples</span></a>
      <ol class="toc">
-      <li><a href="#example1"><span class="secno">13.1</span> <span class="content">Update camera zoom and <code class="idl"><span>takePhoto()</span></code></span></a>
+      <li><a href="#example1"><span class="secno">13.1</span> <span class="content">Update camera pan, tilt and zoom and <code class="idl"><span>takePhoto()</span></code></span></a>
       <li><a href="#example2"><span class="secno">13.2</span> <span class="content">Repeated grabbing of a frame with <code class="idl"><span>grabFrame()</span></code></span></a>
       <li><a href="#example3"><span class="secno">13.3</span> <span class="content">Grabbing a Frame and Post-Processing</span></a>
       <li><a href="#example4"><span class="secno">13.4</span> <span class="content">Update camera focus distance and <code class="idl"><span>takePhoto()</span></code></span></a>
@@ -1991,27 +1991,27 @@ For instance, embedding the user’s location in the metadata of the digitzed im
    <p><code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaTrackConstraintSet" id="ref-for-idl-def-MediaTrackConstraintSet①">MediaTrackConstraintSet</a></code> <a data-link-type="biblio" href="#biblio-getusermedia">[GETUSERMEDIA]</a> dictionary is used for both reading the current status with <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-getConstraints-MediaTrackConstraints" id="ref-for-widl-MediaStreamTrack-getConstraints-MediaTrackConstraints①">getConstraints()</a></code> and for applying a set of constraints with <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#widl-MediaStreamTrack-applyConstraints-Promise-void--MediaTrackConstraints-constraints" id="ref-for-widl-MediaStreamTrack-applyConstraints-Promise-void--MediaTrackConstraints-constraints①">applyConstraints()</a></code>.</p>
    <div class="note" role="note"> <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaTrackSettings" id="ref-for-idl-def-MediaTrackSettings">MediaTrackSettings</a></code> can be retrieved to verify the effect of the application by the user agent of the requested <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaTrackConstraints" id="ref-for-idl-def-MediaTrackConstraints">MediaTrackConstraints</a></code>. Some constraints such as, e.g. <a data-link-type="dfn" href="#zoom" id="ref-for-zoom②">zoom</a>, might not be immediately applicable. </div>
 <pre class="idl highlight def"><c- b>partial</c-> <c- b>dictionary</c-> <a class="idl-code" data-link-type="dictionary" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaTrackConstraintSet" id="ref-for-idl-def-MediaTrackConstraintSet②"><c- g>MediaTrackConstraintSet</c-></a> {
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-constraindomstring" id="ref-for-idl-def-constraindomstring"><c- n>ConstrainDOMString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDOMString " href="#dom-mediatrackconstraintset-whitebalancemode" id="ref-for-dom-mediatrackconstraintset-whitebalancemode"><c- g>whiteBalanceMode</c-></a>;
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-constraindomstring" id="ref-for-idl-def-constraindomstring①"><c- n>ConstrainDOMString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDOMString " href="#dom-mediatrackconstraintset-exposuremode" id="ref-for-dom-mediatrackconstraintset-exposuremode"><c- g>exposureMode</c-></a>;
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-constraindomstring" id="ref-for-idl-def-constraindomstring②"><c- n>ConstrainDOMString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDOMString " href="#dom-mediatrackconstraintset-focusmode" id="ref-for-dom-mediatrackconstraintset-focusmode"><c- g>focusMode</c-></a>;
-  <a class="n" data-link-type="idl-name" href="#typedefdef-constrainpoint2d" id="ref-for-typedefdef-constrainpoint2d"><c- n>ConstrainPoint2D</c-></a>   <a class="idl-code" data-link-type="dict-member" data-type="ConstrainPoint2D   " href="#dom-mediatrackconstraintset-pointsofinterest" id="ref-for-dom-mediatrackconstraintset-pointsofinterest"><c- g>pointsOfInterest</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-constraindomstring" id="ref-for-idl-def-constraindomstring"><c- n>ConstrainDOMString</c-></a>           <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDOMString           " href="#dom-mediatrackconstraintset-whitebalancemode" id="ref-for-dom-mediatrackconstraintset-whitebalancemode"><c- g>whiteBalanceMode</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-constraindomstring" id="ref-for-idl-def-constraindomstring①"><c- n>ConstrainDOMString</c-></a>           <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDOMString           " href="#dom-mediatrackconstraintset-exposuremode" id="ref-for-dom-mediatrackconstraintset-exposuremode"><c- g>exposureMode</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-constraindomstring" id="ref-for-idl-def-constraindomstring②"><c- n>ConstrainDOMString</c-></a>           <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDOMString           " href="#dom-mediatrackconstraintset-focusmode" id="ref-for-dom-mediatrackconstraintset-focusmode"><c- g>focusMode</c-></a>;
+  <a class="n" data-link-type="idl-name" href="#typedefdef-constrainpoint2d" id="ref-for-typedefdef-constrainpoint2d"><c- n>ConstrainPoint2D</c-></a>             <a class="idl-code" data-link-type="dict-member" data-type="ConstrainPoint2D             " href="#dom-mediatrackconstraintset-pointsofinterest" id="ref-for-dom-mediatrackconstraintset-pointsofinterest"><c- g>pointsOfInterest</c-></a>;
 
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>    <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-exposurecompensation" id="ref-for-dom-mediatrackconstraintset-exposurecompensation"><c- g>exposureCompensation</c-></a>;
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble①"><c- n>ConstrainDouble</c-></a>    <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-exposuretime" id="ref-for-dom-mediatrackconstraintset-exposuretime"><c- g>exposureTime</c-></a>;
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble②"><c- n>ConstrainDouble</c-></a>    <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-colortemperature" id="ref-for-dom-mediatrackconstraintset-colortemperature"><c- g>colorTemperature</c-></a>;
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble③"><c- n>ConstrainDouble</c-></a>    <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-iso" id="ref-for-dom-mediatrackconstraintset-iso"><c- g>iso</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>              <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble              " href="#dom-mediatrackconstraintset-exposurecompensation" id="ref-for-dom-mediatrackconstraintset-exposurecompensation"><c- g>exposureCompensation</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble①"><c- n>ConstrainDouble</c-></a>              <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble              " href="#dom-mediatrackconstraintset-exposuretime" id="ref-for-dom-mediatrackconstraintset-exposuretime"><c- g>exposureTime</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble②"><c- n>ConstrainDouble</c-></a>              <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble              " href="#dom-mediatrackconstraintset-colortemperature" id="ref-for-dom-mediatrackconstraintset-colortemperature"><c- g>colorTemperature</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble③"><c- n>ConstrainDouble</c-></a>              <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble              " href="#dom-mediatrackconstraintset-iso" id="ref-for-dom-mediatrackconstraintset-iso"><c- g>iso</c-></a>;
 
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble④"><c- n>ConstrainDouble</c-></a>    <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-brightness" id="ref-for-dom-mediatrackconstraintset-brightness"><c- g>brightness</c-></a>;
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble⑤"><c- n>ConstrainDouble</c-></a>    <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-contrast" id="ref-for-dom-mediatrackconstraintset-contrast"><c- g>contrast</c-></a>;
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble⑥"><c- n>ConstrainDouble</c-></a>    <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-saturation" id="ref-for-dom-mediatrackconstraintset-saturation"><c- g>saturation</c-></a>;
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble⑦"><c- n>ConstrainDouble</c-></a>    <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-sharpness" id="ref-for-dom-mediatrackconstraintset-sharpness"><c- g>sharpness</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble④"><c- n>ConstrainDouble</c-></a>              <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble              " href="#dom-mediatrackconstraintset-brightness" id="ref-for-dom-mediatrackconstraintset-brightness"><c- g>brightness</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble⑤"><c- n>ConstrainDouble</c-></a>              <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble              " href="#dom-mediatrackconstraintset-contrast" id="ref-for-dom-mediatrackconstraintset-contrast"><c- g>contrast</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble⑥"><c- n>ConstrainDouble</c-></a>              <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble              " href="#dom-mediatrackconstraintset-saturation" id="ref-for-dom-mediatrackconstraintset-saturation"><c- g>saturation</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble⑦"><c- n>ConstrainDouble</c-></a>              <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble              " href="#dom-mediatrackconstraintset-sharpness" id="ref-for-dom-mediatrackconstraintset-sharpness"><c- g>sharpness</c-></a>;
 
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble⑧"><c- n>ConstrainDouble</c-></a>    <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-focusdistance" id="ref-for-dom-mediatrackconstraintset-focusdistance"><c- g>focusDistance</c-></a>;
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble⑨"><c- n>ConstrainDouble</c-></a>    <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-pan" id="ref-for-dom-mediatrackconstraintset-pan"><c- g>pan</c-></a>;
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble①⓪"><c- n>ConstrainDouble</c-></a>    <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-tilt" id="ref-for-dom-mediatrackconstraintset-tilt"><c- g>tilt</c-></a>;
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble①①"><c- n>ConstrainDouble</c-></a>    <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-zoom" id="ref-for-dom-mediatrackconstraintset-zoom"><c- g>zoom</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble⑧"><c- n>ConstrainDouble</c-></a>              <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble              " href="#dom-mediatrackconstraintset-focusdistance" id="ref-for-dom-mediatrackconstraintset-focusdistance"><c- g>focusDistance</c-></a>;
+  (<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-boolean" id="ref-for-idl-boolean③⑧"><c- b>boolean</c-></a> <c- b>or</c-> <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble⑨"><c- n>ConstrainDouble</c-></a>) <a class="idl-code" data-link-type="dict-member" data-type="(boolean or ConstrainDouble) " href="#dom-mediatrackconstraintset-pan" id="ref-for-dom-mediatrackconstraintset-pan"><c- g>pan</c-></a>;
+  (<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-boolean" id="ref-for-idl-boolean③⑨"><c- b>boolean</c-></a> <c- b>or</c-> <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble①⓪"><c- n>ConstrainDouble</c-></a>) <a class="idl-code" data-link-type="dict-member" data-type="(boolean or ConstrainDouble) " href="#dom-mediatrackconstraintset-tilt" id="ref-for-dom-mediatrackconstraintset-tilt"><c- g>tilt</c-></a>;
+  (<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-boolean" id="ref-for-idl-boolean④⓪"><c- b>boolean</c-></a> <c- b>or</c-> <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble①①"><c- n>ConstrainDouble</c-></a>) <a class="idl-code" data-link-type="dict-member" data-type="(boolean or ConstrainDouble) " href="#dom-mediatrackconstraintset-zoom" id="ref-for-dom-mediatrackconstraintset-zoom"><c- g>zoom</c-></a>;
 
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainBoolean" id="ref-for-idl-def-ConstrainBoolean"><c- n>ConstrainBoolean</c-></a>   <a class="idl-code" data-link-type="dict-member" data-type="ConstrainBoolean   " href="#dom-mediatrackconstraintset-torch" id="ref-for-dom-mediatrackconstraintset-torch"><c- g>torch</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainBoolean" id="ref-for-idl-def-ConstrainBoolean"><c- n>ConstrainBoolean</c-></a>             <a class="idl-code" data-link-type="dict-member" data-type="ConstrainBoolean             " href="#dom-mediatrackconstraintset-torch" id="ref-for-dom-mediatrackconstraintset-torch"><c- g>torch</c-></a>;
 };
 </pre>
    <h4 class="heading settled" data-level="9.3.1" id="mediatrackconstraintset-members"><span class="secno">9.3.1. </span><span class="content">Members</span><a class="self-link" href="#mediatrackconstraintset-members"></a></h4>
@@ -2036,18 +2036,24 @@ For instance, embedding the user’s location in the metadata of the digitzed im
     <dd>See <a data-link-type="dfn" href="#brightness" id="ref-for-brightness②">brightness</a> constrainable property.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export id="dom-mediatrackconstraintset-contrast"><code>contrast</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble①⑦">ConstrainDouble</a></span>
     <dd>See <a data-link-type="dfn" href="#contrast" id="ref-for-contrast②">contrast</a> constrainable property.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export id="dom-mediatrackconstraintset-pan"><code>pan</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble①⑧">ConstrainDouble</a></span>
-    <dd>See <a data-link-type="dfn" href="#pan" id="ref-for-pan②">pan</a> constrainable property.
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export id="dom-mediatrackconstraintset-pan"><code>pan</code></dfn>, <span> of type <code class="idl-code">(boolean or ConstrainDouble)</code></span>
+    <dd>A value of true is equivalent to a value of empty <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble①⑧">ConstrainDouble</a></code>.
+      A value of false is equivalent to a value of null.
+      See <a data-link-type="dfn" href="#pan" id="ref-for-pan②">pan</a> constrainable property.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export id="dom-mediatrackconstraintset-saturation"><code>saturation</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble①⑨">ConstrainDouble</a></span>
     <dd>See <a data-link-type="dfn" href="#saturation" id="ref-for-saturation②">saturation</a> constrainable property.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export id="dom-mediatrackconstraintset-sharpness"><code>sharpness</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble②⓪">ConstrainDouble</a></span>
     <dd>See <a data-link-type="dfn" href="#sharpness" id="ref-for-sharpness②">sharpness</a> constrainable property.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export id="dom-mediatrackconstraintset-focusdistance"><code>focusDistance</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble②①">ConstrainDouble</a></span>
     <dd>See <a data-link-type="dfn" href="#focus-distance" id="ref-for-focus-distance②">focus distance</a> constrainable property.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export id="dom-mediatrackconstraintset-tilt"><code>tilt</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble②②">ConstrainDouble</a></span>
-    <dd>See <a data-link-type="dfn" href="#tilt" id="ref-for-tilt②">tilt</a> constrainable property.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export id="dom-mediatrackconstraintset-zoom"><code>zoom</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble②③">ConstrainDouble</a></span>
-    <dd>See <a data-link-type="dfn" href="#zoom" id="ref-for-zoom③">zoom</a> constrainable property.
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export id="dom-mediatrackconstraintset-tilt"><code>tilt</code></dfn>, <span> of type <code class="idl-code">(boolean or ConstrainDouble)</code></span>
+    <dd>A value of true is equivalent to a value of empty <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble②②">ConstrainDouble</a></code>.
+      A value of false is equivalent to a value of null.
+      See <a data-link-type="dfn" href="#tilt" id="ref-for-tilt②">tilt</a> constrainable property.
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export id="dom-mediatrackconstraintset-zoom"><code>zoom</code></dfn>, <span> of type <code class="idl-code">(boolean or ConstrainDouble)</code></span>
+    <dd>A value of true is equivalent to a value of empty <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble" id="ref-for-idl-def-ConstrainDouble②③">ConstrainDouble</a></code>.
+      A value of false is equivalent to a value of null.
+      See <a data-link-type="dfn" href="#zoom" id="ref-for-zoom③">zoom</a> constrainable property.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackConstraintSet" data-dfn-type="dict-member" data-export id="dom-mediatrackconstraintset-torch"><code>torch</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainBoolean" id="ref-for-idl-def-ConstrainBoolean①">ConstrainBoolean</a></span>
     <dd>See <a data-link-type="dfn" href="#torch" id="ref-for-torch②">torch</a> constrainable property.
    </dl>
@@ -2074,7 +2080,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double②⓪"><c- b>double</c-></a>            <a class="idl-code" data-link-type="dict-member" data-type="double            " href="#dom-mediatracksettings-tilt" id="ref-for-dom-mediatracksettings-tilt"><c- g>tilt</c-></a>;
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double②①"><c- b>double</c-></a>            <a class="idl-code" data-link-type="dict-member" data-type="double            " href="#dom-mediatracksettings-zoom" id="ref-for-dom-mediatracksettings-zoom"><c- g>zoom</c-></a>;
 
-  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-boolean" id="ref-for-idl-boolean③⑧"><c- b>boolean</c-></a>           <a class="idl-code" data-link-type="dict-member" data-type="boolean           " href="#dom-mediatracksettings-torch" id="ref-for-dom-mediatracksettings-torch"><c- g>torch</c-></a>;
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-boolean" id="ref-for-idl-boolean④①"><c- b>boolean</c-></a>           <a class="idl-code" data-link-type="dict-member" data-type="boolean           " href="#dom-mediatracksettings-torch" id="ref-for-dom-mediatracksettings-torch"><c- g>torch</c-></a>;
 };
 </pre>
    <h4 class="heading settled" data-level="9.4.1" id="mediatracksettings-members"><span class="secno">9.4.1. </span><span class="content">Members</span><a class="self-link" href="#mediatracksettings-members"></a></h4>
@@ -2111,7 +2117,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
     <dd>This reflects the current <a data-link-type="dfn" href="#tilt" id="ref-for-tilt③">tilt</a> setting of the camera.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export id="dom-mediatracksettings-zoom"><code>zoom</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double③③">double</a></span>
     <dd>This reflects the current <a data-link-type="dfn" href="#zoom" id="ref-for-zoom④">zoom</a> setting of the camera.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export id="dom-mediatracksettings-torch"><code>torch</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-boolean" id="ref-for-idl-boolean③⑨">boolean</a></span>
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaTrackSettings" data-dfn-type="dict-member" data-export id="dom-mediatracksettings-torch"><code>torch</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-boolean" id="ref-for-idl-boolean④②">boolean</a></span>
     <dd>Current camera <a data-link-type="dfn" href="#torch" id="ref-for-torch③">torch</a> configuration setting.
    </dl>
    <h3 class="heading settled" data-level="9.5" id="additional-constrainable-props"><span class="secno">9.5. </span><span class="content">Additional Constrainable Properties</span><a class="self-link" href="#additional-constrainable-props"></a></h3>
@@ -2181,11 +2187,18 @@ For instance, embedding the user’s location in the metadata of the digitzed im
      <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="image-width">Image width</dfn> and <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="image-height">image height</dfn> represent the supported/desired resolution of the resulting photographic image after any potential sensor corrections and other algorithms are run. 
      <div class="note" role="note"> The supported resolutions are managed segregated e.g. <code class="idl"><a data-link-type="idl" href="#dom-photocapabilities-imagewidth" id="ref-for-dom-photocapabilities-imagewidth②">imageWidth</a></code> and <code class="idl"><a data-link-type="idl" href="#dom-photocapabilities-imageheight" id="ref-for-dom-photocapabilities-imageheight②">imageHeight</a></code> values/ranges to prevent increasing the fingerprinting surface and to allow the UA to make a best-effort decision with regards to actual hardware configuration vis-a-vis requested constraints. </div>
     <li><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="focus-distance">Focus distance</dfn> is a numeric camera setting that controls the focus distance of the lens.  The setting usually represents distance in meters to the optimal focus distance.
-    <li><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="pan">Pan</dfn> is a numeric camera setting that controls the pan of the camera.  The setting represents pan in arc seconds, which are 1/3600th of a degree.  Values are in the range from –180*3600 arc seconds to +180*3600 arc seconds.  Positive values pan the camera clockwise as viewed from above, and negative values pan the camera counter clockwise as viewed from above.
     <li>
-     <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="tilt">Tilt</dfn> is a numeric camera setting that controls the tilt of the camera.  The setting represents tilt in arc seconds, which are 1/3600th of a degree.  Values are in the range from –180*3600 arc seconds to +180*3600 arc seconds.  Positive values tilt the camera upward when viewed from the front, and negative values tilt the camera downward as viewed from the front. 
-     <div class="note" role="note"> There is no defined order when applying <a data-link-type="dfn" href="#pan" id="ref-for-pan④">pan</a> and <a data-link-type="dfn" href="#tilt" id="ref-for-tilt④">tilt</a>, the UA is allowed to apply them in any order.  In practice this should not matter since these values are absolute, so order will not affect the final position.  However, if applying pan and tilt is slow enough, the order in which they are applied may be visually noticeable. </div>
-    <li><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="zoom">Zoom</dfn> is a numeric camera setting that controls the focal length of the lens.  The setting usually represents a ratio, e.g. 4 is a zoom ratio of 4:1.  The minimum value is usually 1, to represent a 1:1 ratio (i.e. no zoom).
+     <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="pan">Pan</dfn> is a numeric camera setting that controls the pan of the camera. The setting represents pan in arc seconds, which are 1/3600th of a degree. Values are in the range from –180*3600 arc seconds to +180*3600 arc seconds. Positive values pan the camera clockwise as viewed from above, and negative values pan the camera counter clockwise as viewed from above. 
+     <p>Any algorithm which uses a <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaTrackConstraintSet" id="ref-for-idl-def-MediaTrackConstraintSet③">MediaTrackConstraintSet</a></code> object and its <code class="idl"><a data-link-type="idl" href="#dom-mediatrackconstraintset-pan" id="ref-for-dom-mediatrackconstraintset-pan①">pan</a></code> attribute which is not equivalent to null MUST <a data-link-type="dfn" href="https://w3c.github.io/permissions/#request-permission-to-use" id="ref-for-request-permission-to-use">request permission to use</a> (as defined in <a data-link-type="biblio" href="#biblio-permissions">[permissions]</a>) a PermissionDescriptor with its name member set to "camera" and its <code class="idl"><a data-link-type="idl">panTiltZoom</a></code> member set to true, and, optionally, consider its deviceId member set to any appropriate device’s deviceId.</p>
+    <p></p>
+    <li>
+     <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="tilt">Tilt</dfn> is a numeric camera setting that controls the tilt of the camera. The setting represents tilt in arc seconds, which are 1/3600th of a degree. Values are in the range from –180*3600 arc seconds to +180*3600 arc seconds. Positive values tilt the camera upward when viewed from the front, and negative values tilt the camera downward as viewed from the front. 
+     <p>Any algorithm which uses a <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaTrackConstraintSet" id="ref-for-idl-def-MediaTrackConstraintSet④">MediaTrackConstraintSet</a></code> object and its <code class="idl"><a data-link-type="idl" href="#dom-mediatrackconstraintset-tilt" id="ref-for-dom-mediatrackconstraintset-tilt①">tilt</a></code> attribute which is not equivalent to null MUST <a data-link-type="dfn" href="https://w3c.github.io/permissions/#request-permission-to-use" id="ref-for-request-permission-to-use①">request permission to use</a> (as defined in <a data-link-type="biblio" href="#biblio-permissions">[permissions]</a>) a PermissionDescriptor with its name member set to "camera" and its <code class="idl"><a data-link-type="idl">panTiltZoom</a></code> member set to true, and, optionally, consider its deviceId member set to any appropriate device’s deviceId.</p>
+     <div class="note" role="note"> There is no defined order when applying <a data-link-type="dfn" href="#pan" id="ref-for-pan④">pan</a> and <a data-link-type="dfn" href="#tilt" id="ref-for-tilt④">tilt</a>, the UA is allowed to apply them in any order. In practice this should not matter since these values are absolute, so order will not affect the final position. However, if applying pan and tilt is slow enough, the order in which they are applied may be visually noticeable. </div>
+    <li>
+     <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="zoom">Zoom</dfn> is a numeric camera setting that controls the focal length of the lens. The setting usually represents a ratio, e.g. 4 is a zoom ratio of 4:1. The minimum value is usually 1, to represent a 1:1 ratio (i.e. no zoom). 
+     <p>Any algorithm which uses a <code class="idl"><a data-link-type="idl" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaTrackConstraintSet" id="ref-for-idl-def-MediaTrackConstraintSet⑤">MediaTrackConstraintSet</a></code> object and its <code class="idl"><a data-link-type="idl" href="#dom-mediatrackconstraintset-zoom" id="ref-for-dom-mediatrackconstraintset-zoom①">zoom</a></code> attribute which is not equivalent to null MUST <a data-link-type="dfn" href="https://w3c.github.io/permissions/#request-permission-to-use" id="ref-for-request-permission-to-use②">request permission to use</a> (as defined in <a data-link-type="biblio" href="#biblio-permissions">[permissions]</a>) a PermissionDescriptor with its name member set to "camera" and its <code class="idl"><a data-link-type="idl">panTiltZoom</a></code> member set to true, and, optionally, consider its deviceId member set to any appropriate device’s deviceId.</p>
+    <p></p>
     <li><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="fill-light-mode">Fill light mode</dfn> describes the flash setting of the capture device (e.g. <var>auto</var>, <var>off</var>, <var>on</var>). <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="torch">Torch</dfn> describes the setting of the source’s fill light as  continuously connected, staying on as long as <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-track" id="ref-for-dom-imagecapture-track①⑤">track</a></code> is active.
    </ol>
    <h2 class="heading settled" data-level="11" id="meteringmode-section"><span class="secno">11. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#enumdef-meteringmode" id="ref-for-enumdef-meteringmode⑨">MeteringMode</a></code></span><a class="self-link" href="#meteringmode-section"></a></h2>
@@ -2223,19 +2236,32 @@ For instance, embedding the user’s location in the metadata of the digitzed im
    </dl>
    <h2 class="heading settled" data-level="13" id="examples"><span class="secno">13. </span><span class="content">Examples</span><a class="self-link" href="#examples"></a></h2>
    <div class="note" role="note"> Slightly modified versions of these examples can be found in e.g. <a href="https://codepen.io/collection/nLeobQ/">this codepen collection</a>. </div>
-   <h3 class="heading settled" data-level="13.1" id="example1"><span class="secno">13.1. </span><span class="content">Update camera zoom and <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-takephoto" id="ref-for-dom-imagecapture-takephoto①⓪">takePhoto()</a></code></span><a class="self-link" href="#example1"></a></h3>
-   <div class="note" role="note"> The following example can also be found in e.g. <a href="https://codepen.io/miguelao/pen/BLPzKx/left?editors=1010">this codepen</a> with minimal modifications. </div>
-   <div class="example" id="example-f5b0156b">
-    <a class="self-link" href="#example-f5b0156b"></a> 
+   <h3 class="heading settled" data-level="13.1" id="example1"><span class="secno">13.1. </span><span class="content">Update camera pan, tilt and zoom and <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-takephoto" id="ref-for-dom-imagecapture-takephoto①⓪">takePhoto()</a></code></span><a class="self-link" href="#example1"></a></h3>
+   <div class="note" role="note"> The following example can also be found in e.g. <a href="https://codepen.io/eehakkin/pen/XWbOVxp/left?editors=1010">this codepen</a> with minimal modifications. </div>
+   <div class="example" id="example-07874f8f">
+    <a class="self-link" href="#example-07874f8f"></a> 
 <pre class="highlight"><c- o>&lt;</c->html<c- o>></c->
 <c- o>&lt;</c->body<c- o>></c->
 <c- o>&lt;</c->video autoplay<c- o>>&lt;</c->/video>
 <c- o>&lt;</c->img<c- o>></c->
-<c- o>&lt;</c->input type<c- o>=</c-><c- u>"range"</c-> hidden<c- o>></c->
+<c- o>&lt;</c->div hidden<c- o>></c->
+  <c- o>&lt;</c->input id<c- o>=</c-><c- u>"pan"</c-> name<c- o>=</c-><c- u>"pan"</c-> title<c- o>=</c-><c- u>"Pan"</c-> type<c- o>=</c-><c- u>"range"</c-> <c- o>/></c->
+  <c- o>&lt;</c->label <c- k>for</c-><c- o>=</c-><c- u>"pan"</c-><c- o>></c->Pan<c- o>&lt;</c->/label>
+<c- o>&lt;</c->/div>
+<c- o>&lt;</c->div hidden<c- o>></c->
+  <c- o>&lt;</c->input id<c- o>=</c-><c- u>"tilt"</c-> name<c- o>=</c-><c- u>"tilt"</c-> title<c- o>=</c-><c- u>"Tilt"</c-> type<c- o>=</c-><c- u>"range"</c-> <c- o>/></c->
+  <c- o>&lt;</c->label <c- k>for</c-><c- o>=</c-><c- u>"tilt"</c-><c- o>></c->Tilt<c- o>&lt;</c->/label>
+<c- o>&lt;</c->/div>
+<c- o>&lt;</c->div hidden<c- o>></c->
+  <c- o>&lt;</c->input id<c- o>=</c-><c- u>"zoom"</c-> name<c- o>=</c-><c- u>"zoom"</c-> title<c- o>=</c-><c- u>"Zoom"</c-> type<c- o>=</c-><c- u>"range"</c-> <c- o>/></c->
+  <c- o>&lt;</c->label <c- k>for</c-><c- o>=</c-><c- u>"zoom"</c-><c- o>></c->Zoom<c- o>&lt;</c->/label>
+<c- o>&lt;</c->/div>
 <c- o>&lt;</c->script<c- o>></c->
   <c- a>var</c-> imageCapture<c- p>;</c->
 
-  navigator<c- p>.</c->mediaDevices<c- p>.</c->getUserMedia<c- p>({</c->video<c- o>:</c-> <c- kc>true</c-><c- p>})</c->
+  navigator<c- p>.</c->mediaDevices<c- p>.</c->getUserMedia<c- p>({</c->
+      video<c- o>:</c-> <c- p>{</c->pan<c- o>:</c-> <c- kc>true</c-><c- p>,</c-> tilt<c- o>:</c-> <c- kc>true</c-><c- p>,</c-> zoom<c- o>:</c-> <c- kc>true</c-><c- p>}</c->
+    <c- p>})</c->
     <c- p>.</c->then<c- p>(</c->gotMedia<c- p>)</c->
     <c- p>.</c-><c- k>catch</c-><c- p>(</c->err <c- p>=></c-> console<c- p>.</c->error<c- p>(</c-><c- t>'getUserMedia() failed: '</c-><c- p>,</c-> err<c- p>));</c->
 
@@ -2247,22 +2273,49 @@ For instance, embedding the user’s location in the metadata of the digitzed im
     imageCapture <c- o>=</c-> <c- k>new</c-> ImageCapture<c- p>(</c->track<c- p>);</c->
 
     <c- kr>const</c-> capabilities <c- o>=</c-> track<c- p>.</c->getCapabilities<c- p>()</c->
+    <c- kr>const</c-> settings <c- o>=</c-> track<c- p>.</c->getSettings<c- p>();</c->
+
+    <c- c1>// Check whether pan is supported or not.</c->
+    <c- k>if</c-> <c- p>(</c->capabilities<c- p>.</c->pan<c- p>)</c-> <c- p>{</c->
+      <c- c1>// Map pan to a slider element.</c->
+      <c- kr>const</c-> input <c- o>=</c-> document<c- p>.</c->querySelector<c- p>(</c-><c- t>'input[name="pan"][type="range"]'</c-><c- p>);</c->
+      input<c- p>.</c->min <c- o>=</c-> capabilities<c- p>.</c->pan<c- p>.</c->min<c- p>;</c->
+      input<c- p>.</c->max <c- o>=</c-> capabilities<c- p>.</c->pan<c- p>.</c->max<c- p>;</c->
+      input<c- p>.</c->step <c- o>=</c-> capabilities<c- p>.</c->pan<c- p>.</c->step<c- p>;</c->
+      input<c- p>.</c->value <c- o>=</c-> settings<c- p>.</c->pan<c- p>;</c->
+      input<c- p>.</c->oninput <c- o>=</c-> <c- a>function</c-><c- p>(</c->event<c- p>)</c-> <c- p>{</c->
+        track<c- p>.</c->applyConstraints<c- p>({</c->advanced<c- o>:</c-> <c- p>[{</c->pan<c- o>:</c-> event<c- p>.</c->target<c- p>.</c->value<c- p>}]});</c->
+      <c- p>};</c->
+      input<c- p>.</c->parentElement<c- p>.</c->hidden <c- o>=</c-> <c- kc>false</c-><c- p>;</c->
+    <c- p>}</c->
+
+    <c- c1>// Check whether tilt is supported or not.</c->
+    <c- k>if</c-> <c- p>(</c->capabilities<c- p>.</c->tilt<c- p>)</c-> <c- p>{</c->
+      <c- c1>// Map tilt to a slider element.</c->
+      <c- kr>const</c-> input <c- o>=</c-> document<c- p>.</c->querySelector<c- p>(</c-><c- t>'input[name="tilt"][type="range"]'</c-><c- p>);</c->
+      input<c- p>.</c->min <c- o>=</c-> capabilities<c- p>.</c->tilt<c- p>.</c->min<c- p>;</c->
+      input<c- p>.</c->max <c- o>=</c-> capabilities<c- p>.</c->tilt<c- p>.</c->max<c- p>;</c->
+      input<c- p>.</c->step <c- o>=</c-> capabilities<c- p>.</c->tilt<c- p>.</c->step<c- p>;</c->
+      input<c- p>.</c->value <c- o>=</c-> settings<c- p>.</c->tilt<c- p>;</c->
+      input<c- p>.</c->oninput <c- o>=</c-> <c- a>function</c-><c- p>(</c->event<c- p>)</c-> <c- p>{</c->
+        track<c- p>.</c->applyConstraints<c- p>({</c->advanced<c- o>:</c-> <c- p>[{</c->tilt<c- o>:</c-> event<c- p>.</c->target<c- p>.</c->value<c- p>}]});</c->
+      <c- p>};</c->
+      input<c- p>.</c->parentElement<c- p>.</c->hidden <c- o>=</c-> <c- kc>false</c-><c- p>;</c->
+    <c- p>}</c->
+
     <c- c1>// Check whether zoom is supported or not.</c->
-    <c- k>if</c-> <c- p>(</c-><c- o>!</c->capabilities<c- p>.</c->zoom<c- p>)</c-> <c- p>{</c->
-      <c- k>return</c-><c- p>;</c->
+    <c- k>if</c-> <c- p>(</c->capabilities<c- p>.</c->zoom<c- p>)</c-> <c- p>{</c->
+      <c- c1>// Map zoom to a slider element.</c->
+      <c- kr>const</c-> input <c- o>=</c-> document<c- p>.</c->querySelector<c- p>(</c-><c- t>'input[name="zoom"][type="range"]'</c-><c- p>);</c->
+      input<c- p>.</c->min <c- o>=</c-> capabilities<c- p>.</c->zoom<c- p>.</c->min<c- p>;</c->
+      input<c- p>.</c->max <c- o>=</c-> capabilities<c- p>.</c->zoom<c- p>.</c->max<c- p>;</c->
+      input<c- p>.</c->step <c- o>=</c-> capabilities<c- p>.</c->zoom<c- p>.</c->step<c- p>;</c->
+      input<c- p>.</c->value <c- o>=</c-> settings<c- p>.</c->zoom<c- p>;</c->
+      input<c- p>.</c->oninput <c- o>=</c-> <c- a>function</c-><c- p>(</c->event<c- p>)</c-> <c- p>{</c->
+        track<c- p>.</c->applyConstraints<c- p>({</c->advanced<c- o>:</c-> <c- p>[{</c->zoom<c- o>:</c-> event<c- p>.</c->target<c- p>.</c->value<c- p>}]});</c->
+      <c- p>};</c->
+      input<c- p>.</c->parentElement<c- p>.</c->hidden <c- o>=</c-> <c- kc>false</c-><c- p>;</c->
     <c- p>}</c->
-
-    <c- c1>// Map zoom to a slider element.</c->
-    <c- kr>const</c-> input <c- o>=</c-> document<c- p>.</c->querySelector<c- p>(</c-><c- t>'input[type="range"]'</c-><c- p>);</c->
-    input<c- p>.</c->min <c- o>=</c-> capabilities<c- p>.</c->zoom<c- p>.</c->min<c- p>;</c->
-    input<c- p>.</c->max <c- o>=</c-> capabilities<c- p>.</c->zoom<c- p>.</c->max<c- p>;</c->
-    input<c- p>.</c->step <c- o>=</c-> capabilities<c- p>.</c->zoom<c- p>.</c->step<c- p>;</c->
-    input<c- p>.</c->value <c- o>=</c-> track<c- p>.</c->getSettings<c- p>().</c->zoom<c- p>;</c->
-
-    input<c- p>.</c->oninput <c- o>=</c-> <c- a>function</c-><c- p>(</c->event<c- p>)</c-> <c- p>{</c->
-      track<c- p>.</c->applyConstraints<c- p>({</c->advanced <c- o>:</c-> <c- p>[{</c->zoom<c- o>:</c-> event<c- p>.</c->target<c- p>.</c->value<c- p>}]</c-> <c- p>});</c->
-    <c- p>}</c->
-    input<c- p>.</c->hidden <c- o>=</c-> <c- kc>false</c-><c- p>;</c->
   <c- p>}</c->
 
   <c- a>function</c-> takePhoto<c- p>()</c-> <c- p>{</c->
@@ -2719,6 +2772,12 @@ For instance, embedding the user’s location in the metadata of the digitzed im
     <li><a href="#ref-for-imagebitmap③">3.2. Methods</a> <a href="#ref-for-imagebitmap④">(2)</a> <a href="#ref-for-imagebitmap⑤">(3)</a> <a href="#ref-for-imagebitmap⑥">(4)</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-request-permission-to-use">
+   <a href="https://w3c.github.io/permissions/#request-permission-to-use">https://w3c.github.io/permissions/#request-permission-to-use</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-request-permission-to-use">10. Photo Capabilities and Constrainable Properties</a> <a href="#ref-for-request-permission-to-use①">(2)</a> <a href="#ref-for-request-permission-to-use②">(3)</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-idl-DOMException">
    <a href="https://heycam.github.io/webidl/#idl-DOMException">https://heycam.github.io/webidl/#idl-DOMException</a><b>Referenced in:</b>
    <ul>
@@ -2787,8 +2846,9 @@ For instance, embedding the user’s location in the metadata of the digitzed im
     <li><a href="#ref-for-idl-boolean①⑨">9.1.1. Members</a> <a href="#ref-for-idl-boolean②⓪">(2)</a> <a href="#ref-for-idl-boolean②①">(3)</a> <a href="#ref-for-idl-boolean②②">(4)</a> <a href="#ref-for-idl-boolean②③">(5)</a> <a href="#ref-for-idl-boolean②④">(6)</a> <a href="#ref-for-idl-boolean②⑤">(7)</a> <a href="#ref-for-idl-boolean②⑥">(8)</a> <a href="#ref-for-idl-boolean②⑦">(9)</a> <a href="#ref-for-idl-boolean②⑧">(10)</a> <a href="#ref-for-idl-boolean②⑨">(11)</a> <a href="#ref-for-idl-boolean③⓪">(12)</a> <a href="#ref-for-idl-boolean③①">(13)</a> <a href="#ref-for-idl-boolean③②">(14)</a> <a href="#ref-for-idl-boolean③③">(15)</a> <a href="#ref-for-idl-boolean③④">(16)</a> <a href="#ref-for-idl-boolean③⑤">(17)</a>
     <li><a href="#ref-for-idl-boolean③⑥">9.2. MediaTrackCapabilities dictionary</a>
     <li><a href="#ref-for-idl-boolean③⑦">9.2.1. Members</a>
-    <li><a href="#ref-for-idl-boolean③⑧">9.4. MediaTrackSettings dictionary</a>
-    <li><a href="#ref-for-idl-boolean③⑨">9.4.1. Members</a>
+    <li><a href="#ref-for-idl-boolean③⑧">9.3. MediaTrackConstraintSet dictionary</a> <a href="#ref-for-idl-boolean③⑨">(2)</a> <a href="#ref-for-idl-boolean④⓪">(3)</a>
+    <li><a href="#ref-for-idl-boolean④①">9.4. MediaTrackSettings dictionary</a>
+    <li><a href="#ref-for-idl-boolean④②">9.4.1. Members</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-idl-double">
@@ -2817,6 +2877,11 @@ For instance, embedding the user’s location in the metadata of the digitzed im
      <li><span class="dfn-paneled" id="term-for-imagebitmap" style="color:initial">ImageBitmap</span>
     </ul>
    <li>
+    <a data-link-type="biblio">[permissions]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="term-for-request-permission-to-use" style="color:initial">request permission to use</span>
+    </ul>
+   <li>
     <a data-link-type="biblio">[WebIDL]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="term-for-idl-DOMException" style="color:initial">DOMException</span>
@@ -2841,6 +2906,8 @@ For instance, embedding the user’s location in the metadata of the digitzed im
    <dd>Daniel Burnett; et al. <a href="https://www.w3.org/TR/mediacapture-streams/">Media Capture and Streams</a>. 2 July 2019. CR. URL: <a href="https://www.w3.org/TR/mediacapture-streams/">https://www.w3.org/TR/mediacapture-streams/</a>
    <dt id="biblio-html">[HTML]
    <dd>Anne van Kesteren; et al. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
+   <dt id="biblio-permissions">[PERMISSIONS]
+   <dd>Mounir Lamouri; Marcos Caceres; Jeffrey Yasskin. <a href="https://www.w3.org/TR/permissions/">Permissions</a>. 25 September 2017. WD. URL: <a href="https://www.w3.org/TR/permissions/">https://www.w3.org/TR/permissions/</a>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
    <dt id="biblio-webidl">[WebIDL]
@@ -2946,27 +3013,27 @@ For instance, embedding the user’s location in the metadata of the digitzed im
 };
 
 <c- b>partial</c-> <c- b>dictionary</c-> <a class="idl-code" data-link-type="dictionary" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaTrackConstraintSet"><c- g>MediaTrackConstraintSet</c-></a> {
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-constraindomstring"><c- n>ConstrainDOMString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDOMString " href="#dom-mediatrackconstraintset-whitebalancemode"><c- g>whiteBalanceMode</c-></a>;
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-constraindomstring"><c- n>ConstrainDOMString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDOMString " href="#dom-mediatrackconstraintset-exposuremode"><c- g>exposureMode</c-></a>;
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-constraindomstring"><c- n>ConstrainDOMString</c-></a> <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDOMString " href="#dom-mediatrackconstraintset-focusmode"><c- g>focusMode</c-></a>;
-  <a class="n" data-link-type="idl-name" href="#typedefdef-constrainpoint2d"><c- n>ConstrainPoint2D</c-></a>   <a class="idl-code" data-link-type="dict-member" data-type="ConstrainPoint2D   " href="#dom-mediatrackconstraintset-pointsofinterest"><c- g>pointsOfInterest</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-constraindomstring"><c- n>ConstrainDOMString</c-></a>           <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDOMString           " href="#dom-mediatrackconstraintset-whitebalancemode"><c- g>whiteBalanceMode</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-constraindomstring"><c- n>ConstrainDOMString</c-></a>           <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDOMString           " href="#dom-mediatrackconstraintset-exposuremode"><c- g>exposureMode</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-constraindomstring"><c- n>ConstrainDOMString</c-></a>           <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDOMString           " href="#dom-mediatrackconstraintset-focusmode"><c- g>focusMode</c-></a>;
+  <a class="n" data-link-type="idl-name" href="#typedefdef-constrainpoint2d"><c- n>ConstrainPoint2D</c-></a>             <a class="idl-code" data-link-type="dict-member" data-type="ConstrainPoint2D             " href="#dom-mediatrackconstraintset-pointsofinterest"><c- g>pointsOfInterest</c-></a>;
 
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>    <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-exposurecompensation"><c- g>exposureCompensation</c-></a>;
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>    <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-exposuretime"><c- g>exposureTime</c-></a>;
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>    <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-colortemperature"><c- g>colorTemperature</c-></a>;
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>    <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-iso"><c- g>iso</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>              <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble              " href="#dom-mediatrackconstraintset-exposurecompensation"><c- g>exposureCompensation</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>              <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble              " href="#dom-mediatrackconstraintset-exposuretime"><c- g>exposureTime</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>              <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble              " href="#dom-mediatrackconstraintset-colortemperature"><c- g>colorTemperature</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>              <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble              " href="#dom-mediatrackconstraintset-iso"><c- g>iso</c-></a>;
 
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>    <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-brightness"><c- g>brightness</c-></a>;
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>    <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-contrast"><c- g>contrast</c-></a>;
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>    <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-saturation"><c- g>saturation</c-></a>;
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>    <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-sharpness"><c- g>sharpness</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>              <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble              " href="#dom-mediatrackconstraintset-brightness"><c- g>brightness</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>              <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble              " href="#dom-mediatrackconstraintset-contrast"><c- g>contrast</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>              <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble              " href="#dom-mediatrackconstraintset-saturation"><c- g>saturation</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>              <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble              " href="#dom-mediatrackconstraintset-sharpness"><c- g>sharpness</c-></a>;
 
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>    <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-focusdistance"><c- g>focusDistance</c-></a>;
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>    <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-pan"><c- g>pan</c-></a>;
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>    <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-tilt"><c- g>tilt</c-></a>;
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>    <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble    " href="#dom-mediatrackconstraintset-zoom"><c- g>zoom</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>              <a class="idl-code" data-link-type="dict-member" data-type="ConstrainDouble              " href="#dom-mediatrackconstraintset-focusdistance"><c- g>focusDistance</c-></a>;
+  (<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-boolean"><c- b>boolean</c-></a> <c- b>or</c-> <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>) <a class="idl-code" data-link-type="dict-member" data-type="(boolean or ConstrainDouble) " href="#dom-mediatrackconstraintset-pan"><c- g>pan</c-></a>;
+  (<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-boolean"><c- b>boolean</c-></a> <c- b>or</c-> <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>) <a class="idl-code" data-link-type="dict-member" data-type="(boolean or ConstrainDouble) " href="#dom-mediatrackconstraintset-tilt"><c- g>tilt</c-></a>;
+  (<a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-boolean"><c- b>boolean</c-></a> <c- b>or</c-> <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainDouble"><c- n>ConstrainDouble</c-></a>) <a class="idl-code" data-link-type="dict-member" data-type="(boolean or ConstrainDouble) " href="#dom-mediatrackconstraintset-zoom"><c- g>zoom</c-></a>;
 
-  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainBoolean"><c- n>ConstrainBoolean</c-></a>   <a class="idl-code" data-link-type="dict-member" data-type="ConstrainBoolean   " href="#dom-mediatrackconstraintset-torch"><c- g>torch</c-></a>;
+  <a class="n" data-link-type="idl-name" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-ConstrainBoolean"><c- n>ConstrainBoolean</c-></a>             <a class="idl-code" data-link-type="dict-member" data-type="ConstrainBoolean             " href="#dom-mediatrackconstraintset-torch"><c- g>torch</c-></a>;
 };
 
 <c- b>partial</c-> <c- b>dictionary</c-> <a class="idl-code" data-link-type="dictionary" href="https://www.w3.org/TR/mediacapture-streams/#idl-def-MediaTrackSettings"><c- g>MediaTrackSettings</c-></a> {
@@ -3047,7 +3114,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
     <li><a href="#ref-for-dom-imagecapture-takephoto②">3. Image Capture API</a> <a href="#ref-for-dom-imagecapture-takephoto③">(2)</a>
     <li><a href="#ref-for-dom-imagecapture-takephoto④">3.2. Methods</a> <a href="#ref-for-dom-imagecapture-takephoto⑤">(2)</a> <a href="#ref-for-dom-imagecapture-takephoto⑥">(3)</a>
     <li><a href="#ref-for-dom-imagecapture-takephoto⑦">8.1. Values</a> <a href="#ref-for-dom-imagecapture-takephoto⑧">(2)</a> <a href="#ref-for-dom-imagecapture-takephoto⑨">(3)</a>
-    <li><a href="#ref-for-dom-imagecapture-takephoto①⓪">13.1. Update camera zoom and takePhoto()</a>
+    <li><a href="#ref-for-dom-imagecapture-takephoto①⓪">13.1. Update camera pan, tilt and zoom and takePhoto()</a>
     <li><a href="#ref-for-dom-imagecapture-takephoto①①">13.4. Update camera focus distance and takePhoto()</a>
    </ul>
   </aside>
@@ -3489,6 +3556,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
    <b><a href="#dom-mediatrackconstraintset-pan">#dom-mediatrackconstraintset-pan</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-mediatrackconstraintset-pan">9.3. MediaTrackConstraintSet dictionary</a>
+    <li><a href="#ref-for-dom-mediatrackconstraintset-pan①">10. Photo Capabilities and Constrainable Properties</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediatrackconstraintset-saturation">
@@ -3513,12 +3581,14 @@ For instance, embedding the user’s location in the metadata of the digitzed im
    <b><a href="#dom-mediatrackconstraintset-tilt">#dom-mediatrackconstraintset-tilt</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-mediatrackconstraintset-tilt">9.3. MediaTrackConstraintSet dictionary</a>
+    <li><a href="#ref-for-dom-mediatrackconstraintset-tilt①">10. Photo Capabilities and Constrainable Properties</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediatrackconstraintset-zoom">
    <b><a href="#dom-mediatrackconstraintset-zoom">#dom-mediatrackconstraintset-zoom</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-mediatrackconstraintset-zoom">9.3. MediaTrackConstraintSet dictionary</a>
+    <li><a href="#ref-for-dom-mediatrackconstraintset-zoom①">10. Photo Capabilities and Constrainable Properties</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-mediatrackconstraintset-torch">
