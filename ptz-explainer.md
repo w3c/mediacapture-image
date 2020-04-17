@@ -31,7 +31,8 @@ steering the camera to face a speaker for instance.
 Without it, users have to install native apps today to control camera PTZ.
 Presently, zoom is supported as a media track constraint behind the camera
 permission. The plan is to group pan, tilt and zoom together behind a PTZ
-separate permission.
+separate permission which can be requested in a single `getUserMedia()` call
+with the camera permission.
 
 ## Control camera pan/tilt
 
@@ -39,14 +40,16 @@ We would like to add `pan` and `tilt` to the existing property set of media
 track capabilities, constraints and settings. These new constraints apply to the
 live video feed. Those will also be used in `getUserMedia()` to express whether a
 website wants to control camera PTZ functionality. In other words, it will be
-used to request the PTZ permission, a separate camera permission, in a single
-call. If the selected/connected camera does not support PTZ though, the PTZ
-permission won’t be requested and may fallback to the camera permission. If the
-user denies the PTZ permission, it may also fallback to the camera permission.
+used to request the PTZ permission, a separate permission, in a single
+`getUserMedia()` call, along the camera permission. If the selected/connected
+camera does not support PTZ though or user blocks solely the PTZ permission, the
+UA may fall back to the camera permission.
 
 The [new "true" semantics] for `pan`, `tilt`, and `zoom` makes it possible to
 acquire a PTZ camera in `getUserMedia()` without altering the current pan, tilt
-and zoom values.
+and zoom values. If the PTZ permission is not granted, the `pan`, `tilt`, and
+`zoom` are not available as capabilities, settings, and constraints, even if the
+camera supports PTZ.
 
 Applying PTZ constraints requires the PTZ permission to be granted as described
 in the "Interaction with the Permissions API" section below. If not granted,
@@ -57,12 +60,12 @@ The example below shows how camera pan and tilt could be requested and presented
 to the user.
 
 ```js
-// User is prompted to grant camera PTZ access only if the camera supports PTZ.
+// User is prompted to grant both camera and PTZ access in a single call.
 // If the camera does not support PTZ or user denies PTZ permission, it falls
 // back to a "regular" camera prompt.
 const videoStream = await navigator.mediaDevices.getUserMedia({
   video: {
-    // [NEW] Website asks to control camera PTZ.
+    // [NEW] Website asks to control camera PTZ as well.
     pan: true, tilt: true, zoom: true,
   }
 });
@@ -77,9 +80,9 @@ const capabilities = videoTrack.getCapabilities();
 const settings = videoTrack.getSettings();
 
 // [NEW] Let the user control the camera tilt motion if the camera supports it
-// and user granted access.
+// and user has granted PTZ access.
 if ("pan" in capabilities) {
-  const input = document.querySelector("input[type="range"]");
+  const input = document.querySelector("input[type=range]");
   input.min = capabilities.pan.min;
   input.max = capabilities.pan.max;
   input.step = capabilities.pan.step;
@@ -96,7 +99,7 @@ if ("pan" in capabilities) {
 }
 
 // [NEW] Let the user control the camera tilt motion if the camera supports it
-// and user granted access.
+// and user has granted PTZ access.
 if ("tilt" in capabilities) {
   // similar to the pan motion above.
 }
@@ -110,17 +113,22 @@ Having a separate PTZ permission allows the UA to differentiate between normal
 camera permissions and PTZ camera permissions as PTZ needs to be explicitly
 requested as an extension to the camera permission.
 
-UA may group both the camera permission request and the PTZ permission request.
-See mock below.
+The UA may group both the camera permission request and the PTZ permission
+request. See mock below.
 
 ![Mock of a PTZ permission prompt](/images/ptz-prompt-mock.png)
+
+Users can block and revoke the PTZ permission solely in UA settings. The UA may
+also provide a way for users to block PTZ directly from the prompt. Web
+developers can monitor those PTZ permission changes with the [permissions API].
 
 The camera permission can be requested using `{name: "camera", panTiltZoom:
 false}` or `{name: "camera"}` while the PTZ permission can be requested using
 `{name: "camera", panTiltZoom: true}`. The latter is used in `getUserMedia()` if
 `pan`, `tilt`, and `zoom` values are "true".
 
-The example below shows how to query the current status of the PTZ permission.
+The example below shows how to query the current status of the PTZ permission
+and monitor changes.
 
 ```js
 const panTiltZoomPermissionStatus = await navigator.permissions.query({
@@ -130,6 +138,10 @@ const panTiltZoomPermissionStatus = await navigator.permissions.query({
 
 if (panTiltZoomPermissionStatus.state == "granted") {
   // User has granted access to this website to control camera PTZ.
+}
+
+panTiltZoomPermissionStatus.onchange = () => {
+  // User has changed PTZ permission status.
 }
 ```
 
@@ -160,6 +172,7 @@ N/A
 Many thanks for valuable feedback and advice from:
 - Reilly Grant
 - Rijubrata Bhaumik
+- Kenneth Rohde Christiansen
 
 
 [Some cameras]: https://support.zoom.us/hc/en-us/articles/204065759-Zoom-Rooms-Camera-Controls
@@ -168,3 +181,4 @@ Many thanks for valuable feedback and advice from:
 [MediaStream Image Capture API]: https://w3c.github.io/mediacapture-image/
 [implemented in Chrome]: https://caniuse.com/#search=imageCapture
 [new "true" semantics]: https://github.com/w3c/mediacapture-image/pull/218#issuecomment-610286277
+[permissions API]: https://w3c.github.io/permissions/#media-devices
