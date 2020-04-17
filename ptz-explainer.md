@@ -41,7 +41,8 @@ live video feed. Those will also be used in `getUserMedia()` to express whether 
 website wants to control camera PTZ functionality. In other words, it will be
 used to request the PTZ permission, a separate camera permission, in a single
 call. If the selected/connected camera does not support PTZ though, the PTZ
-permission won’t be requested and may fallback to the camera permission.
+permission won’t be requested and may fallback to the camera permission. If the
+user denies the PTZ permission, it may also fallback to the camera permission.
 
 The [new "true" semantics] for `pan`, `tilt`, and `zoom` makes it possible to
 acquire a PTZ camera in `getUserMedia()` without altering the current pan, tilt
@@ -57,11 +58,12 @@ to the user.
 
 ```js
 // User is prompted to grant camera PTZ access only if the camera supports PTZ.
-// If the camera does not support PTZ, it falls back to a "regular" camera prompt.
+// If the camera does not support PTZ or user denies PTZ permission, it falls
+// back to a "regular" camera prompt.
 const videoStream = await navigator.mediaDevices.getUserMedia({
   video: {
     // [NEW] Website asks to control camera PTZ.
-    pan: true, tilt: true, zoom: true, 
+    pan: true, tilt: true, zoom: true,
   }
 });
 
@@ -74,7 +76,8 @@ const videoTrack = videoStream.getVideoTracks()[0];
 const capabilities = videoTrack.getCapabilities();
 const settings = videoTrack.getSettings();
 
-// [NEW] If the camera supports pan motion, let the user control it.
+// [NEW] Let the user control the camera tilt motion if the camera supports it
+// and user granted access.
 if ("pan" in capabilities) {
   const input = document.querySelector("input[type="range"]");
   input.min = capabilities.pan.min;
@@ -92,9 +95,10 @@ if ("pan" in capabilities) {
   };
 }
 
-// [NEW] If the camera supports tilt motion, let the user control it.
+// [NEW] Let the user control the camera tilt motion if the camera supports it
+// and user granted access.
 if ("tilt" in capabilities) {
-  // similar to pan motion above.
+  // similar to the pan motion above.
 }
 ```
 
