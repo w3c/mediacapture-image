@@ -581,8 +581,8 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
   <dd>See <a>contrast</a> constrainable property.</dd>
 
   <dt><dfn dict-member for="MediaTrackConstraintSet"><code>pan</code></dfn></dt>
-  <dd>A value of true is equivalent to a value of empty {{ConstrainDouble}}.
-      A value of false is equivalent to a value of null.
+  <dd>A value of true is normalized to a value of empty {{ConstrainDouble}}.
+      A value of false is normalized to a value of undefined.
       See <a>pan</a> constrainable property.</dd>
 
   <dt><dfn dict-member for="MediaTrackConstraintSet"><code>saturation</code></dfn></dt>
@@ -595,13 +595,13 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
   <dd>See <a>focus distance</a> constrainable property.</dd>
 
   <dt><dfn dict-member for="MediaTrackConstraintSet"><code>tilt</code></dfn></dt>
-  <dd>A value of true is equivalent to a value of empty {{ConstrainDouble}}.
-      A value of false is equivalent to a value of null.
+  <dd>A value of true is normalized to a value of empty {{ConstrainDouble}}.
+      A value of false is normalized to a value of undefined.
       See <a>tilt</a> constrainable property.</dd>
 
   <dt><dfn dict-member for="MediaTrackConstraintSet"><code>zoom</code></dfn></dt>
-  <dd>A value of true is equivalent to a value of empty {{ConstrainDouble}}.
-      A value of false is equivalent to a value of null.
+  <dd>A value of true is normalized to a value of empty {{ConstrainDouble}}.
+      A value of false is normalized to a value of undefined.
       See <a>zoom</a> constrainable property.</dd>
 
   <dt><dfn dict-member for="MediaTrackConstraintSet"><code>torch</code></dfn></dt>
@@ -776,11 +776,18 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
 
     <li><dfn>Pan</dfn> is a numeric camera setting that controls the pan of the camera. The setting represents pan in arc seconds, which are 1/3600th of a degree. Values are in the range from –180*3600 arc seconds to +180*3600 arc seconds. Positive values pan the camera clockwise as viewed from above, and negative values pan the camera counter clockwise as viewed from above.
 
-    Any algorithm which uses a {{MediaTrackConstraintSet}} object and its {{MediaTrackConstraintSet/pan}} attribute which is not equivalent to null MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to "camera" and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its deviceId member set to any appropriate device's deviceId.</li>
+    Any algorithm which uses a {{MediaTrackConstraintSet}} object and its {{MediaTrackConstraintSet/pan}} dictionary member which exists after a possible normalization MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to "camera" and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its deviceId member set to any appropriate device's deviceId.
+
+    <div class="note">
+      The {{MediaTrackConstraintSet/pan}}, {{MediaTrackConstraintSet/tilt}} and {{MediaTrackConstraintSet/zoom}} dictionary members exists after a possible normalization if the normalized value is a double value or a {{ConstrainDoubleRange}} value (whether empty or not).
+      A boolean value of true is normalized to an empty {{ConstrainDoubleRange}} value thus the dictionary member exists after a normalization.
+      A boolean value of false is normalized to no value thus the dictionary member does not exist after a normalization.
+      An empty {{ConstrainDoubleRange}} value implies no constraints but only a permission and capability request.
+    </div></li>
 
     <li><dfn>Tilt</dfn> is a numeric camera setting that controls the tilt of the camera. The setting represents tilt in arc seconds, which are 1/3600th of a degree. Values are in the range from –180*3600 arc seconds to +180*3600 arc seconds. Positive values tilt the camera upward when viewed from the front, and negative values tilt the camera downward as viewed from the front.
 
-    Any algorithm which uses a {{MediaTrackConstraintSet}} object and its {{MediaTrackConstraintSet/tilt}} attribute which is not equivalent to null MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to "camera" and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its deviceId member set to any appropriate device's deviceId.
+    Any algorithm which uses a {{MediaTrackConstraintSet}} object and its {{MediaTrackConstraintSet/tilt}} dictionary member which exists after a possible normalization MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to "camera" and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its deviceId member set to any appropriate device's deviceId.
 
     <div class="note">
       There is no defined order when applying <a>pan</a> and <a>tilt</a>, the UA is allowed to apply them in any order. In practice this should not matter since these values are absolute, so order will not affect the final position. However, if applying pan and tilt is slow enough, the order in which they are applied may be visually noticeable.
@@ -788,7 +795,7 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
 
     <li><dfn>Zoom</dfn> is a numeric camera setting that controls the focal length of the lens. The setting usually represents a ratio, e.g. 4 is a zoom ratio of 4:1. The minimum value is usually 1, to represent a 1:1 ratio (i.e. no zoom).
 
-    Any algorithm which uses a {{MediaTrackConstraintSet}} object and its {{MediaTrackConstraintSet/zoom}} attribute which is not equivalent to null MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to "camera" and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its deviceId member set to any appropriate device's deviceId.</li>
+    Any algorithm which uses a {{MediaTrackConstraintSet}} object and its {{MediaTrackConstraintSet/zoom}} dictionary member which exists after a possible normalization MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to "camera" and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its deviceId member set to any appropriate device's deviceId.</li>
 
     <li><dfn>Fill light mode</dfn> describes the flash setting of the capture device (e.g. |auto|, |off|, |on|). <dfn>Torch</dfn> describes the setting of the source's fill light as  continuously connected, staying on as long as {{track}} is active.</li>
   </ol>
@@ -1143,7 +1150,7 @@ urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: 
 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: getSupportedConstraints(); url: widl-MediaDevices-getSupportedConstraints-MediaTrackSupportedConstraints
 
-urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: ConstrainDouble ; url: idl-def-ConstrainDouble
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: ConstrainDouble ; url: idl-def-constraindouble
 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: ConstrainDOMString ; url: idl-def-constraindomstring
 
