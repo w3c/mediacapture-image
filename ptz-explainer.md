@@ -41,9 +41,12 @@ track capabilities, constraints and settings. These new constraints apply to the
 live video feed. Those will also be used in `getUserMedia()` to express whether a
 website wants to control camera PTZ functionality. In other words, it will be
 used to request the PTZ permission, a separate permission, in a single
-`getUserMedia()` call, along the camera permission. If the selected/connected
-camera does not support PTZ though or user blocks solely the PTZ permission, the
-UA may fall back to the camera permission.
+`getUserMedia()` call, along the camera permission.
+
+If the selected/connected camera does not support PTZ though or user blocks solely
+the PTZ permission, the UA will either reject the `getUserMedia()` call if PTZ
+constraints are required, or fall back to the camera permission if PTZ constraints
+are defined as advanced constraints.
 
 The [new "true" semantics] for `pan`, `tilt`, and `zoom` makes it possible to
 acquire a PTZ camera in `getUserMedia()` without altering the current pan, tilt
@@ -61,13 +64,17 @@ to the user.
 ```js
 // User is prompted to grant both camera and PTZ access in a single call.
 // If the camera does not support PTZ or user denies PTZ permission, it falls
-// back to a "regular" camera prompt.
+// back to a "regular" camera prompt as PTZ constraints are defined as advanced
+// constraints.
 const videoStream = await navigator.mediaDevices.getUserMedia({
   video: {
-    // [NEW] Website asks to control camera PTZ as well.
-    pan: true, tilt: true, zoom: true,
-  }
+    advanced: [{
+      // [NEW] Website asks to control camera PTZ as well.
+      pan: true, tilt: true, zoom: true,
+    }],
+  },
 });
+
 
 // Show camera video stream to user.
 const video = document.querySelector("video");
