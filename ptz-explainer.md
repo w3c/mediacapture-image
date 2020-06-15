@@ -52,9 +52,8 @@ and zoom values. If the PTZ permission is not granted, the `pan`, `tilt`, and
 camera supports PTZ.
 
 Applying PTZ constraints requires the PTZ permission to be granted as described
-in the "Interaction with the Permissions API" section below. If not granted,
-user will be prompted. Otherwise, the pan and tilt values passed in
-`applyConstraints()` will be used to move the camera.
+in the "Interaction with the Permissions API" section below. The `pan` and `tilt`
+values passed in `applyConstraints()` will be used to move the camera.
 
 The example below shows how camera pan and tilt could be requested and presented
 to the user.
@@ -88,10 +87,6 @@ if ("pan" in capabilities) {
   input.step = capabilities.pan.step;
   input.value = settings.pan;
   input.oninput = async (event) => {
-    // [NEW] Applying PTZ constraints requests the permission
-    // descriptor `{name: "camera", panTiltZoom: true}`. Since this is already
-    // granted during successful getUserMedia call above, this applyConstraints
-    // call should not prompt for any new permissions.
     await videoTrack.applyConstraints({
       advanced: [{ pan: event.target.value }],
     });
@@ -118,7 +113,7 @@ request. See mock below.
 
 ![Mock of a PTZ permission prompt](/images/ptz-prompt-mock.png)
 
-Users can block and revoke the PTZ permission solely in UA settings. The UA may
+Users can block and revoke the PTZ permission in UA settings. The UA may
 also provide a way for users to block PTZ directly from the prompt. Web
 developers can monitor those PTZ permission changes with the [permissions API].
 
