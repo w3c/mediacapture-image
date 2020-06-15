@@ -75,7 +75,6 @@ const videoStream = await navigator.mediaDevices.getUserMedia({
   },
 });
 
-
 // Show camera video stream to user.
 const video = document.querySelector("video");
 video.srcObject = videoStream;
