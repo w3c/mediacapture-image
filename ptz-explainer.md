@@ -106,6 +106,19 @@ if ("tilt" in capabilities) {
 }
 ```
 
+The example below shows how camera pan could be reset when acquiring a
+PTZ camera in `getUserMedia()`.
+
+```js
+// User is prompted to grant both camera and PTZ access in a single call.
+// If the camera does not support PTZ or user denies PTZ permission, it fails
+// as PTZ constraints are required.
+const videoStream = await navigator.mediaDevices.getUserMedia({
+  // [NEW] Website asks to reset camera pan.
+  video: { pan: 1 },
+});
+```
+
 [Spec PR](https://github.com/w3c/mediacapture-image/pull/218)
 
 ## Integration with the Permissions API
