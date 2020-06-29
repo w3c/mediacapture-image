@@ -130,7 +130,7 @@ requested as an extension to the camera permission.
 The UA may group both the camera permission request and the PTZ permission
 request. See mock below.
 
-![Mock of a PTZ permission prompt](/images/ptz-prompt-mock.png)
+![Mock of a PTZ permission prompt](/images/ptz-prompt-mock.jpg)
 
 Users can block and revoke the PTZ permission in UA settings. The UA may
 also provide a way for users to block PTZ directly from the prompt. Web
