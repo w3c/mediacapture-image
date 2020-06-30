@@ -171,6 +171,24 @@ hardware supports it). The permission will have to be re-requested through
 
 [Spec PR](https://github.com/w3c/permissions/pull/204)
 
+## Security
+
+Requesting the PTZ permission is gated by well-known anti-abuse mechanisms:
+- starting a media session is available only in secure contexts,
+- the user has to explicitly allow PTZ through a permission prompt.
+
+When the website actively controls camera PTZ, the browser could enhance the
+existing notifications that the camera is in use in several ways:
+- the tab indicator may include a preview of the camera's current [field of view]
+  when the user hovers over it,
+- a browser notification could be displayed when the camera has been commanded to
+  move or zoom to warn the user and identify the website.
+
+In order to prevent two websites from controlling camera PTZ at the same time,
+the browser could automatically pause existing camera PTZ access when another
+page wants to control it, and let web developers know by dispatching `mute`
+HTMLMediaStreamTrack events.
+
 ## History bits
 
 The current MediaStream Image Capture API already defines the `zoom` media track
@@ -196,3 +214,4 @@ Many thanks for valuable feedback and advice from:
 [implemented in Chrome]: https://caniuse.com/#search=imageCapture
 [new "true" semantics]: https://github.com/w3c/mediacapture-image/pull/218#issuecomment-610286277
 [permissions API]: https://w3c.github.io/permissions/#media-devices
+[field of view]: https://info.logitech.com/vc-tech-features.html#collaboration
