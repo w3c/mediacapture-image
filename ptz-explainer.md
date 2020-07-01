@@ -167,7 +167,7 @@ permission is revoked, the PTZ permission is automatically revoked as well.
 The camera permission (obtained using an older version of the UA, or with
 another camera) is not implicitly upgraded to the PTZ permission (even when the
 hardware supports it). The permission will have to be re-requested through
-`getUserMedia()` or `applyConstraints()`.
+`getUserMedia()` or the permissions API.
 
 [Spec PR](https://github.com/w3c/permissions/pull/204)
 
