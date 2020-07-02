@@ -195,6 +195,10 @@ they clear state from their browsers.
    and scoop them later on. To mitigate this, the browser could reset pan, tilt,
    and zoom settings to a default value each time a media session starts.
 
+1. Websites could share pan, tilt, and zoom real-time values during a media
+   session. A way of mitigating this would be to allow only one top-level
+   browsing context at a time to access and control camera PTZ.
+
 ## History bits
 
 The current MediaStream Image Capture API already defines the `zoom` media track
