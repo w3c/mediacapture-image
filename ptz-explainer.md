@@ -171,6 +171,34 @@ hardware supports it). The permission will have to be re-requested through
 
 [Spec PR](https://github.com/w3c/permissions/pull/204)
 
+## Fingerprinting
+
+User fingerprinting is the practice of gathering multiple bits of user
+information from multiple sources (built-in hardware, user settings, installed
+peripherals, browsing data) and intersecting them together to create a unique
+signature of the user, that would enable to recognize them later on, even if
+they clear state from their browsers.
+
+1. Pan, tilt, and zoom hardware capabilities (e.g. `min`, `max`, `step`) and
+   current settings are not exposed to websites unless the user explicitly
+   grants PTZ permission. However it is possible to use pan, tilt, and zoom
+   mandatory constraints so that the immediate failure of a `getUserMedia` call
+   with `OverConstrainedError` returns information about camera devices on the
+   system without prompting the user. This increases the surface available for
+   fingerprinting as already raised in the [Media Capture and Streams
+   spec](https://www.w3.org/TR/mediacapture-streams/#privacy-and-security-considerations).
+   The browser could mitigate this issue by always treating pan, tilt, and zoom
+   constraints as "ideal" in `getUserMedia` as suggested in
+   [#229](https://github.com/w3c/mediacapture-image/issues/229).
+   
+1. A malicious website could set pan, tilt, and zoom to minimally different values
+   and scoop them later on. To mitigate this, the browser could reset pan, tilt,
+   and zoom settings to a default value each time a media session starts.
+
+1. Websites could share pan, tilt, and zoom real-time values during a media
+   session. A way of mitigating this would be to allow only one top-level
+   browsing context at a time to access and control camera PTZ.
+
 ## History bits
 
 The current MediaStream Image Capture API already defines the `zoom` media track
