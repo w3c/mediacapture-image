@@ -1228,9 +1228,9 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version 04c91f0f, updated Mon Jun 29 08:51:04 2020 +0200" name="generator">
+  <meta content="Bikeshed version eed57b9f, updated Thu Jul 9 18:41:51 2020 -0700" name="generator">
   <link href="https://www.w3.org/TR/image-capture/" rel="canonical">
-  <meta content="980b90f3eb8e0d0ba5356eaa00c7c2173b8817f9" name="document-revision">
+  <meta content="e5d9d241789b3d150f78113654ede80db73fc078" name="document-revision">
 <style>
 table {
   border-collapse: collapse;
@@ -1494,7 +1494,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">MediaStream Image Capture</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2020-07-03">3 July 2020</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2020-07-10">10 July 2020</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -1571,6 +1571,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
      <a href="#mediasettingsrange-section"><span class="secno">6</span> <span class="content"><code class="idl"><span>MediaSettingsRange</span></code></span></a>
      <ol class="toc">
       <li><a href="#mediasettingsrange-attributes"><span class="secno">6.1</span> <span class="content">Attributes</span></a>
+      <li><a href="#mediasettingsrange-methods"><span class="secno">6.2</span> <span class="content">Methods</span></a>
      </ol>
     <li>
      <a href="#redeyereduction-section"><span class="secno">7</span> <span class="content"><code class="idl"><span>RedEyeReduction</span></code></span></a>
@@ -1821,6 +1822,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
     <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double④"><c- b>double</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="double" href="#dom-mediasettingsrange-max" id="ref-for-dom-mediasettingsrange-max"><c- g>max</c-></a>;
     <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double⑤"><c- b>double</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="double" href="#dom-mediasettingsrange-min" id="ref-for-dom-mediasettingsrange-min"><c- g>min</c-></a>;
     <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double⑥"><c- b>double</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="double" href="#dom-mediasettingsrange-step" id="ref-for-dom-mediasettingsrange-step"><c- g>step</c-></a>;
+    [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Default" id="ref-for-Default"><c- g>Default</c-></a>] <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-object" id="ref-for-idl-object"><c- b>object</c-></a> <a class="idl-code" data-link-type="method" href="#dom-mediasettingsrange-tojson" id="ref-for-dom-mediasettingsrange-tojson"><c- g>toJSON</c-></a>();
 };
 </pre>
    <h3 class="heading settled" data-level="6.1" id="mediasettingsrange-attributes"><span class="secno">6.1. </span><span class="content">Attributes</span><a class="self-link" href="#mediasettingsrange-attributes"></a></h3>
@@ -1831,6 +1833,11 @@ For instance, embedding the user’s location in the metadata of the digitzed im
     <dd>The minimum value of this setting
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaSettingsRange" data-dfn-type="attribute" data-export id="dom-mediasettingsrange-step"><code>step</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double⑨">double</a>, readonly</span>
     <dd>The minimum difference between consecutive values of this setting.
+   </dl>
+   <h3 class="heading settled" data-level="6.2" id="mediasettingsrange-methods"><span class="secno">6.2. </span><span class="content">Methods</span><a class="self-link" href="#mediasettingsrange-methods"></a></h3>
+   <dl class="domintro">
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="MediaSettingsRange" data-dfn-type="method" data-export id="dom-mediasettingsrange-tojson"><code>toJSON()</code></dfn>
+    <dd>When called, run <a data-link-type="biblio" href="#biblio-webidl">[WEBIDL]</a>'s <a data-link-type="dfn" href="https://heycam.github.io/webidl/#default-tojson-steps" id="ref-for-default-tojson-steps">default toJSON steps</a>.
    </dl>
    <h2 class="heading settled" data-level="7" id="redeyereduction-section"><span class="secno">7. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#enumdef-redeyereduction" id="ref-for-enumdef-redeyereduction②">RedEyeReduction</a></code></span><a class="self-link" href="#redeyereduction-section"></a></h2>
 <pre class="idl highlight def"><c- b>enum</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="enum" data-export id="enumdef-redeyereduction"><code><c- g>RedEyeReduction</c-></code></dfn> {
@@ -2728,6 +2735,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
      <li><a href="#dom-mediatracksettings-tilt">dict-member for MediaTrackSettings</a><span>, in §9.4.1</span>
      <li><a href="#dom-mediatracksupportedconstraints-tilt">dict-member for MediaTrackSupportedConstraints</a><span>, in §9.1.1</span>
     </ul>
+   <li><a href="#dom-mediasettingsrange-tojson">toJSON()</a><span>, in §6.2</span>
    <li><a href="#torch">Torch</a><span>, in §10</span>
    <li>
     torch
@@ -2808,6 +2816,12 @@ For instance, embedding the user’s location in the metadata of the digitzed im
     <li><a href="#ref-for-idl-DOMString⑨">9.4.1. Members</a> <a href="#ref-for-idl-DOMString①⓪">(2)</a> <a href="#ref-for-idl-DOMString①①">(3)</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-Default">
+   <a href="https://heycam.github.io/webidl/#Default">https://heycam.github.io/webidl/#Default</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-Default">6. MediaSettingsRange</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-Exposed">
    <a href="https://heycam.github.io/webidl/#Exposed">https://heycam.github.io/webidl/#Exposed</a><b>Referenced in:</b>
    <ul>
@@ -2866,6 +2880,12 @@ For instance, embedding the user’s location in the metadata of the digitzed im
     <li><a href="#ref-for-idl-boolean④②">9.4.1. Members</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="term-for-default-tojson-steps">
+   <a href="https://heycam.github.io/webidl/#default-tojson-steps">https://heycam.github.io/webidl/#default-tojson-steps</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-default-tojson-steps">6.2. Methods</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="term-for-idl-double">
    <a href="https://heycam.github.io/webidl/#idl-double">https://heycam.github.io/webidl/#idl-double</a><b>Referenced in:</b>
    <ul>
@@ -2877,6 +2897,12 @@ For instance, embedding the user’s location in the metadata of the digitzed im
     <li><a href="#ref-for-idl-double②②">9.4.1. Members</a> <a href="#ref-for-idl-double②③">(2)</a> <a href="#ref-for-idl-double②④">(3)</a> <a href="#ref-for-idl-double②⑤">(4)</a> <a href="#ref-for-idl-double②⑥">(5)</a> <a href="#ref-for-idl-double②⑦">(6)</a> <a href="#ref-for-idl-double②⑧">(7)</a> <a href="#ref-for-idl-double②⑨">(8)</a> <a href="#ref-for-idl-double③⓪">(9)</a> <a href="#ref-for-idl-double③①">(10)</a> <a href="#ref-for-idl-double③②">(11)</a> <a href="#ref-for-idl-double③③">(12)</a>
     <li><a href="#ref-for-idl-double③④">12. Point2D</a> <a href="#ref-for-idl-double③⑤">(2)</a>
     <li><a href="#ref-for-idl-double③⑥">12.1. Members</a> <a href="#ref-for-idl-double③⑦">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-idl-object">
+   <a href="https://heycam.github.io/webidl/#idl-object">https://heycam.github.io/webidl/#idl-object</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-idl-object">6. MediaSettingsRange</a>
    </ul>
   </aside>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
@@ -2903,10 +2929,11 @@ For instance, embedding the user’s location in the metadata of the digitzed im
      <li><span class="dfn-paneled" id="term-for-request-permission-to-use" style="color:initial">request permission to use</span>
     </ul>
    <li>
-    <a data-link-type="biblio">[WebIDL]</a> defines the following terms:
+    <a data-link-type="biblio">[WEBIDL]</a> defines the following terms:
     <ul>
      <li><span class="dfn-paneled" id="term-for-idl-DOMException" style="color:initial">DOMException</span>
      <li><span class="dfn-paneled" id="term-for-idl-DOMString" style="color:initial">DOMString</span>
+     <li><span class="dfn-paneled" id="term-for-Default" style="color:initial">Default</span>
      <li><span class="dfn-paneled" id="term-for-Exposed" style="color:initial">Exposed</span>
      <li><span class="dfn-paneled" id="term-for-invalidstateerror" style="color:initial">InvalidStateError</span>
      <li><span class="dfn-paneled" id="term-for-notsupportederror" style="color:initial">NotSupportedError</span>
@@ -2915,7 +2942,9 @@ For instance, embedding the user’s location in the metadata of the digitzed im
      <li><span class="dfn-paneled" id="term-for-unknownerror" style="color:initial">UnknownError</span>
      <li><span class="dfn-paneled" id="term-for-a-promise-rejected-with" style="color:initial">a promise rejected with</span>
      <li><span class="dfn-paneled" id="term-for-idl-boolean" style="color:initial">boolean</span>
+     <li><span class="dfn-paneled" id="term-for-default-tojson-steps" style="color:initial">default tojson steps</span>
      <li><span class="dfn-paneled" id="term-for-idl-double" style="color:initial">double</span>
+     <li><span class="dfn-paneled" id="term-for-idl-object" style="color:initial">object</span>
     </ul>
   </ul>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
@@ -2931,7 +2960,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
    <dd>Mounir Lamouri; Marcos Caceres; Jeffrey Yasskin. <a href="https://www.w3.org/TR/permissions/">Permissions</a>. 25 September 2017. WD. URL: <a href="https://www.w3.org/TR/permissions/">https://www.w3.org/TR/permissions/</a>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
-   <dt id="biblio-webidl">[WebIDL]
+   <dt id="biblio-webidl">[WEBIDL]
    <dd>Boris Zbarsky. <a href="https://heycam.github.io/webidl/">Web IDL</a>. 15 December 2016. ED. URL: <a href="https://heycam.github.io/webidl/">https://heycam.github.io/webidl/</a>
   </dl>
   <h3 class="no-num no-ref heading settled" id="informative"><span class="content">Informative References</span><a class="self-link" href="#informative"></a></h3>
@@ -2974,6 +3003,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
     <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double"><c- b>double</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="double" href="#dom-mediasettingsrange-max"><c- g>max</c-></a>;
     <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double"><c- b>double</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="double" href="#dom-mediasettingsrange-min"><c- g>min</c-></a>;
     <c- b>readonly</c-> <c- b>attribute</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-double"><c- b>double</c-></a> <a class="idl-code" data-link-type="attribute" data-readonly data-type="double" href="#dom-mediasettingsrange-step"><c- g>step</c-></a>;
+    [<a class="idl-code" data-link-type="extended-attribute" href="https://heycam.github.io/webidl/#Default"><c- g>Default</c-></a>] <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-object"><c- b>object</c-></a> <a class="idl-code" data-link-type="method" href="#dom-mediasettingsrange-tojson"><c- g>toJSON</c-></a>();
 };
 
 <c- b>enum</c-> <a href="#enumdef-redeyereduction"><code><c- g>RedEyeReduction</c-></code></a> {
@@ -3258,6 +3288,12 @@ For instance, embedding the user’s location in the metadata of the digitzed im
    <b><a href="#dom-mediasettingsrange-step">#dom-mediasettingsrange-step</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-mediasettingsrange-step">6. MediaSettingsRange</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-mediasettingsrange-tojson">
+   <b><a href="#dom-mediasettingsrange-tojson">#dom-mediasettingsrange-tojson</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-mediasettingsrange-tojson">6. MediaSettingsRange</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="enumdef-redeyereduction">
