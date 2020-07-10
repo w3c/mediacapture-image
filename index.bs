@@ -280,6 +280,7 @@ interface ImageCapture {
       readonly attribute double max;
       readonly attribute double min;
       readonly attribute double step;
+      [Default] object toJSON();
   };
 </pre>
 
@@ -294,6 +295,13 @@ interface ImageCapture {
 
   <dt><dfn attribute for="MediaSettingsRange"><code>step</code></dfn></dt>
   <dd>The minimum difference between consecutive values of this setting.</dd>
+</dl>
+
+## Methods ## {#mediasettingsrange-methods}
+
+<dl class="domintro">
+  <dt><dfn method for="MediaSettingsRange"><code>toJSON()</code></dfn></dt>
+  <dd>When called, run [[!WEBIDL]]'s <a>default toJSON steps</a>.</dd>
 </dl>
 
 # {{RedEyeReduction}} # {#redeyereduction-section}
