@@ -84,8 +84,8 @@ const videoTrack = videoStream.getVideoTracks()[0];
 const capabilities = videoTrack.getCapabilities();
 const settings = videoTrack.getSettings();
 
-// [NEW] Let the user control the camera tilt motion if the camera supports it
-// and user has granted PTZ access.
+// [NEW] Let the user control the camera pan motion if the camera supports it
+// and PTZ access is granted.
 if ("pan" in capabilities) {
   const input = document.querySelector("input[type=range]");
   input.min = capabilities.pan.min;
@@ -100,7 +100,7 @@ if ("pan" in capabilities) {
 }
 
 // [NEW] Let the user control the camera tilt motion if the camera supports it
-// and user has granted PTZ access.
+// and PTZ access is granted.
 if ("tilt" in capabilities) {
   // similar to the pan motion above.
 }
