@@ -784,7 +784,9 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
 
     <li><dfn>Pan</dfn> is a numeric camera setting that controls the pan of the camera. The setting represents pan in arc seconds, which are 1/3600th of a degree. Values are in the range from –180*3600 arc seconds to +180*3600 arc seconds. Positive values pan the camera clockwise as viewed from above, and negative values pan the camera counter clockwise as viewed from above.
 
-    Any algorithm which uses a {{MediaTrackConstraintSet}} object and its {{MediaTrackConstraintSet/pan}} dictionary member which exists after a possible normalization MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to "camera" and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its deviceId member set to any appropriate device's deviceId.
+    Any algorithm which uses a {{MediaTrackConstraintSet}} object and its {{MediaTrackConstraintSet/pan}} dictionary member which exists after a possible normalization MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId.
+
+    If the {{visibilityState}} of the <a>top-level browsing context</a> value is "hidden", the {{applyConstraints()}} algorithm MUST throw a {{SecurityError}} if {{MediaTrackConstraintSet/pan}} dictionary member exists after a possible normalization.
 
     <div class="note">
       The {{MediaTrackConstraintSet/pan}}, {{MediaTrackConstraintSet/tilt}} and {{MediaTrackConstraintSet/zoom}} dictionary members exists after a possible normalization if the normalized value is a double value or a {{ConstrainDoubleRange}} value (whether empty or not).
@@ -795,7 +797,9 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
 
     <li><dfn>Tilt</dfn> is a numeric camera setting that controls the tilt of the camera. The setting represents tilt in arc seconds, which are 1/3600th of a degree. Values are in the range from –180*3600 arc seconds to +180*3600 arc seconds. Positive values tilt the camera upward when viewed from the front, and negative values tilt the camera downward as viewed from the front.
 
-    Any algorithm which uses a {{MediaTrackConstraintSet}} object and its {{MediaTrackConstraintSet/tilt}} dictionary member which exists after a possible normalization MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to "camera" and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its deviceId member set to any appropriate device's deviceId.
+    Any algorithm which uses a {{MediaTrackConstraintSet}} object and its {{MediaTrackConstraintSet/tilt}} dictionary member which exists after a possible normalization MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId.
+
+    If the {{visibilityState}} of the <a>top-level browsing context</a> value is "hidden", the {{applyConstraints()}} algorithm MUST throw a {{SecurityError}} if {{MediaTrackConstraintSet/tilt}} dictionary member exists after a possible normalization.
 
     <div class="note">
       There is no defined order when applying <a>pan</a> and <a>tilt</a>, the UA is allowed to apply them in any order. In practice this should not matter since these values are absolute, so order will not affect the final position. However, if applying pan and tilt is slow enough, the order in which they are applied may be visually noticeable.
@@ -803,7 +807,10 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
 
     <li><dfn>Zoom</dfn> is a numeric camera setting that controls the focal length of the lens. The setting usually represents a ratio, e.g. 4 is a zoom ratio of 4:1. The minimum value is usually 1, to represent a 1:1 ratio (i.e. no zoom).
 
-    Any algorithm which uses a {{MediaTrackConstraintSet}} object and its {{MediaTrackConstraintSet/zoom}} dictionary member which exists after a possible normalization MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to "camera" and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its deviceId member set to any appropriate device's deviceId.</li>
+    Any algorithm which uses a {{MediaTrackConstraintSet}} object and its {{MediaTrackConstraintSet/zoom}} dictionary member which exists after a possible normalization MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId.
+
+    If the {{visibilityState}} of the <a>top-level browsing context</a> value is "hidden", the {{applyConstraints()}} algorithm MUST throw a {{SecurityError}} if {{MediaTrackConstraintSet/zoom}} dictionary member exists after a possible normalization.
+
 
     <li><dfn>Fill light mode</dfn> describes the flash setting of the capture device (e.g. |auto|, |off|, |on|). <dfn>Torch</dfn> describes the setting of the source's fill light as  continuously connected, staying on as long as {{track}} is active.</li>
   </ol>
@@ -1152,7 +1159,7 @@ urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: get
 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: getConstraints(); url: widl-MediaStreamTrack-getConstraints-MediaTrackConstraints
 
-urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: applyConstraints(); url: widl-MediaStreamTrack-applyConstraints-Promise-void--MediaTrackConstraints-constraints
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: method; text: applyConstraints(); url: dom-mediastreamtrack-applyconstraints
 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: MediaDevices; url: mediadevices-interface-extensions
 
@@ -1176,6 +1183,8 @@ urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dictionary; text:
 
 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dfn; text: constrainable property; url: defining-a-new-constrainable-property
+
+urlPrefix: https://www.w3.org/TR/page-visibility/; type: attribute; text: visibilityState; for: Document; url: dom-visibilitystate
 </pre>
 
 <pre class="link-defaults">
