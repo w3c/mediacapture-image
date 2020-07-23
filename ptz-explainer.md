@@ -177,6 +177,9 @@ Requesting the PTZ permission is gated by well-known anti-abuse mechanisms:
 - starting a media session is available only in secure contexts,
 - the user has to explicitly allow PTZ through a permission prompt.
 
+The page must be visible when the website updates camera pan, tilt, and zoom
+with `applyConstraints()`, otherwise it fails with `SecurityError`.
+
 When the website actively controls camera PTZ, the browser could enhance the
 existing notifications that the camera is in use in several ways:
 - the tab indicator may include a preview of the camera's current [field of view]
