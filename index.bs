@@ -160,11 +160,11 @@ interface ImageCapture {
     <li>Let <var>p</var> be a new promise.</li>
     <li>Run the following steps in parallel:
     <ol>
-      <li>Gather data from {{track}} into a {{PhotoCapabilities}} object containing the available capabilities of the device, including ranges where appropriate. The method of doing this will depend on the underlying device. </li>
+      <li>Gather data from {{track}} into a {{PhotoCapabilities}} dictionary containing the available capabilities of the device, including ranges where appropriate. The method of doing this will depend on the underlying device. </li>
 
       <li>If the data cannot be gathered for any reason (for example, the {{MediaStreamTrack}} being ended asynchronously), then reject <var>p</var> with a new {{DOMException}} whose name is {{OperationError}}, and abort these steps.</li>
 
-      <li>Resolve <var>p</var> with the {{PhotoCapabilities}} object.</li>
+      <li>Resolve <var>p</var> with the {{PhotoCapabilities}} dictionary.</li>
     </ol>
     </li>
     <li>Return <var>p</var>.</li>
@@ -180,11 +180,11 @@ interface ImageCapture {
     <li>Let <var>p</var> be a new promise.</li>
     <li>Run the following steps in parallel:
     <ol>
-      <li>Gather data from {{track}} into a {{PhotoSettings}} containing the current conditions in which the device is found. The method of doing this will depend on the underlying device. </li>
+      <li>Gather data from {{track}} into a {{PhotoSettings}} dictionary containing the current conditions in which the device is found. The method of doing this will depend on the underlying device. </li>
 
       <li>If the data cannot be gathered for any reason (for example, the {{MediaStreamTrack}} being ended asynchronously), then reject <var>p</var> with</a> a new {{DOMException}} whose name is {{OperationError}}, and abort these steps.</li>
 
-      <li>Resolve <var>p</var> with the {{PhotoSettings}} object.</li>
+      <li>Resolve <var>p</var> with the {{PhotoSettings}} dictionary.</li>
     </ol>
     </li>
     <li>Return <var>p</var>.</li>
@@ -217,27 +217,27 @@ interface ImageCapture {
 # PhotoCapabilities # {#photocapabilities-section}
 
 <pre class="idl">
-  [Exposed=Window] interface PhotoCapabilities {
-    readonly attribute RedEyeReduction            redEyeReduction;
-    readonly attribute MediaSettingsRange         imageHeight;
-    readonly attribute MediaSettingsRange         imageWidth;
-    readonly attribute FrozenArray&lt;FillLightMode> fillLightMode;
+  dictionary PhotoCapabilities {
+    RedEyeReduction         redEyeReduction;
+    MediaSettingsRange      imageHeight;
+    MediaSettingsRange      imageWidth;
+    sequence&lt;FillLightMode> fillLightMode;
   };
 </pre>
 
-## Attributes ## {#photocapabilities-attributes}
+## Members ## {#photocapabilities-members}
 
 <dl class="domintro">
-  <dt><dfn attribute for="PhotoCapabilities"><code>redEyeReduction</code></dfn></dt>
+  <dt><dfn dict-member for="PhotoCapabilities"><code>redEyeReduction</code></dfn></dt>
   <dd>The <a>red eye reduction</a> capacity of the source.</dd>
 
-  <dt><dfn attribute for="PhotoCapabilities"><code>imageHeight</code></dfn></dt>
+  <dt><dfn dict-member for="PhotoCapabilities"><code>imageHeight</code></dfn></dt>
   <dd>This reflects the <a>image height</a> range supported by the UA.</dd>
 
-  <dt><dfn attribute for="PhotoCapabilities"><code>imageWidth</code></dfn></dt>
+  <dt><dfn dict-member for="PhotoCapabilities"><code>imageWidth</code></dfn></dt>
   <dd>This reflects the <a>image width</a> range supported by the UA.</dd>
 
-  <dt><dfn attribute for="PhotoCapabilities"><code>fillLightMode</code></dfn></dt>
+  <dt><dfn dict-member for="PhotoCapabilities"><code>fillLightMode</code></dfn></dt>
   <dd>This reflects the supported <a>fill light mode</a> (flash) settings, if any.</dd>
 </dl>
 
@@ -276,32 +276,24 @@ interface ImageCapture {
 # {{MediaSettingsRange}} # {#mediasettingsrange-section}
 
 <pre class="idl">
-  [Exposed=Window] interface MediaSettingsRange {
-      readonly attribute double max;
-      readonly attribute double min;
-      readonly attribute double step;
-      [Default] object toJSON();
+  dictionary MediaSettingsRange {
+      double max;
+      double min;
+      double step;
   };
 </pre>
 
-## Attributes ## {#mediasettingsrange-attributes}
+## Members ## {#mediasettingsrange-members}
 
 <dl class="domintro">
-  <dt><dfn attribute for="MediaSettingsRange"><code>max</code></dfn></dt>
+  <dt><dfn dict-member for="MediaSettingsRange"><code>max</code></dfn></dt>
   <dd>The maximum value of this setting</dd>
 
-  <dt><dfn attribute for="MediaSettingsRange"><code>min</code></dfn></dt>
+  <dt><dfn dict-member for="MediaSettingsRange"><code>min</code></dfn></dt>
   <dd>The minimum value of this setting</dd>
 
-  <dt><dfn attribute for="MediaSettingsRange"><code>step</code></dfn></dt>
+  <dt><dfn dict-member for="MediaSettingsRange"><code>step</code></dfn></dt>
   <dd>The minimum difference between consecutive values of this setting.</dd>
-</dl>
-
-## Methods ## {#mediasettingsrange-methods}
-
-<dl class="domintro">
-  <dt><dfn method for="MediaSettingsRange"><code>toJSON()</code></dfn></dt>
-  <dd>When called, run [[!WEBIDL]]'s <a>default toJSON steps</a>.</dd>
 </dl>
 
 # {{RedEyeReduction}} # {#redeyereduction-section}
