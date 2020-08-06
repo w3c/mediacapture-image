@@ -72,7 +72,7 @@ var imageCapture;
   }
 ```
 
-## Capabilities
+## Constrainable Properties
 
 This specification allows web developers to get and set various properties in a modern webcam like `whiteBalanceMode`, `exposureMode`, `focusMode`, `exposureMode`, `pointsOfInterest`, `exposureCompensation`, `exposureTime`, `colorTemperature`, `iso`, `brightness`, `contrast`, `pan`, `saturation`, `sharpness`, `focalDistance`, `tilt`, `zoom` and  `torch` if there is support in the target platform.
 
