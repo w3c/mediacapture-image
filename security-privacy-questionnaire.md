@@ -26,7 +26,7 @@ This specification also allows Web sites to pan, tilt and zoom cameras which may
 No.
 
 ### 06. What information from the underlying platform, e.g. configuration data, is exposed by this specification to an origin?
-No particular additional information is exposed about the camera hardware, like brand, etc, however we do expose if the platform has support for the constainable properties.
+No particular additional information is exposed about the camera hardware, like brand, etc, however we do expose if the platform has support for the constainable properties. A site with permission to one or more cameras will be able to probe the existence of these new capabilities on those cameras, by passing constraints to getUserMedia or track.applyConstraints. The new capabilities are: `whiteBalanceMode`, `exposureMode`, `focusMode`, `exposureMode`, `pointsOfInterest`, `exposureCompensation`, `exposureTime`, `colorTemperature`, `iso`, `brightness`, `contrast`, `pan`, `saturation`, `sharpness`, `focalDistance`, `tilt`, `zoom` and  `torch` if there is support in the target platform. For PTZ use case, the Web Platform should not request pan-tilt-zoom camera permission (but only a normal camera permission) if there are not PTZ capable cameras.
 
 ### 07. Does this specification allow an origin access to sensors on a user’s device
 This specification does not allow an origin access to any new sensors on a user’s device.
@@ -49,7 +49,7 @@ No.
 [GETUSERMEDIA](https://www.w3.org/TR/mediacapture-streams/) might expose deviceID. This specification does not expose anything extra.
 
 ### 13. How does this specification distinguish between behavior in first-party and third-party contexts?
-Capabilities in the ImageCapture as an extension of GetUserMedia, are exposed only to a top-level browsing secure context. In addition, the page must be visible when the website updates camera pan, tilt, and zoom with applyConstraints(), otherwise it fails with SecurityError. Therefore ImageCapture can’t be used by third-party resources.
+Capabilities in the ImageCapture as an extension of GetUserMedia, are exposed only to a top-level browsing secure context. In addition, the page must be visible when the website updates camera pan, tilt, and zoom with applyConstraints(), otherwise it fails with SecurityError. Third-party access to `getUserMedia` is governed by the `camera` and `microphone` permissions policies.
 
 
 ### 14. How does this specification work in the context of a user agent’s Private Browsing or "incognito" mode?
@@ -63,4 +63,5 @@ Privacy](https://w3c.github.io/mediacapture-image/#securityandprivacy) section. 
 By default, this specification uses the same permissions namely `camera` as the [mediacapture-main](https://w3c.github.io/mediacapture-main/) specification. However, we do have a separate PTZ permission that allows UA to differentiate between normal camera permissions and PTZ camera permissions as PTZ needs to be explicitly requested as an extension to the camera permission. `{name: "camera", panTiltZoom: true}` is stronger than `{name: "camera", panTiltZoom: false}`.
 
 ### 17. What should this questionnaire have asked?
+
 
