@@ -16,7 +16,7 @@ Cameras on client platforms like mobile devices, tablets and laptops are increas
 
 ## Goals
 
-The [MediaStream Image Capture API](https://w3c.github.io/mediacapture-image/) has been [implemented in Chrome](https://caniuse.com/#search=imageCapture) since 2017. The specification is an extension of the [Media Capture and Streams](https://w3c.github.io/mediacapture-main/) where we specify advanced features related to camera and photography as a set of property set of capabilities, constraints and settings. Most camera applications are written in native technologies to delight users with advanced use cases like controlling `exposureTime`, `focalDistance`, etc. This specification tries to bridge the gap between what is allowed on a native platform and what is exposed to the Web Platform with respect to camera capabilities. Even more advanced cameras have Pan, Tilt and Zoom support. We support those capabilities also keeping in mind the privacy and security nuances those entail and delight users of applications like video conferencing with use cases not possible before on the Web Platform.
+The [MediaStream Image Capture API](https://w3c.github.io/mediacapture-image/) has been [implemented in Chrome](https://caniuse.com/#search=imageCapture) since 2017. The specification is an extension of the [Media Capture and Streams](https://w3c.github.io/mediacapture-main/) where we specify advanced features related to camera and photography as a set of constrainable properties, with capabilities, constraints and settings. Most camera applications are written in native technologies to delight users with advanced use cases like controlling `exposureTime`, `focalDistance`, etc. This specification tries to bridge the gap between what is allowed on a native platform and what is exposed to the Web Platform with respect to camera capabilities. Even more advanced cameras have Pan, Tilt and Zoom support. We support those capabilities also keeping in mind the privacy and security nuances those entail and delight users of applications like video conferencing with use cases not possible before on the Web Platform.
 
 
 ## Methods
@@ -26,13 +26,11 @@ The [MediaStream Image Capture API](https://w3c.github.io/mediacapture-image/) h
 ## API example
 
 ```js
-var imageCapture;
+let imageCapture;
 
-  navigator.mediaDevices.getUserMedia({video: true})
-    .then(gotMedia)
-    .catch(err => console.error('getUserMedia() failed: ', err));
-
-  function gotMedia(mediastream) {
+async function getMedia() {
+  try {
+    const mediastream = await navigator.mediaDevices.getUserMedia({video: true});
     const video = document.querySelector('video');
     video.srcObject = mediastream;
 
@@ -52,17 +50,24 @@ var imageCapture;
     input.step = capabilities.focusDistance.step;
     input.value = track.getSettings().focusDistance;
 
-    input.oninput = function(event) {
-      track.applyConstraints({
-        advanced : [{focusMode: "manual", focusDistance: event.target.value}]
-      });
+    input.oninput = async event => {
+      try {
+        await track.applyConstraints({
+          focusMode: "manual", focusDistance: event.target.value
+        });
+      } catch (err) {
+        console.error(err);
+      }
     }
     input.hidden = false;
+    } catch (err) {
+      console.error(err);
+    }
   }
 
-  function takePhoto() {
-    imageCapture.takePhoto()
-      .then(blob => {
+  async function takePhoto() {
+    try {
+      const blob = await imageCapture.takePhoto();
         console.log('Photo taken: ' + blob.type + ', ' + blob.size + 'B');
 
         const image = document.querySelector('img');
@@ -74,7 +79,7 @@ var imageCapture;
 
 ## Constrainable Properties
 
-This specification allows web developers to get and set various properties in a modern webcam like `whiteBalanceMode`, `exposureMode`, `focusMode`, `exposureMode`, `pointsOfInterest`, `exposureCompensation`, `exposureTime`, `colorTemperature`, `iso`, `brightness`, `contrast`, `pan`, `saturation`, `sharpness`, `focalDistance`, `tilt`, `zoom` and  `torch` if there is support in the target platform.
+This specification allows web developers to read and constrain various properties in a modern webcam like `whiteBalanceMode`, `exposureMode`, `focusMode`, `exposureMode`, `pointsOfInterest`, `exposureCompensation`, `exposureTime`, `colorTemperature`, `iso`, `brightness`, `contrast`, `pan`, `saturation`, `sharpness`, `focalDistance`, `tilt`, `zoom` and  `torch` if there is support in the target platform.
 
 
 
@@ -88,5 +93,4 @@ N/A
 Many thanks for valuable feedback and advice from:
 - François Beaufort
 - Eero Häkkinen
-
 
