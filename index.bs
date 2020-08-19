@@ -775,7 +775,7 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
 
     <li><dfn>Focus distance</dfn> is a numeric camera setting that controls the focus distance of the lens.  The setting usually represents distance in meters to the optimal focus distance.</li>
 
-    <li><dfn>Pan</dfn> is a numeric camera setting that controls the pan of the camera. The setting represents pan in arc seconds, which are 1/3600th of a degree. Values are in the range from –180*3600 arc seconds to +180*3600 arc seconds. Positive values pan the camera clockwise as viewed from above, and negative values pan the camera counter clockwise as viewed from above.
+    <li><dfn>Pan</dfn> is a numeric camera setting that controls the pan of the camera. The setting represents pan in arc seconds, which are 1/3600th of a degree. Values are in the range from –180\*3600 arc seconds to +180\*3600 arc seconds. Positive values pan the camera clockwise as viewed from above, and negative values pan the camera counter clockwise as viewed from above.
 
     Any algorithm which uses a {{MediaTrackConstraintSet}} object and its {{MediaTrackConstraintSet/pan}} dictionary member which exists after a possible normalization MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId.
 
@@ -788,7 +788,7 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
       An empty {{ConstrainDoubleRange}} value implies no constraints but only a permission and capability request.
     </div></li>
 
-    <li><dfn>Tilt</dfn> is a numeric camera setting that controls the tilt of the camera. The setting represents tilt in arc seconds, which are 1/3600th of a degree. Values are in the range from –180*3600 arc seconds to +180*3600 arc seconds. Positive values tilt the camera upward when viewed from the front, and negative values tilt the camera downward as viewed from the front.
+    <li><dfn>Tilt</dfn> is a numeric camera setting that controls the tilt of the camera. The setting represents tilt in arc seconds, which are 1/3600th of a degree. Values are in the range from –180\*3600 arc seconds to +180\*3600 arc seconds. Positive values tilt the camera upward when viewed from the front, and negative values tilt the camera downward as viewed from the front.
 
     Any algorithm which uses a {{MediaTrackConstraintSet}} object and its {{MediaTrackConstraintSet/tilt}} dictionary member which exists after a possible normalization MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId.
 
