@@ -30,18 +30,18 @@ let imageCapture;
 
 async function getMedia() {
   try {
-    const mediastream = await navigator.mediaDevices.getUserMedia({video: true});
-    const video = document.querySelector('video');
+    const mediastream = await navigator.mediaDevices.getUserMedia({
+      video: true,
+    });
+    const video = document.querySelector("video");
     video.srcObject = mediastream;
 
     const track = mediastream.getVideoTracks()[0];
     imageCapture = new ImageCapture(track);
 
-    const capabilities = track.getCapabilities()
+    const capabilities = track.getCapabilities();
     // Check whether focus distance is supported or not.
-    if (!capabilities.focusDistance) {
-      return;
-    }
+    if (!capabilities.focusDistance) return;
 
     // Map focus distance to a slider element.
     const input = document.querySelector('input[type="range"]');
@@ -50,31 +50,32 @@ async function getMedia() {
     input.step = capabilities.focusDistance.step;
     input.value = track.getSettings().focusDistance;
 
-    input.oninput = async event => {
+    input.oninput = async (event) => {
       try {
         await track.applyConstraints({
-          focusMode: "manual", focusDistance: event.target.value
+          focusMode: "manual",
+          focusDistance: event.target.value,
         });
       } catch (err) {
-        console.error(err);
+        console.error("applyConstraints() failed: ", err);
       }
-    }
-    input.hidden = false;
-    } catch (err) {
-      console.error(err);
-    }
+    };
+  } catch (err) {
+    console.error(err);
   }
+}
 
-  async function takePhoto() {
-    try {
-      const blob = await imageCapture.takePhoto();
-        console.log('Photo taken: ' + blob.type + ', ' + blob.size + 'B');
+async function takePhoto() {
+  try {
+    const blob = await imageCapture.takePhoto();
+    console.log("Photo taken: " + blob.type + ", " + blob.size + "B");
 
-        const image = document.querySelector('img');
-        image.src = URL.createObjectURL(blob);
-      })
-      .catch(err => console.error('takePhoto() failed: ', err));
+    const image = document.querySelector("img");
+    image.src = URL.createObjectURL(blob);
+  } catch (err) {
+    console.error("takePhoto() failed: ", err);
   }
+}
 ```
 
 ## Constrainable Properties
