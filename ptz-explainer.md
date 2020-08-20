@@ -51,8 +51,9 @@ are defined as advanced constraints.
 The [new "true" semantics] for `pan`, `tilt`, and `zoom` makes it possible to
 acquire a PTZ camera in `getUserMedia()` without altering the current pan, tilt
 and zoom values. If the PTZ permission is not granted, the `pan`, `tilt`, and
-`zoom` are not available as capabilities, settings, and constraints, even if the
-camera supports PTZ.
+`zoom` settings and constraints are not available, even if the camera supports
+PTZ. The `pan`, `tilt`, and `zoom` capabilities may be available regardless of
+the PTZ permission status.
 
 Applying PTZ constraints requires the PTZ permission to be granted as described
 in the "Interaction with the Permissions API" section below. The `pan` and `tilt`
@@ -86,7 +87,7 @@ const settings = videoTrack.getSettings();
 
 // [NEW] Let the user control the camera pan motion if the camera supports it
 // and PTZ access is granted.
-if ("pan" in capabilities) {
+if ("pan" in settings) {
   const input = document.querySelector("input[type=range]");
   input.min = capabilities.pan.min;
   input.max = capabilities.pan.max;
@@ -101,7 +102,7 @@ if ("pan" in capabilities) {
 
 // [NEW] Let the user control the camera tilt motion if the camera supports it
 // and PTZ access is granted.
-if ("tilt" in capabilities) {
+if ("tilt" in settings) {
   // similar to the pan motion above.
 }
 ```
@@ -200,9 +201,10 @@ peripherals, browsing data) and intersecting them together to create a unique
 signature of the user, that would enable to recognize them later on, even if
 they clear state from their browsers.
 
-1. Pan, tilt, and zoom hardware capabilities (e.g. `min`, `max`, `step`) and
-   current settings are not exposed to websites unless the user explicitly
-   grants PTZ permission. However it is possible to use pan, tilt, and zoom
+1. Pan, tilt, and zoom current settings are not exposed to websites unless the
+   user explicitly grants PTZ permission. PTZ hardware capabilities (e.g. `min`,
+   `max`, `step`) may not be exposed to websites unless the user explicitly
+   grants camera permission. However it is possible to use pan, tilt, and zoom
    mandatory constraints so that the immediate failure of a `getUserMedia` call
    with `OverConstrainedError` returns information about camera devices on the
    system without prompting the user. This increases the surface available for
@@ -236,6 +238,7 @@ Many thanks for valuable feedback and advice from:
 - Reilly Grant
 - Rijubrata Bhaumik
 - Kenneth Rohde Christiansen
+- Youenn Fablet
 
 
 [Some cameras]: https://support.zoom.us/hc/en-us/articles/204065759-Zoom-Rooms-Camera-Controls
