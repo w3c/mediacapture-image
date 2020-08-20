@@ -204,7 +204,7 @@ they clear state from their browsers.
 1. Pan, tilt, and zoom current settings are not exposed to websites unless the
    user explicitly grants PTZ permission. PTZ hardware capabilities (e.g. `min`,
    `max`, `step`) may not be exposed to websites unless the user explicitly
-   grants camera permission. However it is possible to use pan, tilt, and zoom
+   grants PTZ permission. However it is possible to use pan, tilt, and zoom
    mandatory constraints so that the immediate failure of a `getUserMedia` call
    with `OverConstrainedError` returns information about camera devices on the
    system without prompting the user. This increases the surface available for
