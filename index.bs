@@ -901,76 +901,56 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
       &lt;label for="zoom">Zoom&lt;/label>
     &lt;/div>
     &lt;script>
-      var imageCapture;
+      let imageCapture;
 
-      navigator.mediaDevices.getUserMedia({
-          video: {pan: true, tilt: true, zoom: true}
-        })
-        .then(gotMedia)
-        .catch(err => console.error('getUserMedia() failed: ', err));
+      async function getMedia() {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({
+            video: {pan: true, tilt: true, zoom: true},
+          });
+          const video = document.querySelector('video');
+          video.srcObject = stream;
 
-      function gotMedia(mediastream) {
-        const video = document.querySelector('video');
-        video.srcObject = mediastream;
+          const [track] = stream.getVideoTracks();
+          imageCapture = new ImageCapture(track);
 
-        const track = mediastream.getVideoTracks()[0];
-        imageCapture = new ImageCapture(track);
+          const capabilities = track.getCapabilities();
+          const settings = track.getSettings();
 
-        const capabilities = track.getCapabilities()
-        const settings = track.getSettings();
+          for (const ptz of ['pan', 'tilt', 'zoom']) {
+            // Check whether pan/tilt/zoom is available or not.
+            if (!capabilities[ptz]) continue;
 
-        // Check whether pan is supported or not.
-        if (capabilities.pan) {
-          // Map pan to a slider element.
-          const input = document.querySelector('input[name="pan"][type="range"]');
-          input.min = capabilities.pan.min;
-          input.max = capabilities.pan.max;
-          input.step = capabilities.pan.step;
-          input.value = settings.pan;
-          input.oninput = function(event) {
-            track.applyConstraints({advanced: [{pan: event.target.value}]});
-          };
-          input.parentElement.hidden = false;
-        }
-
-        // Check whether tilt is supported or not.
-        if (capabilities.tilt) {
-          // Map tilt to a slider element.
-          const input = document.querySelector('input[name="tilt"][type="range"]');
-          input.min = capabilities.tilt.min;
-          input.max = capabilities.tilt.max;
-          input.step = capabilities.tilt.step;
-          input.value = settings.tilt;
-          input.oninput = function(event) {
-            track.applyConstraints({advanced: [{tilt: event.target.value}]});
-          };
-          input.parentElement.hidden = false;
-        }
-
-        // Check whether zoom is supported or not.
-        if (capabilities.zoom) {
-          // Map zoom to a slider element.
-          const input = document.querySelector('input[name="zoom"][type="range"]');
-          input.min = capabilities.zoom.min;
-          input.max = capabilities.zoom.max;
-          input.step = capabilities.zoom.step;
-          input.value = settings.zoom;
-          input.oninput = function(event) {
-            track.applyConstraints({advanced: [{zoom: event.target.value}]});
-          };
-          input.parentElement.hidden = false;
+            // Map it to a slider element.
+            const input = document.querySelector(`input[name=${ptz}][type="range"]`);
+            input.min = capabilities[ptz].min;
+            input.max = capabilities[ptz].max;
+            input.step = capabilities[ptz].step;
+            input.value = settings[ptz];
+            input.oninput = async event => {
+              try {
+                await track.applyConstraints({[ptz]: input.value});
+              } catch (err) {
+                console.error("applyConstraints() failed: ", err);
+              }
+            };
+            input.parentElement.hidden = false;
+          }
+        } catch (err) {
+          console.error(err);
         }
       }
 
-      function takePhoto() {
-        imageCapture.takePhoto()
-          .then(blob => {
-            console.log('Photo taken: ' + blob.type + ', ' + blob.size + 'B');
+      async function takePhoto() {
+        try {
+          const blob = await imageCapture.takePhoto();
+          console.log("Photo taken: " + blob.type + ", " + blob.size + "B");
 
-            const image = document.querySelector('img');
-            image.src = URL.createObjectURL(blob);
-          })
-          .catch(err => console.error('takePhoto() failed: ', err));
+          const image = document.querySelector('img');
+          image.src = URL.createObjectURL(blob);
+        } catch (err) {
+          console.error("takePhoto() failed: ", err);
+        }
       }
     &lt;/script>
     &lt;/body>
@@ -989,36 +969,35 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
     &lt;html>
     &lt;body>
     &lt;canvas>&lt;/canvas>
-    &lt;button onclick="stopGrabFrame()">Stop frame grab&lt;/button>
+    &lt;button id="stopButton">Stop frame grab&lt;/button>
     &lt;script>
-      const canvas = document.querySelector('canvas');
+      async function grabFrames() {
+        try {
+          const canvas = document.querySelector('canvas');
+          const video = document.querySelector('video');
 
-      var interval;
-      var track;
+          const stream = await navigator.mediaDevices.getUserMedia({video: true});
+          video.srcObject = stream;
+          const [track] = stream.getVideoTracks();
+          try {
+            const imageCapture = new ImageCapture(track);
 
-      navigator.mediaDevices.getUserMedia({video: true})
-        .then(gotMedia)
-        .catch(err => console.error('getUserMedia() failed: ', err));
+            let keepGoing = true;
+            stopButton.onclick = () => keepGoing = false;
 
-      function gotMedia(mediastream) {
-        track = mediastream.getVideoTracks()[0];
-        var imageCapture = new ImageCapture(track);
-        interval = setInterval(function () {
-          imageCapture.grabFrame()
-            .then(processFrame)
-            .catch(err => console.error('grabFrame() failed: ', err));
-        }, 1000);
-      }
-
-      function processFrame(imgData) {
-        canvas.width = imgData.width;
-        canvas.height = imgData.height;
-        canvas.getContext('2d').drawImage(imgData, 0, 0);
-      }
-
-      function stopGrabFrame(e) {
-        clearInterval(interval);
-        track.stop();
+            while (keepGoing) {
+              const imgData = await imageCapture.grabFrame();
+              canvas.width = imgData.width;
+              canvas.height = imgData.height;
+              canvas.getContext('2d').drawImage(imgData, 0, 0);
+              await new Promise(r => setTimeout(r, 1000));
+            }
+          } finally {
+            track.stop();
+          }
+        } catch (err) {
+          console.error(err);
+        }
       }
     &lt;/script>
     &lt;/body>
@@ -1037,43 +1016,42 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
     &lt;body>
     &lt;canvas>&lt;/canvas>
     &lt;script>
-      const canvas = document.querySelector('canvas');
+      async function grabFrames() {
+        try {
+          const canvas = document.querySelector('canvas');
+          const video = document.querySelector('video');
 
-      var track;
+          const stream = await navigator.mediaDevices.getUserMedia({video: true});
+          video.srcObject = stream;
+          const [track] = stream.getVideoTracks();
+          try {
+            const imageCapture = new ImageCapture(track);
+            const imageBitmap = await imageCapture.grabFrame();
 
-      navigator.mediaDevices.getUserMedia({video: true})
-        .then(gotMedia)
-        .catch(err => console.error('getUserMedia() failed: ', err));
+            // |imageBitmap| pixels are not directly accessible: we need to paint
+            // the grabbed frame onto a &lt;canvas>, then getImageData() from it.
+            const ctx = canvas.getContext('2d');
+            canvas.width = imageBitmap.width;
+            canvas.height = imageBitmap.height;
+            ctx.drawImage(imageBitmap, 0, 0);
 
-      function gotMedia(mediastream) {
-        track = mediastream.getVideoTracks()[0];
-        var imageCapture = new ImageCapture(track);
-        imageCapture.grabFrame()
-          .then(processFrame)
-          .catch(err => console.error('grabFrame() failed: ', err));
-      }
+            // Read back the pixels from the &lt;canvas>, and invert the colors.
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
 
-      function processFrame(imageBitmap) {
-        track.stop();
-
-        // |imageBitmap| pixels are not directly accessible: we need to paint
-        // the grabbed frame onto a &lt;canvas>, then getImageData() from it.
-        const ctx = canvas.getContext('2d');
-        canvas.width = imageBitmap.width;
-        canvas.height = imageBitmap.height;
-        ctx.drawImage(imageBitmap, 0, 0);
-
-        // Read back the pixels from the &lt;canvas>, and invert the colors.
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-
-        var data = imageData.data;
-        for (var i = 0; i &lt; data.length; i += 4) {
-          data[i]     = 255 - data[i];     // red
-          data[i + 1] = 255 - data[i + 1]; // green
-          data[i + 2] = 255 - data[i + 2]; // blue
+            const data = imageData.data;
+            for (let i = 0; i &lt; data.length; i += 4) {
+              data[i] ^= 255;     // red
+              data[i + 1] ^= 255; // green
+              data[i + 2] ^= 255; // blue
+            }
+            // Finally, draw the inverted image to the &lt;canvas>
+            ctx.putImageData(imageData, 0, 0);
+          } finally {
+            track.stop();
+          }
+        } catch (err) {
+          console.error(err);
         }
-        // Finally, draw the inverted image to the &lt;canvas>
-        ctx.putImageData(imageData, 0, 0);
       }
     &lt;/script>
     &lt;/body>
@@ -1091,49 +1069,57 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
     &lt;img>
     &lt;input type="range" hidden>
     &lt;script>
-      var imageCapture;
+      let imageCapture;
 
-      navigator.mediaDevices.getUserMedia({video: true})
-        .then(gotMedia)
-        .catch(err => console.error('getUserMedia() failed: ', err));
+      async function getMedia() {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({video: true});
+          const video = document.querySelector('video');
+          video.srcObject = stream;
 
-      function gotMedia(mediastream) {
-        const video = document.querySelector('video');
-        video.srcObject = mediastream;
+          const [track] = stream.getVideoTracks();
+          imageCapture = new ImageCapture(track);
 
-        const track = mediastream.getVideoTracks()[0];
-        imageCapture = new ImageCapture(track);
+          const capabilities = track.getCapabilities();
+          const settings = track.getSettings();
 
-        const capabilities = track.getCapabilities()
-        // Check whether focus distance is supported or not.
-        if (!capabilities.focusDistance) {
-          return;
+          // Check whether focus distance is available or not.
+          if (!capabilities.focusDistance) {
+            return;
+          }
+
+          // Map focus distance to a slider element.
+          const input = document.querySelector('input[type="range"]');
+          input.min = capabilities.focusDistance.min;
+          input.max = capabilities.focusDistance.max;
+          input.step = capabilities.focusDistance.step;
+          input.value = settings.focusDistance;
+          input.oninput = async event => {
+            try {
+              await track.applyConstraints({
+                focusMode: "manual",
+                focusDistance: input.value
+              });
+            } catch (err) {
+              console.error("applyConstraints() failed: ", err);
+            }
+          };
+          input.parentElement.hidden = false;
+        } catch (err) {
+          console.error(err);
         }
-
-        // Map focus distance to a slider element.
-        const input = document.querySelector('input[type="range"]');
-        input.min = capabilities.focusDistance.min;
-        input.max = capabilities.focusDistance.max;
-        input.step = capabilities.focusDistance.step;
-        input.value = track.getSettings().focusDistance;
-
-        input.oninput = function(event) {
-          track.applyConstraints({
-            advanced : [{focusMode: "manual", focusDistance: event.target.value}]
-          });
-        }
-        input.hidden = false;
       }
 
-      function takePhoto() {
-        imageCapture.takePhoto()
-          .then(blob => {
-            console.log('Photo taken: ' + blob.type + ', ' + blob.size + 'B');
+      async function takePhoto() {
+        try {
+          const blob = await imageCapture.takePhoto();
+          console.log("Photo taken: " + blob.type + ", " + blob.size + "B");
 
-            const image = document.querySelector('img');
-            image.src = URL.createObjectURL(blob);
-          })
-          .catch(err => console.error('takePhoto() failed: ', err));
+          const image = document.querySelector('img');
+          image.src = URL.createObjectURL(blob);
+        } catch (err) {
+          console.error("takePhoto() failed: ", err);
+        }
       }
     &lt;/script>
     &lt;/body>
