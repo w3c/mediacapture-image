@@ -982,10 +982,9 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
           try {
             const imageCapture = new ImageCapture(track);
 
-            let keepGoing = true;
-            stopButton.onclick = () => keepGoing = false;
+            stopButton.onclick = () => track.stop();
 
-            while (keepGoing) {
+            while (track.readyState == 'live') {
               const imgData = await imageCapture.grabFrame();
               canvas.width = imgData.width;
               canvas.height = imgData.height;
