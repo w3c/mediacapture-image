@@ -554,6 +554,33 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
 An exact required or ideal no support for a property can be satisfied also by a device which is capable to support the property if only that capability is not exposed.
 </div>
 
+## {{ConstrainDoubleOrBoolean}} type ## {#constraindoubleorboolean-section}
+
+<pre class="idl">
+  typedef (double or boolean or ConstrainDoubleRangeOrBooleanParameters) ConstrainDoubleOrBoolean;
+</pre>
+
+Throughout this specification, the identifier {{ConstrainDoubleOrBoolean}} is used to refer to the (double or boolean or ConstrainDoubleRangeOrBooleanParameters) type.
+
+### Settings dictionaries ### {#constraindoubleorboolean-settings-dictionaries}
+
+For every <a>settings dictionary</a> with a value for a constrainable property constrainable by a {{ConstrainDoubleOrBoolean}} constraint there MUST be a corresponding <a>settings dictionary</a> without a value for that property representing no support for that property.
+
+### Fitness distance ### {#constraindoubleorboolean-fitness-distance}
+
+The <a>fitness distance</a> is defined in [[!GETUSERMEDIA]].
+
+The step 2 specifies that if the constraint is required, and the <a>settings dictionary</a>'s value for the constraint does not satisfy the constraint, the <a>fitness distance</a> is positive infinity.
+The constraint is required, and the <a>settings dictionary</a>'s value for the constraint does not satisfy the constraint also
+if a required support is specified (the constrain value either contains a boolean member named 'exact' or, if bare values are to be treated as 'exact', is a boolean) and either
+the required support is true and the <a>settings dictionary</a>'s value for the constraint does not exist or
+the required support is false and the <a>settings dictionary</a>'s value for the constraint exists.
+
+The final steps 5 and 6 specify the <a>fitness distance</a> as the result of formulae.
+As a final step, if an ideal support is specified (the constrain value either contains a boolean member named 'ideal' or, if bare values are to be treated as 'ideal', is a boolean), the <a>fitness distance</a> is the result of the formula
+<pre>(actual == ideal) ? 1 : 0</pre>
+where actual is true if the <a>settings dictionary</a>'s value for the constraint exists and false otherwise.
+
 ## {{MediaTrackConstraintSet}} dictionary ## {#mediatrackconstraintset-section}
 
 {{MediaTrackConstraintSet}} [[!GETUSERMEDIA]] dictionary is used for both reading the current status with {{getConstraints()}} and for applying a set of constraints with {{applyConstraints()}}.
@@ -1199,8 +1226,11 @@ urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dictionary; text:
 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dictionary; text: MediaTrackSettings; url: idl-def-MediaTrackSettings
 
-
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dfn; text: constrainable property; url: defining-a-new-constrainable-property
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dfn; text: fitness distance; url: dfn-fitness-distance
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dfn; text: settings dictionary; url: dfn-settings-dictionary
 
 urlPrefix: https://www.w3.org/TR/page-visibility/; type: attribute; text: visibilityState; for: Document; url: dom-visibilitystate
 </pre>
