@@ -528,6 +528,32 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
   <dd>A boolean indicating whether camera supports <a>torch</a>  mode- on meaning supported.</dd>
 </dl>
 
+## {{ConstrainDoubleRangeOrBooleanParameters}} dictionary ## {#constraindoublerangeorbooleanparameters-section}
+
+<pre class="idl">
+  dictionary ConstrainDoubleRangeOrBooleanParameters : DoubleRange {
+    (double or boolean) exact;
+    (double or boolean) ideal;
+  };
+</pre>
+
+### Members ### {#constraindoublerangeorbooleanparameters-members}
+
+<dl class="domintro">
+  <dt><dfn dict-member for="ConstrainDoubleRangeOrBooleanParameters"><code>exact</code></dfn></dt>
+  <dd>The exact required value for this property or
+      the exact required support for this property.</dd>
+</dd>
+
+  <dt><dfn dict-member for="ConstrainDoubleRangeOrBooleanParameters"><code>ideal</code></dfn></dt>
+  <dd>The ideal (target) value for this property or
+      the ideal (target) support for this property.</dd>
+</dl>
+
+<div class="note">
+An exact required or ideal no support for a property can be satisfied also by a device which is capable to support the property if only that capability is not exposed.
+</div>
+
 ## {{MediaTrackConstraintSet}} dictionary ## {#mediatrackconstraintset-section}
 
 {{MediaTrackConstraintSet}} [[!GETUSERMEDIA]] dictionary is used for both reading the current status with {{getConstraints()}} and for applying a set of constraints with {{applyConstraints()}}.
