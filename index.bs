@@ -591,27 +591,27 @@ where actual is true if the <a>settings dictionary</a>'s value for the constrain
 
 <pre class="idl">
   partial dictionary MediaTrackConstraintSet {
-    ConstrainDOMString           whiteBalanceMode;
-    ConstrainDOMString           exposureMode;
-    ConstrainDOMString           focusMode;
-    ConstrainPoint2D             pointsOfInterest;
+    ConstrainDOMString       whiteBalanceMode;
+    ConstrainDOMString       exposureMode;
+    ConstrainDOMString       focusMode;
+    ConstrainPoint2D         pointsOfInterest;
 
-    ConstrainDouble              exposureCompensation;
-    ConstrainDouble              exposureTime;
-    ConstrainDouble              colorTemperature;
-    ConstrainDouble              iso;
+    ConstrainDouble          exposureCompensation;
+    ConstrainDouble          exposureTime;
+    ConstrainDouble          colorTemperature;
+    ConstrainDouble          iso;
 
-    ConstrainDouble              brightness;
-    ConstrainDouble              contrast;
-    ConstrainDouble              saturation;
-    ConstrainDouble              sharpness;
+    ConstrainDouble          brightness;
+    ConstrainDouble          contrast;
+    ConstrainDouble          saturation;
+    ConstrainDouble          sharpness;
 
-    ConstrainDouble              focusDistance;
-    (boolean or ConstrainDouble) pan;
-    (boolean or ConstrainDouble) tilt;
-    (boolean or ConstrainDouble) zoom;
+    ConstrainDouble          focusDistance;
+    ConstrainDoubleOrBoolean pan;
+    ConstrainDoubleOrBoolean tilt;
+    ConstrainDoubleOrBoolean zoom;
 
-    ConstrainBoolean             torch;
+    ConstrainBoolean         torch;
   };
 </pre>
 
@@ -649,9 +649,7 @@ where actual is true if the <a>settings dictionary</a>'s value for the constrain
   <dd>See <a>contrast</a> constrainable property.</dd>
 
   <dt><dfn dict-member for="MediaTrackConstraintSet"><code>pan</code></dfn></dt>
-  <dd>A value of true is normalized to a value of empty {{ConstrainDouble}}.
-      A value of false is normalized to a value of undefined.
-      See <a>pan</a> constrainable property.</dd>
+  <dd>See <a>pan</a> constrainable property.</dd>
 
   <dt><dfn dict-member for="MediaTrackConstraintSet"><code>saturation</code></dfn></dt>
   <dd>See <a>saturation</a> constrainable property.</dd>
@@ -663,14 +661,10 @@ where actual is true if the <a>settings dictionary</a>'s value for the constrain
   <dd>See <a>focus distance</a> constrainable property.</dd>
 
   <dt><dfn dict-member for="MediaTrackConstraintSet"><code>tilt</code></dfn></dt>
-  <dd>A value of true is normalized to a value of empty {{ConstrainDouble}}.
-      A value of false is normalized to a value of undefined.
-      See <a>tilt</a> constrainable property.</dd>
+  <dd>See <a>tilt</a> constrainable property.</dd>
 
   <dt><dfn dict-member for="MediaTrackConstraintSet"><code>zoom</code></dfn></dt>
-  <dd>A value of true is normalized to a value of empty {{ConstrainDouble}}.
-      A value of false is normalized to a value of undefined.
-      See <a>zoom</a> constrainable property.</dd>
+  <dd>See <a>zoom</a> constrainable property.</dd>
 
   <dt><dfn dict-member for="MediaTrackConstraintSet"><code>torch</code></dfn></dt>
   <dd>See <a>torch</a> constrainable property.</dd>
@@ -844,22 +838,15 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
 
     <li><dfn>Pan</dfn> is a numeric camera setting that controls the pan of the camera. The setting represents pan in arc seconds, which are 1/3600th of a degree. Values are in the range from –180\*3600 arc seconds to +180\*3600 arc seconds. Positive values pan the camera clockwise as viewed from above, and negative values pan the camera counter clockwise as viewed from above.
 
-    Any algorithm which uses a {{MediaTrackConstraintSet}} object and its {{MediaTrackConstraintSet/pan}} dictionary member which exists after a possible normalization MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId.
+    Any algorithm which uses a pan constraint other than an exact required or an ideal no support constraint MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId.
 
-    If the {{visibilityState}} of the <a>top-level browsing context</a> value is "hidden", the {{applyConstraints()}} algorithm MUST throw a {{SecurityError}} if {{MediaTrackConstraintSet/pan}} dictionary member exists after a possible normalization.
-
-    <div class="note">
-      The {{MediaTrackConstraintSet/pan}}, {{MediaTrackConstraintSet/tilt}} and {{MediaTrackConstraintSet/zoom}} dictionary members exists after a possible normalization if the normalized value is a double value or a {{ConstrainDoubleRange}} value (whether empty or not).
-      A boolean value of true is normalized to an empty {{ConstrainDoubleRange}} value thus the dictionary member exists after a normalization.
-      A boolean value of false is normalized to no value thus the dictionary member does not exist after a normalization.
-      An empty {{ConstrainDoubleRange}} value implies no constraints but only a permission and capability request.
-    </div></li>
+    If the {{visibilityState}} of the <a>top-level browsing context</a> value is "hidden", the {{applyConstraints()}} algorithm MUST throw a {{SecurityError}} if a pan constraint other than an exact required or an ideal no support constraint is used.
 
     <li><dfn>Tilt</dfn> is a numeric camera setting that controls the tilt of the camera. The setting represents tilt in arc seconds, which are 1/3600th of a degree. Values are in the range from –180\*3600 arc seconds to +180\*3600 arc seconds. Positive values tilt the camera upward when viewed from the front, and negative values tilt the camera downward as viewed from the front.
 
-    Any algorithm which uses a {{MediaTrackConstraintSet}} object and its {{MediaTrackConstraintSet/tilt}} dictionary member which exists after a possible normalization MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId.
+    Any algorithm which uses a tilt constraint other than an exact required or an ideal no support constraint MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId.
 
-    If the {{visibilityState}} of the <a>top-level browsing context</a> value is "hidden", the {{applyConstraints()}} algorithm MUST throw a {{SecurityError}} if {{MediaTrackConstraintSet/tilt}} dictionary member exists after a possible normalization.
+    If the {{visibilityState}} of the <a>top-level browsing context</a> value is "hidden", the {{applyConstraints()}} algorithm MUST throw a {{SecurityError}} if a tilt constraint other than an exact required or an ideal no support constraint is used.
 
     <div class="note">
       There is no defined order when applying <a>pan</a> and <a>tilt</a>, the UA is allowed to apply them in any order. In practice this should not matter since these values are absolute, so order will not affect the final position. However, if applying pan and tilt is slow enough, the order in which they are applied may be visually noticeable.
@@ -867,9 +854,9 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
 
     <li><dfn>Zoom</dfn> is a numeric camera setting that controls the focal length of the lens. The setting usually represents a ratio, e.g. 4 is a zoom ratio of 4:1. The minimum value is usually 1, to represent a 1:1 ratio (i.e. no zoom).
 
-    Any algorithm which uses a {{MediaTrackConstraintSet}} object and its {{MediaTrackConstraintSet/zoom}} dictionary member which exists after a possible normalization MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId.
+    Any algorithm which uses a zoom constraint other than an exact required or an ideal no support constraint MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId.
 
-    If the {{visibilityState}} of the <a>top-level browsing context</a> value is "hidden", the {{applyConstraints()}} algorithm MUST throw a {{SecurityError}} if {{MediaTrackConstraintSet/zoom}} dictionary member exists after a possible normalization.
+    If the {{visibilityState}} of the <a>top-level browsing context</a> value is "hidden", the {{applyConstraints()}} algorithm MUST throw a {{SecurityError}} if a zoom constraint other than an exact required or an ideal no support constraint is used.
 
 
     <li><dfn>Fill light mode</dfn> describes the flash setting of the capture device (e.g. `auto`, `off`, `on`). <dfn>Torch</dfn> describes the setting of the source's fill light as  continuously connected, staying on as long as {{track}} is active.</li>
