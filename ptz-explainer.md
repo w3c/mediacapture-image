@@ -44,9 +44,7 @@ used to request the PTZ permission, a separate permission, in a single
 `getUserMedia()` call, along the camera permission.
 
 If the selected/connected camera does not support PTZ though or user blocks solely
-the PTZ permission, the UA will either reject the `getUserMedia()` call if PTZ
-constraints are required, or fall back to the camera permission if PTZ constraints
-are defined as advanced constraints.
+the PTZ permission, the UA will fall back to a regular camera prompt.
 
 The [new "true" semantics] for `pan`, `tilt`, and `zoom` makes it possible to
 acquire a PTZ camera in `getUserMedia()` without altering the current pan, tilt
@@ -64,15 +62,10 @@ to the user.
 ```js
 // User is prompted to grant both camera and PTZ access in a single call.
 // If the camera does not support PTZ or user denies PTZ permission, it falls
-// back to a "regular" camera prompt as PTZ constraints are defined as advanced
-// constraints.
+// back to a regular camera prompt.
 const videoStream = await navigator.mediaDevices.getUserMedia({
-  video: {
-    advanced: [{
-      // [NEW] Website asks to control camera PTZ as well.
-      pan: true, tilt: true, zoom: true,
-    }],
-  },
+  // [NEW] Website asks to control camera PTZ as well.
+  video: { pan: true, tilt: true, zoom: true },
 });
 
 // Show camera video stream to user.
@@ -80,7 +73,7 @@ const video = document.querySelector("video");
 video.srcObject = videoStream;
 
 // Get video track capabilities and settings.
-const videoTrack = videoStream.getVideoTracks()[0];
+const [videoTrack] = videoStream.getVideoTracks();
 const capabilities = videoTrack.getCapabilities();
 const settings = videoTrack.getSettings();
 
@@ -94,7 +87,7 @@ if ("pan" in capabilities) {
   input.value = settings.pan;
   input.oninput = async (event) => {
     await videoTrack.applyConstraints({
-      advanced: [{ pan: event.target.value }],
+      advanced: [{ pan: input.value }],
     });
   };
 }
@@ -107,12 +100,11 @@ if ("tilt" in capabilities) {
 ```
 
 The example below shows how camera pan could be reset when acquiring a
-PTZ camera in `getUserMedia()`.
+PTZ camera in `getUserMedia()`. Only ideal constraints are allowed for pan,
+tilt, and zoom constraints. Using mandatory ones will cause the returned promise
+to reject with `OverConstrainedError`.
 
 ```js
-// User is prompted to grant both camera and PTZ access in a single call.
-// If the camera does not support PTZ or user denies PTZ permission, it fails
-// as PTZ constraints are required.
 const videoStream = await navigator.mediaDevices.getUserMedia({
   // [NEW] Website asks to reset camera pan.
   video: { pan: 1 },
@@ -123,7 +115,7 @@ const videoStream = await navigator.mediaDevices.getUserMedia({
 
 ## Integration with the Permissions API
 
-Having a separate PTZ permission allows the UA to differentiate between normal
+Having a separate PTZ permission allows the UA to differentiate between regular
 camera permissions and PTZ camera permissions as PTZ needs to be explicitly
 requested as an extension to the camera permission.
 
@@ -200,18 +192,11 @@ peripherals, browsing data) and intersecting them together to create a unique
 signature of the user, that would enable to recognize them later on, even if
 they clear state from their browsers.
 
-1. Pan, tilt, and zoom hardware capabilities (e.g. `min`, `max`, `step`) and
-   current settings are not exposed to websites unless the user explicitly
-   grants PTZ permission. However it is possible to use pan, tilt, and zoom
-   mandatory constraints so that the immediate failure of a `getUserMedia` call
-   with `OverConstrainedError` returns information about camera devices on the
-   system without prompting the user. This increases the surface available for
-   fingerprinting as already raised in the [Media Capture and Streams
-   spec](https://www.w3.org/TR/mediacapture-streams/#privacy-and-security-considerations).
-   The browser could mitigate this issue by always treating pan, tilt, and zoom
-   constraints as "ideal" in `getUserMedia` as suggested in
-   [#229](https://github.com/w3c/mediacapture-image/issues/229).
-   
+1. The immediate failure of a `getUserMedia` call with `OverConstrainedError`
+   when using pan, tilt, and zoom mandatory constraints (used with `min`, `max`,
+   and `exact` keywords) makes sure a malicious script can't detect whether a
+   PTZ camera is available on the system without prompting the user.
+
 1. A malicious website could set pan, tilt, and zoom to minimally different values
    and scoop them later on. To mitigate this, the browser could reset pan, tilt,
    and zoom settings to a default value each time a media session starts.
@@ -236,6 +221,9 @@ Many thanks for valuable feedback and advice from:
 - Reilly Grant
 - Rijubrata Bhaumik
 - Kenneth Rohde Christiansen
+- Youenn Fablet
+- Jan-Ivar Bruaroey
+- Eero Häkkinen
 
 
 [Some cameras]: https://support.zoom.us/hc/en-us/articles/204065759-Zoom-Rooms-Camera-Controls
