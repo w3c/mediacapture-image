@@ -596,9 +596,10 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
   <dd>See <a>contrast</a> constrainable property.</dd>
 
   <dt><dfn dict-member for="MediaTrackConstraintSet"><code>pan</code></dfn></dt>
-  <dd>A value of true is normalized to a value of empty {{ConstrainDouble}}.
+  <dd>A value of true is normalized to a value of empty {{ConstrainDoubleRange}}.
       A value of false is normalized to a value of undefined.
-      See <a>pan</a> constrainable property.</dd>
+      If the value after normalization is a double value or a {{ConstrainDoubleRange}} value (whether empty or not), that implies a <a>pan capability</a> request which is ideal in basic constraints and exact <a>required</a> in advanced constraints.
+      See <a>pan</a> and <a>pan capability</a> constrainable properties.</dd>
 
   <dt><dfn dict-member for="MediaTrackConstraintSet"><code>saturation</code></dfn></dt>
   <dd>See <a>saturation</a> constrainable property.</dd>
@@ -610,14 +611,16 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
   <dd>See <a>focus distance</a> constrainable property.</dd>
 
   <dt><dfn dict-member for="MediaTrackConstraintSet"><code>tilt</code></dfn></dt>
-  <dd>A value of true is normalized to a value of empty {{ConstrainDouble}}.
+  <dd>A value of true is normalized to a value of empty {{ConstrainDoubleRange}}.
       A value of false is normalized to a value of undefined.
-      See <a>tilt</a> constrainable property.</dd>
+      If the value after normalization is a double value or a {{ConstrainDoubleRange}} value (whether empty or not), that implies a <a>tilt capability</a> request which is ideal in basic constraints and exact <a>required</a> in advanced constraints.
+      See <a>tilt</a> and <a>tilt capability</a> constrainable properties.</dd>
 
   <dt><dfn dict-member for="MediaTrackConstraintSet"><code>zoom</code></dfn></dt>
-  <dd>A value of true is normalized to a value of empty {{ConstrainDouble}}.
+  <dd>A value of true is normalized to a value of empty {{ConstrainDoubleRange}}.
       A value of false is normalized to a value of undefined.
-      See <a>zoom</a> constrainable property.</dd>
+      If the value after normalization is a double value or a {{ConstrainDoubleRange}} value (whether empty or not), that implies a <a>zoom capability</a> request which is ideal in basic constraints and exact <a>required</a> in advanced constraints.
+      See <a>zoom</a> and <a>zoom capability</a> constrainable properties.</dd>
 
   <dt><dfn dict-member for="MediaTrackConstraintSet"><code>torch</code></dfn></dt>
   <dd>See <a>torch</a> constrainable property.</dd>
@@ -798,35 +801,64 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
 
     <li><dfn>Focus distance</dfn> is a numeric camera setting that controls the focus distance of the lens.  The setting usually represents distance in meters to the optimal focus distance.</li>
 
-    <li><dfn>Pan</dfn> is a numeric camera setting that controls the pan of the camera. The setting represents pan in arc seconds, which are 1/3600th of a degree. Values are in the range from –180\*3600 arc seconds to +180\*3600 arc seconds. Positive values pan the camera clockwise as viewed from above, and negative values pan the camera counter clockwise as viewed from above.
+    <li>
+      <dfn>Pan</dfn> is a numeric camera setting that controls the pan of the camera. The setting represents pan in arc seconds, which are 1/3600th of a degree. Values are in the range from -180\*3600 arc seconds to +180\*3600 arc seconds. Positive values pan the camera clockwise as viewed from above, and negative values pan the camera counter clockwise as viewed from above.
 
-    Any algorithm which uses a {{MediaTrackConstraintSet}} object and its {{MediaTrackConstraintSet/pan}} dictionary member which exists after a possible normalization MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId.
+      <dfn>Pan capability</dfn> is a boolean camera property representing camera's ability to pan which results in a proper non-degenerate setting range.
+      That capability or whether it is exposed cannot be changed with {{applyConstraints()}}.
 
-    If the {{visibilityState}} of the <a>top-level browsing context</a> value is "hidden", the {{applyConstraints()}} algorithm MUST throw a {{SecurityError}} if {{MediaTrackConstraintSet/pan}} dictionary member exists after a possible normalization.
+      In the {{getUserMedia()}} algorithm, if the {{MediaTrackConstraintSet/pan}} dictionary member of a {{MediaTrackConstraintSet}} object exists after a normalization and the algorithm uses that dictionary member:
+      <ul>
+        <li>The algorithm MUST throw a {{TypeError}} if the constraint is in the basic constraints and is <a>required</a>.</li>
+        <li>The algorithm MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId unless there are no pan capable cameras.
+            If that permission is not requested or if the permission is denied, the pan setting and capability ranges MUST NOT be exposed.</li>
+      </ul>
 
-    <div class="note">
-      The {{MediaTrackConstraintSet/pan}}, {{MediaTrackConstraintSet/tilt}} and {{MediaTrackConstraintSet/zoom}} dictionary members exists after a possible normalization if the normalized value is a double value or a {{ConstrainDoubleRange}} value (whether empty or not).
-      A boolean value of true is normalized to an empty {{ConstrainDoubleRange}} value thus the dictionary member exists after a normalization.
-      A boolean value of false is normalized to no value thus the dictionary member does not exist after a normalization.
-      An empty {{ConstrainDoubleRange}} value implies no constraints but only a permission and capability request.
-    </div></li>
+      If the {{visibilityState}} of the <a>top-level browsing context</a> value is "hidden", the {{applyConstraints()}} algorithm MUST throw a {{SecurityError}} if {{MediaTrackConstraintSet/pan}} dictionary member exists after a normalization.
 
-    <li><dfn>Tilt</dfn> is a numeric camera setting that controls the tilt of the camera. The setting represents tilt in arc seconds, which are 1/3600th of a degree. Values are in the range from –180\*3600 arc seconds to +180\*3600 arc seconds. Positive values tilt the camera upward when viewed from the front, and negative values tilt the camera downward as viewed from the front.
+      <div class="note">
+        The {{MediaTrackConstraintSet/pan}}, {{MediaTrackConstraintSet/tilt}} and {{MediaTrackConstraintSet/zoom}} dictionary members exist after a normalization if the normalized value is a double value or a {{ConstrainDoubleRange}} value (whether empty or not).
+        A boolean value of true is normalized to an empty {{ConstrainDoubleRange}} value thus the dictionary member exists after a normalization.
+        A boolean value of false is normalized to no value thus the dictionary member does not exist after a normalization.
+        An empty {{ConstrainDoubleRange}} value implies no pan, tilt or zoom constraints but only a permission and capability request.
+      </div>
+    </li>
 
-    Any algorithm which uses a {{MediaTrackConstraintSet}} object and its {{MediaTrackConstraintSet/tilt}} dictionary member which exists after a possible normalization MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId.
+    <li>
+      <dfn>Tilt</dfn> is a numeric camera setting that controls the tilt of the camera. The setting represents tilt in arc seconds, which are 1/3600th of a degree. Values are in the range from -180\*3600 arc seconds to +180\*3600 arc seconds. Positive values tilt the camera upward when viewed from the front, and negative values tilt the camera downward as viewed from the front.
 
-    If the {{visibilityState}} of the <a>top-level browsing context</a> value is "hidden", the {{applyConstraints()}} algorithm MUST throw a {{SecurityError}} if {{MediaTrackConstraintSet/tilt}} dictionary member exists after a possible normalization.
+      <dfn>Tilt capability</dfn> is a boolean camera property representing camera's ability to tilt which results in a proper non-degenerate setting range.
+      That capability or whether it is exposed cannot be changed with {{applyConstraints()}}.
 
-    <div class="note">
-      There is no defined order when applying <a>pan</a> and <a>tilt</a>, the UA is allowed to apply them in any order. In practice this should not matter since these values are absolute, so order will not affect the final position. However, if applying pan and tilt is slow enough, the order in which they are applied may be visually noticeable.
-    </div></li>
+      In the {{getUserMedia()}} algorithm, if the {{MediaTrackConstraintSet/tilt}} dictionary member of a {{MediaTrackConstraintSet}} object exists after a normalization and the algorithm uses that dictionary member:
+      <ul>
+        <li>The algorithm MUST throw a {{TypeError}} if the constraint is in the basic constraints and is <a>required</a>.</li>
+        <li>The algorithm MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId unless there are no tilt capable cameras.
+            If that permission is not requested or if the permission is denied, the tilt setting and capability ranges MUST NOT be exposed.</li>
+      </ul>
 
-    <li><dfn>Zoom</dfn> is a numeric camera setting that controls the focal length of the lens. The setting usually represents a ratio, e.g. 4 is a zoom ratio of 4:1. The minimum value is usually 1, to represent a 1:1 ratio (i.e. no zoom).
+      If the {{visibilityState}} of the <a>top-level browsing context</a> value is "hidden", the {{applyConstraints()}} algorithm MUST throw a {{SecurityError}} if {{MediaTrackConstraintSet/tilt}} dictionary member exists after a normalization.
 
-    Any algorithm which uses a {{MediaTrackConstraintSet}} object and its {{MediaTrackConstraintSet/zoom}} dictionary member which exists after a possible normalization MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId.
+      <div class="note">
+        There is no defined order when applying <a>pan</a> and <a>tilt</a>, the UA is allowed to apply them in any order. In practice this should not matter since these values are absolute, so order will not affect the final position. However, if applying pan and tilt is slow enough, the order in which they are applied may be visually noticeable.
+      </div>
+    </li>
 
-    If the {{visibilityState}} of the <a>top-level browsing context</a> value is "hidden", the {{applyConstraints()}} algorithm MUST throw a {{SecurityError}} if {{MediaTrackConstraintSet/zoom}} dictionary member exists after a possible normalization.
+    <li>
+      <dfn>Zoom</dfn> is a numeric camera setting that controls the focal length of the lens. The setting usually represents a ratio, e.g. 4 is a zoom ratio of 4:1. The minimum value is usually 1, to represent a 1:1 ratio (i.e. no zoom).
 
+      <dfn>Zoom capability</dfn> is a boolean camera property representing camera's ability to zoom which results in a proper non-degenerate setting range.
+      That capability or whether it is exposed cannot be changed with {{applyConstraints()}}.
+
+      In the {{getUserMedia()}} algorithm, if the {{MediaTrackConstraintSet/zoom}} dictionary member of a {{MediaTrackConstraintSet}} object exists after a normalization and the algorithm uses that dictionary member:
+      <ul>
+        <li>The algorithm MUST throw a {{TypeError}} if the constraint is in the basic constraints and is <a>required</a>.</li>
+        <li>The algorithm MUST <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId unless there are no zoom capable cameras.
+            If that permission is not requested or if the permission is denied, the zoom setting and capability ranges MUST NOT be exposed.</li>
+      </ul>
+
+      If the {{visibilityState}} of the <a>top-level browsing context</a> value is "hidden", the {{applyConstraints()}} algorithm MUST throw a {{SecurityError}} if {{MediaTrackConstraintSet/zoom}} dictionary member exists after a normalization.
+    </li>
 
     <li><dfn>Fill light mode</dfn> describes the flash setting of the capture device (e.g. `auto`, `off`, `on`). <dfn>Torch</dfn> describes the setting of the source's fill light as  continuously connected, staying on as long as {{track}} is active.</li>
   </ol>
@@ -1182,8 +1214,11 @@ urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dictionary; text:
 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dictionary; text: MediaTrackSettings; url: idl-def-MediaTrackSettings
 
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: interface; text: OverconstrainedError; url: overconstrainederror-object
 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dfn; text: constrainable property; url: defining-a-new-constrainable-property
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dfn; text: required; url: dfn-required
 
 urlPrefix: https://www.w3.org/TR/page-visibility/; type: attribute; text: visibilityState; for: Document; url: dom-visibilitystate
 </pre>
