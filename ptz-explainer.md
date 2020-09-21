@@ -107,7 +107,7 @@ to reject with `OverConstrainedError`.
 ```js
 const videoStream = await navigator.mediaDevices.getUserMedia({
   // [NEW] Website asks to reset camera pan.
-  video: { pan: 1 },
+  video: { pan: 0 },
 });
 ```
 
