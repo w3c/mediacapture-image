@@ -52,8 +52,9 @@ The [new "true" semantics] for `pan`, `tilt`, and `zoom` makes it possible to
 acquire a PTZ camera in `getUserMedia()` without altering the current pan, tilt
 and zoom values. If the PTZ permission is not granted, the `pan`, `tilt`, and
 `zoom` are not available as capabilities, settings, and constraints, even if the
-camera supports PTZ. The UA may expose "empty" `pan`, `tilt`, and `zoom`
-capabilities to allow a website to detect the availability of a PTZ camera.
+camera supports PTZ. The UA may expose all together "empty" `pan`, `tilt`, and
+`zoom` capabilities to allow a website to detect the availability of a PTZ
+camera.
 
 Applying PTZ constraints requires the PTZ permission to be granted as described
 in the "Interaction with the Permissions API" section below. The `pan` and `tilt`
