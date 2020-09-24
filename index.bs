@@ -687,7 +687,10 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
   <dd>This reflects the current <a>contrast</a> setting of the camera.</dd>
 
   <dt><dfn dict-member for="MediaTrackSettings"><code>pan</code></dfn></dt>
-  <dd>This reflects the current <a>pan</a> setting of the camera.</dd>
+  <dd>This reflects the current <a>pan</a> setting of the camera.
+
+  If the track has been created without <a>requesting permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true or if that permission request is denied, the track does not support <a>pan</a>.
+  In that case the UA MUST NOT expose the <a>pan</a> setting.</dd>
 
   <dt><dfn dict-member for="MediaTrackSettings"><code>saturation</code></dfn></dt>
   <dd>This reflects the current <a>saturation</a> setting of the camera.</dd>
@@ -699,10 +702,16 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
   <dd>This reflects the current <a>focus distance</a> setting of the camera.</dd>
 
   <dt><dfn dict-member for="MediaTrackSettings"><code>tilt</code></dfn></dt>
-  <dd>This reflects the current <a>tilt</a> setting of the camera.</dd>
+  <dd>This reflects the current <a>tilt</a> setting of the camera.
+
+  If the track has been created without <a>requesting permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true or if that permission request is denied, the track does not support <a>tilt</a>.
+  In that case the UA MUST NOT expose the <a>tilt</a> setting.</dd>
 
   <dt><dfn dict-member for="MediaTrackSettings"><code>zoom</code></dfn></dt>
-  <dd>This reflects the current <a>zoom</a> setting of the camera.</dd>
+  <dd>This reflects the current <a>zoom</a> setting of the camera.
+
+  If the track has been created without <a>requesting permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true or if that permission request is denied, the track does not support <a>zoom</a>.
+  In that case the UA MUST NOT expose the <a>zoom</a> setting.</dd>
 
   <dt><dfn dict-member for="MediaTrackSettings"><code>torch</code></dfn></dt>
   <dd>Current camera <a>torch</a> configuration setting.</dd>
