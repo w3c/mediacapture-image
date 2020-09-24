@@ -52,7 +52,9 @@ The [new "true" semantics] for `pan`, `tilt`, and `zoom` makes it possible to
 acquire a PTZ camera in `getUserMedia()` without altering the current pan, tilt
 and zoom values. If the PTZ permission is not granted, the `pan`, `tilt`, and
 `zoom` are not available as capabilities, settings, and constraints, even if the
-camera supports PTZ.
+camera supports PTZ. The UA may expose all together "empty" `pan`, `tilt`, and
+`zoom` capabilities to allow a website to detect the availability of a PTZ
+camera.
 
 Applying PTZ constraints requires the PTZ permission to be granted as described
 in the "Interaction with the Permissions API" section below. The `pan` and `tilt`
@@ -86,7 +88,7 @@ const settings = videoTrack.getSettings();
 
 // [NEW] Let the user control the camera pan motion if the camera supports it
 // and PTZ access is granted.
-if ("pan" in capabilities) {
+if ("pan" in settings) {
   const input = document.querySelector("input[type=range]");
   input.min = capabilities.pan.min;
   input.max = capabilities.pan.max;
@@ -101,7 +103,7 @@ if ("pan" in capabilities) {
 
 // [NEW] Let the user control the camera tilt motion if the camera supports it
 // and PTZ access is granted.
-if ("tilt" in capabilities) {
+if ("tilt" in settings) {
   // similar to the pan motion above.
 }
 ```
