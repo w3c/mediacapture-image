@@ -104,7 +104,7 @@ if ("tilt" in settings) {
 The example below shows how camera pan could be reset when acquiring a
 PTZ camera in `getUserMedia()`. Only ideal constraints are allowed for pan,
 tilt, and zoom constraints. Using mandatory ones will cause the returned promise
-to reject with `OverConstrainedError`.
+to reject with `TypeError`.
 
 ```js
 const videoStream = await navigator.mediaDevices.getUserMedia({
@@ -194,7 +194,7 @@ peripherals, browsing data) and intersecting them together to create a unique
 signature of the user, that would enable to recognize them later on, even if
 they clear state from their browsers.
 
-1. The immediate failure of a `getUserMedia` call with `OverConstrainedError`
+1. The immediate failure of a `getUserMedia` call with `TypeError`
    when using pan, tilt, and zoom mandatory constraints (used with `min`, `max`,
    and `exact` keywords) makes sure a malicious script can't detect whether a
    PTZ camera is available on the system without prompting the user.
