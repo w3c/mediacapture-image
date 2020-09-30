@@ -496,12 +496,7 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
   <dd>This reflects the <a>pan</a> value range supported by the UA and by the track.
 
   If the track has been created without <a>requesting permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true or if that permission request is denied, the track does not support <a>pan</a>.
-  In that case the UA MUST NOT expose the <a>pan</a> value range.
-
-  <div class="note">
-    It does not matter whether the algorithm to <a>request permission to use</a> a PermissionDescriptor returns the current permission state without user interaction (when the current state is not "prompt") or asks the user's permission.
-    In both cases, the permission to use is requested and either granted or denied.
-  </div></dd>
+  In that case the UA MUST NOT expose the <a>pan</a> value range.</dd>
 
   <dt><dfn dict-member for="MediaTrackCapabilities"><code>saturation</code></dfn></dt>
   <dd>This reflects the permitted range of <a>saturation</a> setting. Values are numeric. Increasing values indicate increasing saturation.</dd>
