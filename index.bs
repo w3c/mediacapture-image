@@ -897,16 +897,16 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
     &lt;body>
     &lt;video autoplay>&lt;/video>
     &lt;img>
-    &lt;div hidden>
-      &lt;input id="pan" name="pan" title="Pan" type="range" />
+    &lt;div>
+      &lt;input id="pan" title="Pan" type="range" disabled />
       &lt;label for="pan">Pan&lt;/label>
     &lt;/div>
-    &lt;div hidden>
-      &lt;input id="tilt" name="tilt" title="Tilt" type="range" />
+    &lt;div>
+      &lt;input id="tilt" title="Tilt" type="range" disabled />
       &lt;label for="tilt">Tilt&lt;/label>
     &lt;/div>
-    &lt;div hidden>
-      &lt;input id="zoom" name="zoom" title="Zoom" type="range" />
+    &lt;div>
+      &lt;input id="zoom" title="Zoom" type="range" disabled />
       &lt;label for="zoom">Zoom&lt;/label>
     &lt;/div>
     &lt;script>
@@ -928,22 +928,23 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
 
           for (const ptz of ['pan', 'tilt', 'zoom']) {
             // Check whether pan/tilt/zoom is available or not.
-            if (!capabilities[ptz]) continue;
+            if (!(ptz in settings)) continue;
 
             // Map it to a slider element.
-            const input = document.querySelector(`input[name=${ptz}][type="range"]`);
+            const input = document.getElementById(ptz);
             input.min = capabilities[ptz].min;
             input.max = capabilities[ptz].max;
             input.step = capabilities[ptz].step;
             input.value = settings[ptz];
+            input.disabled = false;
             input.oninput = async event => {
               try {
+                // Warning: Chrome requires advanced constraints.
                 await track.applyConstraints({[ptz]: input.value});
               } catch (err) {
                 console.error("applyConstraints() failed: ", err);
               }
             };
-            input.parentElement.hidden = false;
           }
         } catch (err) {
           console.error(err);
