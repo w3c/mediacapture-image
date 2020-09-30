@@ -1328,9 +1328,9 @@ Possible extra rowspan handling
       background-attachment: fixed;
     }
   </style>
-  <meta content="Bikeshed version e632b349, updated Mon Sep 28 10:02:40 2020 -0700" name="generator">
+  <meta content="Bikeshed version 092ef7cd, updated Tue Sep 29 10:14:09 2020 -0700" name="generator">
   <link href="https://www.w3.org/TR/image-capture/" rel="canonical">
-  <meta content="da612864f6bd4274e7485ba91701d0ee31edfffc" name="document-revision">
+  <meta content="d27d3a3c3e96881b0bdaf543510957c26be71a49" name="document-revision">
 <style>
 table {
   border-collapse: collapse;
@@ -1900,7 +1900,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">MediaStream Image Capture</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2020-09-29">29 September 2020</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2020-09-30">30 September 2020</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -2674,22 +2674,22 @@ For instance, embedding the user’s location in the metadata of the digitzed im
    <div class="note" role="note"> Slightly modified versions of these examples can be found in e.g. <a href="https://codepen.io/collection/nLeobQ/">this codepen collection</a>. </div>
    <h3 class="heading settled" data-level="13.1" id="example1"><span class="secno">13.1. </span><span class="content">Update camera pan, tilt and zoom and <code class="idl"><a data-link-type="idl" href="#dom-imagecapture-takephoto" id="ref-for-dom-imagecapture-takephoto①⓪">takePhoto()</a></code></span><a class="self-link" href="#example1"></a></h3>
    <div class="note" role="note"> The following example can also be found in e.g. <a href="https://codepen.io/eehakkin/pen/XWbOVxp/left?editors=1010">this codepen</a> with minimal modifications. </div>
-   <div class="example" id="example-fe5203ea">
-    <a class="self-link" href="#example-fe5203ea"></a> 
+   <div class="example" id="example-ad20296f">
+    <a class="self-link" href="#example-ad20296f"></a> 
 <pre class="highlight"><c- o>&lt;</c->html<c- o>></c->
 <c- o>&lt;</c->body<c- o>></c->
 <c- o>&lt;</c->video autoplay<c- o>>&lt;</c->/video>
 <c- o>&lt;</c->img<c- o>></c->
-<c- o>&lt;</c->div hidden<c- o>></c->
-  <c- o>&lt;</c->input id<c- o>=</c-><c- u>"pan"</c-> name<c- o>=</c-><c- u>"pan"</c-> title<c- o>=</c-><c- u>"Pan"</c-> type<c- o>=</c-><c- u>"range"</c-> <c- o>/></c->
+<c- o>&lt;</c->div<c- o>></c->
+  <c- o>&lt;</c->input id<c- o>=</c-><c- u>"pan"</c-> title<c- o>=</c-><c- u>"Pan"</c-> type<c- o>=</c-><c- u>"range"</c-> disabled <c- o>/></c->
   <c- o>&lt;</c->label <c- k>for</c-><c- o>=</c-><c- u>"pan"</c-><c- o>></c->Pan<c- o>&lt;</c->/label>
 <c- o>&lt;</c->/div>
-<c- o>&lt;</c->div hidden<c- o>></c->
-  <c- o>&lt;</c->input id<c- o>=</c-><c- u>"tilt"</c-> name<c- o>=</c-><c- u>"tilt"</c-> title<c- o>=</c-><c- u>"Tilt"</c-> type<c- o>=</c-><c- u>"range"</c-> <c- o>/></c->
+<c- o>&lt;</c->div<c- o>></c->
+  <c- o>&lt;</c->input id<c- o>=</c-><c- u>"tilt"</c-> title<c- o>=</c-><c- u>"Tilt"</c-> type<c- o>=</c-><c- u>"range"</c-> disabled <c- o>/></c->
   <c- o>&lt;</c->label <c- k>for</c-><c- o>=</c-><c- u>"tilt"</c-><c- o>></c->Tilt<c- o>&lt;</c->/label>
 <c- o>&lt;</c->/div>
-<c- o>&lt;</c->div hidden<c- o>></c->
-  <c- o>&lt;</c->input id<c- o>=</c-><c- u>"zoom"</c-> name<c- o>=</c-><c- u>"zoom"</c-> title<c- o>=</c-><c- u>"Zoom"</c-> type<c- o>=</c-><c- u>"range"</c-> <c- o>/></c->
+<c- o>&lt;</c->div<c- o>></c->
+  <c- o>&lt;</c->input id<c- o>=</c-><c- u>"zoom"</c-> title<c- o>=</c-><c- u>"Zoom"</c-> type<c- o>=</c-><c- u>"range"</c-> disabled <c- o>/></c->
   <c- o>&lt;</c->label <c- k>for</c-><c- o>=</c-><c- u>"zoom"</c-><c- o>></c->Zoom<c- o>&lt;</c->/label>
 <c- o>&lt;</c->/div>
 <c- o>&lt;</c->script<c- o>></c->
@@ -2711,22 +2711,23 @@ For instance, embedding the user’s location in the metadata of the digitzed im
 
       <c- k>for</c-> <c- p>(</c-><c- kr>const</c-> ptz <c- k>of</c-> <c- p>[</c-><c- t>'pan'</c-><c- p>,</c-> <c- t>'tilt'</c-><c- p>,</c-> <c- t>'zoom'</c-><c- p>])</c-> <c- p>{</c->
         <c- c1>// Check whether pan/tilt/zoom is available or not.</c->
-        <c- k>if</c-> <c- p>(</c-><c- o>!</c->capabilities<c- p>[</c->ptz<c- p>])</c-> <c- k>continue</c-><c- p>;</c->
+        <c- k>if</c-> <c- p>(</c-><c- o>!</c-><c- p>(</c->ptz <c- k>in</c-> settings<c- p>))</c-> <c- k>continue</c-><c- p>;</c->
 
         <c- c1>// Map it to a slider element.</c->
-        <c- kr>const</c-> input <c- o>=</c-> document<c- p>.</c->querySelector<c- p>(</c-><code class="highlight">input<c- p><c- p>[</c-></c->name<c- o><c- o>=</c-></c->$<c- p><c- p>{</c-></c->ptz<c- p><c- p>}][</c-></c->type<c- o><c- o>=</c-></c-><c- u><c- u>"range"</c-></c-><c- p><c- p>]</c-></c-></code><c- p>);</c->
+        <c- kr>const</c-> input <c- o>=</c-> document<c- p>.</c->getElementById<c- p>(</c->ptz<c- p>);</c->
         input<c- p>.</c->min <c- o>=</c-> capabilities<c- p>[</c->ptz<c- p>].</c->min<c- p>;</c->
         input<c- p>.</c->max <c- o>=</c-> capabilities<c- p>[</c->ptz<c- p>].</c->max<c- p>;</c->
         input<c- p>.</c->step <c- o>=</c-> capabilities<c- p>[</c->ptz<c- p>].</c->step<c- p>;</c->
         input<c- p>.</c->value <c- o>=</c-> settings<c- p>[</c->ptz<c- p>];</c->
+        input<c- p>.</c->disabled <c- o>=</c-> <c- kc>false</c-><c- p>;</c->
         input<c- p>.</c->oninput <c- o>=</c-> async event <c- p>=></c-> <c- p>{</c->
           <c- k>try</c-> <c- p>{</c->
+            <c- c1>// Warning: Chrome requires advanced constraints.</c->
             await track<c- p>.</c->applyConstraints<c- p>({[</c->ptz<c- p>]</c-><c- o>:</c-> input<c- p>.</c->value<c- p>});</c->
           <c- p>}</c-> <c- k>catch</c-> <c- p>(</c->err<c- p>)</c-> <c- p>{</c->
             console<c- p>.</c->error<c- p>(</c-><c- u>"applyConstraints() failed: "</c-><c- p>,</c-> err<c- p>);</c->
           <c- p>}</c->
         <c- p>};</c->
-        input<c- p>.</c->parentElement<c- p>.</c->hidden <c- o>=</c-> <c- kc>false</c-><c- p>;</c->
       <c- p>}</c->
     <c- p>}</c-> <c- k>catch</c-> <c- p>(</c->err<c- p>)</c-> <c- p>{</c->
       console<c- p>.</c->error<c- p>(</c->err<c- p>);</c->
@@ -3407,7 +3408,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
    <dt id="biblio-fileapi">[FileAPI]
    <dd>Marijn Kruisselbrink; Arun Ranganathan. <a href="https://www.w3.org/TR/FileAPI/">File API</a>. 11 September 2019. WD. URL: <a href="https://www.w3.org/TR/FileAPI/">https://www.w3.org/TR/FileAPI/</a>
    <dt id="biblio-getusermedia">[GETUSERMEDIA]
-   <dd>Cullen Jennings; et al. <a href="https://www.w3.org/TR/mediacapture-streams/">Media Capture and Streams</a>. 28 September 2020. CR. URL: <a href="https://www.w3.org/TR/mediacapture-streams/">https://www.w3.org/TR/mediacapture-streams/</a>
+   <dd>Cullen Jennings; et al. <a href="https://www.w3.org/TR/mediacapture-streams/">Media Capture and Streams</a>. 29 September 2020. CR. URL: <a href="https://www.w3.org/TR/mediacapture-streams/">https://www.w3.org/TR/mediacapture-streams/</a>
    <dt id="biblio-html">[HTML]
    <dd>Anne van Kesteren; et al. <a href="https://html.spec.whatwg.org/multipage/">HTML Standard</a>. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/">https://html.spec.whatwg.org/multipage/</a>
    <dt id="biblio-permissions">[PERMISSIONS]
