@@ -1,4 +1,10 @@
-# Image Capturing for the Web :camera: [![Build Status](https://travis-ci.org/w3c/mediacapture-image.svg?branch=master)](https://travis-ci.org/w3c/mediacapture-image) <a href="https://www.irccloud.com/invite?channel=%23media-capture&amp;hostname=irc.freenode.net&amp;port=6697&amp;ssl=1" target="_blank"><img src="https://img.shields.io/badge/IRC-%23media--capture-1e72ff.svg?style=plastic"  height="20"></a> <a href="https://www.irccloud.com/invite?channel=%23webrtc&amp;hostname=irc.w3.org&amp;port=6667" target="_blank"><img src="https://img.shields.io/badge/IRC-%23webrtc-1e72ff.svg?style=plastic"  height="20"></a>
+# Image Capturing for the Web :camera:
+
+[![Build Status](https://travis-ci.org/w3c/picture-in-picture.svg?branch=master)](https://travis-ci.org/w3c/picture-in-picture)
+[![WPT Chrome](https://wpt-badge.glitch.me/?product=chrome&prefix=/mediacapture-image/)](https://wpt.fyi/results/mediacapture-image)
+[![WPT Firefox](https://wpt-badge.glitch.me/?product=firefox&prefix=/mediacapture-image/)](https://wpt.fyi/results/mediacapture-image)
+[![WPT Safari](https://wpt-badge.glitch.me/?product=safari&prefix=/mediacapture-image/)](https://wpt.fyi/results/mediacapture-image)
+[![IRC #webrtc](https://img.shields.io/badge/IRC-%23webrtc-1e72ff.svg?style=plastic)](https://www.irccloud.com/invite?channel=%23webrtc&amp;hostname=irc.w3.org&amp;port=6667)
 
 This document specifies methods and camera settings to produce photographic image capture.
 
