@@ -1,7 +1,7 @@
 <pre class="metadata">
 Title: MediaStream Image Capture
-Repository: image-capture
-Group: mediacapture
+Repository: w3c/image-capture
+Group: webrtc
 Markup Shorthands: markdown yes
 Status: ED
 ED: https://w3c.github.io/mediacapture-image/
