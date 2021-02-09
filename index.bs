@@ -263,11 +263,11 @@ interface ImageCapture {
   <dt><dfn dict-member for="PhotoSettings"><code>redEyeReduction</code></dfn></dt>
   <dd>This reflects whether camera <a>red eye reduction</a> is desired</dd>
 
-  <dt><dfn dict-member for="PhotoSettings"><code>imageWidth</code></dfn></dt>
-  <dd>This reflects the desired <a>image height</a>.  The UA MUST select the closest height value this setting if it supports a discrete set of height options.</dd>
-
   <dt><dfn dict-member for="PhotoSettings"><code>imageHeight</code></dfn></dt>
-  <dd>This reflects the desired <a>image width</a>. The UA MUST select the closest width value this setting if it supports a discrete set of width options.</dd>
+  <dd>This reflects the desired <a>image height</a>.  The UA MUST select the closest height value to this setting if it supports a discrete set of height options.</dd>
+
+  <dt><dfn dict-member for="PhotoSettings"><code>imageWidth</code></dfn></dt>
+  <dd>This reflects the desired <a>image width</a>. The UA MUST select the closest width value to this setting if it supports a discrete set of width options.</dd>
 
   <dt><dfn dict-member for="PhotoSettings"><code>fillLightMode</code></dfn></dt>
   <dd>This reflects the desired <a>fill light mode</a> (flash) setting.</dd>
