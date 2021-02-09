@@ -7,7 +7,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
   <meta content="Bikeshed version c5172e83, updated Fri Nov 20 15:35:20 2020 -0800" name="generator">
   <link href="https://www.w3.org/TR/image-capture/" rel="canonical">
-  <meta content="7a1e01d56365ff6274c21bdbba352cbced96c77d" name="document-revision">
+  <meta content="941afa3c9a441fce50ff4534d134e8ccdab5ad27" name="document-revision">
 <style>
 table {
   border-collapse: collapse;
@@ -585,7 +585,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"><a class="logo" href="https://www.w3.org/"> <img alt="W3C" height="48" src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" width="72"> </a> </p>
    <h1 class="p-name no-ref" id="title">MediaStream Image Capture</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2021-01-19">19 January 2021</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2021-02-09">9 February 2021</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
@@ -906,10 +906,10 @@ For instance, embedding the user’s location in the metadata of the digitzed im
    <dl class="domintro">
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="PhotoSettings" data-dfn-type="dict-member" data-export id="dom-photosettings-redeyereduction"><code>redEyeReduction</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-boolean" id="ref-for-idl-boolean①">boolean</a></span>
     <dd>This reflects whether camera <a data-link-type="dfn" href="#red-eye-reduction" id="ref-for-red-eye-reduction①">red eye reduction</a> is desired
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="PhotoSettings" data-dfn-type="dict-member" data-export id="dom-photosettings-imagewidth"><code>imageWidth</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double②">double</a></span>
-    <dd>This reflects the desired <a data-link-type="dfn" href="#image-height" id="ref-for-image-height①">image height</a>.  The UA MUST select the closest height value this setting if it supports a discrete set of height options.
-    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="PhotoSettings" data-dfn-type="dict-member" data-export id="dom-photosettings-imageheight"><code>imageHeight</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double③">double</a></span>
-    <dd>This reflects the desired <a data-link-type="dfn" href="#image-width" id="ref-for-image-width①">image width</a>. The UA MUST select the closest width value this setting if it supports a discrete set of width options.
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="PhotoSettings" data-dfn-type="dict-member" data-export id="dom-photosettings-imageheight"><code>imageHeight</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double②">double</a></span>
+    <dd>This reflects the desired <a data-link-type="dfn" href="#image-height" id="ref-for-image-height①">image height</a>.  The UA MUST select the closest height value to this setting if it supports a discrete set of height options.
+    <dt><dfn class="dfn-paneled idl-code" data-dfn-for="PhotoSettings" data-dfn-type="dict-member" data-export id="dom-photosettings-imagewidth"><code>imageWidth</code></dfn>, <span> of type <a data-link-type="idl-name" href="https://heycam.github.io/webidl/#idl-double" id="ref-for-idl-double③">double</a></span>
+    <dd>This reflects the desired <a data-link-type="dfn" href="#image-width" id="ref-for-image-width①">image width</a>. The UA MUST select the closest width value to this setting if it supports a discrete set of width options.
     <dt><dfn class="dfn-paneled idl-code" data-dfn-for="PhotoSettings" data-dfn-type="dict-member" data-export id="dom-photosettings-filllightmode"><code>fillLightMode</code></dfn>, <span> of type <a data-link-type="idl-name" href="#enumdef-filllightmode" id="ref-for-enumdef-filllightmode③">FillLightMode</a></span>
     <dd>This reflects the desired <a data-link-type="dfn" href="#fill-light-mode" id="ref-for-fill-light-mode①">fill light mode</a> (flash) setting.
    </dl>
@@ -2390,16 +2390,16 @@ For instance, embedding the user’s location in the metadata of the digitzed im
     <li><a href="#ref-for-dom-photosettings-redeyereduction①">7.1. Values</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="dom-photosettings-imagewidth">
-   <b><a href="#dom-photosettings-imagewidth">#dom-photosettings-imagewidth</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-dom-photosettings-imagewidth">5. PhotoSettings</a>
-   </ul>
-  </aside>
   <aside class="dfn-panel" data-for="dom-photosettings-imageheight">
    <b><a href="#dom-photosettings-imageheight">#dom-photosettings-imageheight</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dom-photosettings-imageheight">5. PhotoSettings</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="dom-photosettings-imagewidth">
+   <b><a href="#dom-photosettings-imagewidth">#dom-photosettings-imagewidth</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-dom-photosettings-imagewidth">5. PhotoSettings</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-photosettings-filllightmode">
