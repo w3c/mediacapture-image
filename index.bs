@@ -743,7 +743,7 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
 # Photo Capabilities and Constrainable Properties # {#constrainable-properties}
 
   <div class="note">
-    Many of the mentioned photo and video capabilities mirror hardware features that are hard to define since can be implemented in a number of ways.  Moreover, manufacturers tend to publish vague definitions to protect their intellectual property.
+    Many of the mentioned photo and video capabilities mirror hardware features that are hard to define since they can be implemented in a number of ways.  Moreover, manufacturers tend to publish vague definitions to protect their intellectual property.
   </div>
 
   <div class="note">
