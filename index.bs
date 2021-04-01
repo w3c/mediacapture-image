@@ -740,8 +740,13 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
 
 # Photo Capabilities and Constrainable Properties # {#constrainable-properties}
 
-   <div class="note">
-    Many of the mentioned photo and video capabilities mirror hardware features that are hard to define since can be implemented in a number of ways.  Moreover, manufacturers tend to publish vague definitions to protect their intellectual property.
+  <div class="note">
+    Many of the mentioned photo and video capabilities mirror hardware features that are hard to define since they can be implemented in a number of ways.  Moreover, manufacturers tend to publish vague definitions to protect their intellectual property.
+  </div>
+
+  <div class="note">
+    None of the names of these photo capabilities and constrainable properties are in the list of <a>allowed required constraints for device selection</a>.
+    Therefore, in <a>getUserMedia()</a>, these photo capabilities and constrainable properties can be constrained only with <a>optional basic constraints</a> and <a>advanced constraints</a>, but not with <a>required constraints</a>.
   </div>
 
   <ol>
@@ -1180,6 +1185,14 @@ urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dictionary; text:
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dictionary; text: MediaTrackSettings; url: idl-def-MediaTrackSettings
 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dfn; text: constrainable property; url: defining-a-new-constrainable-property
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dfn; text: advanced constraints; url: dfn-advanced-constraints
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dfn; text: allowed required constraints for device selection; url: dfn-allowed-required-constraints-for-device-selection
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dfn; text: optional basic constraints; url: dfn-optional-basic-constraints
+
+urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dfn; text: required constraints; url: dfn-required-constraints
 
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dfn; text: fitness distance; url: dfn-fitness-distance
 
