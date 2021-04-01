@@ -7,7 +7,7 @@
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet" type="text/css">
   <meta content="Bikeshed version b94c7e755, updated Fri Feb 19 16:28:59 2021 -0800" name="generator">
   <link href="https://www.w3.org/TR/image-capture/" rel="canonical">
-  <meta content="2d13c7a46da6abd5a31fa1d47829e921a48aeec3" name="document-revision">
+  <meta content="6b3b8d81e01c187fbbcdc85db5b7beb42e438445" name="document-revision">
 <style>
 table {
   border-collapse: collapse;
@@ -1244,7 +1244,9 @@ For instance, embedding the user’s location in the metadata of the digitzed im
     <dd>The ideal (target) value of <a data-link-type="dfn" href="#points-of-interest" id="ref-for-points-of-interest④">points of interest</a>.
    </dl>
    <h2 class="heading settled" data-level="10" id="constrainable-properties"><span class="secno">10. </span><span class="content">Photo Capabilities and Constrainable Properties</span><a class="self-link" href="#constrainable-properties"></a></h2>
-   <div class="note" role="note"> Many of the mentioned photo and video capabilities mirror hardware features that are hard to define since can be implemented in a number of ways.  Moreover, manufacturers tend to publish vague definitions to protect their intellectual property. </div>
+   <div class="note" role="note"> Many of the mentioned photo and video capabilities mirror hardware features that are hard to define since they can be implemented in a number of ways.  Moreover, manufacturers tend to publish vague definitions to protect their intellectual property. </div>
+   <div class="note" role="note"> None of the names of these photo capabilities and constrainable properties are in the list of <a data-link-type="dfn" href="https://www.w3.org/TR/mediacapture-streams/#dfn-allowed-required-constraints-for-device-selection" id="ref-for-dfn-allowed-required-constraints-for-device-selection">allowed required constraints for device selection</a>.
+    Therefore, in <a data-link-type="functionish" href="https://www.w3.org/TR/mediacapture-streams/#dom-mediadevices-getusermedia" id="ref-for-dom-mediadevices-getusermedia①">getUserMedia()</a>, these photo capabilities and constrainable properties can be constrained only with <a data-link-type="dfn" href="https://www.w3.org/TR/mediacapture-streams/#dfn-optional-basic-constraints" id="ref-for-dfn-optional-basic-constraints">optional basic constraints</a> and <a data-link-type="dfn" href="https://www.w3.org/TR/mediacapture-streams/#dfn-advanced-constraints" id="ref-for-dfn-advanced-constraints">advanced constraints</a>, but not with <a data-link-type="dfn" href="https://www.w3.org/TR/mediacapture-streams/#dfn-required-constraints" id="ref-for-dfn-required-constraints">required constraints</a>. </div>
    <ol>
     <li>
      <i><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="white-balance-mode">White balance mode</dfn></i> is a setting that cameras use to adjust for different color temperatures. <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="color-temperature">Color temperature</dfn> is the temperature of background light (usually measured in Kelvin).  This setting can usually be automatically and continuously determined by the implementation, but it’s also common to offer a <code>manual</code> mode in which the estimated temperature of the scene illumination is hinted to the implementation.  Typical temperature ranges for popular modes are provided below: 
