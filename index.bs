@@ -349,6 +349,36 @@ interface ImageCapture {
 
 This Section defines a number of new set of <a>Constrainable Properties</a> for {{MediaStreamTrack}} that can be applied in order to make its behavior more suitable for taking pictures.  Use of these constraints via {{MediaStreamTrack}}'s methods {{getCapabilities()}}, {{getSettings()}}, {{getConstraints()}} and {{applyConstraints()}} will modify the behavior of  the {{ImageCapture}} object's {{track}}.
 
+## {{MediaStreamTrack}} interface ## {#mediastreamtrack-section}
+
+<pre class="idl">
+  partial interface MediaStreamTrack {
+    Promise&lt;MediaTrackAttributes> getAttributes();
+  };
+</pre>
+
+### Members ### {#mediastreamtrack-members}
+
+<dl class="domintro">
+  <dt><dfn method for="MediaStreamTrack"><code>getAttributes()</code></dfn></dt>
+  <dd>
+    {{getAttributes()}} is used to retrieve the current attribute values, if any.
+    When this method is invoked, the user agent MUST run the following steps:
+    <ol>
+      <li>If the {{readyState}} of the media stream track is not {{live}}, return <a>a promise rejected with</a> a new {{DOMException}} whose name is {{InvalidStateError}}, and abort these steps.</li>
+      <li>Let <var>p</var> be a new promise.</li>
+      <li>Run the following steps in parallel:
+          <ol>
+            <li>Gather data from the media stream track into a {{MediaTrackAttributes}} dictionary containing the current attributes. The method of doing this will depend on the underlying device.</li>
+            <li>If the data cannot be gathered for any reason (for example, the media stream track being ended asynchronously), then reject <var>p</var> with</a> a new {{DOMException}} whose name is {{OperationError}}, and abort these steps.</li>
+            <li>Resolve <var>p</var> with the {{MediaTrackAttributes}} dictionary.</li>
+          </ol>
+      </li>
+      <li>Return <var>p</var>.</li>
+    </ol>
+  </dd>
+</dl>
+
 ## {{MediaTrackSupportedConstraints}} dictionary ## {#mediatracksupportedconstraints-section}
 
 {{MediaTrackSupportedConstraints}} is extended here with the list of constraints that a User Agent recognizes for controlling the photo capabilities.  This dictionary can be retrieved using {{MediaDevices}} {{getSupportedConstraints()}} method.
@@ -374,6 +404,8 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
     boolean tilt = true;
     boolean zoom = true;
     boolean torch = true;
+
+    boolean faceDetectionMode = true;
   };
 </pre>
 
@@ -430,6 +462,9 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
 
   <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>torch</code></dfn></dt>
   <dd>Whether configuration of <a>torch</a> is recognized.</dd>
+
+  <dt><dfn dict-member for="MediaTrackSupportedConstraints"><code>faceDetectionMode</code></dfn></dt>
+  <dd>Whether configuration of <a>face detection mode</a> is recognized.</dd>
 </dl>
 
 ## {{MediaTrackCapabilities}} dictionary ## {#mediatrackcapabilities-section}
@@ -458,6 +493,8 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
     MediaSettingsRange   zoom;
 
     boolean              torch;
+
+    sequence&lt;DOMString>  faceDetectionMode;
   };
 </pre>
 
@@ -530,6 +567,9 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
 
   <dt><dfn dict-member for="MediaTrackCapabilities"><code>torch</code></dfn></dt>
   <dd>A boolean indicating whether camera supports <a>torch</a>  mode- on meaning supported.</dd>
+
+  <dt><dfn dict-member for="MediaTrackCapabilities"><code>faceDetectionMode</code></dfn></dt>
+  <dd>A sequence of supported <a>face detection modes</a>. Each string MUST be one of the members of {{FaceDetectionMode}}.</dd>
 </dl>
 
 ## {{MediaTrackConstraintSet}} dictionary ## {#mediatrackconstraintset-section}
@@ -563,6 +603,8 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
     (boolean or ConstrainDouble) zoom;
 
     ConstrainBoolean             torch;
+
+    ConstrainDOMString           faceDetectionMode;
   };
 </pre>
 
@@ -619,6 +661,9 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
 
   <dt><dfn dict-member for="MediaTrackConstraintSet"><code>torch</code></dfn></dt>
   <dd>See <a>torch</a> constrainable property.</dd>
+
+  <dt><dfn dict-member for="MediaTrackConstraintSet"><code>faceDetectionMode</code></dfn></dt>
+  <dd>See <a>face detection mode</a> constrainable property.</dd>
 </dl>
 
 ## {{MediaTrackSettings}} dictionary ## {#mediatracksettings-section}
@@ -648,6 +693,8 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
     double            zoom;
 
     boolean           torch;
+
+    DOMString         faceDetectionMode;
   };
 </pre>
 
@@ -714,6 +761,23 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
   <dt><dfn dict-member for="MediaTrackSettings"><code>torch</code></dfn></dt>
   <dd>Current camera <a>torch</a> configuration setting.</dd>
 
+  <dt><dfn dict-member for="MediaTrackSettings"><code>faceDetectionMode</code></dfn></dt>
+  <dd>Current <a>face detection mode</a> setting. The string MUST be one of the members of {{FaceDetectionMode}}.</dd>
+</dl>
+
+## {{MediaTrackAttributes}} dictionary ## {#mediatrackattributes-section}
+
+<pre class="idl">
+  dictionary MediaTrackAttributes {
+    sequence&lt;DetectedFace> detectedFaces;
+  };
+</pre>
+
+### Members ### {#mediatrackattributes-members}
+
+<dl class="domintro">
+  <dt><dfn dict-member for="MediaTrackAttributes"><code>detectedFaces</code></dfn></dt>
+  <dd>Currently detected faces, if any, as a sequence of {{DetectedFace}}s.</dd>
 </dl>
 
 ## Additional Constrainable Properties ## {#additional-constrainable-props}
@@ -830,7 +894,32 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
     If the {{visibilityState}} of the <a>top-level browsing context</a> value is "hidden", the {{applyConstraints()}} algorithm MUST throw a {{SecurityError}} if {{MediaTrackConstraintSet/zoom}} dictionary member exists with a value other than false.</li>
 
     <li><dfn>Fill light mode</dfn> describes the flash setting of the capture device (e.g. `auto`, `off`, `on`). <dfn>Torch</dfn> describes the setting of the source's fill light as  continuously connected, staying on as long as {{track}} is active.</li>
+
+    <li><dfn>Face detection mode</dfn> describes the face detection setting of the capture device (e.g. `off`, `simple` or `full`).</li>
   </ol>
+
+# {{FaceDetectionMode}} # {#facedetectionmode-section}
+
+<pre class="idl">
+  enum FaceDetectionMode {
+    "off",
+    "simple",
+    "full"
+  };
+</pre>
+
+## Values ## {#facedetectionmode-values}
+
+<dl class="domintro">
+  <dt><dfn enum-value for="FaceDetectionMode"><code>off</code></dfn></dt>
+  <dd>This source does not offer face detection.  For setting, this is interpreted as a command to turn off the feature.</dd>
+
+  <dt><dfn enum-value for="FaceDetectionMode"><code>simple</code></dfn></dt>
+  <dd>The capture device is configured for simple face detection, or such a mode is requested.</dd>
+
+  <dt><dfn enum-value for="FaceDetectionMode"><code>full</code></dfn></dt>
+  <dd>The capture device is configured for full face detection, or such a mode is requested.</dd>
+</dl>
 
 # {{MeteringMode}} # {#meteringmode-section}
 
@@ -1199,6 +1288,8 @@ urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dfn; text: fitnes
 urlPrefix: https://www.w3.org/TR/mediacapture-streams/#; type: dfn; text: settings dictionary; url: dfn-settings-dictionary
 
 urlPrefix: https://www.w3.org/TR/page-visibility/; type: attribute; text: visibilityState; for: Document; url: dom-visibilitystate
+
+urlPrefix: https://wicg.github.io/shape-detection-api/#; type: dictionary; text: DetectedFace; url: dictdef-detectedface
 </pre>
 
 <pre class="link-defaults">
