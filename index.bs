@@ -495,7 +495,7 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
   <dd>
     This reflects the <a>pan</a> value range supported by the UA and by the track.
 
-    If the track has been created without <a>requesting permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true or if that permission request is denied, the track does not support <a>pan</a>.
+    If the track has been created without <a>requesting permission to use</a> (as defined in [[!permissions]]) a {{PermissionDescriptor}} with its name member set to <a permission>camera</a> and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true or if that permission request is denied, the track does not support <a>pan</a>.
     In that case the UA MUST NOT expose the <a>pan</a> value range but MAY provide an empty {{MediaSettingsRange}} dictionary to indicate that the underlying video source supports <a>pan</a>.
 
     <div class="note">
@@ -516,7 +516,7 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
   <dd>
     This reflects the <a>tilt</a> value range supported by the UA and by the track.
 
-    If the track has been created without <a>requesting permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true or if that permission request is denied, the track does not support <a>tilt</a>.
+    If the track has been created without <a>requesting permission to use</a> (as defined in [[!permissions]]) a {{PermissionDescriptor}} with its name member set to <a permission>camera</a> and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true or if that permission request is denied, the track does not support <a>tilt</a>.
     In that case the UA MUST NOT expose the <a>tilt</a> value range but MAY provide an empty {{MediaSettingsRange}} dictionary to indicate that the underlying video source supports <a>tilt</a>.
   </dd>
 
@@ -524,7 +524,7 @@ This Section defines a number of new set of <a>Constrainable Properties</a> for 
   <dd>
     This reflects the <a>zoom</a> value range supported by the UA and by the track.
 
-    If the track has been created without <a>requesting permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true or if that permission request is denied, the track does not support <a>zoom</a>.
+    If the track has been created without <a>requesting permission to use</a> (as defined in [[!permissions]]) a {{PermissionDescriptor}} with its name member set to <a permission>camera</a> and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true or if that permission request is denied, the track does not support <a>zoom</a>.
     In that case the UA MUST NOT expose the <a>zoom</a> value range but MAY provide an empty {{MediaSettingsRange}} dictionary to indicate that the underlying video source supports <a>zoom</a>.
   </dd>
 
@@ -687,7 +687,7 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
   <dt><dfn dict-member for="MediaTrackSettings"><code>pan</code></dfn></dt>
   <dd>This reflects the current <a>pan</a> setting of the camera.
 
-  If the track has been created without <a>requesting permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true or if that permission request is denied, the track does not support <a>pan</a>.
+  If the track has been created without <a>requesting permission to use</a> (as defined in [[!permissions]]) a {{PermissionDescriptor}} with its name member set to <a permission>camera</a> and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true or if that permission request is denied, the track does not support <a>pan</a>.
   In that case the UA MUST NOT expose the <a>pan</a> setting.</dd>
 
   <dt><dfn dict-member for="MediaTrackSettings"><code>saturation</code></dfn></dt>
@@ -702,13 +702,13 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
   <dt><dfn dict-member for="MediaTrackSettings"><code>tilt</code></dfn></dt>
   <dd>This reflects the current <a>tilt</a> setting of the camera.
 
-  If the track has been created without <a>requesting permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true or if that permission request is denied, the track does not support <a>tilt</a>.
+  If the track has been created without <a>requesting permission to use</a> (as defined in [[!permissions]]) a {{PermissionDescriptor}} with its name member set to <a permission>camera</a> and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true or if that permission request is denied, the track does not support <a>tilt</a>.
   In that case the UA MUST NOT expose the <a>tilt</a> setting.</dd>
 
   <dt><dfn dict-member for="MediaTrackSettings"><code>zoom</code></dfn></dt>
   <dd>This reflects the current <a>zoom</a> setting of the camera.
 
-  If the track has been created without <a>requesting permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true or if that permission request is denied, the track does not support <a>zoom</a>.
+  If the track has been created without <a>requesting permission to use</a> (as defined in [[!permissions]]) a {{PermissionDescriptor}} with its name member set to <a permission>camera</a> and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true or if that permission request is denied, the track does not support <a>zoom</a>.
   In that case the UA MUST NOT expose the <a>zoom</a> setting.</dd>
 
   <dt><dfn dict-member for="MediaTrackSettings"><code>torch</code></dfn></dt>
@@ -805,7 +805,7 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
 
     Constraints on pan influence camera selection through <a>fitness distance</a> toward cameras with the ability to pan. To exert this influence without overwriting the current pan setting, pan may be constrained to true. Conversely, constraining it to false disfavors cameras with the ability to pan.
 
-    Any algorithm which uses a {{MediaTrackConstraintSet}} object whose {{MediaTrackConstraintSet/pan}} dictionary member exists with a value other than false MUST either <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId, or decide not to expose the pan setting.
+    Any algorithm which uses a {{MediaTrackConstraintSet}} object whose {{MediaTrackConstraintSet/pan}} dictionary member exists with a value other than false MUST either <a>request permission to use</a> (as defined in [[!permissions]]) a {{PermissionDescriptor}} with its name member set to <a permission>camera</a> and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId, or decide not to expose the pan setting.
 
     If the {{visibilityState}} of the <a>top-level browsing context</a> value is "hidden", the {{applyConstraints()}} algorithm MUST throw a {{SecurityError}} if {{MediaTrackConstraintSet/pan}} dictionary member exists with a value other than false.</li>
 
@@ -813,7 +813,7 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
 
     Constraints on tilt influence camera selection through <a>fitness distance</a> toward cameras with the ability to tilt. To exert this influence without overwriting the current tilt setting, tilt may be constrained to true. Conversely, constraining it to false disfavors cameras with the ability to tilt.
 
-    Any algorithm which uses a {{MediaTrackConstraintSet}} object whose {{MediaTrackConstraintSet/tilt}} dictionary member exists with a value other than false MUST either <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId, or decide not to expose the tilt setting.
+    Any algorithm which uses a {{MediaTrackConstraintSet}} object whose {{MediaTrackConstraintSet/tilt}} dictionary member exists with a value other than false MUST either <a>request permission to use</a> (as defined in [[!permissions]]) a {{PermissionDescriptor}} with its name member set to <a permission>camera</a> and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId, or decide not to expose the tilt setting.
 
     If the {{visibilityState}} of the <a>top-level browsing context</a> value is "hidden", the {{applyConstraints()}} algorithm MUST throw a {{SecurityError}} if {{MediaTrackConstraintSet/tilt}} dictionary member exists with a value other than false.
 
@@ -825,7 +825,7 @@ When the {{getSettings()}} method is invoked on a video stream track, the user a
 
     Constraints on zoom influence camera selection through <a>fitness distance</a> toward cameras with the ability to zoom. To exert this influence without overwriting the current zoom setting, zoom may be constrained to true. Conversely, constraining it to false disfavors cameras with the ability to zoom.
 
-    Any algorithm which uses a {{MediaTrackConstraintSet}} object whose {{MediaTrackConstraintSet/zoom}} dictionary member exists with a value other than false MUST either <a>request permission to use</a> (as defined in [[!permissions]]) a PermissionDescriptor with its name member set to {{PermissionName/camera}} and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId, or decide not to expose the zoom setting.
+    Any algorithm which uses a {{MediaTrackConstraintSet}} object whose {{MediaTrackConstraintSet/zoom}} dictionary member exists with a value other than false MUST either <a>request permission to use</a> (as defined in [[!permissions]]) a {{PermissionDescriptor}} with its name member set to <a permission>camera</a> and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId, or decide not to expose the zoom setting.
 
     If the {{visibilityState}} of the <a>top-level browsing context</a> value is "hidden", the {{applyConstraints()}} algorithm MUST throw a {{SecurityError}} if {{MediaTrackConstraintSet/zoom}} dictionary member exists with a value other than false.</li>
 
