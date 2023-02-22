@@ -19,6 +19,8 @@ Abstract: This document specifies methods and camera settings to produce photogr
 !Implementation: <a href="https://github.com/w3c/mediacapture-image/blob/master/implementation-status.md">Implementation Status</a>
 !Implementation: <a href="http://caniuse.com/#feat=imagecapture">Can I use Image Capture?</a>
 
+!Polyfills: <a href="https://github.com/GoogleChromeLabs/imagecapture-polyfill">GoogleChromeLabs/imagecapture-polyfill</a>
+
 </pre>
 
 <style>
