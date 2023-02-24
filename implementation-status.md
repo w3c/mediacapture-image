@@ -11,7 +11,7 @@ different browsers.
 <a href="#samsung-internet"><img width=64 src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/samsung-internet/samsung-internet_128x128.png" alt="Samsung Internet browser logo"></a>
 
 # Chrome
-* Notes updated **June 2017**.
+* Notes updated **February 2023**.
 * *No flag needed after M59*  (before that, use `chrome://flags/#enable-experimental-web-platform-features`).
 
 ImageCapture method       |Available                               |
@@ -43,22 +43,22 @@ Feature/Platform          | Android                               | Linux/Chrome
 └ imageWidth              | ✓                                     | ✓                                    | ✓                                       | ✓   |
 └ redEyeReduction         | ✓                                     |                                      |                                         |     |
 `MediaTrack`*             |                                       |                                      |                                         |     |
-└ brightness              |                                       | ✓                                    |                                         |     |
-└ colorTemperature        |60 ([724626](https://crbug.com/724626))| ✓                                    | 60 ([657128](https://crbug.com/657128)) |     |
-└ contrast                |                                       | ✓                                    | 60 ([657128](https://crbug.com/657128)) |     |
+└ brightness              |                                       | ✓                                    |                                         | 111([817805](https://crbug.com/817805)) |
+└ colorTemperature        |60 ([724626](https://crbug.com/724626))| ✓                                    | 60 ([657128](https://crbug.com/657128)) | 111([817805](https://crbug.com/817805)) |
+└ contrast                |                                       | ✓                                    | 60 ([657128](https://crbug.com/657128)) | 111([817805](https://crbug.com/817805)) |
 └ exposureCompensation    |   ([724730](https://crbug.com/724730))| ✓                                    | 60 ([657128](https://crbug.com/657128)) |     |
-└ exposureTime            |72 ([823316](https://crbug.com/823316))| ✓              |
-└ exposureMode            | ✓                                     | ✓                                    | 60 ([657128](https://crbug.com/657128)) |     |
-└ focusDistance           |72 ([732807](https://crbug.com/732807))| ✓                                     |                                         |     |
-└ focusMode               | ✓                                     | ✓                                    | 60 ([657128](https://crbug.com/657128)) |     |
+└ exposureTime            |72 ([823316](https://crbug.com/823316))| ✓                                    |                                         | 111([817805](https://crbug.com/817805)) |
+└ exposureMode            | ✓                                     | ✓                                    | 60 ([657128](https://crbug.com/657128)) | 111([817805](https://crbug.com/817805)) |
+└ focusDistance           |72 ([732807](https://crbug.com/732807))| ✓                                     |                                         | 111([817805](https://crbug.com/817805)) |
+└ focusMode               | ✓                                     | ✓                                    | 60 ([657128](https://crbug.com/657128)) | 111([817805](https://crbug.com/817805)) |
 └ iso                     | ✓                                     |                                      |                                         |     |
-└ pan                     |                                       | ([934063](https://crbug.com/934063)) | ([934063](https://crbug.com/934063))    |     |
+└ pan                     |                                       | ([934063](https://crbug.com/934063)) | ([934063](https://crbug.com/934063))    | 87([934063](https://crbug.com/934063)) |
 └ pointsOfInterest        | ✓                                     |                                      |                                         |     |
-└ saturation              |                                       | ✓                                    | 60 ([657128](https://crbug.com/657128)) |     |
-└ sharpness               |                                       | ✓                                    | 60 ([657128](https://crbug.com/657128)) |     |
-└ tilt                    |                                       | ([934063](https://crbug.com/934063)) | ([934063](https://crbug.com/934063))    |     |
-└ whiteBalanceMode        | ✓                                     | ✓                                    | 60 ([657128](https://crbug.com/657128)) |     |
-└ zoom                    | ✓                                     | ✓                                    | 60 ([657128](https://crbug.com/657128)) |     |
+└ saturation              |                                       | ✓                                    | 60 ([657128](https://crbug.com/657128)) | 111([817805](https://crbug.com/817805)) |
+└ sharpness               |                                       | ✓                                    | 60 ([657128](https://crbug.com/657128)) | 111([817805](https://crbug.com/817805)) |
+└ tilt                    |                                       | ([934063](https://crbug.com/934063)) | ([934063](https://crbug.com/934063))    | 87([934063](https://crbug.com/934063)) |
+└ whiteBalanceMode        | ✓                                     | ✓                                    | 60 ([657128](https://crbug.com/657128)) | 111([817805](https://crbug.com/817805)) |
+└ zoom                    | ✓                                     | ✓                                    | 60 ([657128](https://crbug.com/657128)) | 87([934063](https://crbug.com/934063)) |
 
 ### Unsupported platforms
 
