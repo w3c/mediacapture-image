@@ -43,14 +43,14 @@ Feature/Platform          | Android                               | Linux/Chrome
 └ imageWidth              | ✓                                     | ✓                                    | ✓                                       | ✓   |
 └ redEyeReduction         | ✓                                     |                                      |                                         |     |
 `MediaTrack`*             |                                       |                                      |                                         |     |
-└ brightness              |                                       | ✓                                    |                                         | 111([817805](https://crbug.com/817805)) |
+└ brightness              |                                       | ✓                                    | 60 ([657128](https://crbug.com/657128)) | 111([817805](https://crbug.com/817805)) |
 └ colorTemperature        |60 ([724626](https://crbug.com/724626))| ✓                                    | 60 ([657128](https://crbug.com/657128)) | 111([817805](https://crbug.com/817805)) |
 └ contrast                |                                       | ✓                                    | 60 ([657128](https://crbug.com/657128)) | 111([817805](https://crbug.com/817805)) |
 └ exposureCompensation    |   ([724730](https://crbug.com/724730))| ✓                                    | 60 ([657128](https://crbug.com/657128)) |     |
-└ exposureTime            |72 ([823316](https://crbug.com/823316))| ✓                                    |                                         | 111([817805](https://crbug.com/817805)) |
+└ exposureTime            |72 ([823316](https://crbug.com/823316))| ✓                                    | 76 ([823316](https://crbug.com/823316)) | 111([817805](https://crbug.com/817805)) |
 └ exposureMode            | ✓                                     | ✓                                    | 60 ([657128](https://crbug.com/657128)) | 111([817805](https://crbug.com/817805)) |
-└ focusDistance           |72 ([732807](https://crbug.com/732807))| ✓                                     |                                         | 111([817805](https://crbug.com/817805)) |
-└ focusMode               | ✓                                     | ✓                                    | 60 ([657128](https://crbug.com/657128)) | 111([817805](https://crbug.com/817805)) |
+└ focusDistance           |72 ([732807](https://crbug.com/732807))| ✓                                    | 76 ([732807](https://crbug.com/732807)) | 111([817805](https://crbug.com/817805)) |
+└ focusMode               | ✓                                     | ✓                                    | 76 ([732807](https://crbug.com/732807)) | 111([817805](https://crbug.com/817805)) |
 └ iso                     | ✓                                     |                                      |                                         |     |
 └ pan                     |                                       | ([934063](https://crbug.com/934063)) | ([934063](https://crbug.com/934063))    | 87([934063](https://crbug.com/934063)) |
 └ pointsOfInterest        | ✓                                     |                                      |                                         |     |
