@@ -810,7 +810,7 @@ When the {{MediaStreamTrack/getSettings()}} method is invoked on a video stream 
 
     Constraints on pan influence camera selection through <a>fitness distance</a> toward cameras with the ability to pan. To exert this influence without overwriting the current pan setting, pan may be constrained to true. Conversely, constraining it to false disfavors cameras with the ability to pan.
 
-    Any algorithm which uses a {{MediaTrackConstraintSet}} object whose {{MediaTrackConstraintSet/pan}} dictionary member exists with a value other than false MUST either [=request permission to use=] (as defined in [[!permissions]]) a {{PermissionDescriptor}} with its name member set to <a permission>camera</a> and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId, or decide not to expose the pan setting.
+    Any algorithm which uses a {{MediaTrackConstraintSet}} object whose {{MediaTrackConstraintSet/pan}} dictionary member exists with a value other than false MUST either [=request permission to use=] (as defined in [[!permissions]]) a {{PermissionDescriptor}} with its name member set to <a permission>camera</a> and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, or decide not to expose the pan setting.
 
     If the {{Document/visibilityState}} of the <a>top-level browsing context</a> value is "hidden", the {{MediaStreamTrack/applyConstraints()}} algorithm MUST throw a {{SecurityError}} if {{MediaTrackConstraintSet/pan}} dictionary member exists with a value other than false.</li>
 
@@ -818,7 +818,7 @@ When the {{MediaStreamTrack/getSettings()}} method is invoked on a video stream 
 
     Constraints on tilt influence camera selection through <a>fitness distance</a> toward cameras with the ability to tilt. To exert this influence without overwriting the current tilt setting, tilt may be constrained to true. Conversely, constraining it to false disfavors cameras with the ability to tilt.
 
-    Any algorithm which uses a {{MediaTrackConstraintSet}} object whose {{MediaTrackConstraintSet/tilt}} dictionary member exists with a value other than false MUST either [=request permission to use=] (as defined in [[!permissions]]) a {{PermissionDescriptor}} with its name member set to <a permission>camera</a> and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId, or decide not to expose the tilt setting.
+    Any algorithm which uses a {{MediaTrackConstraintSet}} object whose {{MediaTrackConstraintSet/tilt}} dictionary member exists with a value other than false MUST either [=request permission to use=] (as defined in [[!permissions]]) a {{PermissionDescriptor}} with its name member set to <a permission>camera</a> and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, or decide not to expose the tilt setting.
 
     If the {{Document/visibilityState}} of the <a>top-level browsing context</a> value is "hidden", the {{MediaStreamTrack/applyConstraints()}} algorithm MUST throw a {{SecurityError}} if {{MediaTrackConstraintSet/tilt}} dictionary member exists with a value other than false.
 
@@ -830,7 +830,7 @@ When the {{MediaStreamTrack/getSettings()}} method is invoked on a video stream 
 
     Constraints on zoom influence camera selection through <a>fitness distance</a> toward cameras with the ability to zoom. To exert this influence without overwriting the current zoom setting, zoom may be constrained to true. Conversely, constraining it to false disfavors cameras with the ability to zoom.
 
-    Any algorithm which uses a {{MediaTrackConstraintSet}} object whose {{MediaTrackConstraintSet/zoom}} dictionary member exists with a value other than false MUST either [=request permission to use=] (as defined in [[!permissions]]) a {{PermissionDescriptor}} with its name member set to <a permission>camera</a> and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, and, optionally, consider its {{DevicePermissionDescriptor/deviceId}} member set to any appropriate device's deviceId, or decide not to expose the zoom setting.
+    Any algorithm which uses a {{MediaTrackConstraintSet}} object whose {{MediaTrackConstraintSet/zoom}} dictionary member exists with a value other than false MUST either [=request permission to use=] (as defined in [[!permissions]]) a {{PermissionDescriptor}} with its name member set to <a permission>camera</a> and its {{CameraDevicePermissionDescriptor/panTiltZoom}} member set to true, or decide not to expose the zoom setting.
 
     If the {{Document/visibilityState}} of the <a>top-level browsing context</a> value is "hidden", the {{MediaStreamTrack/applyConstraints()}} algorithm MUST throw a {{SecurityError}} if {{MediaTrackConstraintSet/zoom}} dictionary member exists with a value other than false.</li>
 
