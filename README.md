@@ -13,7 +13,7 @@ Specification and Samples
 * [Image Capture (a.k.a. MediaStream Image Capture) Specification](https://w3c.github.io/mediacapture-image/), including code samples.
 * [Implementation Status](implementation-status.md) describes various browser support on platforms, hardware compatibility, etc.
 * [Sample code](https://rawgit.com/Miguelao/demos/master/imagecapture.html)
-* [Image Capture polyfill](https://github.com/dandv/imagecapture)
+* [Image Capture polyfill](https://github.com/GoogleChromeLabs/imagecapture-polyfill)
 
 Notes on bikeshedding :bicyclist:
 --------------

@@ -1,6 +1,7 @@
 name: Auto-publish
 on:
   pull_request: {}
+  workflow_dispatch:
   push:
     branches: [main]
 
