@@ -60,7 +60,7 @@ For instance, embedding the user’s location in the metadata of the digitzed im
 The User Agent must support Promises in order to implement the Image Capture API.  Any {{Promise}} object is assumed to have a resolver object, with <code>resolve()</code> and <code>reject()</code> methods associated with it.
 
 <pre class="idl">
-[Exposed=Window]
+[Exposed=Window, SecureContext]
 interface ImageCapture {
    constructor(MediaStreamTrack videoTrack);
    Promise&lt;Blob&gt;              takePhoto(optional PhotoSettings photoSettings = {});
