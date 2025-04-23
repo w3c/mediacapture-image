@@ -1,10 +1,12 @@
 name: Auto-publish
 on:
   pull_request: {}
-  workflow_dispatch:
-  paths: index.bs
   push:
-    branches: [main]
+    branches:
+      - main
+    paths:
+      - index.bs
+  workflow_dispatch:
 
 jobs:
   main:

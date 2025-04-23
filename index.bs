@@ -184,7 +184,7 @@ interface ImageCapture {
     <ol>
       <li>Gather data from {{track}} into a {{PhotoSettings}} dictionary containing the current conditions in which the device is found. The method of doing this will depend on the underlying device. </li>
 
-      <li>If the data cannot be gathered for any reason (for example, the {{MediaStreamTrack}} being ended asynchronously), then reject <var>p</var> with</a> a new {{DOMException}} whose name is {{OperationError}}, and abort these steps.</li>
+      <li>If the data cannot be gathered for any reason (for example, the {{MediaStreamTrack}} being ended asynchronously), then reject <var>p</var> with a new {{DOMException}} whose name is {{OperationError}}, and abort these steps.</li>
 
       <li>Resolve <var>p</var> with the {{PhotoSettings}} dictionary.</li>
     </ol>
@@ -204,7 +204,7 @@ interface ImageCapture {
       <li>Gather data from {{track}} into an {{ImageBitmap}} object. The {{ImageBitmap/width}} and {{ImageBitmap/height}} of the {{ImageBitmap}} object are derived from the constraints of {{track}}.
       </li>
 
-      <li>If the operation cannot be completed for any reason (for example, upon invocation of multiple {{grabFrame()}}/{{takePhoto()}} method calls in rapid succession), then reject <var>p</var> with</a> a new {{DOMException}} whose name is {{UnknownError}}, and abort these steps.</li>
+      <li>If the operation cannot be completed for any reason (for example, upon invocation of multiple {{grabFrame()}}/{{takePhoto()}} method calls in rapid succession), then reject <var>p</var> with a new {{DOMException}} whose name is {{UnknownError}}, and abort these steps.</li>
 
       <li>Resolve <var>p</var> with the {{ImageBitmap}} object.</li>
 
