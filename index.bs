@@ -992,10 +992,8 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
       async function grabFrames() {
         try {
           const canvas = document.querySelector('canvas');
-          const video = document.querySelector('video');
 
           const stream = await navigator.mediaDevices.getUserMedia({video: true});
-          video.srcObject = stream;
           const [track] = stream.getVideoTracks();
           try {
             const imageCapture = new ImageCapture(track);
@@ -1036,10 +1034,8 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
       async function grabFrames() {
         try {
           const canvas = document.querySelector('canvas');
-          const video = document.querySelector('video');
 
           const stream = await navigator.mediaDevices.getUserMedia({video: true});
-          video.srcObject = stream;
           const [track] = stream.getVideoTracks();
           try {
             const imageCapture = new ImageCapture(track);
