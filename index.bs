@@ -1121,7 +1121,7 @@ A {{Point2D}} represents a location in a two dimensional space. The origin of co
               console.error("applyConstraints() failed: ", err);
             }
           };
-          input.parentElement.hidden = false;
+          input.hidden = false;
         } catch (err) {
           console.error(err);
         }
